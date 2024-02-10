@@ -1,0 +1,28 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "R for babies"
+  author:
+    - name: Thinh Ong
+      url: https://drthinhong.com
+      orcid: 0000-0001-6772-9291
+  date: "02/09/2024"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - prepare.qmd
+    - references.qmd
+
+bibliography: references.bib
+csl: nature.csl
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

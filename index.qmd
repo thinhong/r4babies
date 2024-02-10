@@ -1,0 +1,7 @@
+# Tổng quan {.unnumbered}
+
+Cấu trúc bài giảng được tham khảo từ các tài liệu sau:
+
+1. Beckerman, A. P., Childs, D. Z., & Petchey, O. L. (2017). Getting started with R: an introduction for biologists. Oxford University Press.
+2. Batra, Neale, et al. The Epidemiologist R Handbook. 2021.
+

@@ -1,0 +1,151 @@
+# Giới thiệu
+
+::: {.callout-tip}
+
+# Mục tiêu
+
+1. Hiểu ngôn ngữ lập trình là gì và cách học ngôn ngữ lập trình
+2. Hiểu sự khác nhau giữa R và RStudio
+3. Biết cách cài đặt package và gọi library trong R
+4. Biết cách viết file R Script và R Markdown
+
+:::
+
+## R
+
+R là một ngôn ngữ lập trình được phát triển bởi GS. Robert Gentleman và GS. Ross Ihaka tại Đại học Auckland [@ihaka1996]. Tên gọi R được đặt theo tên của 2 tác giả (Robert và Ross).
+
+![](img/intro/ross-robert.png)
+
+> | Robert Gentleman: "Let's write some software."
+> | Ross Ihaka: "Sure, that sounds like fun."[@ihaka1998]
+
+### Ngôn ngữ lập trình
+
+Ngôn ngữ lập trình là một tập hợp các hướng dẫn để yêu cầu máy tính thực hiện một số tác vụ nhất định.[@lenovo2024]
+
+Ngôn ngữ là phương tiện để con người giao tiếp với con người. Ngôn ngữ lập trình là phương tiện để con người giao tiếp với máy tính.[@lenovo2024] Vì vậy, học ngôn ngữ lập trình cũng giống như học ngoại ngữ, bao gồm từ vựng, ngữ pháp, cụm từ, mệnh đề... để viết thành một câu văn mà máy tính có thể hiểu được và làm đúng những gì con người muốn.
+
+![](img/intro/program-langs.png)
+
+Một số ngôn ngữ lập trình trong phân tích dữ liệu [[Photo credit](https://medium.com/@andreaskuhn92/how-to-solve-the-same-numerical-problem-in-7-different-programming-languages-a64daac3ed64)]
+
+### Câu văn trong R
+
+Câu lệnh (command) hoặc hàm (function) chính là những câu văn trong R để giao tiếp với máy tính. Chúng ta phải học ngữ pháp của 1 câu lệnh và ý nghĩa của nó để có thể sử dụng R để ra lệnh cho máy tính. Một câu lệnh trong R thường có dạng như sau:
+
+```{r, eval = F}
+tên-câu-lệnh(tên-tham-số = đầu-vào hoặc mong-muốn)
+```
+
+- Tên câu lệnh: nằm trước dấu `()`, thể hiện ý nghĩa câu lệnh dùng để làm gì.
+- Tên tham số: nằm trong dấu `()` là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng. Giá trị gán cho tham số có thể là một data đầu vào, hoặc một mong muốn của người dùng.
+
+Ví dụ:
+
+```{r, eval = F}
+mean(x = df$col1, na.rm = TRUE)
+```
+
+- Tên câu lệnh là `mean`: chúng ta đang muốn máy tính hãy tính giá trị trung bình của 1 biến.
+- Các tham số là `x` và `na.rm`:
+  - `x`: là data đầu vào, ở đây chúng ta viết `x = df$col1` để cho máy tính biết data đầu vào là cột `col1` trong bảng data `df`.
+  - `na.rm`: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây `na.rm = TRUE` nghĩa là nếu cột `col1` có NA thì bỏ những giá trị NA đi trước khi tính trung bình.
+
+### R và SPSS, Stata, SAS
+
+![](img/intro/r-spss.png)
+
+-   R là ngôn ngữ lập trình. Người dùng giao tiếp, đối thoại với máy tính bằng cách nhập những câu văn (code) giống như chat với máy tính, để máy hiểu và làm đúng những gì con người muốn.
+-   SPSS, Stata, SAS là các gói phần mềm thống kê (software package) thương mại, được thiết kế giao diện người dùng kéo thả, click chọn để dễ dàng giao tiếp với máy tính hơn. Người dùng cũng có thể viết code (SPSS Syntax, Stata command, SAS program) để lưu lại các bước phân tích, nhưng đây không phải mục tiêu chính của các gói thương mại này. Người dùng không thể yêu cầu máy tính làm gì khác với những chức năng đã được quy định sẵn trong gói phần mềm. Mỗi gói phần mềm được viết bằng một ngôn ngữ lập trình:
+    -   SPSS: Java
+    -   Stata: C
+    -   SAS: C
+
+## Tại sao học R?
+
+1.  Miễn phí và sử dụng được trên mọi hệ điều hành thông dụng (Windows, Macs, Linux).
+
+2.  R là ngôn ngữ truyền thống cho phân tích dữ liệu trong nghiên cứu y sinh (biostatistics), tin sinh (bioinformatics), dịch tễ, mô hình dự báo... Chuyên gia ở các ngành này liên tục phát triển các gói phần mềm (packages) viết bằng R cập nhật các phương pháp mới nhất, machine learning, thiết kế web...
+
+![](img/intro/r-pkgs.png)
+
+Các gói phần mềm phổ biến trong R [[Photo credit](https://medium.com/@adrian.joseph/improve-your-r-workflow-with-these-must-have-r-packages-be47dacd89bc)]
+
+3.  Vẽ biểu đồ chất lượng cao.
+
+![](img/intro/r-viz.png)
+
+Một số biểu đồ vẽ bằng R [[Photo credit](https://towardsdatascience.com/create-beautiful-plots-easily-with-these-r-packages-bf2f278d479c)]
+
+## R và RStudio
+
+R là ngôn ngữ lập trình. Sau khi cài R, chúng ta mở lên sẽ thấy giao diện giống như một khung chat trống. Khung chat này là nơi chúng ta viết code để giao tiếp với máy tính.
+
+![](img/intro/r-gui.png)
+
+RStudio là một môi trường phát triển tích hợp (integrated development environment hay IDE) hay nói đơn giản là một phần mềm để viết code R hiệu quả hơn.
+
+![](img/intro/rstudio.png)
+
+Vì vậy, chúng ta cần cài đặt riêng R (ngôn ngữ lập trình) và RStudio (IDE).
+
+### Cài đặt R
+
+Truy cập [https://cran.r-project.org/](https://cran.r-project.org/) và tải R cho hệ điều hành của mình.
+
+![](img/intro/r-download.png)
+
+### Cài đặt RStudio
+
+Truy cập [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/) và tải RStudio cho hệ điều hành của mình.
+
+![](img/intro/rstudio-download.png)
+
+## R packages {#sec-r-pkgs}
+
+R packages là các gói phần mềm được viết bằng ngôn ngữ lập trình R để thực hiện một số tác vụ cụ thể.
+
+### Cài đặt R packages
+
+```{r, eval = F}
+install.packages("readxl")
+```
+
+::: {.callout-important}
+
+# Lưu ý
+
+- Cần có internet để tải và cài đặt R packages bằng lệnh `install.packages()`.
+- Khi cài đặt, tên package phải nằm trong dấu ngoặc kép `""`.
+
+:::
+
+### Sử dụng R packages
+
+Sau khi cài đặt thì package sẽ trở thành một "thư viện" trong R. Để gọi thư viện này, dùng:
+
+```{r, eval = F}
+library(readxl)
+```
+
+::: {.callout-important}
+
+# Lưu ý
+
+- Không cần internet để sử dụng library.
+- Khi gọi library thì tên library không nằm trong dấu ngoặc kép nữa `""`.
+
+:::
+
+## R Script và R Markdown
+
+Các đoạn hội thoại giữa chúng ta và máy tính có thể được lưu lại bằng file văn bản là R Script (`.R`) hoặc R Markdown (`.Rmd`). Gần đây có thêm [Quarto](https://quarto.org/) (`.qmd`) mở rộng hơn những gì R Markdown có thể làm. Vì cách viết Quarto khá giống R Markdown, nên chúng ta sẽ tập trung vào học R Markdown cơ bản.
+
+### R Script
+
+### R Markdown
+
+![](img/intro/rmd.png)
+
+![](img/intro/rmd-outp.png)

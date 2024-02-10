@@ -1,0 +1,107 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R for babies",
+    "section": "",
+    "text": "Tổng quan\nCấu trúc bài giảng được tham khảo từ các tài liệu sau:\n\nBeckerman, A. P., Childs, D. Z., & Petchey, O. L. (2017). Getting started with R: an introduction for biologists. Oxford University Press.\nBatra, Neale, et al. The Epidemiologist R Handbook. 2021."
+  },
+  {
+    "objectID": "intro.html#r",
+    "href": "intro.html#r",
+    "title": "1  Giới thiệu",
+    "section": "1.1 R",
+    "text": "1.1 R\nR là một ngôn ngữ lập trình được phát triển bởi GS. Robert Gentleman và GS. Ross Ihaka tại Đại học Auckland1. Tên gọi R được đặt theo tên của 2 tác giả (Robert và Ross).\n\n\nRobert Gentleman: “Let’s write some software.”\nRoss Ihaka: “Sure, that sounds like fun.”2\n\n\n1.1.1 Ngôn ngữ lập trình\nNgôn ngữ lập trình là một tập hợp các hướng dẫn để yêu cầu máy tính thực hiện một số tác vụ nhất định.3\nNgôn ngữ là phương tiện để con người giao tiếp với con người. Ngôn ngữ lập trình là phương tiện để con người giao tiếp với máy tính.3 Vì vậy, học ngôn ngữ lập trình cũng giống như học ngoại ngữ, bao gồm từ vựng, ngữ pháp, cụm từ, mệnh đề… để viết thành một câu văn mà máy tính có thể hiểu được và làm đúng những gì con người muốn.\n\nMột số ngôn ngữ lập trình trong phân tích dữ liệu [Photo credit]\n\n\n1.1.2 Câu văn trong R\nCâu lệnh (command) hoặc hàm (function) chính là những câu văn trong R để giao tiếp với máy tính. Chúng ta phải học ngữ pháp của 1 câu lệnh và ý nghĩa của nó để có thể sử dụng R để ra lệnh cho máy tính. Một câu lệnh trong R thường có dạng như sau:\n\ntên-câu-lệnh(tên-tham-số = đầu-vào hoặc mong-muốn)\n\n\nTên câu lệnh: nằm trước dấu (), thể hiện ý nghĩa câu lệnh dùng để làm gì.\nTên tham số: nằm trong dấu () là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng. Giá trị gán cho tham số có thể là một data đầu vào, hoặc một mong muốn của người dùng.\n\nVí dụ:\n\nmean(x = df$col1, na.rm = TRUE)\n\n\nTên câu lệnh là mean: chúng ta đang muốn máy tính hãy tính giá trị trung bình của 1 biến.\nCác tham số là x và na.rm:\n\nx: là data đầu vào, ở đây chúng ta viết x = df$col1 để cho máy tính biết data đầu vào là cột col1 trong bảng data df.\nna.rm: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây na.rm = TRUE nghĩa là nếu cột col1 có NA thì bỏ những giá trị NA đi trước khi tính trung bình.\n\n\n\n\n1.1.3 R và SPSS, Stata, SAS\n\n\nR là ngôn ngữ lập trình. Người dùng giao tiếp, đối thoại với máy tính bằng cách nhập những câu văn (code) giống như chat với máy tính, để máy hiểu và làm đúng những gì con người muốn.\nSPSS, Stata, SAS là các gói phần mềm thống kê (software package) thương mại, được thiết kế giao diện người dùng kéo thả, click chọn để dễ dàng giao tiếp với máy tính hơn. Người dùng cũng có thể viết code (SPSS Syntax, Stata command, SAS program) để lưu lại các bước phân tích, nhưng đây không phải mục tiêu chính của các gói thương mại này. Người dùng không thể yêu cầu máy tính làm gì khác với những chức năng đã được quy định sẵn trong gói phần mềm. Mỗi gói phần mềm được viết bằng một ngôn ngữ lập trình:\n\nSPSS: Java\nStata: C\nSAS: C"
+  },
+  {
+    "objectID": "intro.html#tại-sao-học-r",
+    "href": "intro.html#tại-sao-học-r",
+    "title": "1  Giới thiệu",
+    "section": "1.2 Tại sao học R?",
+    "text": "1.2 Tại sao học R?\n\nMiễn phí và sử dụng được trên mọi hệ điều hành thông dụng (Windows, Macs, Linux).\nR là ngôn ngữ truyền thống cho phân tích dữ liệu trong nghiên cứu y sinh (biostatistics), tin sinh (bioinformatics), dịch tễ, mô hình dự báo… Chuyên gia ở các ngành này liên tục phát triển các gói phần mềm (packages) viết bằng R cập nhật các phương pháp mới nhất, machine learning, thiết kế web…\n\n\nCác gói phần mềm phổ biến trong R [Photo credit]\n\nVẽ biểu đồ chất lượng cao.\n\n\nMột số biểu đồ vẽ bằng R [Photo credit]"
+  },
+  {
+    "objectID": "intro.html#r-và-rstudio",
+    "href": "intro.html#r-và-rstudio",
+    "title": "1  Giới thiệu",
+    "section": "1.3 R và RStudio",
+    "text": "1.3 R và RStudio\nR là ngôn ngữ lập trình. Sau khi cài R, chúng ta mở lên sẽ thấy giao diện giống như một khung chat trống. Khung chat này là nơi chúng ta viết code để giao tiếp với máy tính.\n\nRStudio là một môi trường phát triển tích hợp (integrated development environment hay IDE) hay nói đơn giản là một phần mềm để viết code R hiệu quả hơn.\n\nVì vậy, chúng ta cần cài đặt riêng R (ngôn ngữ lập trình) và RStudio (IDE).\n\n1.3.1 Cài đặt R\nTruy cập https://cran.r-project.org/ và tải R cho hệ điều hành của mình.\n\n\n\n1.3.2 Cài đặt RStudio\nTruy cập https://posit.co/download/rstudio-desktop/ và tải RStudio cho hệ điều hành của mình."
+  },
+  {
+    "objectID": "prepare.html#file-data-đang-ở-đâu",
+    "href": "prepare.html#file-data-đang-ở-đâu",
+    "title": "2  Chuẩn bị làm việc",
+    "section": "2.1 File data đang ở đâu?",
+    "text": "2.1 File data đang ở đâu?\nBước đầu tiên chúng ta phải biết file data đang nằm ở đâu trong máy tính. Vị trí, hay địa chỉ, hay đường dẫn lưu file data trong máy tính gọi là path.\n\n2.1.1 Windows\nĐể Windows hiển thị đường dẫn trong Explorer, trên thanh menu chọn dấu ... &gt; Options.\n\nChọn tab View, tick vào ô Display the full path in the title bar.\n\nSau khi làm các bước trên, click vào title bar của Explorer sẽ thấy hiển thị đầy đủ path của file hoặc folder hiện tại như sau:\n\n\n\n\n\n\n\n\nLưu ý\n\n\n\nTrong Windows, khi copy path vào R cần sửa lại theo 1 trong 2 cách sau:\n\nSửa tất cả dấu \\ thành /:\n\nC:/Users/ongph/github/r4babies/data\n\nSửa tất cả dấu \\ thành \\\\:\n\nC:\\\\Users\\\\ongph\\\\github\\\\r4babies\\\\data\n\n\n\n\n2.1.2 MacOS\n\n\n2.1.3 Absolute path và relative path\n\n2.1.3.1 Absolute path\nTrong ví dụ trên, C:/Users/ongph/github/r4babies/data là đường dẫn tuyệt đối (absolute path). Absolute path là path đầy đủ từ đầu ổ đĩa cho đến file hay folder hiện tại.\n\n\n2.1.3.2 Relative path\nTrong folder C:/Users/ongph/github/r4babies có chứa 2 folders là /data và /analysis. Chúng ta có thể minh họa path này như sau:\nC:\n|-- Users\n    |-- ongph\n        |-- github\n            |-- r4adults\n                |-- data\n            |-- r4babies\n                |-- data\n                |-- analysis\nVí dụ chúng ta đang ở trong folder /data. Từ /data muốn hướng dẫn cho máy tính đi đến được folder /analysis có thể viết relative path như sau:\n../analysis\nTrong đó:\n\n..: đi ngược lên 1 folder, trong ví dụ này chúng ta đang ở /data, đi ngược lên 1 folder là /r4babies\n/analysis: sau khi đi ngược lên /r4babies, hướng dẫn máy tính đi tiếp tới folder /analysis\n\nTương tự, chúng ta đang ở trong folder /data nằm trong /r4babies, muốn đến folder /data nằm trong /r4adults thì viết như sau:\n../../r4adults/data\n\n\n\n2.1.4 Quy tắc đặt tên files, folders\nĐể tránh bị lỗi trong quá trình sử dụng R, nên đặt tên files, folders theo các quy tắc sau:\n\nKhông đặt tên có dấu tiếng Việt\nKhông đặt tên quá dài\nKhông đặt tên chữ viết hoa viết thường lẫn lộn, nếu cần thì chỉ đặt theo quy luật camelCase (viết hoa chữ cái đầu của các từ sau từ đầu tiên, ví dụ dataSoiHcm) hoặc PascalCase (viết hoa chữ cái đầu của tất cả các từ, ví dụ DataSoiHcm)\nKhông có khoảng trống \" \" trong tên, có thể đặt kiểu camelCase, hoặc sử dụng dấu -, _ thay thế các khoảng trống: ví dụ không dùng tên data soi HCM 2023.xlsx mà có thể đặt là dataSoiHcm2023.xlsx, hoặc data-soi-hcm-2023.xlsx, hoặc data_soi_hcm_2023.xlsx"
+  },
+  {
+    "objectID": "prepare.html#r-project",
+    "href": "prepare.html#r-project",
+    "title": "2  Chuẩn bị làm việc",
+    "section": "2.2 R project",
+    "text": "2.2 R project\nĐể tiện quản lý, mỗi dự án phân tích nên được đặt trong 1 folder. Trong folder này chứa tất cả data, code, bảng kết quả, biểu đồ… Chúng ta sẽ dùng chức năng tạo R project của RStudio để tạo folder này.\nTrên thanh menu vào File &gt; New Project... &gt; New Directory.\n\nChọn Project Type là New Project.\n\nĐặt tên folder cho project này, và chọn đường dẫn nơi sẽ lưu project trong máy tính.\n\nTrong folder /test là một R project mới tạo này, chúng ta tạo thêm 2 folders /data và /analysis. Các thành phần trong folder này như sau:\ntest\n|-- data\n    |-- data.csv\n|-- analysis\n    |-- code.R\n    |-- analysis.Rmd\n|-- test.Rproj\n\nFolder /data: chứa tất cả data\nFolder /analysis: chứa tất cả file code, markdown\n\nTừ bây giờ, mỗi lần muốn phân tích cho dự án /test này, chúng ta mở file test.Rproj bằng RStudio. Tất cả các file code trong folder /analysis có thể đọc file trong folder /data bằng cách dùng relative path. Ví dụ:\n\ndf &lt;- read.csv(\"../data/data.csv\")"
+  },
+  {
+    "objectID": "prepare.html#r-packages",
+    "href": "prepare.html#r-packages",
+    "title": "2  Chuẩn bị làm việc",
+    "section": "2.3 R packages",
+    "text": "2.3 R packages\n\ninstall.packages(\"readxl\")\n\n\n\n\n\n\n\nLưu ý\n\n\n\nKhi cài đặt, tên package phải nằm trong dấu ngoặc kép \"\"\n\n\nSau khi cài đặt thì package sẽ trở thành một “thư viện” trong R. Để gọi thư viện này, dùng:\n\nlibrary(readxl)\n\n\n\n\n\n\n\nLưu ý\n\n\n\nKhi gọi library thì tên library không nằm trong dấu ngoặc kép nữa \"\""
+  },
+  {
+    "objectID": "prepare.html#đọc-data-vào-r",
+    "href": "prepare.html#đọc-data-vào-r",
+    "title": "2  Chuẩn bị làm việc",
+    "section": "2.3 Đọc data vào R",
+    "text": "2.3 Đọc data vào R\n\n2.3.1 Phân biệt hai loại file chính\nChúng ta có thể gặp các files data ở rất nhiều format khác nhau, như .csv, .txt, .json, .xlsx, .png, .pdf… Tuy nhiên, một cách đơn giản, có thể chia các files thành 2 loại:\n\n2.3.1.1 Text files\nLà những files khi mở bằng text editor như Notepad thì có thể đọc được các chữ trong file (human-readable). Các files như .csv, .txt, .json đều là text files. Trong R đã có sẵn những functions để đọc được hầu hết các text files.\n\n\n\n\n\n\n\n\n\n\nFigure 2.1: File .csv và .json khi mở bằng Notepad\n\n\n\n\n2.3.1.2 Binary files\nLà những files khi mở bằng text editor như Notepad thì không đọc được các chữ trong file. Các files như .xlsx, .png, .pdf đều là binary files. Binary files cần được mở bằng các phần mềm chuyên dụng, ví dụ dùng Excel để mở file .xlsx thì mới đọc được dưới dạng chữ human-readable. Bản thân R không đọc được các loại file này, nhưng chúng ta có thể cài đặt và sử dụng các R packages để đọc binary files.\n\n\n\n\n\n\n\n\n\n\nFigure 2.2: File .xlsx và .pdf khi mở bằng Notepad\n\n\n\n\n\n2.3.2 Đọc text files vào R\n\n\n2.3.3 Đọc binary files vào R\n\n2.3.3.1 File excel\nXem lại cách cài đặt và sử dụng R packages tại Section 1.4.\n\nlibrary(readxl)\n\nVấn đề với file excel: merged cells"
+  },
+  {
+    "objectID": "prepare.html#data-gọn-gàng-tidy-data",
+    "href": "prepare.html#data-gọn-gàng-tidy-data",
+    "title": "2  Chuẩn bị làm việc",
+    "section": "2.4 Data gọn gàng (tidy data)",
+    "text": "2.4 Data gọn gàng (tidy data)\nTidy data1\n\n\n\n\n1. Wickham, H. Tidy Data. Journal of Statistical Software 59, (2014)."
+  },
+  {
+    "objectID": "prepare.html#r-code-và-r-markdown",
+    "href": "prepare.html#r-code-và-r-markdown",
+    "title": "2  Chuẩn bị làm việc",
+    "section": "2.5 R code và R markdown",
+    "text": "2.5 R code và R markdown\nLưu lại các đoạn hội thoại giữa chúng ta và R.\n\n\n\n\n1. Wickham, H. Tidy Data. Journal of Statistical Software 59, (2014)."
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "1. Ihaka, R. The R\nProject: A Brief History and Thoughts About the Future.\n(1998).\n\n\n2. Ihaka, R. & Gentleman, R. R: A Language for\nData Analysis and Graphics. Journal of Computational and\nGraphical Statistics 5, 299–314 (1996).\n\n\n3. Lenovo, Inc. Programming\nLanguage: What is a programming language? (2024).\n\n\n4. Wickham, H. Tidy Data. Journal\nof Statistical Software 59, (2014)."
+  },
+  {
+    "objectID": "intro.html#r-packages",
+    "href": "intro.html#r-packages",
+    "title": "1  Giới thiệu",
+    "section": "1.4 R packages",
+    "text": "1.4 R packages\nR packages là các gói phần mềm được viết bằng ngôn ngữ lập trình R để thực hiện một số tác vụ cụ thể.\n\n1.4.1 Cài đặt R packages\n\ninstall.packages(\"readxl\")\n\n\n\n\n\n\n\nLưu ý\n\n\n\n\nCần có internet để tải và cài đặt R packages bằng lệnh install.packages()\nKhi cài đặt, tên package phải nằm trong dấu ngoặc kép \"\"\n\n\n\n\n\n1.4.2 Sử dụng R packages\nSau khi cài đặt thì package sẽ trở thành một “thư viện” trong R. Để gọi thư viện này, dùng:\n\nlibrary(readxl)\n\n\n\n\n\n\n\nLưu ý\n\n\n\n\nKhông cần internet để sử dụng library\nKhi gọi library thì tên library không nằm trong dấu ngoặc kép nữa \"\"\n\n\n\n\n\n\n\n1. Ihaka, R. & Gentleman, R. R: A Language for Data Analysis and Graphics. Journal of Computational and Graphical Statistics 5, 299–314 (1996).\n\n\n2. Ihaka, R. The R Project: A Brief History and Thoughts About the Future. (1998).\n\n\n3. Lenovo, Inc. Programming Language: What is a programming language? (2024)."
+  },
+  {
+    "objectID": "intro.html#sec-r-pkgs",
+    "href": "intro.html#sec-r-pkgs",
+    "title": "1  Giới thiệu",
+    "section": "1.4 R packages",
+    "text": "1.4 R packages\nR packages là các gói phần mềm được viết bằng ngôn ngữ lập trình R để thực hiện một số tác vụ cụ thể.\n\n1.4.1 Cài đặt R packages\n\ninstall.packages(\"readxl\")\n\n\n\n\n\n\n\nLưu ý\n\n\n\n\nCần có internet để tải và cài đặt R packages bằng lệnh install.packages().\nKhi cài đặt, tên package phải nằm trong dấu ngoặc kép \"\".\n\n\n\n\n\n1.4.2 Sử dụng R packages\nSau khi cài đặt thì package sẽ trở thành một “thư viện” trong R. Để gọi thư viện này, dùng:\n\nlibrary(readxl)\n\n\n\n\n\n\n\nLưu ý\n\n\n\n\nKhông cần internet để sử dụng library.\nKhi gọi library thì tên library không nằm trong dấu ngoặc kép nữa \"\"."
+  },
+  {
+    "objectID": "intro.html#r-code-và-rmarkdown",
+    "href": "intro.html#r-code-và-rmarkdown",
+    "title": "1  Giới thiệu",
+    "section": "1.5 R code và Rmarkdown",
+    "text": "1.5 R code và Rmarkdown\nLưu lại các đoạn hội thoại giữa chúng ta và R.\n\n\n\n\n1. Ihaka, R. & Gentleman, R. R: A Language for Data Analysis and Graphics. Journal of Computational and Graphical Statistics 5, 299–314 (1996).\n\n\n2. Ihaka, R. The R Project: A Brief History and Thoughts About the Future. (1998).\n\n\n3. Lenovo, Inc. Programming Language: What is a programming language? (2024)."
+  },
+  {
+    "objectID": "intro.html#r-script-và-r-markdown",
+    "href": "intro.html#r-script-và-r-markdown",
+    "title": "1  Giới thiệu",
+    "section": "1.5 R Script và R Markdown",
+    "text": "1.5 R Script và R Markdown\nCác đoạn hội thoại giữa chúng ta và máy tính có thể được lưu lại bằng file văn bản là R Script (.R) hoặc R Markdown (.Rmd). Gần đây có thêm Quarto (.qmd) mở rộng hơn những gì R Markdown có thể làm. Vì cách viết Quarto khá giống R Markdown, nên chúng ta sẽ tập trung vào học R Markdown cơ bản.\n\n1.5.1 R Script\n\n\n1.5.2 R Markdown\n\n\n\n\n\n\n1. Ihaka, R. & Gentleman, R. R: A Language for Data Analysis and Graphics. Journal of Computational and Graphical Statistics 5, 299–314 (1996).\n\n\n2. Ihaka, R. The R Project: A Brief History and Thoughts About the Future. (1998).\n\n\n3. Lenovo, Inc. Programming Language: What is a programming language? (2024)."
+  }
+]

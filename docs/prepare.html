@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R for babies - 2&nbsp; Chuẩn bị làm việc</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./intro.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prepare.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Chuẩn bị làm việc</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R for babies</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tổng quan</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Giới thiệu</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prepare.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Chuẩn bị làm việc</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#file-data-đang-ở-đâu" id="toc-file-data-đang-ở-đâu" class="nav-link active" data-scroll-target="#file-data-đang-ở-đâu"><span class="header-section-number">2.1</span> File data đang ở đâu?</a>
+  <ul class="collapse">
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows"><span class="header-section-number">2.1.1</span> Windows</a></li>
+  <li><a href="#macos" id="toc-macos" class="nav-link" data-scroll-target="#macos"><span class="header-section-number">2.1.2</span> MacOS</a></li>
+  <li><a href="#absolute-path-và-relative-path" id="toc-absolute-path-và-relative-path" class="nav-link" data-scroll-target="#absolute-path-và-relative-path"><span class="header-section-number">2.1.3</span> Absolute path và relative path</a></li>
+  <li><a href="#quy-tắc-đặt-tên-files-folders" id="toc-quy-tắc-đặt-tên-files-folders" class="nav-link" data-scroll-target="#quy-tắc-đặt-tên-files-folders"><span class="header-section-number">2.1.4</span> Quy tắc đặt tên files, folders</a></li>
+  </ul></li>
+  <li><a href="#r-project" id="toc-r-project" class="nav-link" data-scroll-target="#r-project"><span class="header-section-number">2.2</span> R project</a></li>
+  <li><a href="#đọc-data-vào-r" id="toc-đọc-data-vào-r" class="nav-link" data-scroll-target="#đọc-data-vào-r"><span class="header-section-number">2.3</span> Đọc data vào R</a>
+  <ul class="collapse">
+  <li><a href="#phân-biệt-hai-loại-file-chính" id="toc-phân-biệt-hai-loại-file-chính" class="nav-link" data-scroll-target="#phân-biệt-hai-loại-file-chính"><span class="header-section-number">2.3.1</span> Phân biệt hai loại file chính</a></li>
+  <li><a href="#đọc-text-files-vào-r" id="toc-đọc-text-files-vào-r" class="nav-link" data-scroll-target="#đọc-text-files-vào-r"><span class="header-section-number">2.3.2</span> Đọc text files vào R</a></li>
+  <li><a href="#đọc-binary-files-vào-r" id="toc-đọc-binary-files-vào-r" class="nav-link" data-scroll-target="#đọc-binary-files-vào-r"><span class="header-section-number">2.3.3</span> Đọc binary files vào R</a></li>
+  </ul></li>
+  <li><a href="#data-gọn-gàng-tidy-data" id="toc-data-gọn-gàng-tidy-data" class="nav-link" data-scroll-target="#data-gọn-gàng-tidy-data"><span class="header-section-number">2.4</span> Data gọn gàng (tidy data)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Chuẩn bị làm việc</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Mục tiêu
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Biết cách tìm path tới nơi lưu file data</li>
+<li>Biết cách đọc data vào R</li>
+<li>Hiểu cấu trúc tidy data</li>
+</ol>
+</div>
+</div>
+<section id="file-data-đang-ở-đâu" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="file-data-đang-ở-đâu"><span class="header-section-number">2.1</span> File data đang ở đâu?</h2>
+<p>Bước đầu tiên chúng ta phải biết file data đang nằm ở đâu trong máy tính. Vị trí, hay địa chỉ, hay đường dẫn lưu file data trong máy tính gọi là <strong><em>path</em></strong>.</p>
+<section id="windows" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="windows"><span class="header-section-number">2.1.1</span> Windows</h3>
+<p>Để Windows hiển thị đường dẫn trong Explorer, trên thanh menu chọn dấu <code>...</code> &gt; <code>Options</code>.</p>
+<p><img src="img/prepare/path-win-option.png" class="img-fluid"></p>
+<p>Chọn tab <code>View</code>, tick vào ô <code>Display the full path in the title bar</code>.</p>
+<p><img src="img/prepare/path-win-full.png" class="img-fluid" style="width:60.0%"></p>
+<p>Sau khi làm các bước trên, click vào title bar của Explorer sẽ thấy hiển thị đầy đủ path của file hoặc folder hiện tại như sau:</p>
+<p><img src="img/prepare/path-win-1.png" class="img-fluid"></p>
+<p><img src="img/prepare/path-win-2.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lưu ý
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Trong Windows, khi copy path vào R cần sửa lại theo 1 trong 2 cách sau:</p>
+<ol type="1">
+<li>Sửa tất cả dấu <code>\</code> thành <code>/</code>:</li>
+</ol>
+<pre><code>C:/Users/ongph/github/r4babies/data</code></pre>
+<ol start="2" type="1">
+<li>Sửa tất cả dấu <code>\</code> thành <code>\\</code>:</li>
+</ol>
+<pre><code>C:\\Users\\ongph\\github\\r4babies\\data</code></pre>
+</div>
+</div>
+</section>
+<section id="macos" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="macos"><span class="header-section-number">2.1.2</span> MacOS</h3>
+</section>
+<section id="absolute-path-và-relative-path" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="absolute-path-và-relative-path"><span class="header-section-number">2.1.3</span> Absolute path và relative path</h3>
+<section id="absolute-path" class="level4" data-number="2.1.3.1">
+<h4 data-number="2.1.3.1" class="anchored" data-anchor-id="absolute-path"><span class="header-section-number">2.1.3.1</span> Absolute path</h4>
+<p>Trong ví dụ trên, <code>C:/Users/ongph/github/r4babies/data</code> là đường dẫn tuyệt đối (<strong><em>absolute path</em></strong>). Absolute path là path đầy đủ từ đầu ổ đĩa cho đến file hay folder hiện tại.</p>
+</section>
+<section id="relative-path" class="level4" data-number="2.1.3.2">
+<h4 data-number="2.1.3.2" class="anchored" data-anchor-id="relative-path"><span class="header-section-number">2.1.3.2</span> Relative path</h4>
+<p>Trong folder <code>C:/Users/ongph/github/r4babies</code> có chứa 2 folders là <code>/data</code> và <code>/analysis</code>. Chúng ta có thể minh họa path này như sau:</p>
+<pre><code>C:
+|-- Users
+    |-- ongph
+        |-- github
+            |-- r4adults
+                |-- data
+            |-- r4babies
+                |-- data
+                |-- analysis</code></pre>
+<p>Ví dụ chúng ta đang ở trong folder <code>/data</code>. Từ <code>/data</code> muốn hướng dẫn cho máy tính đi đến được folder <code>/analysis</code> có thể viết <strong><em>relative path</em></strong> như sau:</p>
+<pre><code>../analysis</code></pre>
+<p>Trong đó:</p>
+<ul>
+<li><code>..</code>: đi ngược lên 1 folder, trong ví dụ này chúng ta đang ở <code>/data</code>, đi ngược lên 1 folder là <code>/r4babies</code></li>
+<li><code>/analysis</code>: sau khi đi ngược lên <code>/r4babies</code>, hướng dẫn máy tính đi tiếp tới folder <code>/analysis</code></li>
+</ul>
+<p>Tương tự, chúng ta đang ở trong folder <code>/data</code> nằm trong <code>/r4babies</code>, muốn đến folder <code>/data</code> nằm trong <code>/r4adults</code> thì viết như sau:</p>
+<pre><code>../../r4adults/data</code></pre>
+</section>
+</section>
+<section id="quy-tắc-đặt-tên-files-folders" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="quy-tắc-đặt-tên-files-folders"><span class="header-section-number">2.1.4</span> Quy tắc đặt tên files, folders</h3>
+<p>Để tránh bị lỗi trong quá trình sử dụng R, nên đặt tên files, folders theo các quy tắc sau:</p>
+<ul>
+<li>Không đặt tên có dấu tiếng Việt</li>
+<li>Không đặt tên quá dài</li>
+<li>Không đặt tên chữ viết hoa viết thường lẫn lộn, nếu cần thì chỉ đặt theo quy luật camelCase (viết hoa chữ cái đầu của các từ sau từ đầu tiên, ví dụ <code>dataSoiHcm</code>) hoặc PascalCase (viết hoa chữ cái đầu của tất cả các từ, ví dụ <code>DataSoiHcm</code>)</li>
+<li>Không có khoảng trống <code>" "</code> trong tên, có thể đặt kiểu camelCase, hoặc sử dụng dấu <code>-</code>, <code>_</code> thay thế các khoảng trống: ví dụ không dùng tên <code>data soi HCM 2023.xlsx</code> mà có thể đặt là <code>dataSoiHcm2023.xlsx</code>, hoặc <code>data-soi-hcm-2023.xlsx</code>, hoặc <code>data_soi_hcm_2023.xlsx</code></li>
+</ul>
+</section>
+</section>
+<section id="r-project" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="r-project"><span class="header-section-number">2.2</span> R project</h2>
+<p>Để tiện quản lý, mỗi dự án phân tích nên được đặt trong 1 folder. Trong folder này chứa tất cả data, code, bảng kết quả, biểu đồ… Chúng ta sẽ dùng chức năng tạo R project của RStudio để tạo folder này.</p>
+<p>Trên thanh menu vào <code>File</code> &gt; <code>New Project...</code> &gt; <code>New Directory</code>.</p>
+<p><img src="img/prepare/new-prj-1.png" class="img-fluid"></p>
+<p>Chọn Project Type là <code>New Project</code>.</p>
+<p><img src="img/prepare/new-prj-2.png" class="img-fluid"></p>
+<p>Đặt tên folder cho project này, và chọn đường dẫn nơi sẽ lưu project trong máy tính.</p>
+<p><img src="img/prepare/new-prj-3.png" class="img-fluid"></p>
+<p>Trong folder <code>/test</code> là một R project mới tạo này, chúng ta tạo thêm 2 folders <code>/data</code> và <code>/analysis</code>. Các thành phần trong folder này như sau:</p>
+<pre><code>test
+|-- data
+    |-- data.csv
+|-- analysis
+    |-- code.R
+    |-- analysis.Rmd
+|-- test.Rproj</code></pre>
+<ul>
+<li>Folder <code>/data</code>: chứa tất cả data</li>
+<li>Folder <code>/analysis</code>: chứa tất cả file code, markdown</li>
+</ul>
+<p>Từ bây giờ, mỗi lần muốn phân tích cho dự án <code>/test</code> này, chúng ta mở file <code>test.Rproj</code> bằng RStudio. Tất cả các file code trong folder <code>/analysis</code> có thể đọc file trong folder <code>/data</code> bằng cách dùng relative path. Ví dụ:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="đọc-data-vào-r" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="đọc-data-vào-r"><span class="header-section-number">2.3</span> Đọc data vào R</h2>
+<section id="phân-biệt-hai-loại-file-chính" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="phân-biệt-hai-loại-file-chính"><span class="header-section-number">2.3.1</span> Phân biệt hai loại file chính</h3>
+<p>Chúng ta có thể gặp các files data ở rất nhiều format khác nhau, như <code>.csv</code>, <code>.txt</code>, <code>.json</code>, <code>.xlsx</code>, <code>.png</code>, <code>.pdf</code>… Tuy nhiên, một cách đơn giản, có thể chia các files thành 2 loại:</p>
+<section id="text-files" class="level4" data-number="2.3.1.1">
+<h4 data-number="2.3.1.1" class="anchored" data-anchor-id="text-files"><span class="header-section-number">2.3.1.1</span> Text files</h4>
+<p>Là những files khi mở bằng text editor như Notepad thì có thể đọc được các chữ trong file (human-readable). Các files như <code>.csv</code>, <code>.txt</code>, <code>.json</code> đều là text files. Trong R đã có sẵn những functions để đọc được hầu hết các text files.</p>
+<div id="fig-text-files" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="img/prepare/csv.png" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="img/prepare/json.png" class="img-fluid figure-img"></p>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.1: File <code>.csv</code> và <code>.json</code> khi mở bằng Notepad</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="binary-files" class="level4" data-number="2.3.1.2">
+<h4 data-number="2.3.1.2" class="anchored" data-anchor-id="binary-files"><span class="header-section-number">2.3.1.2</span> Binary files</h4>
+<p>Là những files khi mở bằng text editor như Notepad thì không đọc được các chữ trong file. Các files như <code>.xlsx</code>, <code>.png</code>, <code>.pdf</code> đều là binary files. Binary files cần được mở bằng các phần mềm chuyên dụng, ví dụ dùng Excel để mở file <code>.xlsx</code> thì mới đọc được dưới dạng chữ human-readable. Bản thân R không đọc được các loại file này, nhưng chúng ta có thể cài đặt và sử dụng các R packages để đọc binary files.</p>
+<div id="fig-binary-files" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="img/prepare/excel.png" class="img-fluid figure-img"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="img/prepare/pdf.png" class="img-fluid figure-img"></p>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.2: File <code>.xlsx</code> và <code>.pdf</code> khi mở bằng Notepad</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="đọc-text-files-vào-r" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="đọc-text-files-vào-r"><span class="header-section-number">2.3.2</span> Đọc text files vào R</h3>
+</section>
+<section id="đọc-binary-files-vào-r" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="đọc-binary-files-vào-r"><span class="header-section-number">2.3.3</span> Đọc binary files vào R</h3>
+<section id="file-excel" class="level4" data-number="2.3.3.1">
+<h4 data-number="2.3.3.1" class="anchored" data-anchor-id="file-excel"><span class="header-section-number">2.3.3.1</span> File excel</h4>
+<p>Xem lại cách cài đặt và sử dụng R packages tại <a href="intro.html#sec-r-pkgs"><span>Section&nbsp;1.4</span></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Vấn đề với file excel: merged cells</p>
+</section>
+</section>
+</section>
+<section id="data-gọn-gàng-tidy-data" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="data-gọn-gàng-tidy-data"><span class="header-section-number">2.4</span> Data gọn gàng (tidy data)</h2>
+<p>Tidy data<span class="citation" data-cites="wickham2014"><sup><a href="references.html#ref-wickham2014" role="doc-biblioref">1</a></sup></span></p>
+
+
+<div id="refs" class="references csl-bib-body" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-wickham2014" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Wickham, H. <a href="https://doi.org/10.18637/jss.v059.i10">Tidy Data</a>. <em>Journal of Statistical Software</em> <strong>59</strong>, (2014).</div>
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./intro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Giới thiệu</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
