@@ -348,7 +348,7 @@ Lưu ý
 <h2 data-number="2.3" class="anchored" data-anchor-id="đọc-data-vào-r"><span class="header-section-number">2.3</span> Đọc data vào R</h2>
 <section id="phân-biệt-hai-loại-file-chính" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="phân-biệt-hai-loại-file-chính"><span class="header-section-number">2.3.1</span> Phân biệt hai loại file chính</h3>
-<p>Chúng ta có thể gặp các files data ở rất nhiều format khác nhau, như <code>.csv</code>, <code>.txt</code>, <code>.json</code>, <code>.xlsx</code>, <code>.png</code>, <code>.pdf</code>… Tuy nhiên, một cách đơn giản, có thể chia các files thành 2 loại:</p>
+<p>Chúng ta có thể gặp các files data ở rất nhiều format khác nhau, như <code>.csv</code>, <code>.txt</code>, <code>.json</code>, <code>.xlsx</code>, <code>.dta</code>… Tuy nhiên, một cách đơn giản, có thể chia các files thành 2 loại:</p>
 <section id="text-files" class="level4" data-number="2.3.1.1">
 <h4 data-number="2.3.1.1" class="anchored" data-anchor-id="text-files"><span class="header-section-number">2.3.1.1</span> Text files</h4>
 <p>Là những files khi mở bằng text editor như Notepad thì có thể đọc được các chữ trong file (human-readable). Các files như <code>.csv</code>, <code>.txt</code>, <code>.json</code> đều là text files. Trong R đã có sẵn những functions để đọc được hầu hết các text files.</p>
@@ -368,7 +368,7 @@ Lưu ý
 </section>
 <section id="binary-files" class="level4" data-number="2.3.1.2">
 <h4 data-number="2.3.1.2" class="anchored" data-anchor-id="binary-files"><span class="header-section-number">2.3.1.2</span> Binary files</h4>
-<p>Là những files khi mở bằng text editor như Notepad thì không đọc được các chữ trong file. Các files như <code>.xlsx</code>, <code>.png</code>, <code>.pdf</code> đều là binary files. Binary files cần được mở bằng các phần mềm chuyên dụng, ví dụ dùng Excel để mở file <code>.xlsx</code> thì mới đọc được dưới dạng chữ human-readable. Bản thân R không đọc được các loại file này, nhưng chúng ta có thể cài đặt và sử dụng các R packages để đọc binary files.</p>
+<p>Là những files khi mở bằng text editor như Notepad thì không đọc được các chữ trong file. Các files như <code>.xlsx</code>, <code>.dta</code> đều là binary files. Binary files cần được mở bằng các phần mềm chuyên dụng, ví dụ dùng Excel để mở file <code>.xlsx</code> thì mới đọc được dưới dạng chữ human-readable. Bản thân R không đọc được các loại file này, nhưng chúng ta có thể cài đặt và sử dụng các R packages để đọc binary files.</p>
 <div id="fig-binary-files" class="quarto-layout-panel">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -376,10 +376,10 @@ Lưu ý
 <p><img src="img/prepare/excel.png" class="img-fluid figure-img"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="img/prepare/pdf.png" class="img-fluid figure-img"></p>
+<p><img src="img/prepare/dta.png" class="img-fluid figure-img"></p>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.2: File <code>.xlsx</code> và <code>.pdf</code> khi mở bằng Notepad</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2.2: File <code>.xlsx</code> và <code>.dta</code> khi mở bằng Notepad</figcaption><p></p>
 </figure>
 </div>
 </section>

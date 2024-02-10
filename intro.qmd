@@ -13,7 +13,7 @@
 
 ## R
 
-R là một ngôn ngữ lập trình được phát triển bởi GS. Robert Gentleman và GS. Ross Ihaka tại Đại học Auckland [@ihaka1996]. Tên gọi R được đặt theo tên của 2 tác giả (Robert và Ross).
+R là một ngôn ngữ lập trình được phát triển bởi GS. Robert Gentleman và GS. Ross Ihaka tại Đại học Auckland [@ihaka1996]. Tên gọi R được đặt theo chữ cái đầu của tên 2 tác giả (Robert và Ross).
 
 ![](img/intro/ross-robert.png)
 

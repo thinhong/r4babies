@@ -137,7 +137,7 @@ df <- read.csv("../data/data.csv")
 
 ### Phân biệt hai loại file chính
 
-Chúng ta có thể gặp các files data ở rất nhiều format khác nhau, như `.csv`, `.txt`, `.json`, `.xlsx`, `.png`, `.pdf`... Tuy nhiên, một cách đơn giản, có thể chia các files thành 2 loại:
+Chúng ta có thể gặp các files data ở rất nhiều format khác nhau, như `.csv`, `.txt`, `.json`, `.xlsx`, `.dta`... Tuy nhiên, một cách đơn giản, có thể chia các files thành 2 loại:
 
 #### Text files
 
@@ -153,14 +153,14 @@ File `.csv` và `.json` khi mở bằng Notepad
 
 #### Binary files
 
-Là những files khi mở bằng text editor như Notepad thì không đọc được các chữ trong file. Các files như `.xlsx`, `.png`, `.pdf` đều là binary files. Binary files cần được mở bằng các phần mềm chuyên dụng, ví dụ dùng Excel để mở file `.xlsx` thì mới đọc được dưới dạng chữ human-readable. Bản thân R không đọc được các loại file này, nhưng chúng ta có thể cài đặt và sử dụng các R packages để đọc binary files.
+Là những files khi mở bằng text editor như Notepad thì không đọc được các chữ trong file. Các files như `.xlsx`, `.dta` đều là binary files. Binary files cần được mở bằng các phần mềm chuyên dụng, ví dụ dùng Excel để mở file `.xlsx` thì mới đọc được dưới dạng chữ human-readable. Bản thân R không đọc được các loại file này, nhưng chúng ta có thể cài đặt và sử dụng các R packages để đọc binary files.
 
 ::: {#fig-binary-files layout-ncol="2"}
 ![](img/prepare/excel.png)
 
-![](img/prepare/pdf.png)
+![](img/prepare/dta.png)
 
-File `.xlsx` và `.pdf` khi mở bằng Notepad
+File `.xlsx` và `.dta` khi mở bằng Notepad
 :::
 
 ### Đọc text files vào R
