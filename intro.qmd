@@ -1,5 +1,18 @@
 # Giới thiệu
 
+::: {.callout-note}
+
+# Trước buổi học
+
+- Cài đặt R và RStudio (xem @sec-install)
+- Cài đặt các R packages này (bấm vào nút copy ở bên phải và paste vào R):
+
+```{r, eval = F}
+install.packages(c("base64enc", "digest", "evaluate", "glue", "highr", "htmltools", "jsonlite", "knitr", "magrittr", "mime", "rmarkdown", "stringi", "stringr", "xfun", "yaml"))
+```
+
+:::
+
 ::: {.callout-tip}
 
 # Mục tiêu
@@ -35,11 +48,12 @@ Một số ngôn ngữ lập trình trong phân tích dữ liệu [[Photo credit
 Câu lệnh (command) hoặc hàm (function) chính là những câu văn trong R để giao tiếp với máy tính. Chúng ta phải học ngữ pháp của 1 câu lệnh và ý nghĩa của nó để có thể sử dụng R để ra lệnh cho máy tính. Một câu lệnh trong R thường có dạng như sau:
 
 ```{r, eval = F}
-tên-câu-lệnh(tên-tham-số = đầu-vào hoặc mong-muốn)
+tên-câu-lệnh(tên-tham-số = data-đầu-vào hoặc lựa-chọn)
 ```
 
 - Tên câu lệnh: nằm trước dấu `()`, thể hiện ý nghĩa câu lệnh dùng để làm gì.
-- Tên tham số: nằm trong dấu `()` là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng. Giá trị gán cho tham số có thể là một data đầu vào, hoặc một mong muốn của người dùng.
+- Tên tham số: nằm trong dấu `()` là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng.
+- Dấu `=`: dùng để gán 1 giá trị cho tham số. Giá trị gán cho tham số có thể là một data đầu vào, hoặc một lựa chọn của người dùng (đúng/sai).
 
 Ví dụ:
 
@@ -47,10 +61,10 @@ Ví dụ:
 mean(x = df$col1, na.rm = TRUE)
 ```
 
-- Tên câu lệnh là `mean`: chúng ta đang muốn máy tính hãy tính giá trị trung bình của 1 biến.
+- Tên câu lệnh là `mean`: chúng ta đang yêu cầu máy tính hãy tính giá trị trung bình của 1 biến.
 - Các tham số là `x` và `na.rm`:
   - `x`: là data đầu vào, ở đây chúng ta viết `x = df$col1` để cho máy tính biết data đầu vào là cột `col1` trong bảng data `df`.
-  - `na.rm`: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây `na.rm = TRUE` nghĩa là nếu cột `col1` có NA thì bỏ những giá trị NA đi trước khi tính trung bình.
+  - `na.rm`: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn `na.rm = TRUE` nghĩa là nếu cột `col1` có NA thì bỏ những giá trị NA đi trước khi tính trung bình.
 
 ### R và SPSS, Stata, SAS
 
@@ -78,7 +92,7 @@ Các gói phần mềm phổ biến trong R [[Photo credit](https://medium.com/@
 
 Một số biểu đồ vẽ bằng R [[Photo credit](https://towardsdatascience.com/create-beautiful-plots-easily-with-these-r-packages-bf2f278d479c)]
 
-## R và RStudio
+## R và RStudio {#sec-install}
 
 R là ngôn ngữ lập trình. Sau khi cài R, chúng ta mở lên sẽ thấy giao diện giống như một khung chat trống. Khung chat này là nơi chúng ta viết code để giao tiếp với máy tính.
 
@@ -140,12 +154,39 @@ library(readxl)
 
 ## R Script và R Markdown
 
-Các đoạn hội thoại giữa chúng ta và máy tính có thể được lưu lại bằng file văn bản là R Script (`.R`) hoặc R Markdown (`.Rmd`). Gần đây có thêm [Quarto](https://quarto.org/) (`.qmd`) mở rộng hơn những gì R Markdown có thể làm. Vì cách viết Quarto khá giống R Markdown, nên chúng ta sẽ tập trung vào học R Markdown cơ bản.
+Các đoạn hội thoại giữa chúng ta và máy tính có thể được lưu lại bằng file R Script (`.R`) hoặc R Markdown (`.Rmd`). Gần đây có thêm [Quarto](https://quarto.org/) (`.qmd`) mở rộng hơn những gì R Markdown có thể làm. Vì cách viết Quarto khá giống R Markdown, nên chúng ta sẽ tập trung vào học R Markdown cơ bản.
 
 ### R Script
 
+Tạo R Script bằng cách vào menu `File` > `New File` > `R Script`.
+
+R Script là file chứa các câu lệnh R và những dòng chú thích ngắn gọn về câu lệnh (comments). Có 2 cách để comment:
+
+- Viết dấu `#` đầu dòng để xác định dòng này là comment.
+- Viết dấu `#` ở cuối dòng lệnh.
+
+![](img/intro/rscript.png)
+
 ### R Markdown
 
+Tạo R Markdown bằng cách vào menu `File` > `New File` > `R Markdown...`.
+
+R Markdown là công cụ để tạo ra tài liệu tự động. Trong file R Markdown chứa code R xen kẽ với văn bản mô tả, bảng, biểu đồ... có thể xuất ra nhiều loại định dạng như `.docx`, `.pdf`, `.html`, `.pptx`.
+
+Cấu trúc file R Markdown gồm:
+
+- YAML header: nằm ở trên cùng trong và ngăn cách với phần còn lại bằng cặp dấu `---`. Phần này để mô tả tiêu đề tài liệu, tác giả, ngày tháng, định dạng mong muốn
+- Văn bản: phần diễn giải cho tài liệu, gồm các đề mục và chữ diễn giải viết theo ngôn ngữ [markdown](https://rmarkdown.rstudio.com/lesson-8.html).
+  - Đề mục được đánh dấu bằng dấu `#` và các đề mục nhỏ hơn thì tăng thêm số dấu `#` như `##`, `###`.
+  - Phải xuống hàng 2 lần để viết hàng mới trong văn bản.
+- Đoạn code (code chunks): là nơi để viết code và xuất ra các kết quả mong muốn. Code chunks của R được đặt trong cặp dấu:
+
+![](img/intro/rmd-chunk.png)
+
+Ví dụ có file R Markdown sau:
+
 ![](img/intro/rmd.png)
+
+Khi `knit` file R Markdown trên sẽ tạo ra file báo cáo sau với đầy đủ tiêu đề, đề mục, bảng kết quả, biểu đồ... giống như được tạo ra từ 1 chương trình soạn thảo văn bản như Word.
 
 ![](img/intro/rmd-outp.png)

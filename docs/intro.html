@@ -193,7 +193,7 @@ div.csl-indent {
   <li><a href="#r-và-spss-stata-sas" id="toc-r-và-spss-stata-sas" class="nav-link" data-scroll-target="#r-và-spss-stata-sas"><span class="header-section-number">1.1.3</span> R và SPSS, Stata, SAS</a></li>
   </ul></li>
   <li><a href="#tại-sao-học-r" id="toc-tại-sao-học-r" class="nav-link" data-scroll-target="#tại-sao-học-r"><span class="header-section-number">1.2</span> Tại sao học R?</a></li>
-  <li><a href="#r-và-rstudio" id="toc-r-và-rstudio" class="nav-link" data-scroll-target="#r-và-rstudio"><span class="header-section-number">1.3</span> R và RStudio</a>
+  <li><a href="#sec-install" id="toc-sec-install" class="nav-link" data-scroll-target="#sec-install"><span class="header-section-number">1.3</span> R và RStudio</a>
   <ul class="collapse">
   <li><a href="#cài-đặt-r" id="toc-cài-đặt-r" class="nav-link" data-scroll-target="#cài-đặt-r"><span class="header-section-number">1.3.1</span> Cài đặt R</a></li>
   <li><a href="#cài-đặt-rstudio" id="toc-cài-đặt-rstudio" class="nav-link" data-scroll-target="#cài-đặt-rstudio"><span class="header-section-number">1.3.2</span> Cài đặt RStudio</a></li>
@@ -231,6 +231,25 @@ div.csl-indent {
 
 </header>
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Trước buổi học
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Cài đặt R và RStudio (xem <a href="#sec-install"><span>Section&nbsp;1.3</span></a>)</li>
+<li>Cài đặt các R packages này (bấm vào nút copy ở bên phải và paste vào R):</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"base64enc"</span>, <span class="st">"digest"</span>, <span class="st">"evaluate"</span>, <span class="st">"glue"</span>, <span class="st">"highr"</span>, <span class="st">"htmltools"</span>, <span class="st">"jsonlite"</span>, <span class="st">"knitr"</span>, <span class="st">"magrittr"</span>, <span class="st">"mime"</span>, <span class="st">"rmarkdown"</span>, <span class="st">"stringi"</span>, <span class="st">"stringr"</span>, <span class="st">"xfun"</span>, <span class="st">"yaml"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -268,22 +287,23 @@ Ross Ihaka: “Sure, that sounds like fun.”<span class="citation" data-cites="
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="câu-văn-trong-r"><span class="header-section-number">1.1.2</span> Câu văn trong R</h3>
 <p>Câu lệnh (command) hoặc hàm (function) chính là những câu văn trong R để giao tiếp với máy tính. Chúng ta phải học ngữ pháp của 1 câu lệnh và ý nghĩa của nó để có thể sử dụng R để ra lệnh cho máy tính. Một câu lệnh trong R thường có dạng như sau:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tên<span class="sc">-</span>câu<span class="sc">-</span>lệnh(tên<span class="sc">-</span>tham<span class="sc">-</span>số <span class="ot">=</span> đầu<span class="sc">-</span>vào hoặc mong<span class="sc">-</span>muốn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tên<span class="sc">-</span>câu<span class="sc">-</span>lệnh(tên<span class="sc">-</span>tham<span class="sc">-</span>số <span class="ot">=</span> data<span class="sc">-</span>đầu<span class="sc">-</span>vào hoặc lựa<span class="sc">-</span>chọn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Tên câu lệnh: nằm trước dấu <code>()</code>, thể hiện ý nghĩa câu lệnh dùng để làm gì.</li>
-<li>Tên tham số: nằm trong dấu <code>()</code> là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng. Giá trị gán cho tham số có thể là một data đầu vào, hoặc một mong muốn của người dùng.</li>
+<li>Tên tham số: nằm trong dấu <code>()</code> là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng.</li>
+<li>Dấu <code>=</code>: dùng để gán 1 giá trị cho tham số. Giá trị gán cho tham số có thể là một data đầu vào, hoặc một lựa chọn của người dùng (đúng/sai).</li>
 </ul>
 <p>Ví dụ:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> df<span class="sc">$</span>col1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> df<span class="sc">$</span>col1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>Tên câu lệnh là <code>mean</code>: chúng ta đang muốn máy tính hãy tính giá trị trung bình của 1 biến.</li>
+<li>Tên câu lệnh là <code>mean</code>: chúng ta đang yêu cầu máy tính hãy tính giá trị trung bình của 1 biến.</li>
 <li>Các tham số là <code>x</code> và <code>na.rm</code>:
 <ul>
 <li><code>x</code>: là data đầu vào, ở đây chúng ta viết <code>x = df$col1</code> để cho máy tính biết data đầu vào là cột <code>col1</code> trong bảng data <code>df</code>.</li>
-<li><code>na.rm</code>: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây <code>na.rm = TRUE</code> nghĩa là nếu cột <code>col1</code> có NA thì bỏ những giá trị NA đi trước khi tính trung bình.</li>
+<li><code>na.rm</code>: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn <code>na.rm = TRUE</code> nghĩa là nếu cột <code>col1</code> có NA thì bỏ những giá trị NA đi trước khi tính trung bình.</li>
 </ul></li>
 </ul>
 </section>
@@ -315,8 +335,8 @@ Ross Ihaka: “Sure, that sounds like fun.”<span class="citation" data-cites="
 <p><img src="img/intro/r-viz.png" class="img-fluid"></p>
 <p>Một số biểu đồ vẽ bằng R [<a href="https://towardsdatascience.com/create-beautiful-plots-easily-with-these-r-packages-bf2f278d479c">Photo credit</a>]</p>
 </section>
-<section id="r-và-rstudio" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="r-và-rstudio"><span class="header-section-number">1.3</span> R và RStudio</h2>
+<section id="sec-install" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="sec-install"><span class="header-section-number">1.3</span> R và RStudio</h2>
 <p>R là ngôn ngữ lập trình. Sau khi cài R, chúng ta mở lên sẽ thấy giao diện giống như một khung chat trống. Khung chat này là nơi chúng ta viết code để giao tiếp với máy tính.</p>
 <p><img src="img/intro/r-gui.png" class="img-fluid"></p>
 <p>RStudio là một môi trường phát triển tích hợp (integrated development environment hay IDE) hay nói đơn giản là một phần mềm để viết code R hiệu quả hơn.</p>
@@ -339,7 +359,7 @@ Ross Ihaka: “Sure, that sounds like fun.”<span class="citation" data-cites="
 <section id="cài-đặt-r-packages" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="cài-đặt-r-packages"><span class="header-section-number">1.4.1</span> Cài đặt R packages</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -362,7 +382,7 @@ Lưu ý
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="sử-dụng-r-packages"><span class="header-section-number">1.4.2</span> Sử dụng R packages</h3>
 <p>Sau khi cài đặt thì package sẽ trở thành một “thư viện” trong R. Để gọi thư viện này, dùng:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -384,13 +404,35 @@ Lưu ý
 </section>
 <section id="r-script-và-r-markdown" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="r-script-và-r-markdown"><span class="header-section-number">1.5</span> R Script và R Markdown</h2>
-<p>Các đoạn hội thoại giữa chúng ta và máy tính có thể được lưu lại bằng file văn bản là R Script (<code>.R</code>) hoặc R Markdown (<code>.Rmd</code>). Gần đây có thêm <a href="https://quarto.org/">Quarto</a> (<code>.qmd</code>) mở rộng hơn những gì R Markdown có thể làm. Vì cách viết Quarto khá giống R Markdown, nên chúng ta sẽ tập trung vào học R Markdown cơ bản.</p>
+<p>Các đoạn hội thoại giữa chúng ta và máy tính có thể được lưu lại bằng file R Script (<code>.R</code>) hoặc R Markdown (<code>.Rmd</code>). Gần đây có thêm <a href="https://quarto.org/">Quarto</a> (<code>.qmd</code>) mở rộng hơn những gì R Markdown có thể làm. Vì cách viết Quarto khá giống R Markdown, nên chúng ta sẽ tập trung vào học R Markdown cơ bản.</p>
 <section id="r-script" class="level3" data-number="1.5.1">
 <h3 data-number="1.5.1" class="anchored" data-anchor-id="r-script"><span class="header-section-number">1.5.1</span> R Script</h3>
+<p>Tạo R Script bằng cách vào menu <code>File</code> &gt; <code>New File</code> &gt; <code>R Script</code>.</p>
+<p>R Script là file chứa các câu lệnh R và những dòng chú thích ngắn gọn về câu lệnh (comments). Có 2 cách để comment:</p>
+<ul>
+<li>Viết dấu <code>#</code> đầu dòng để xác định dòng này là comment.</li>
+<li>Viết dấu <code>#</code> ở cuối dòng lệnh.</li>
+</ul>
+<p><img src="img/intro/rscript.png" class="img-fluid"></p>
 </section>
 <section id="r-markdown" class="level3" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="r-markdown"><span class="header-section-number">1.5.2</span> R Markdown</h3>
+<p>Tạo R Markdown bằng cách vào menu <code>File</code> &gt; <code>New File</code> &gt; <code>R Markdown...</code>.</p>
+<p>R Markdown là công cụ để tạo ra tài liệu tự động. Trong file R Markdown chứa code R xen kẽ với văn bản mô tả, bảng, biểu đồ… có thể xuất ra nhiều loại định dạng như <code>.docx</code>, <code>.pdf</code>, <code>.html</code>, <code>.pptx</code>.</p>
+<p>Cấu trúc file R Markdown gồm:</p>
+<ul>
+<li>YAML header: nằm ở trên cùng trong và ngăn cách với phần còn lại bằng cặp dấu <code>---</code>. Phần này để mô tả tiêu đề tài liệu, tác giả, ngày tháng, định dạng mong muốn</li>
+<li>Văn bản: phần diễn giải cho tài liệu, gồm các đề mục và chữ diễn giải viết theo ngôn ngữ <a href="https://rmarkdown.rstudio.com/lesson-8.html">markdown</a>.
+<ul>
+<li>Đề mục được đánh dấu bằng dấu <code>#</code> và các đề mục nhỏ hơn thì tăng thêm số dấu <code>#</code> như <code>##</code>, <code>###</code>.</li>
+<li>Phải xuống hàng 2 lần để viết hàng mới trong văn bản.</li>
+</ul></li>
+<li>Đoạn code (code chunks): là nơi để viết code và xuất ra các kết quả mong muốn. Code chunks của R được đặt trong cặp dấu:</li>
+</ul>
+<p><img src="img/intro/rmd-chunk.png" class="img-fluid"></p>
+<p>Ví dụ có file R Markdown sau:</p>
 <p><img src="img/intro/rmd.png" class="img-fluid"></p>
+<p>Khi <code>knit</code> file R Markdown trên sẽ tạo ra file báo cáo sau với đầy đủ tiêu đề, đề mục, bảng kết quả, biểu đồ… giống như được tạo ra từ 1 chương trình soạn thảo văn bản như Word.</p>
 <p><img src="img/intro/rmd-outp.png" class="img-fluid"></p>
 
 
