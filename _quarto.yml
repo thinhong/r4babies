@@ -13,8 +13,12 @@ book:
     - index.qmd
     - intro.qmd
     - prepare.qmd
+    - clean.qmd
     - references.qmd
 
+execute:
+  freeze: auto
+  
 bibliography: references.bib
 csl: nature.csl
 
@@ -24,6 +28,4 @@ format:
     code-overflow: wrap
   pdf:
     documentclass: scrreprt
-
-
 

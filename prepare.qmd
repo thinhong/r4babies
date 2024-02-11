@@ -6,12 +6,12 @@
 
 - Tải data thực hành:
 
-{{< downloadthis data/gdp-capita.xlsx dname="gdp-capita" label="Download xlsx" type=light >}} {{< downloadthis data/life-exp.csv dname="life-exp" label="Download csv" type=light >}}
+{{< downloadthis data/gdp-capita.xlsx dname="gdp-capita" label="gdp-capita.xlsx" type=light >}} {{< downloadthis data/life-exp.csv dname="life-exp" label="life-exp.csv" type=light >}} {{< downloadthis data/linelist_raw.dta dname="linelist_raw" label="linelist_raw.dta" type=light >}}
 
 - Cài đặt các R packages này:
 
 ```{r, eval = F}
-install.packages(c("readxl"))
+install.packages(c("readxl", "haven"))
 ```
 
 :::
@@ -64,7 +64,7 @@ C:\\Users\\ongph\\github\\r4babies\\data
 
 ### MacOS
 
-### Absolute path và relative path
+### Absolute path và relative path {#sec-abs-rel-path}
 
 #### Absolute path
 
@@ -181,18 +181,97 @@ File `.xlsx` và `.dta` khi mở bằng Notepad
 
 ### Đọc text files vào R
 
+#### `read.table()`
+
+Lệnh `read.table()` là lệnh chung để đọc tất cả data dạng bảng.
+
+```{r, eval = F}
+read.table(file, header = FALSE, sep = "")
+```
+
+Dùng `?read.table` để đọc thêm hướng dẫn sử dụng và các arguments khác của lệnh. Ở đây chúng ta tìm hiểu một số arguments thường dùng:
+
+- `file`: path của file data đầu vào, có thể dùng absolute path hoặc relative path (xem @sec-abs-rel-path).
+
+- `header`: dòng đầu tiên của file data có phải là tên cột không. Nếu `header = TRUE` thì R sẽ lấy các giá trị trong hàng đầu tiên làm tên cột. Nếu `header = FALSE` thì R sẽ tự đặt tên cột là `V1`, `V2`, `V3`...
+
+::: {.callout-important}
+
+# Lưu ý
+
+Trong R, `TRUE` có thể viết tắt là `T` và `FALSE` có thể viết tắt là `F`.
+
+:::
+
+- `sep`: các cột trong text file ngăn cách nhau bằng kí tự gì. Ví dụ file `life-exp.csv` nếu chúng ta mở bằng Notepad sẽ thấy các cột ngăn cách nhau bằng dấu `,`.
+
+![](img/prepare/csv.png)
+
+Chúng ta đọc file `life-exp.csv` vào R như sau:
+
+```{r}
+df <- read.table(file = "data/life-exp.csv", header = F, sep = ",")
+head(df)
+```
+
+Nếu đọc với argument `header = T`:
+
+```{r}
+df <- read.table(file = "data/life-exp.csv", header = T, sep = ",")
+head(df)
+```
+
+#### `read.csv()`
+
+File `.csv` là một định dạng thông dụng, tên đầy đủ là comma-separated values nghĩa là các giá trị được ngăn cách bởi dấu `,` (comma). Trong R có sẵn lệnh `read.csv()` để đọc file `.csv`.
+
+```{r, eval = F}
+read.csv(file, header = TRUE, sep = ",")
+```
+
+Các arguments của `read.csv()` cũng tương tự `read.table()`, nhưng đã được quy định cho phù hợp với file `.csv`. Vì vậy, thường chỉ cần đặt path vào argument `file` là đủ.
+
+```{r}
+df <- read.csv(file = "data/life-exp.csv")
+head(df)
+```
+
 ### Đọc binary files vào R
 
-#### File excel
+#### `read_excel()`
 
-Xem lại cách cài đặt và sử dụng R packages tại @sec-r-pkgs.
+Dùng lệnh `read_excel()` trong package `readxl` để đọc các file excel (đuôi `.xls` hay `.xlsx`) . Xem lại cách cài đặt và sử dụng R packages tại @sec-r-pkgs.
+
+```{r, eval = F}
+read_excel(path, sheet = NULL, col_names = TRUE)
+```
+
+Chúng ta có thể thấy tên các arguments của `read_excel()` hoàn toàn khác với `read.table()` hay `read.csv()`.
+
+- `path`: path của file data đầu vào.
+- `sheet`: tên hoặc số thứ tự của sheet sẽ đọc vào R, nếu file có nhiều sheets.
+- `col_names`: dòng đầu tiên của file data có phải là tên cột không, giống argument `header` của `read.table()`.
 
 ```{r}
 library(readxl)
+df <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1)
+head(df)
 ```
 
-Vấn đề với file excel: merged cells
+::: {.callout-important}
 
-## Data gọn gàng (tidy data)
+# Lưu ý
 
-Tidy data[@wickham2014]
+Một lỗi thường gặp với file excel là R đọc các file có merged cells không tốt. Vì vậy khi nhập data, nên tránh làm merged cells.
+
+:::
+
+#### File SPSS, Stata, SAS
+
+Dùng các lệnh `read_sav()` (SPSS), `read_dta()` (Stata) và `read_sas()` trong package `haven`.
+
+```{r}
+library(haven)
+df <- read_dta(file = "data/linelist_raw.dta")
+head(df)
+```

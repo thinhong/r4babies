@@ -66,6 +66,12 @@ mean(x = df$col1, na.rm = TRUE)
   - `x`: là data đầu vào, ở đây chúng ta viết `x = df$col1` để cho máy tính biết data đầu vào là cột `col1` trong bảng data `df`.
   - `na.rm`: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn `na.rm = TRUE` nghĩa là nếu cột `col1` có NA thì bỏ những giá trị NA đi trước khi tính trung bình.
 
+::: {.callout-important}
+
+Để đọc hướng dẫn sử dụng về câu lệnh, gõ `?tên-câu-lệnh`.
+
+:::
+
 ### R và SPSS, Stata, SAS
 
 ![](img/intro/r-spss.png)
