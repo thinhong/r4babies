@@ -276,7 +276,7 @@ Một lỗi thường gặp với file excel là R đọc các file có merged c
 
 #### File SPSS, Stata, SAS
 
-Dùng các lệnh `read_sav()` (SPSS), `read_dta()` (Stata) và `read_sas()` trong package `haven`.
+Dùng các lệnh `read_sav()` (SPSS), `read_dta()` (Stata) và `read_sas()` (SAS) trong package `haven`.
 
 ```{r}
 library(haven)

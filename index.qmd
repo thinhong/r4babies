@@ -1,11 +1,19 @@
 # Tổng quan {.unnumbered}
 
-Cấu trúc bài giảng được tham khảo từ các tài liệu sau:
+## Về khóa học
 
-1. Beckerman, A. P., Childs, D. Z., & Petchey, O. L. (2017). Getting started with R: an introduction for biologists. Oxford University Press.
+Khóa học được thiết kế để hướng dẫn đội ngũ nhân viên của Trung tâm Kiểm soát bệnh tật Thành phố Hồ Chí Minh (HCDC) trong series "Tập huấn về Phân tích dữ liệu sử dụng phần mềm R và Nghiên cứu khoa học".
+
+Cấu trúc khóa học được tham khảo từ các tài liệu sau:
+
+1. Beckerman, AP, Childs, DZ, & Petchey, OL. Getting started with R: an introduction for biologists. Oxford University Press. 2017.
 2. Batra, Neale, et al. The Epidemiologist R Handbook. 2021.
 
 Data cho bài tập và ví dụ được tham khảo từ các nguồn sau:
 
 1. World Bank. GDP per capita (current US$). Retrieved February 10, 2024 from [World Bank Open Data](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD).
 2. Laksika Tharmalingam. Health and Demographics Dataset, Version 1. Retrieved February 10, 2024 from [Kaggle](https://www.kaggle.com/datasets/uom190346a/health-and-demographics-dataset).
+
+## Liên hệ
+
+Mọi ý kiến đóng góp, phản ánh, câu hỏi thắc mắc xin liên hệ [Thinh Ong](https://drthinhong.com/).
