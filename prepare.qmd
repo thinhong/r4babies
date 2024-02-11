@@ -20,8 +20,8 @@ install.packages(c("readxl", "haven"))
 # Mục tiêu
 
 1.  Biết cách tìm path tới nơi lưu file data
-2.  Biết cách đọc data vào R
-3.  Hiểu cấu trúc tidy data
+2.  Biết cách tạo và quản lý R project
+3.  Biết cách đọc data vào R
 :::
 
 ## File data đang ở đâu?
@@ -140,10 +140,10 @@ test
 |-- test.Rproj
 ```
 
--   Folder `/data`: chứa tất cả data
--   Folder `/analysis`: chứa tất cả file code, markdown
+-   Folder `/data`: chứa tất cả data.
+-   Folder `/analysis`: chứa tất cả file R Markdown.
 
-Từ bây giờ, mỗi lần muốn phân tích cho dự án `/test` này, chúng ta mở file `test.Rproj` bằng RStudio. Tất cả các file code trong folder `/analysis` có thể đọc file trong folder `/data` bằng cách dùng relative path. Ví dụ:
+Từ bây giờ, mỗi lần muốn phân tích cho dự án `/test` này, chúng ta mở file `test.Rproj` bằng RStudio. Tất cả các file code trong folder `/analysis` có thể đọc file trong folder `/data` bằng cách dùng relative path. Những data quan trọng không thể copy vào chung trong project thì dùng absolute path (xem lại phần nói về path ở @sec-abs-rel-path). Ví dụ:
 
 ```{r, eval = F}
 df <- read.csv("../data/data.csv")
