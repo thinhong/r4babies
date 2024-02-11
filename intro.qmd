@@ -52,7 +52,7 @@ tên-câu-lệnh(tên-tham-số = data-đầu-vào hoặc lựa-chọn)
 ```
 
 - Tên câu lệnh: nằm trước dấu `()`, thể hiện ý nghĩa câu lệnh dùng để làm gì.
-- Tên tham số: nằm trong dấu `()` là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng.
+- Tên tham số (argument): nằm trong dấu `()` là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng.
 - Dấu `=`: dùng để gán 1 giá trị cho tham số. Giá trị gán cho tham số có thể là một data đầu vào, hoặc một lựa chọn của người dùng (đúng/sai).
 
 Ví dụ:

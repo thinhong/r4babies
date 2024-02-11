@@ -221,6 +221,14 @@ df <- read.table(file = "data/life-exp.csv", header = T, sep = ",")
 head(df)
 ```
 
+::: {.callout-note}
+
+Dấu `<-` dùng để gán kết quả của một function cho một đối tượng (object) trong R. Nếu chỉ viết `read.table(file = "data/life-exp.csv", header = T, sep = ",")` thì R không lưu lại kết quả sau khi đọc mà chỉ hiển thị ra màn hình.
+
+Sau khi gán kết quả đọc của `read.table()` vào object `df`, dùng lệnh `head(df)` để hiển thị 6 dòng đầu tiên của bảng.
+
+:::
+
 #### `read.csv()`
 
 File `.csv` là một định dạng thông dụng, tên đầy đủ là comma-separated values nghĩa là các giá trị được ngăn cách bởi dấu `,` (comma). Trong R có sẵn lệnh `read.csv()` để đọc file `.csv`.
