@@ -1,4 +1,20 @@
-# Chuẩn bị làm việc
+# Chuẩn bị
+
+::: {.callout-note}
+
+# Trước buổi học
+
+- Tải data thực hành:
+
+{{< downloadthis data/gdp-capita.xlsx dname="gdp-capita" label="Download xlsx" type=light >}} {{< downloadthis data/life-exp.csv dname="life-exp" label="Download csv" type=light >}}
+
+- Cài đặt các R packages này:
+
+```{r, eval = F}
+install.packages(c("readxl"))
+```
+
+:::
 
 ::: callout-tip
 # Mục tiêu
