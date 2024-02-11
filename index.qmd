@@ -7,5 +7,5 @@ Cấu trúc bài giảng được tham khảo từ các tài liệu sau:
 
 Data cho bài tập và ví dụ được tham khảo từ các nguồn sau:
 
-1. World Bank. GDP per capita (current US$). Retrieved February 10, 2024 from [World Bank Open Data](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD)
+1. World Bank. GDP per capita (current US$). Retrieved February 10, 2024 from [World Bank Open Data](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD).
 2. Laksika Tharmalingam. Health and Demographics Dataset, Version 1. Retrieved February 10, 2024 from [Kaggle](https://www.kaggle.com/datasets/uom190346a/health-and-demographics-dataset).

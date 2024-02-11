@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "R for babies",
     "section": "",
-    "text": "Tổng quan\nCấu trúc bài giảng được tham khảo từ các tài liệu sau:\n\nBeckerman, A. P., Childs, D. Z., & Petchey, O. L. (2017). Getting started with R: an introduction for biologists. Oxford University Press.\nBatra, Neale, et al. The Epidemiologist R Handbook. 2021.\n\nData cho bài tập và ví dụ được tham khảo từ các nguồn sau:\n\nWorld Bank. GDP per capita (current US$). Retrieved February 10, 2024 from World Bank Open Data\nLaksika Tharmalingam. Health and Demographics Dataset, Version 1. Retrieved February 10, 2024 from Kaggle."
+    "text": "Tổng quan\nCấu trúc bài giảng được tham khảo từ các tài liệu sau:\n\nBeckerman, A. P., Childs, D. Z., & Petchey, O. L. (2017). Getting started with R: an introduction for biologists. Oxford University Press.\nBatra, Neale, et al. The Epidemiologist R Handbook. 2021.\n\nData cho bài tập và ví dụ được tham khảo từ các nguồn sau:\n\nWorld Bank. GDP per capita (current US$). Retrieved February 10, 2024 from World Bank Open Data.\nLaksika Tharmalingam. Health and Demographics Dataset, Version 1. Retrieved February 10, 2024 from Kaggle."
   },
   {
     "objectID": "intro.html#r",
@@ -21,11 +21,25 @@
     "text": "1.2 Tại sao học R?\n\nMiễn phí và sử dụng được trên mọi hệ điều hành thông dụng (Windows, Macs, Linux).\nR là ngôn ngữ truyền thống cho phân tích dữ liệu trong nghiên cứu y sinh (biostatistics), tin sinh (bioinformatics), dịch tễ, mô hình dự báo… Chuyên gia ở các ngành này liên tục phát triển các gói phần mềm (packages) viết bằng R cập nhật các phương pháp mới nhất, machine learning, thiết kế web…\n\n\nCác gói phần mềm phổ biến trong R [Photo credit]\n\nVẽ biểu đồ chất lượng cao.\n\n\nMột số biểu đồ vẽ bằng R [Photo credit]"
   },
   {
-    "objectID": "intro.html#r-và-rstudio",
-    "href": "intro.html#r-và-rstudio",
+    "objectID": "intro.html#sec-install",
+    "href": "intro.html#sec-install",
     "title": "1  Giới thiệu",
     "section": "1.3 R và RStudio",
     "text": "1.3 R và RStudio\nR là ngôn ngữ lập trình. Sau khi cài R, chúng ta mở lên sẽ thấy giao diện giống như một khung chat trống. Khung chat này là nơi chúng ta viết code để giao tiếp với máy tính.\n\nRStudio là một môi trường phát triển tích hợp (integrated development environment hay IDE) hay nói đơn giản là một phần mềm để viết code R hiệu quả hơn.\n\nVì vậy, chúng ta cần cài đặt riêng R (ngôn ngữ lập trình) và RStudio (IDE).\n\n1.3.1 Cài đặt R\nTruy cập https://cran.r-project.org/ và tải R cho hệ điều hành của mình.\n\n\n\n1.3.2 Cài đặt RStudio\nTruy cập https://posit.co/download/rstudio-desktop/ và tải RStudio cho hệ điều hành của mình."
+  },
+  {
+    "objectID": "intro.html#sec-r-pkgs",
+    "href": "intro.html#sec-r-pkgs",
+    "title": "1  Giới thiệu",
+    "section": "1.4 R packages",
+    "text": "1.4 R packages\nR packages là các gói phần mềm được viết bằng ngôn ngữ lập trình R để thực hiện một số tác vụ cụ thể.\n\n1.4.1 Cài đặt R packages\n\ninstall.packages(\"readxl\")\n\n\n\n\n\n\n\nLưu ý\n\n\n\n\nCần có internet để tải và cài đặt R packages bằng lệnh install.packages().\nKhi cài đặt, tên package phải nằm trong dấu ngoặc kép \"\".\n\n\n\n\n\n1.4.2 Sử dụng R packages\nSau khi cài đặt thì package sẽ trở thành một “thư viện” trong R. Để gọi thư viện này, dùng:\n\nlibrary(readxl)\n\n\n\n\n\n\n\nLưu ý\n\n\n\n\nKhông cần internet để sử dụng library.\nKhi gọi library thì tên library không nằm trong dấu ngoặc kép nữa \"\"."
+  },
+  {
+    "objectID": "intro.html#r-script-và-r-markdown",
+    "href": "intro.html#r-script-và-r-markdown",
+    "title": "1  Giới thiệu",
+    "section": "1.5 R Script và R Markdown",
+    "text": "1.5 R Script và R Markdown\nCác đoạn hội thoại giữa chúng ta và máy tính có thể được lưu lại bằng file R Script (.R) hoặc R Markdown (.Rmd). Gần đây có thêm Quarto (.qmd) mở rộng hơn những gì R Markdown có thể làm. Vì cách viết Quarto khá giống R Markdown, nên chúng ta sẽ tập trung vào học R Markdown cơ bản.\n\n1.5.1 R Script\nTạo R Script bằng cách vào menu File &gt; New File &gt; R Script.\nR Script là file chứa các câu lệnh R và những dòng chú thích ngắn gọn về câu lệnh (comments). Có 2 cách để comment:\n\nViết dấu # đầu dòng để xác định dòng này là comment.\nViết dấu # ở cuối dòng lệnh.\n\n\n\n\n1.5.2 R Markdown\nTạo R Markdown bằng cách vào menu File &gt; New File &gt; R Markdown....\nR Markdown là công cụ để tạo ra tài liệu tự động. Trong file R Markdown chứa code R xen kẽ với văn bản mô tả, bảng, biểu đồ… có thể xuất ra nhiều loại định dạng như .docx, .pdf, .html, .pptx.\nCấu trúc file R Markdown gồm:\n\nYAML header: nằm ở trên cùng trong và ngăn cách với phần còn lại bằng cặp dấu ---. Phần này để mô tả tiêu đề tài liệu, tác giả, ngày tháng, định dạng mong muốn\nVăn bản: phần diễn giải cho tài liệu, gồm các đề mục và chữ diễn giải viết theo ngôn ngữ markdown.\n\nĐề mục được đánh dấu bằng dấu # và các đề mục nhỏ hơn thì tăng thêm số dấu # như ##, ###.\nPhải xuống hàng 2 lần để viết hàng mới trong văn bản.\n\nĐoạn code (code chunks): là nơi để viết code và xuất ra các kết quả mong muốn. Code chunks của R được đặt trong cặp dấu:\n\n\nVí dụ có file R Markdown sau:\n\nKhi knit file R Markdown trên sẽ tạo ra file báo cáo sau với đầy đủ tiêu đề, đề mục, bảng kết quả, biểu đồ… giống như được tạo ra từ 1 chương trình soạn thảo văn bản như Word.\n\n\n\n\n\n1. Ihaka, R. & Gentleman, R. R: A Language for Data Analysis and Graphics. Journal of Computational and Graphical Statistics 5, 299–314 (1996).\n\n\n2. Ihaka, R. The R Project: A Brief History and Thoughts About the Future. (1998).\n\n\n3. Lenovo, Inc. Programming Language: What is a programming language? (2024)."
   },
   {
     "objectID": "prepare.html#file-data-đang-ở-đâu",
@@ -42,13 +56,6 @@
     "text": "2.2 R project\nĐể tiện quản lý, mỗi dự án phân tích nên được đặt trong 1 folder. Trong folder này chứa tất cả data, code, bảng kết quả, biểu đồ… Chúng ta sẽ dùng chức năng tạo R project của RStudio để tạo folder này.\nTrên thanh menu vào File &gt; New Project... &gt; New Directory.\n\nChọn Project Type là New Project.\n\nĐặt tên folder cho project này, và chọn đường dẫn nơi sẽ lưu project trong máy tính.\n\nTrong folder /test là một R project mới tạo này, chúng ta tạo thêm 2 folders /data và /analysis. Các thành phần trong folder này như sau:\ntest\n|-- data\n    |-- data.csv\n|-- analysis\n    |-- code.R\n    |-- analysis.Rmd\n|-- test.Rproj\n\nFolder /data: chứa tất cả data\nFolder /analysis: chứa tất cả file code, markdown\n\nTừ bây giờ, mỗi lần muốn phân tích cho dự án /test này, chúng ta mở file test.Rproj bằng RStudio. Tất cả các file code trong folder /analysis có thể đọc file trong folder /data bằng cách dùng relative path. Ví dụ:\n\ndf &lt;- read.csv(\"../data/data.csv\")"
   },
   {
-    "objectID": "prepare.html#r-packages",
-    "href": "prepare.html#r-packages",
-    "title": "2  Chuẩn bị làm việc",
-    "section": "2.3 R packages",
-    "text": "2.3 R packages\n\ninstall.packages(\"readxl\")\n\n\n\n\n\n\n\nLưu ý\n\n\n\nKhi cài đặt, tên package phải nằm trong dấu ngoặc kép \"\"\n\n\nSau khi cài đặt thì package sẽ trở thành một “thư viện” trong R. Để gọi thư viện này, dùng:\n\nlibrary(readxl)\n\n\n\n\n\n\n\nLưu ý\n\n\n\nKhi gọi library thì tên library không nằm trong dấu ngoặc kép nữa \"\""
-  },
-  {
     "objectID": "prepare.html#đọc-data-vào-r",
     "href": "prepare.html#đọc-data-vào-r",
     "title": "2  Chuẩn bị làm việc",
@@ -63,66 +70,10 @@
     "text": "2.4 Data gọn gàng (tidy data)\nTidy data1\n\n\n\n\n1. Wickham, H. Tidy Data. Journal of Statistical Software 59, (2014)."
   },
   {
-    "objectID": "prepare.html#r-code-và-r-markdown",
-    "href": "prepare.html#r-code-và-r-markdown",
-    "title": "2  Chuẩn bị làm việc",
-    "section": "2.5 R code và R markdown",
-    "text": "2.5 R code và R markdown\nLưu lại các đoạn hội thoại giữa chúng ta và R.\n\n\n\n\n1. Wickham, H. Tidy Data. Journal of Statistical Software 59, (2014)."
-  },
-  {
     "objectID": "references.html",
     "href": "references.html",
     "title": "References",
     "section": "",
     "text": "1. Ihaka, R. The R\nProject: A Brief History and Thoughts About the Future.\n(1998).\n\n\n2. Ihaka, R. & Gentleman, R. R: A Language for\nData Analysis and Graphics. Journal of Computational and\nGraphical Statistics 5, 299–314 (1996).\n\n\n3. Lenovo, Inc. Programming\nLanguage: What is a programming language? (2024).\n\n\n4. Wickham, H. Tidy Data. Journal\nof Statistical Software 59, (2014)."
-  },
-  {
-    "objectID": "intro.html#r-packages",
-    "href": "intro.html#r-packages",
-    "title": "1  Giới thiệu",
-    "section": "1.4 R packages",
-    "text": "1.4 R packages\nR packages là các gói phần mềm được viết bằng ngôn ngữ lập trình R để thực hiện một số tác vụ cụ thể.\n\n1.4.1 Cài đặt R packages\n\ninstall.packages(\"readxl\")\n\n\n\n\n\n\n\nLưu ý\n\n\n\n\nCần có internet để tải và cài đặt R packages bằng lệnh install.packages()\nKhi cài đặt, tên package phải nằm trong dấu ngoặc kép \"\"\n\n\n\n\n\n1.4.2 Sử dụng R packages\nSau khi cài đặt thì package sẽ trở thành một “thư viện” trong R. Để gọi thư viện này, dùng:\n\nlibrary(readxl)\n\n\n\n\n\n\n\nLưu ý\n\n\n\n\nKhông cần internet để sử dụng library\nKhi gọi library thì tên library không nằm trong dấu ngoặc kép nữa \"\"\n\n\n\n\n\n\n\n1. Ihaka, R. & Gentleman, R. R: A Language for Data Analysis and Graphics. Journal of Computational and Graphical Statistics 5, 299–314 (1996).\n\n\n2. Ihaka, R. The R Project: A Brief History and Thoughts About the Future. (1998).\n\n\n3. Lenovo, Inc. Programming Language: What is a programming language? (2024)."
-  },
-  {
-    "objectID": "intro.html#sec-r-pkgs",
-    "href": "intro.html#sec-r-pkgs",
-    "title": "1  Giới thiệu",
-    "section": "1.4 R packages",
-    "text": "1.4 R packages\nR packages là các gói phần mềm được viết bằng ngôn ngữ lập trình R để thực hiện một số tác vụ cụ thể.\n\n1.4.1 Cài đặt R packages\n\ninstall.packages(\"readxl\")\n\n\n\n\n\n\n\nLưu ý\n\n\n\n\nCần có internet để tải và cài đặt R packages bằng lệnh install.packages().\nKhi cài đặt, tên package phải nằm trong dấu ngoặc kép \"\".\n\n\n\n\n\n1.4.2 Sử dụng R packages\nSau khi cài đặt thì package sẽ trở thành một “thư viện” trong R. Để gọi thư viện này, dùng:\n\nlibrary(readxl)\n\n\n\n\n\n\n\nLưu ý\n\n\n\n\nKhông cần internet để sử dụng library.\nKhi gọi library thì tên library không nằm trong dấu ngoặc kép nữa \"\"."
-  },
-  {
-    "objectID": "intro.html#r-code-và-rmarkdown",
-    "href": "intro.html#r-code-và-rmarkdown",
-    "title": "1  Giới thiệu",
-    "section": "1.5 R code và Rmarkdown",
-    "text": "1.5 R code và Rmarkdown\nLưu lại các đoạn hội thoại giữa chúng ta và R.\n\n\n\n\n1. Ihaka, R. & Gentleman, R. R: A Language for Data Analysis and Graphics. Journal of Computational and Graphical Statistics 5, 299–314 (1996).\n\n\n2. Ihaka, R. The R Project: A Brief History and Thoughts About the Future. (1998).\n\n\n3. Lenovo, Inc. Programming Language: What is a programming language? (2024)."
-  },
-  {
-    "objectID": "intro.html#r-script-và-r-markdown",
-    "href": "intro.html#r-script-và-r-markdown",
-    "title": "1  Giới thiệu",
-    "section": "1.5 R Script và R Markdown",
-    "text": "1.5 R Script và R Markdown\nCác đoạn hội thoại giữa chúng ta và máy tính có thể được lưu lại bằng file R Script (.R) hoặc R Markdown (.Rmd). Gần đây có thêm Quarto (.qmd) mở rộng hơn những gì R Markdown có thể làm. Vì cách viết Quarto khá giống R Markdown, nên chúng ta sẽ tập trung vào học R Markdown cơ bản.\n\n1.5.1 R Script\nTạo R Script bằng cách vào menu File &gt; New File &gt; R Script.\nR Script là file chứa các câu lệnh R và những dòng chú thích ngắn gọn về câu lệnh (comments). Có 2 cách để comment:\n\nViết dấu # đầu dòng để xác định dòng này là comment.\nViết dấu # ở cuối dòng lệnh.\n\n\n\n\n1.5.2 R Markdown\nTạo R Markdown bằng cách vào menu File &gt; New File &gt; R Markdown....\nR Markdown là công cụ để tạo ra tài liệu tự động. Trong file R Markdown chứa code R xen kẽ với văn bản mô tả, bảng, biểu đồ… có thể xuất ra nhiều loại định dạng như .docx, .pdf, .html, .pptx.\nCấu trúc file R Markdown gồm:\n\nYAML header: nằm ở trên cùng trong và ngăn cách với phần còn lại bằng cặp dấu ---. Phần này để mô tả tiêu đề tài liệu, tác giả, ngày tháng, định dạng mong muốn\nVăn bản: phần diễn giải cho tài liệu, gồm các đề mục và chữ diễn giải viết theo ngôn ngữ markdown.\n\nĐề mục được đánh dấu bằng dấu # và các đề mục nhỏ hơn thì tăng thêm số dấu # như ##, ###.\nPhải xuống hàng 2 lần để viết hàng mới trong văn bản.\n\nĐoạn code (code chunks): là nơi để viết code và xuất ra các kết quả mong muốn. Code chunks của R được đặt trong cặp dấu:\n\n\nVí dụ có file R Markdown sau:\n\nKhi knit file R Markdown trên sẽ tạo ra file báo cáo sau với đầy đủ tiêu đề, đề mục, bảng kết quả, biểu đồ… giống như được tạo ra từ 1 chương trình soạn thảo văn bản như Word.\n\n\n\n\n\n1. Ihaka, R. & Gentleman, R. R: A Language for Data Analysis and Graphics. Journal of Computational and Graphical Statistics 5, 299–314 (1996).\n\n\n2. Ihaka, R. The R Project: A Brief History and Thoughts About the Future. (1998).\n\n\n3. Lenovo, Inc. Programming Language: What is a programming language? (2024)."
-  },
-  {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Giới thiệu",
-    "section": "",
-    "text": "2 Trước buổi học\ninstall.packages(c(\"base64enc\", \"digest\", \"evaluate\", \"glue\", \"highr\", \"htmltools\", \"jsonlite\", \"knitr\", \"magrittr\", \"mime\", \"rmarkdown\", \"stringi\", \"stringr\", \"xfun\", \"yaml\"))"
-  },
-  {
-    "objectID": "intro.html#install-r",
-    "href": "intro.html#install-r",
-    "title": "1  Giới thiệu",
-    "section": "1.3 R và RStudio",
-    "text": "1.3 R và RStudio\nR là ngôn ngữ lập trình. Sau khi cài R, chúng ta mở lên sẽ thấy giao diện giống như một khung chat trống. Khung chat này là nơi chúng ta viết code để giao tiếp với máy tính.\n\nRStudio là một môi trường phát triển tích hợp (integrated development environment hay IDE) hay nói đơn giản là một phần mềm để viết code R hiệu quả hơn.\n\nVì vậy, chúng ta cần cài đặt riêng R (ngôn ngữ lập trình) và RStudio (IDE).\n\n1.3.1 Cài đặt R\nTruy cập https://cran.r-project.org/ và tải R cho hệ điều hành của mình.\n\n\n\n1.3.2 Cài đặt RStudio\nTruy cập https://posit.co/download/rstudio-desktop/ và tải RStudio cho hệ điều hành của mình."
-  },
-  {
-    "objectID": "intro.html#sec-install",
-    "href": "intro.html#sec-install",
-    "title": "1  Giới thiệu",
-    "section": "1.3 R và RStudio",
-    "text": "1.3 R và RStudio\nR là ngôn ngữ lập trình. Sau khi cài R, chúng ta mở lên sẽ thấy giao diện giống như một khung chat trống. Khung chat này là nơi chúng ta viết code để giao tiếp với máy tính.\n\nRStudio là một môi trường phát triển tích hợp (integrated development environment hay IDE) hay nói đơn giản là một phần mềm để viết code R hiệu quả hơn.\n\nVì vậy, chúng ta cần cài đặt riêng R (ngôn ngữ lập trình) và RStudio (IDE).\n\n1.3.1 Cài đặt R\nTruy cập https://cran.r-project.org/ và tải R cho hệ điều hành của mình.\n\n\n\n1.3.2 Cài đặt RStudio\nTruy cập https://posit.co/download/rstudio-desktop/ và tải RStudio cho hệ điều hành của mình."
   }
 ]
