@@ -3,6 +3,7 @@ project:
   output-dir: docs
 
 book:
+  google-analytics: "G-RVRBE7Y1R2"
   title: "R for babies"
   author:
     - name: Thinh Ong
