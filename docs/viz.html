@@ -245,14 +245,14 @@ gtag('config', 'G-RVRBE7Y1R2', { 'anonymize_ip': true});
 <p><img src="img/viz/nature-comm.webp" class="img-fluid"></p>
 <p>Chúng ta sẽ vẽ lại biểu đồ này bằng <code>ggplot</code>. Để đơn giản, chúng ta bỏ bớt một số chi tiết và sẽ vẽ biểu đồ sau:</p>
 <p><img src="img/viz/nature-comm-simple.png" class="img-fluid"></p>
+</section>
+<section id="các-bước-thực-hành" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="các-bước-thực-hành"><span class="header-section-number">4.1.2</span> Các bước thực hành</h3>
 <p>Đầu tiên cần gọi library <code>ggplot</code> để vẽ biểu đồ và <code>ggsci</code> cho bảng màu.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggsci)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="các-bước-thực-hành" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="các-bước-thực-hành"><span class="header-section-number">4.1.2</span> Các bước thực hành</h3>
 <p>Nhìn vào biểu đồ, chúng ta thấy trục x (nằm ngang) là sự thay đổi độ phủ vaccine, trục y (nằm dọc) là sự thay đổi bất bình đẳng địa lý. Có 10 quốc gia được hiển thị tên là Angola, Papua New Guinea, Pakistan, Chad, Ethiopia, Kenya, Nigeria, Liberia, Burkina Faso, India.</p>
 <p>Vậy chúng ta cần một data frame có ít nhất 3 cột: (1) tên quốc gia, (2) sự thay đổi độ phủ vaccine, (3) sự thay đổi bất bình đẳng địa lý.</p>
 <div class="cell">

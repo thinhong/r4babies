@@ -12,14 +12,14 @@ Chúng ta sẽ vẽ lại biểu đồ này bằng `ggplot`. Để đơn giản,
 
 ![](img/viz/nature-comm-simple.png)
 
+### Các bước thực hành
+
 Đầu tiên cần gọi library `ggplot` để vẽ biểu đồ và `ggsci` cho bảng màu.
 
 ```{r}
 library(ggplot2)
 library(ggsci)
 ```
-
-### Các bước thực hành
 
 Nhìn vào biểu đồ, chúng ta thấy trục x (nằm ngang) là sự thay đổi độ phủ vaccine, trục y (nằm dọc) là sự thay đổi bất bình đẳng địa lý. Có 10 quốc gia được hiển thị tên là Angola, Papua New Guinea, Pakistan, Chad, Ethiopia, Kenya, Nigeria, Liberia, Burkina Faso, India.
 
