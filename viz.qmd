@@ -126,4 +126,10 @@ ggplot(df_plot, aes(x = coverage, y = inequality)) +
   theme(legend.position = "none")
 ```
 
+::: {.callout-note}
 
+# Bài tập
+
+Thay đổi tiêu đề của các trục tọa độ và chú thích kích thước điểm, màu cho giống với biểu đồ mẫu. Đặt phần chú thích ở trên biểu đồ giống như biểu đồ mẫu.
+
+:::
