@@ -16,6 +16,7 @@ book:
     - intro.qmd
     - prepare.qmd
     - clean.qmd
+    - viz.qmd
     - references.qmd
 
 execute:
