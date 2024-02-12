@@ -10,7 +10,7 @@
 
 - Tải data thực hành:
 
-{{< downloadthis data/gdp-capita.xlsx dname="gdp-capita" label="gdp-capita.xlsx" type=light >}} {{< downloadthis data/life-exp.csv dname="life-exp" label="life-exp.csv" type=light >}} {{< downloadthis data/linelist_raw.dta dname="linelist_raw" label="linelist_raw.dta" type=light >}}
+{{< downloadthis data/gdp-capita.xlsx dname="gdp-capita" label="gdp-capita.xlsx" type=light >}} {{< downloadthis data/life-exp.csv dname="life-exp" label="life-exp.csv" type=light >}} {{< downloadthis data/linelist-raw.dta dname="linelist-raw" label="linelist-raw.dta" type=light >}}
 
 - Cài đặt các R packages này:
 
@@ -284,6 +284,6 @@ Dùng các lệnh `read_sav()` (SPSS), `read_dta()` (Stata) và `read_sas()` (SA
 
 ```{r}
 library(haven)
-df <- read_dta(file = "data/linelist_raw.dta")
+df <- read_dta(file = "data/linelist-raw.dta")
 head(df)
 ```
