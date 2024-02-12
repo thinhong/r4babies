@@ -1,5 +1,9 @@
 # Giới thiệu
 
+::: {.center-text}
+[{{< fa link >}} Presentation](https://drthinhong.com/r4babies-slides/intro.html){.btn .btn-outline-secondary role="button"}
+:::
+
 ::: {.callout-note}
 
 # Trước buổi học

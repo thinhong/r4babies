@@ -27,7 +27,7 @@ csl: nature.csl
 
 format:
   html:
-    theme: cosmo
+    theme: [cosmo, theme.scss]
     code-overflow: wrap
   pdf:
     documentclass: scrreprt

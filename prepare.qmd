@@ -1,5 +1,9 @@
 # Chuẩn bị
 
+::: {.center-text}
+[{{< fa link >}} Presentation](https://drthinhong.com/r4babies-slides/prepare.html){.btn .btn-outline-secondary role="button"}
+:::
+
 ::: {.callout-note}
 
 # Trước buổi học
