@@ -59,7 +59,7 @@ ggplot(df_plot, aes(x = coverage, y = inequality)) +
 Các điểm trong biểu đồ gốc có màu sắc và kích thước to nhỏ khác nhau, vậy trong data frame cần có thêm 1 cột màu sắc và 1 cột kích thước.
 
 ```{r}
-df_plot$size <- c(1.1, 1, 3, 1, 2, 1.1, 3, 1, 1.1, 4)
+df_plot$size <- c(1.1, 1, 3, 1, 2, 1.1, 3, 1, 1.1, 8)
 df_plot$color <- c(1, 2, 3, 1, 1, 1, 1, 1, 1, 3)
 df_plot
 ```
@@ -109,7 +109,7 @@ ggplot(df_plot, aes(x = coverage, y = inequality)) +
 
 ### Kết quả
 
-Biểu đồ được tạo ra đã tương đối giống biểu đồ gốc. Chúng ta có thể thêm các đường thẳng x = 0, y = 0, chọn bảng màu, chọn lại theme cho biểu đồ để nhìn giống biểu đồ gốc hơn.
+Biểu đồ được tạo ra đã tương đối giống biểu đồ gốc. Chúng ta có thể thêm các đường thẳng x = 0, y = 0, chọn bảng màu, chỉnh lại kích thước các điểm, chọn lại theme cho biểu đồ để nhìn giống biểu đồ gốc hơn.
 
 ```{r, fig.width = 6, fig.height = 6}
 ggplot(df_plot, aes(x = coverage, y = inequality)) +
@@ -120,6 +120,7 @@ ggplot(df_plot, aes(x = coverage, y = inequality)) +
   geom_vline(xintercept = 0) +
   geom_hline(yintercept = 0) +
   scale_color_npg() +
+  scale_size_continuous(range = c(1, 10)) +
   theme_classic() +
   theme(legend.position = "none")
 ```
