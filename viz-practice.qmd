@@ -51,7 +51,7 @@ Hiện giờ chữ đang đè lên các điểm, chúng ta điều chỉnh vị 
 ```{r}
 ggplot(df_plot, aes(x = coverage, y = inequality)) +
   geom_point() +
-  geom_text(aes(label = country), hjust = -0.1, vjust = 0.2) +
+  geom_text(aes(label = country), hjust = -0.15, vjust = 0.2) +
   xlim(c(-0.35, 0.55)) +
   ylim(c(-0.17, 0.1))
 ```
@@ -69,7 +69,7 @@ Bây giờ chúng ta có thể thêm màu sắc và kích thước vào `geom_po
 ```{r}
 ggplot(df_plot, aes(x = coverage, y = inequality)) +
   geom_point(aes(size = size, color = color)) +
-  geom_text(aes(label = country), hjust = -0.1, vjust = 0.2) +
+  geom_text(aes(label = country), hjust = -0.15, vjust = 0.2) +
   xlim(c(-0.35, 0.55)) +
   ylim(c(-0.17, 0.1))
 ```
@@ -102,7 +102,7 @@ df_plot <- rbind(df_plot, rd)
 df_plot$color <- factor(df_plot$color)
 ggplot(df_plot, aes(x = coverage, y = inequality)) +
   geom_point(aes(size = size, color = color)) +
-  geom_text(aes(label = country), hjust = -0.1, vjust = 0.2) +
+  geom_text(aes(label = country), hjust = -0.15, vjust = 0.2) +
   xlim(c(-0.35, 0.55)) +
   ylim(c(-0.17, 0.1))
 ```
