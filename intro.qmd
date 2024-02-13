@@ -193,10 +193,18 @@ Cấu trúc file R Markdown gồm:
 
 ![](img/intro/rmd-chunk.png)
 
+Để tạo code chunk chúng ta nhấn tổ hợp phím tắt `Ctrl` + `Alt` + `I`, hoặc nhấn vào icon này trên thanh công cụ, chọn R:
+
+![](img/intro/rmd-add-chunk.png)
+
 Ví dụ có file R Markdown sau:
 
 ![](img/intro/rmd.png)
 
-Khi `knit` file R Markdown trên sẽ tạo ra file báo cáo sau với đầy đủ tiêu đề, đề mục, bảng kết quả, biểu đồ... giống như được tạo ra từ 1 chương trình soạn thảo văn bản như Word.
+Khi `knit` file R Markdown trên sẽ tạo ra file báo cáo sau với đầy đủ tiêu đề, đề mục, bảng kết quả, biểu đồ... giống như được tạo ra từ 1 chương trình soạn thảo văn bản như Word. Để `knit` file R Markdown thì chọn kí hiệu `knit` trên thanh công cụ:
+
+![](img/intro/rmd-knit.png){width=400}
+
+Kết quả `knit` như sau:
 
 ![](img/intro/rmd-outp.png)
