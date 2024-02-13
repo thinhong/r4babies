@@ -114,7 +114,7 @@ Biểu đồ được tạo ra đã tương đối giống biểu đồ gốc. C
 ```{r, fig.width = 6, fig.height = 6}
 ggplot(df_plot, aes(x = coverage, y = inequality)) +
   geom_point(aes(size = size, color = color), alpha = 0.8) +
-  geom_text(aes(label = country), hjust = -0.1, vjust = 0.2) +
+  geom_text(aes(label = country), hjust = -0.15, vjust = 0.2) +
   xlim(c(-0.35, 0.55)) +
   ylim(c(-0.17, 0.1)) +
   geom_vline(xintercept = 0) +
