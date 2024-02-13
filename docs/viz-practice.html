@@ -267,20 +267,20 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>country <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Angola"</span>, <span class="st">"Papua New Guinea"</span>, <span class="st">"Pakistan"</span>, <span class="st">"Chad"</span>, <span class="st">"Ethiopia"</span>, <span class="st">"Kenya"</span>, <span class="st">"Nigeria"</span>, <span class="st">"Liberia"</span>, <span class="st">"Burkina Faso"</span>, <span class="st">"India"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>coverage <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.35</span>, <span class="fl">0.12</span>, <span class="fl">0.14</span>, <span class="fl">0.32</span>, <span class="fl">0.07</span>, <span class="fl">0.2</span>, <span class="fl">0.18</span>, <span class="fl">0.3</span>, <span class="fl">0.35</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>inequality <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.08</span>, <span class="fl">0.05</span>, <span class="fl">0.01</span>, <span class="fl">0.005</span>, <span class="sc">-</span><span class="fl">0.06</span>, <span class="sc">-</span><span class="fl">0.07</span>, <span class="sc">-</span><span class="fl">0.11</span>, <span class="sc">-</span><span class="fl">0.13</span>, <span class="sc">-</span><span class="fl">0.16</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(country, inequality, coverage)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(country, coverage, inequality)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            country inequality coverage
-1            Angola      0.100    -0.10
-2  Papua New Guinea      0.080    -0.35
-3          Pakistan      0.050     0.12
-4              Chad      0.010     0.14
-5          Ethiopia      0.005     0.32
-6             Kenya     -0.060     0.07
-7           Nigeria     -0.070     0.20
-8           Liberia     -0.110     0.18
-9      Burkina Faso     -0.130     0.30
-10            India     -0.160     0.35</code></pre>
+<pre><code>            country coverage inequality
+1            Angola    -0.10      0.100
+2  Papua New Guinea    -0.35      0.080
+3          Pakistan     0.12      0.050
+4              Chad     0.14      0.010
+5          Ethiopia     0.32      0.005
+6             Kenya     0.07     -0.060
+7           Nigeria     0.20     -0.070
+8           Liberia     0.18     -0.110
+9      Burkina Faso     0.30     -0.130
+10            India     0.35     -0.160</code></pre>
 </div>
 </div>
 <p>Chúng ta sẽ vẽ biểu đồ cho 10 quốc gia này trước. Dạng biểu đồ scatterplot trong <code>ggplot</code> tương ứng với <code>geom_point()</code>.</p>
@@ -313,21 +313,21 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 </div>
 <p>Các điểm trong biểu đồ gốc có màu sắc và kích thước to nhỏ khác nhau, vậy trong data frame cần có thêm 1 cột màu sắc và 1 cột kích thước.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_plot<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">1.1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">1.1</span>, <span class="dv">8</span>)</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_plot<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">0.6</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">1.1</span>, <span class="dv">3</span>, <span class="fl">0.7</span>, <span class="fl">1.1</span>, <span class="dv">8</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_plot<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            country inequality coverage size color
-1            Angola      0.100    -0.10  1.1     1
-2  Papua New Guinea      0.080    -0.35  1.0     2
-3          Pakistan      0.050     0.12  3.0     3
-4              Chad      0.010     0.14  1.0     1
-5          Ethiopia      0.005     0.32  2.0     1
-6             Kenya     -0.060     0.07  1.1     1
-7           Nigeria     -0.070     0.20  3.0     1
-8           Liberia     -0.110     0.18  1.0     1
-9      Burkina Faso     -0.130     0.30  1.1     1
-10            India     -0.160     0.35  8.0     3</code></pre>
+<pre><code>            country coverage inequality size color
+1            Angola    -0.10      0.100  1.1     1
+2  Papua New Guinea    -0.35      0.080  0.6     2
+3          Pakistan     0.12      0.050  3.0     3
+4              Chad     0.14      0.010  1.0     1
+5          Ethiopia     0.32      0.005  2.0     1
+6             Kenya     0.07     -0.060  1.1     1
+7           Nigeria     0.20     -0.070  3.0     1
+8           Liberia     0.18     -0.110  0.7     1
+9      Burkina Faso     0.30     -0.130  1.1     1
+10            India     0.35     -0.160  8.0     3</code></pre>
 </div>
 </div>
 <p>Bây giờ chúng ta có thể thêm màu sắc và kích thước vào <code>geom_point()</code>.</p>
@@ -346,28 +346,28 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>np <span class="ot">&lt;-</span> <span class="dv">50</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>rd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">country =</span> <span class="fu">rep</span>(<span class="st">""</span>, np),</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">inequality =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> np, <span class="at">mean =</span> <span class="sc">-</span><span class="fl">0.03</span>, <span class="at">sd =</span> <span class="fl">0.05</span>),</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">coverage =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> np, <span class="at">mean =</span> <span class="fl">0.1</span>, <span class="at">sd =</span> <span class="fl">0.12</span>),</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="fu">runif</span>(np, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">2</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">coverage =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> np, <span class="at">mean =</span> <span class="fl">0.1</span>, <span class="at">sd =</span> <span class="fl">0.12</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">inequality =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> np, <span class="at">mean =</span> <span class="sc">-</span><span class="fl">0.05</span>, <span class="at">sd =</span> <span class="fl">0.04</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> np, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="fl">0.4</span>),</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, np, <span class="at">replace =</span> T))</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  country  inequality   coverage     size color
-1         -0.05802378 0.13039822 1.238726     1
-2         -0.04150887 0.09657439 1.962359     2
-3          0.04793542 0.09485555 1.601366     5
-4         -0.02647458 0.26423227 1.515030     5
-5         -0.02353561 0.07290748 1.402573     1
-6          0.05575325 0.28197647 1.880247     2</code></pre>
+<pre><code>  country   coverage   inequality      size color
+1         0.03274292 -0.039867259 0.7158374     2
+2         0.07237870 -0.051141870 1.1027535     2
+3         0.28704500 -0.051714818 0.9013232     1
+4         0.10846101  0.004744091 0.8609830     2
+5         0.11551453 -0.059030839 0.6193526     1
+6         0.30580780  0.010658824 0.9819889     5</code></pre>
 </div>
 </div>
 <ul>
 <li><code>set.seed(123)</code>: dùng để cố định cách tạo ra các điểm ngẫu nhiên.</li>
 <li><code>np &lt;- 50</code>: tạo ra 50 điểm ngẫu nhiên.</li>
 <li><code>country = rep("", np)</code>: các điểm này không có tên quốc gia.</li>
-<li><code>inequality = rnorm(n = np, mean = -0.03, sd = 0.05)</code>: sự thay đổi bất bình đẳng địa lý (giá trị trên trục y) của các điểm này được tạo ra ngẫu nhiên theo phân phối bình thường với trung bình là -0.03 và độ lệch chuẩn là 0.05.</li>
-<li><code>coverage = rnorm(n = np, mean = 0.1, sd = 0.12)</code>: sự thay đổi độ phủ vaccine (giá trị trên trục x) của các điểm này được tạo ra ngẫu nhiên theo phân phối bình thường với trung bình là 0.1 và độ lệch chuẩn là 0.12.</li>
-<li><code>size = runif(np, min = 1, max = 2)</code>: kích thước các điểm này là số thực ngẫu nhiên từ 1 đến 2.</li>
+<li><code>coverage = rnorm(n = np, mean = 0.1, sd = 0.12)</code>: sự thay đổi độ phủ vaccine (giá trị trên trục x) của các điểm này là số thực được tạo ra ngẫu nhiên theo phân phối bình thường với trung bình là 0.1 và độ lệch chuẩn là 0.12.</li>
+<li><code>inequality = rnorm(n = np, mean = -0.05, sd = 0.04)</code>: sự thay đổi bất bình đẳng địa lý (giá trị trên trục y) của các điểm này là số thực được tạo ra ngẫu nhiên theo phân phối bình thường với trung bình là -0.05 và độ lệch chuẩn là 0.04.</li>
+<li><code>size = rnorm(n = np, mean = 1, sd = 0.4)</code>: kích thước của các điểm này là số thực được tạo ra ngẫu nhiên theo phân phối bình thường với trung bình là 1 và độ lệch chuẩn là 0.4.</li>
 <li><code>color = sample(1:6, np, replace = T)</code>: màu sắc là số nguyên ngẫu nhiên từ 1 đến 6.</li>
 </ul>
 <p>Bây giờ chúng ta ghép data frame <code>rd</code> này với data frame của biểu đồ <code>df_plot</code>. Cột màu sắc được đưa về dạng <code>factor</code> để hiển thị màu. Sau đó dùng code <code>ggplot</code> trên để vẽ.</p>
@@ -396,7 +396,7 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_npg</span>() <span class="sc">+</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
