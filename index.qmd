@@ -16,4 +16,4 @@ Data cho bài tập và ví dụ được tham khảo từ các nguồn sau:
 
 ## Liên hệ
 
-Mọi ý kiến đóng góp, phản ánh, câu hỏi thắc mắc có thể comment (sử dụng tài khoản github) trong khung bên dưới hoặc liên hệ [Thinh Ong](https://drthinhong.com/).
+Mọi ý kiến đóng góp, phản ánh, câu hỏi thắc mắc xin vui lòng comment (sử dụng tài khoản github) trong khung bên dưới hoặc liên hệ [Thinh Ong](https://drthinhong.com/).
