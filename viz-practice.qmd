@@ -25,7 +25,7 @@ Vậy chúng ta cần một data frame có ít nhất 3 cột: (1) tên quốc g
 
 ```{r}
 country <- c("Angola", "Papua New Guinea", "Pakistan", "Chad", "Ethiopia", "Kenya", "Nigeria", "Liberia", "Burkina Faso", "India")
-coverage <- c(-0.1, -0.35, 0.12, 0.14, 0.32, 0.07, 0.2, 0.18, 0.3, 0.35)
+coverage <- c(-0.11, -0.35, 0.12, 0.14, 0.32, 0.07, 0.2, 0.18, 0.3, 0.35)
 inequality <- c(0.1, 0.08, 0.05, 0.01, 0.005, -0.06, -0.07, -0.11, -0.13, -0.16)
 df_plot <- data.frame(country, coverage, inequality)
 df_plot
@@ -51,7 +51,7 @@ Hiện giờ chữ đang đè lên các điểm, chúng ta điều chỉnh vị 
 ```{r}
 ggplot(df_plot, aes(x = coverage, y = inequality)) +
   geom_point() +
-  geom_text(aes(label = country), hjust = -0.15, vjust = 0.2) +
+  geom_text(aes(label = country), hjust = -0.2, vjust = 0.2) +
   xlim(c(-0.35, 0.55)) +
   ylim(c(-0.17, 0.1))
 ```
@@ -69,7 +69,7 @@ Bây giờ chúng ta có thể thêm màu sắc và kích thước vào `geom_po
 ```{r}
 ggplot(df_plot, aes(x = coverage, y = inequality)) +
   geom_point(aes(size = size, color = color)) +
-  geom_text(aes(label = country), hjust = -0.15, vjust = 0.2) +
+  geom_text(aes(label = country), hjust = -0.2, vjust = 0.2) +
   xlim(c(-0.35, 0.55)) +
   ylim(c(-0.17, 0.1))
 ```
@@ -102,7 +102,7 @@ df_plot <- rbind(df_plot, rd)
 df_plot$color <- factor(df_plot$color)
 ggplot(df_plot, aes(x = coverage, y = inequality)) +
   geom_point(aes(size = size, color = color)) +
-  geom_text(aes(label = country), hjust = -0.15, vjust = 0.2) +
+  geom_text(aes(label = country), hjust = -0.2, vjust = 0.2) +
   xlim(c(-0.35, 0.55)) +
   ylim(c(-0.17, 0.1))
 ```
@@ -114,7 +114,7 @@ Biểu đồ được tạo ra đã tương đối giống biểu đồ gốc. C
 ```{r, fig.width = 6, fig.height = 6}
 ggplot(df_plot, aes(x = coverage, y = inequality)) +
   geom_point(aes(size = size, color = color), alpha = 0.8) +
-  geom_text(aes(label = country), hjust = -0.15, vjust = 0.2) +
+  geom_text(aes(label = country), hjust = -0.2, vjust = 0.2) +
   xlim(c(-0.35, 0.55)) +
   ylim(c(-0.17, 0.1)) +
   geom_vline(xintercept = 0) +
