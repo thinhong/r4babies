@@ -34,3 +34,6 @@ format:
   pdf:
     documentclass: scrreprt
 
+comments:
+  giscus:
+    repo: thinhong/r4babies
