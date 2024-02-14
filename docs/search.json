@@ -11,7 +11,21 @@
     "href": "index.html#về-khóa-học",
     "title": "R for babies",
     "section": "Về khóa học",
-    "text": "Về khóa học\nKhóa học được thiết kế để hướng dẫn đội ngũ nhân viên của Trung tâm Kiểm soát bệnh tật Thành phố Hồ Chí Minh (HCDC) trong series “Tập huấn về Phân tích dữ liệu sử dụng phần mềm R và Nghiên cứu khoa học”.\nCấu trúc khóa học được tham khảo từ các tài liệu sau:\n\nBeckerman, AP, Childs, DZ, & Petchey, OL. Getting started with R: an introduction for biologists. Oxford University Press. 2017.\nBatra, Neale, et al. The Epidemiologist R Handbook. 2021.\n\nData cho bài tập và ví dụ được tham khảo từ các nguồn sau:\n\nWorld Bank. GDP per capita (current US$). Retrieved February 10, 2024 from World Bank Open Data.\nLaksika Tharmalingam. Health and Demographics Dataset, Version 1. Retrieved February 10, 2024 from Kaggle."
+    "text": "Về khóa học\nKhóa học được thiết kế để hướng dẫn đội ngũ nhân viên của Trung tâm Kiểm soát bệnh tật Thành phố Hồ Chí Minh (HCDC) trong series “Tập huấn về Phân tích dữ liệu sử dụng phần mềm R và Nghiên cứu khoa học”, với 2 mục tiêu chính:\n\nBiết cách sử dụng R để phân tích dữ liệu theo quy trình chuẩn, phục vụ nghiên cứu khoa học của HCDC.\nBiết cách viết và xuất file báo cáo tự động bằng R Markdown."
+  },
+  {
+    "objectID": "index.html#chương-trình",
+    "href": "index.html#chương-trình",
+    "title": "R for babies",
+    "section": "Chương trình",
+    "text": "Chương trình\nKhóa học kéo dài tổng cộng 7 buổi. Trong buổi đầu tiên, học viên đăng kí nhóm (3-4 người/nhóm, các thành viên trong nhóm phải ở cùng khoa). Sau mỗi buổi học lý thuyết - thực hành trên dữ liệu mẫu, bài tập về nhà là các nhóm tự thực hành sử dụng R để làm việc trên dữ liệu hiện có của khoa mình và soạn bài thuyết trình. Bài thuyết trình trong 20 phút cần có các nội dung sau:\n\nGiới thiệu sơ lược dữ liệu đang sử dụng\nNhóm muốn làm gì trên dữ liệu của mình\nDiễn giải cụ thể từng bước và ý nghĩa code R đã dùng để thực hiện từng mục tiêu\nKinh nghiệm khi dùng R cho dạng dữ liệu này và các chia sẻ khác (nếu có)\n\nTrong 1 tuần trước buổi học kế tiếp, các nhóm tự đăng kí hoặc giảng viên chọn ra 3 nhóm sẽ thuyết trình. Thời gian thuyết trình của mỗi nhóm là 30-40 phút, gồm 20 phút trình bày và 10-20 phút để các nhóm khác góp ý, đặt câu hỏi. Nhóm cũng có thể tự đặt câu hỏi của mình để mọi người cùng giải đáp.\n\n\n\n\n\n\n\n\n\nHoạt động\nNội dung\n\n\n\n\nBuổi 1\nLý thuyết\nThực hành trên dữ liệu mẫu\nGiới thiệu R\nCác bước chuẩn bị cho phân tích dữ liệu\nChia nhóm thuyết trình\n\n\nBuổi 2\nLý thuyết\nThực hành trên dữ liệu mẫu\nLàm sạch dữ liệu\nThực hành làm sạch dữ liệu\n\n\nBuổi 3\nỨng dụng trên dữ liệu của HCDC\nThuyết trình nhóm: làm sạch dữ liệu\nGiải đáp thắc mắc\n\n\nBuổi 4\nLý thuyết\nThực hành trên dữ liệu mẫu\nPhân tích dữ liệu\nThực hành phân tích dữ liệu\n\n\nBuổi 5\nỨng dụng trên dữ liệu của HCDC\nThuyết trình nhóm: phân tích dữ liệu\nGiải đáp thắc mắc\n\n\nBuổi 6\nLý thuyết\nThực hành trên dữ liệu mẫu\nTrực quan hóa dữ liệu\nLàm file báo cáo bằng R Markdown\nThực hành trực quan hóa dữ liệu\n\n\nBuổi 7\nỨng dụng trên dữ liệu của HCDC\nThuyết trình nhóm: viết và xuất file báo cáo tự động bằng R Markdown.\nGiải đáp thắc mắc\nTổng kết"
+  },
+  {
+    "objectID": "index.html#lời-cảm-ơn",
+    "href": "index.html#lời-cảm-ơn",
+    "title": "R for babies",
+    "section": "Lời cảm ơn",
+    "text": "Lời cảm ơn\nCấu trúc khóa học được tham khảo từ các tài liệu sau:\n\nBeckerman, AP, Childs, DZ, & Petchey, OL. Getting started with R: an introduction for biologists. Oxford University Press. 2017.\nBatra, Neale, et al. The Epidemiologist R Handbook. 2021.\n\nData cho bài tập và ví dụ được tham khảo từ các nguồn sau:\n\nWorld Bank. GDP per capita (current US$). Retrieved February 10, 2024 from World Bank Open Data.\nLaksika Tharmalingam. Health and Demographics Dataset, Version 1. Retrieved February 10, 2024 from Kaggle."
   },
   {
     "objectID": "index.html#liên-hệ",
@@ -81,7 +95,35 @@
     "href": "clean.html#data-gọn-gàng-tidy-data",
     "title": "3  Làm sạch",
     "section": "3.1 Data gọn gàng (tidy data)",
-    "text": "3.1 Data gọn gàng (tidy data)\nTidy data1\n\n\n\n\n1. Wickham, H. Tidy Data. Journal of Statistical Software 59, (2014)."
+    "text": "3.1 Data gọn gàng (tidy data)\nDữ liệu gọn gàng có các đặc điểm sau:1\n\nMỗi biến là một cột; mỗi cột là một biến\nMỗi quan sát là một hàng; mỗi hàng là một quan sát\nMỗi giá trị nằm trong một ô; mỗi ô chứa một giá trị duy nhất\n\nChúng ta sẽ dùng data gdp-capita.xlsx\n\nlibrary(readxl)\nlibrary(janitor)\n\n\nAttaching package: 'janitor'\n\n\nThe following objects are masked from 'package:stats':\n\n    chisq.test, fisher.test\n\ndf &lt;- read_excel(path = \"data/gdp-capita.xlsx\", sheet = 1)"
+  },
+  {
+    "objectID": "clean.html#tên-cột",
+    "href": "clean.html#tên-cột",
+    "title": "3  Làm sạch",
+    "section": "3.2 Tên cột",
+    "text": "3.2 Tên cột\nTrong R, tên cột là giá trị trên đỉnh của một cột.\n\ndf &lt;- clean_names(df)"
+  },
+  {
+    "objectID": "clean.html#kết-hợp-dữ-liệu",
+    "href": "clean.html#kết-hợp-dữ-liệu",
+    "title": "3  Làm sạch",
+    "section": "3.3 Kết hợp dữ liệu",
+    "text": "3.3 Kết hợp dữ liệu\nTrong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác nhau và để phân tích thì chúng ta phải kết hợp các bảng lại. Ví dụ\n\nmt &lt;- read_excel(path = \"data/gdp-capita.xlsx\", sheet = 1)"
+  },
+  {
+    "objectID": "clean.html#dữ-liệu-ngày-tháng",
+    "href": "clean.html#dữ-liệu-ngày-tháng",
+    "title": "3  Làm sạch",
+    "section": "3.4 Dữ liệu ngày tháng",
+    "text": "3.4 Dữ liệu ngày tháng\n\n\n\n\n1. Wickham, H. Tidy Data. Journal of Statistical Software 59, (2014)."
+  },
+  {
+    "objectID": "analysis.html",
+    "href": "analysis.html",
+    "title": "4  Phân tích",
+    "section": "",
+    "text": "gtsummary\nCác phép kiểm thường dùng\nSo sánh"
   },
   {
     "objectID": "viz-practice.html#biểu-đồ-mẫu",

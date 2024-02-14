@@ -2,17 +2,71 @@
 
 ## Về khóa học
 
-Khóa học được thiết kế để hướng dẫn đội ngũ nhân viên của Trung tâm Kiểm soát bệnh tật Thành phố Hồ Chí Minh (HCDC) trong series "Tập huấn về Phân tích dữ liệu sử dụng phần mềm R và Nghiên cứu khoa học".
+Khóa học được thiết kế để hướng dẫn đội ngũ nhân viên của Trung tâm Kiểm soát bệnh tật Thành phố Hồ Chí Minh (HCDC) trong series "Tập huấn về Phân tích dữ liệu sử dụng phần mềm R và Nghiên cứu khoa học", với 2 mục tiêu chính:
+
+1.  Biết cách sử dụng R để phân tích dữ liệu theo quy trình chuẩn, phục vụ nghiên cứu khoa học của HCDC.
+2.  Biết cách viết và xuất file báo cáo tự động bằng R Markdown.
+
+## Chương trình
+
+Khóa học kéo dài tổng cộng 7 buổi. Trong buổi đầu tiên, học viên đăng kí nhóm (3-4 người/nhóm, các thành viên trong nhóm phải ở cùng khoa). Sau mỗi buổi học lý thuyết - thực hành trên dữ liệu mẫu, bài tập về nhà là các nhóm tự thực hành sử dụng R để làm việc trên dữ liệu hiện có của khoa mình và soạn bài thuyết trình. Bài thuyết trình trong 20 phút cần có các nội dung sau:
+
+-   Giới thiệu sơ lược dữ liệu đang sử dụng
+-   Nhóm muốn làm gì trên dữ liệu của mình
+-   Diễn giải cụ thể từng bước và ý nghĩa code R đã dùng để thực hiện từng mục tiêu
+-   Kinh nghiệm khi dùng R cho dạng dữ liệu này và các chia sẻ khác (nếu có)
+
+Trong 1 tuần trước buổi học kế tiếp, các nhóm tự đăng kí hoặc giảng viên chọn ra 3 nhóm sẽ thuyết trình. Thời gian thuyết trình của mỗi nhóm là 30-40 phút, gồm 20 phút trình bày và 10-20 phút để các nhóm khác góp ý, đặt câu hỏi. Nhóm cũng có thể tự đặt câu hỏi của mình để mọi người cùng giải đáp.
+
++---------------+--------------------------------+-----------------------------------------------------------------------+
+|               | Hoạt động                      | Nội dung                                                              |
++===============+================================+=======================================================================+
+| Buổi 1        | Lý thuyết                      | Giới thiệu R                                                          |
+|               |                                |                                                                       |
+|               | Thực hành trên dữ liệu mẫu     | Các bước chuẩn bị cho phân tích dữ liệu                               |
+|               |                                |                                                                       |
+|               |                                | Chia nhóm thuyết trình                                                |
++---------------+--------------------------------+-----------------------------------------------------------------------+
+| Buổi 2        | Lý thuyết                      | Làm sạch dữ liệu                                                      |
+|               |                                |                                                                       |
+|               | Thực hành trên dữ liệu mẫu     | Thực hành làm sạch dữ liệu                                            |
++---------------+--------------------------------+-----------------------------------------------------------------------+
+| Buổi 3        | Ứng dụng trên dữ liệu của HCDC | Thuyết trình nhóm: làm sạch dữ liệu                                   |
+|               |                                |                                                                       |
+|               |                                | Giải đáp thắc mắc                                                     |
++---------------+--------------------------------+-----------------------------------------------------------------------+
+| Buổi 4        | Lý thuyết                      | Phân tích dữ liệu                                                     |
+|               |                                |                                                                       |
+|               | Thực hành trên dữ liệu mẫu     | Thực hành phân tích dữ liệu                                           |
++---------------+--------------------------------+-----------------------------------------------------------------------+
+| Buổi 5        | Ứng dụng trên dữ liệu của HCDC | Thuyết trình nhóm: phân tích dữ liệu                                  |
+|               |                                |                                                                       |
+|               |                                | Giải đáp thắc mắc                                                     |
++---------------+--------------------------------+-----------------------------------------------------------------------+
+| Buổi 6        | Lý thuyết                      | Trực quan hóa dữ liệu                                                 |
+|               |                                |                                                                       |
+|               | Thực hành trên dữ liệu mẫu     | Làm file báo cáo bằng R Markdown                                      |
+|               |                                |                                                                       |
+|               |                                | Thực hành trực quan hóa dữ liệu                                       |
++---------------+--------------------------------+-----------------------------------------------------------------------+
+| Buổi 7        | Ứng dụng trên dữ liệu của HCDC | Thuyết trình nhóm: viết và xuất file báo cáo tự động bằng R Markdown. |
+|               |                                |                                                                       |
+|               |                                | Giải đáp thắc mắc                                                     |
+|               |                                |                                                                       |
+|               |                                | Tổng kết                                                              |
++---------------+--------------------------------+-----------------------------------------------------------------------+
+
+## Lời cảm ơn
 
 Cấu trúc khóa học được tham khảo từ các tài liệu sau:
 
-1. Beckerman, AP, Childs, DZ, & Petchey, OL. Getting started with R: an introduction for biologists. Oxford University Press. 2017.
-2. Batra, Neale, et al. The Epidemiologist R Handbook. 2021.
+1.  Beckerman, AP, Childs, DZ, & Petchey, OL. Getting started with R: an introduction for biologists. Oxford University Press. 2017.
+2.  Batra, Neale, et al. The Epidemiologist R Handbook. 2021.
 
 Data cho bài tập và ví dụ được tham khảo từ các nguồn sau:
 
-1. World Bank. GDP per capita (current US$). Retrieved February 10, 2024 from [World Bank Open Data](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD).
-2. Laksika Tharmalingam. Health and Demographics Dataset, Version 1. Retrieved February 10, 2024 from [Kaggle](https://www.kaggle.com/datasets/uom190346a/health-and-demographics-dataset).
+1.  World Bank. GDP per capita (current US\$). Retrieved February 10, 2024 from [World Bank Open Data](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD).
+2.  Laksika Tharmalingam. Health and Demographics Dataset, Version 1. Retrieved February 10, 2024 from [Kaggle](https://www.kaggle.com/datasets/uom190346a/health-and-demographics-dataset).
 
 ## Liên hệ
 

@@ -1,5 +1,37 @@
 # Làm sạch
 
+Bước đầu tiên sau khi đọc được dữ liệu vào R là "làm sạch" dữ liệu (clean data). Chúng ta chỉ tiến hành phân tích khi chắc chắn dữ liệu đã "sạch" và chính xác.
+
 ## Data gọn gàng (tidy data)
 
-Tidy data[@wickham2014]
+Dữ liệu gọn gàng có các đặc điểm sau:[@wickham2014]
+
+- Mỗi biến là một cột; mỗi cột là một biến
+- Mỗi quan sát là một hàng; mỗi hàng là một quan sát
+- Mỗi giá trị nằm trong một ô; mỗi ô chứa một giá trị duy nhất
+
+Chúng ta sẽ dùng data `gdp-capita.xlsx`
+
+```{r}
+library(readxl)
+library(janitor)
+df <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1)
+```
+
+## Tên cột
+
+Trong R, tên cột là giá trị trên đỉnh của một cột.
+
+```{r}
+df <- clean_names(df)
+```
+
+## Kết hợp dữ liệu
+
+Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác nhau và để phân tích thì chúng ta phải kết hợp các bảng lại. Ví dụ 
+
+```{r}
+mt <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1)
+```
+
+## Dữ liệu ngày tháng

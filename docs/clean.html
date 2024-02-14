@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -172,6 +206,12 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./report.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Làm báo cáo bằng R Markdown</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -187,6 +227,9 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#data-gọn-gàng-tidy-data" id="toc-data-gọn-gàng-tidy-data" class="nav-link active" data-scroll-target="#data-gọn-gàng-tidy-data"><span class="header-section-number">3.1</span> Data gọn gàng (tidy data)</a></li>
+  <li><a href="#tên-cột" id="toc-tên-cột" class="nav-link" data-scroll-target="#tên-cột"><span class="header-section-number">3.2</span> Tên cột</a></li>
+  <li><a href="#kết-hợp-dữ-liệu" id="toc-kết-hợp-dữ-liệu" class="nav-link" data-scroll-target="#kết-hợp-dữ-liệu"><span class="header-section-number">3.3</span> Kết hợp dữ liệu</a></li>
+  <li><a href="#dữ-liệu-ngày-tháng" id="toc-dữ-liệu-ngày-tháng" class="nav-link" data-scroll-target="#dữ-liệu-ngày-tháng"><span class="header-section-number">3.4</span> Dữ liệu ngày tháng</a></li>
   </ul>
 </nav>
     </div>
@@ -210,9 +253,47 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 
 </header>
 
+<p>Bước đầu tiên sau khi đọc được dữ liệu vào R là “làm sạch” dữ liệu (clean data). Chúng ta chỉ tiến hành phân tích khi chắc chắn dữ liệu đã “sạch” và chính xác.</p>
 <section id="data-gọn-gàng-tidy-data" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="data-gọn-gàng-tidy-data"><span class="header-section-number">3.1</span> Data gọn gàng (tidy data)</h2>
-<p>Tidy data<span class="citation" data-cites="wickham2014"><sup><a href="references.html#ref-wickham2014" role="doc-biblioref">1</a></sup></span></p>
+<p>Dữ liệu gọn gàng có các đặc điểm sau:<span class="citation" data-cites="wickham2014"><sup><a href="references.html#ref-wickham2014" role="doc-biblioref">1</a></sup></span></p>
+<ul>
+<li>Mỗi biến là một cột; mỗi cột là một biến</li>
+<li>Mỗi quan sát là một hàng; mỗi hàng là một quan sát</li>
+<li>Mỗi giá trị nằm trong một ô; mỗi ô chứa một giá trị duy nhất</li>
+</ul>
+<p>Chúng ta sẽ dùng data <code>gdp-capita.xlsx</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'janitor'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">"data/gdp-capita.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tên-cột" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="tên-cột"><span class="header-section-number">3.2</span> Tên cột</h2>
+<p>Trong R, tên cột là giá trị trên đỉnh của một cột.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="kết-hợp-dữ-liệu" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="kết-hợp-dữ-liệu"><span class="header-section-number">3.3</span> Kết hợp dữ liệu</h2>
+<p>Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác nhau và để phân tích thì chúng ta phải kết hợp các bảng lại. Ví dụ</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mt <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">"data/gdp-capita.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="dữ-liệu-ngày-tháng" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="dữ-liệu-ngày-tháng"><span class="header-section-number">3.4</span> Dữ liệu ngày tháng</h2>
 
 
 <div id="refs" class="references csl-bib-body" data-line-spacing="2" role="list" style="display: none">

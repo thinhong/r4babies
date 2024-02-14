@@ -19,6 +19,7 @@ book:
     - analysis.qmd
     - viz.qmd
     - viz-practice.qmd
+    - report.qmd
     - references.qmd
 
 execute:

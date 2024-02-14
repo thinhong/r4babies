@@ -1,1 +1,7 @@
 # Phân tích
+
+gtsummary
+
+Các phép kiểm thường dùng
+
+So sánh 

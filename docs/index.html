@@ -154,6 +154,12 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./report.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Làm báo cáo bằng R Markdown</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -171,6 +177,8 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
   <li><a href="#tổng-quan" id="toc-tổng-quan" class="nav-link active" data-scroll-target="#tổng-quan">Tổng quan</a>
   <ul class="collapse">
   <li><a href="#về-khóa-học" id="toc-về-khóa-học" class="nav-link" data-scroll-target="#về-khóa-học">Về khóa học</a></li>
+  <li><a href="#chương-trình" id="toc-chương-trình" class="nav-link" data-scroll-target="#chương-trình">Chương trình</a></li>
+  <li><a href="#lời-cảm-ơn" id="toc-lời-cảm-ơn" class="nav-link" data-scroll-target="#lời-cảm-ơn">Lời cảm ơn</a></li>
   <li><a href="#liên-hệ" id="toc-liên-hệ" class="nav-link" data-scroll-target="#liên-hệ">Liên hệ</a></li>
   </ul></li>
   </ul>
@@ -212,7 +220,90 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 <h1 class="unnumbered">Tổng quan</h1>
 <section id="về-khóa-học" class="level2">
 <h2 class="anchored" data-anchor-id="về-khóa-học">Về khóa học</h2>
-<p>Khóa học được thiết kế để hướng dẫn đội ngũ nhân viên của Trung tâm Kiểm soát bệnh tật Thành phố Hồ Chí Minh (HCDC) trong series “Tập huấn về Phân tích dữ liệu sử dụng phần mềm R và Nghiên cứu khoa học”.</p>
+<p>Khóa học được thiết kế để hướng dẫn đội ngũ nhân viên của Trung tâm Kiểm soát bệnh tật Thành phố Hồ Chí Minh (HCDC) trong series “Tập huấn về Phân tích dữ liệu sử dụng phần mềm R và Nghiên cứu khoa học”, với 2 mục tiêu chính:</p>
+<ol type="1">
+<li>Biết cách sử dụng R để phân tích dữ liệu theo quy trình chuẩn, phục vụ nghiên cứu khoa học của HCDC.</li>
+<li>Biết cách viết và xuất file báo cáo tự động bằng R Markdown.</li>
+</ol>
+</section>
+<section id="chương-trình" class="level2">
+<h2 class="anchored" data-anchor-id="chương-trình">Chương trình</h2>
+<p>Khóa học kéo dài tổng cộng 7 buổi. Trong buổi đầu tiên, học viên đăng kí nhóm (3-4 người/nhóm, các thành viên trong nhóm phải ở cùng khoa). Sau mỗi buổi học lý thuyết - thực hành trên dữ liệu mẫu, bài tập về nhà là các nhóm tự thực hành sử dụng R để làm việc trên dữ liệu hiện có của khoa mình và soạn bài thuyết trình. Bài thuyết trình trong 20 phút cần có các nội dung sau:</p>
+<ul>
+<li>Giới thiệu sơ lược dữ liệu đang sử dụng</li>
+<li>Nhóm muốn làm gì trên dữ liệu của mình</li>
+<li>Diễn giải cụ thể từng bước và ý nghĩa code R đã dùng để thực hiện từng mục tiêu</li>
+<li>Kinh nghiệm khi dùng R cho dạng dữ liệu này và các chia sẻ khác (nếu có)</li>
+</ul>
+<p>Trong 1 tuần trước buổi học kế tiếp, các nhóm tự đăng kí hoặc giảng viên chọn ra 3 nhóm sẽ thuyết trình. Thời gian thuyết trình của mỗi nhóm là 30-40 phút, gồm 20 phút trình bày và 10-20 phút để các nhóm khác góp ý, đặt câu hỏi. Nhóm cũng có thể tự đặt câu hỏi của mình để mọi người cùng giải đáp.</p>
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 27%">
+<col style="width: 59%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Hoạt động</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Buổi 1</td>
+<td><p>Lý thuyết</p>
+<p>Thực hành trên dữ liệu mẫu</p></td>
+<td><p>Giới thiệu R</p>
+<p>Các bước chuẩn bị cho phân tích dữ liệu</p>
+<p>Chia nhóm thuyết trình</p></td>
+</tr>
+<tr class="even">
+<td>Buổi 2</td>
+<td><p>Lý thuyết</p>
+<p>Thực hành trên dữ liệu mẫu</p></td>
+<td><p>Làm sạch dữ liệu</p>
+<p>Thực hành làm sạch dữ liệu</p></td>
+</tr>
+<tr class="odd">
+<td>Buổi 3</td>
+<td>Ứng dụng trên dữ liệu của HCDC</td>
+<td><p>Thuyết trình nhóm: làm sạch dữ liệu</p>
+<p>Giải đáp thắc mắc</p></td>
+</tr>
+<tr class="even">
+<td>Buổi 4</td>
+<td><p>Lý thuyết</p>
+<p>Thực hành trên dữ liệu mẫu</p></td>
+<td><p>Phân tích dữ liệu</p>
+<p>Thực hành phân tích dữ liệu</p></td>
+</tr>
+<tr class="odd">
+<td>Buổi 5</td>
+<td>Ứng dụng trên dữ liệu của HCDC</td>
+<td><p>Thuyết trình nhóm: phân tích dữ liệu</p>
+<p>Giải đáp thắc mắc</p></td>
+</tr>
+<tr class="even">
+<td>Buổi 6</td>
+<td><p>Lý thuyết</p>
+<p>Thực hành trên dữ liệu mẫu</p></td>
+<td><p>Trực quan hóa dữ liệu</p>
+<p>Làm file báo cáo bằng R Markdown</p>
+<p>Thực hành trực quan hóa dữ liệu</p></td>
+</tr>
+<tr class="odd">
+<td>Buổi 7</td>
+<td>Ứng dụng trên dữ liệu của HCDC</td>
+<td><p>Thuyết trình nhóm: viết và xuất file báo cáo tự động bằng R Markdown.</p>
+<p>Giải đáp thắc mắc</p>
+<p>Tổng kết</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lời-cảm-ơn" class="level2">
+<h2 class="anchored" data-anchor-id="lời-cảm-ơn">Lời cảm ơn</h2>
 <p>Cấu trúc khóa học được tham khảo từ các tài liệu sau:</p>
 <ol type="1">
 <li>Beckerman, AP, Childs, DZ, &amp; Petchey, OL. Getting started with R: an introduction for biologists. Oxford University Press. 2017.</li>

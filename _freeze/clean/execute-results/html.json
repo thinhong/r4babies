@@ -1,0 +1,16 @@
+{
+  "hash": "3ef4d595f3ca74fdaa52d1a38bf3e3e5",
+  "result": {
+    "markdown": "# Làm sạch\n\nBước đầu tiên sau khi đọc được dữ liệu vào R là \"làm sạch\" dữ liệu (clean data). Chúng ta chỉ tiến hành phân tích khi chắc chắn dữ liệu đã \"sạch\" và chính xác.\n\n## Data gọn gàng (tidy data)\n\nDữ liệu gọn gàng có các đặc điểm sau:[@wickham2014]\n\n- Mỗi biến là một cột; mỗi cột là một biến\n- Mỗi quan sát là một hàng; mỗi hàng là một quan sát\n- Mỗi giá trị nằm trong một ô; mỗi ô chứa một giá trị duy nhất\n\nChúng ta sẽ dùng data `gdp-capita.xlsx`\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(readxl)\nlibrary(janitor)\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n\nAttaching package: 'janitor'\n```\n:::\n\n::: {.cell-output .cell-output-stderr}\n```\nThe following objects are masked from 'package:stats':\n\n    chisq.test, fisher.test\n```\n:::\n\n```{.r .cell-code}\ndf <- read_excel(path = \"data/gdp-capita.xlsx\", sheet = 1)\n```\n:::\n\n\n## Tên cột\n\nTrong R, tên cột là giá trị trên đỉnh của một cột.\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndf <- clean_names(df)\n```\n:::\n\n\n## Kết hợp dữ liệu\n\nTrong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác nhau và để phân tích thì chúng ta phải kết hợp các bảng lại. Ví dụ \n\n\n::: {.cell}\n\n```{.r .cell-code}\nmt <- read_excel(path = \"data/gdp-capita.xlsx\", sheet = 1)\n```\n:::\n\n\n## Dữ liệu ngày tháng\n",
+    "supporting": [
+      "clean_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
