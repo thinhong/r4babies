@@ -18,6 +18,29 @@ library(janitor)
 df <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1)
 ```
 
+## Format bảng
+
+Bảng dữ liệu hiện tại chưa tuân theo quy tắc tidy data vì các cột 2015 - 2022 **không phải là biến** và **mỗi hàng đang chứa nhiều quan sát** (quan sát cho các năm từ 2015 - 2022).
+
+Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhiều quan sát của cùng chủ thể (trong VD này là các quốc gia) được lưu trữ trong một hàng duy nhất. Điều này có thể hữu ích cho việc hiển thị, tuy nhiên không lý tưởng cho việc phân tích.
+
+Để tuân theo quy tắc tidy data, ta cần format bảng dữ liệu sang `định dạng dọc (long)`
+
+Để format bảng dữ liệu trong R, ta có thể sử dụng các lệnh sau.\
+- `pivot_longer()` - chuyển dữ liệu từ dạng ngang sang dọc.\
+- `pivot_wider()` - chuyển dữ liệu từ dạng dọc sang ngang.\
+
+```{r}
+library(tidyverse)
+df <- df %>% 
+  pivot_longer(
+    cols = starts_with("2"),
+    # đặt tên mới cho biến
+    names_to = "year",
+    # đặt tên mới cho cột giá trị tương ứng
+    values_to = "gdp")
+```
+
 ## Tên cột
 
 Trong R, tên cột là giá trị trên đỉnh của một cột.
@@ -41,7 +64,7 @@ Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác
 Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package `dplyr` sau đây
 
 | Function     | Công dụng          | GIF minh hoạ                                                                                             |
-|------------------|------------------|------------------------------------|
+|--------------|--------------------|----------------------------------------------------------------------------------------------------------|
 | left_join()  | Nối ngoài bên trái | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join.gif?raw=true){width="283"}       |
 | right_join() | Nối ngoài bên phải | ![]()![](https://github.com/gadenbuie/tidyexplain/blob/main/images/right-join.gif?raw=true){width="282"} |
 | inner_join() | Nối trong          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/inner-join.gif?raw=true){width="281"}      |
@@ -69,18 +92,18 @@ left_join(df, mt, by = join_by(country_code == country_code))
 
 ### Các datatype trong R
 
-| Datatype  | Ý nghĩa                              |
-|-----------|--------------------------------------|
-| numeric   | dữ liệu dạng số nguyên               |
-| double    | dữ liệu dạng số thập phân            |
-| logical   | dữ liệu dạng đúng/sai (TRUE/FALSE)   |
-| character | dữ liệu dạng chữ                     |
-| Date      | dữ liệu ngày tháng                   |
-| factor    | dữ liệu dạng phân loại (categorical) |
+| Datatype  | Ý nghĩa                                  |
+|-----------|------------------------------------------|
+| numeric   | dữ liệu dạng số nguyên                   |
+| double    | dữ liệu dạng số thập phân                |
+| logical   | dữ liệu dạng đúng/sai (TRUE/FALSE)       |
+| character | dữ liệu dạng chữ (hay còn gọi là string) |
+| Date      | dữ liệu ngày tháng                       |
+| factor    | dữ liệu dạng phân loại (categorical)     |
 
 ### Chuyển đổi datatype
 
-Cú pháp chung cho thay đổi datatype là `as.tên_định_dạng()`
+Cú pháp chung cho thay đổi datatype là `as.datatype()`
 
 Ví dụ như:\
 - `as.numeric()` chuyển thành định dạng số.\
@@ -90,8 +113,12 @@ Ví dụ như:\
 
 Ngoài ra, còn có các lệnh khác để phục vụ cho các mục đích cụ thể hơn, bao gồm:\
 `ifelse()` chuyển thành định dạng logical theo điều kiện nhất định\
-`is.na()` chuyển thành định dạng logical, các dữ liệu trống (NA) có giá trị TRUE và ngược lại.\
-`dmy()`, `ymd()`, `mdy()`, ... chuyển đổi text theo các format khác nhau thành định dạng ngày
+`is.na()` chuyển thành định dạng logical, các dữ liệu trống (`NA`) có giá trị `TRUE` và ngược lại.\
+`dmy()`, `ymd()`, `mdy()`, ... chuyển đổi string theo các format khác nhau thành định dạng ngày
+
+## Dữ liệu string
+
+[Tổng hợp các lệnh từ package stringr](https://stringr.tidyverse.org/reference/index.html)
 
 ## Dữ liệu ngày tháng
 
