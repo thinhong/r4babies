@@ -1,23 +1,21 @@
 # Chuẩn bị
 
-::: {.center-text}
+::: center-text
 [{{< fa link >}} Presentation](https://drthinhong.com/r4babies-slides/prepare.html){.btn .btn-outline-secondary role="button"}
 :::
 
-::: {.callout-note}
-
+::: callout-note
 # Trước buổi học
 
-- Tải data thực hành:
+-   Tải data thực hành:
 
 {{< downloadthis data/gdp-capita.xlsx dname="gdp-capita" label="gdp-capita.xlsx" type=light >}} {{< downloadthis data/life-exp.csv dname="life-exp" label="life-exp.csv" type=light >}} {{< downloadthis data/linelist-raw.dta dname="linelist-raw" label="linelist-raw.dta" type=light >}}
 
-- Cài đặt các R packages này:
+-   Cài đặt các R packages này:
 
 ```{r, eval = F}
 install.packages(c("readxl", "haven"))
 ```
-
 :::
 
 ::: callout-tip
@@ -67,6 +65,16 @@ C:\\Users\\ongph\\github\\r4babies\\data
 :::
 
 ### MacOS
+
+Để hiển thị đường dẫn trong `Finder`, trên thanh menu chọn `View` \> `Show Path Bar`
+
+![](img/prepare/path-mac-option.png){fig-alt="path-mac" width="354"}
+
+Tại thanh đường dẫn (Path Bar), nhấn chuột phải vào folder hoặc file, sau đó chọn `Copy "tên_folder" as Pathname` để copy đường dẫn đến folder.
+
+Trong ví dụ sau, đường dẫn được copy là `/Users/anhptq/Desktop/r4babies/data`
+
+![](img/prepare/path-mac-1.png){width="671"}
 
 ### Absolute path và relative path {#sec-abs-rel-path}
 
@@ -195,19 +203,17 @@ read.table(file, header = FALSE, sep = "")
 
 Dùng `?read.table` để đọc thêm hướng dẫn sử dụng và các arguments khác của lệnh. Ở đây chúng ta tìm hiểu một số arguments thường dùng:
 
-- `file`: path của file data đầu vào, có thể dùng absolute path hoặc relative path (xem @sec-abs-rel-path).
+-   `file`: path của file data đầu vào, có thể dùng absolute path hoặc relative path (xem @sec-abs-rel-path).
 
-- `header`: dòng đầu tiên của file data có phải là tên cột không. Nếu `header = TRUE` thì R sẽ lấy các giá trị trong hàng đầu tiên làm tên cột. Nếu `header = FALSE` thì R sẽ tự đặt tên cột là `V1`, `V2`, `V3`...
+-   `header`: dòng đầu tiên của file data có phải là tên cột không. Nếu `header = TRUE` thì R sẽ lấy các giá trị trong hàng đầu tiên làm tên cột. Nếu `header = FALSE` thì R sẽ tự đặt tên cột là `V1`, `V2`, `V3`...
 
-::: {.callout-important}
-
+::: callout-important
 # Lưu ý
 
 Trong R, `TRUE` có thể viết tắt là `T` và `FALSE` có thể viết tắt là `F`.
-
 :::
 
-- `sep`: các cột trong text file ngăn cách nhau bằng kí tự gì. Ví dụ file `life-exp.csv` nếu chúng ta mở bằng Notepad sẽ thấy các cột ngăn cách nhau bằng dấu `,`.
+-   `sep`: các cột trong text file ngăn cách nhau bằng kí tự gì. Ví dụ file `life-exp.csv` nếu chúng ta mở bằng Notepad sẽ thấy các cột ngăn cách nhau bằng dấu `,`.
 
 ![](img/prepare/csv.png)
 
@@ -225,12 +231,10 @@ df <- read.table(file = "data/life-exp.csv", header = T, sep = ",")
 head(df)
 ```
 
-::: {.callout-note}
-
+::: callout-note
 Dấu `<-` dùng để gán kết quả của một function cho một đối tượng (object) trong R. Nếu chỉ viết `read.table(file = "data/life-exp.csv", header = T, sep = ",")` thì R không lưu lại kết quả sau khi đọc mà chỉ hiển thị ra màn hình.
 
 Sau khi gán kết quả đọc của `read.table()` vào object `df`, dùng lệnh `head(df)` để hiển thị 6 dòng đầu tiên của bảng.
-
 :::
 
 #### `read.csv()`
@@ -260,9 +264,9 @@ read_excel(path, sheet = NULL, col_names = TRUE)
 
 Chúng ta có thể thấy tên các arguments của `read_excel()` hoàn toàn khác với `read.table()` hay `read.csv()`.
 
-- `path`: path của file data đầu vào.
-- `sheet`: tên hoặc số thứ tự của sheet sẽ đọc vào R, nếu file có nhiều sheets.
-- `col_names`: dòng đầu tiên của file data có phải là tên cột không, giống argument `header` của `read.table()`.
+-   `path`: path của file data đầu vào.
+-   `sheet`: tên hoặc số thứ tự của sheet sẽ đọc vào R, nếu file có nhiều sheets.
+-   `col_names`: dòng đầu tiên của file data có phải là tên cột không, giống argument `header` của `read.table()`.
 
 ```{r}
 library(readxl)
@@ -270,12 +274,10 @@ df <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1)
 head(df)
 ```
 
-::: {.callout-important}
-
+::: callout-important
 # Lưu ý
 
 Một lỗi thường gặp với file excel là R đọc các file có merged cells không tốt. Vì vậy khi nhập data, nên tránh làm merged cells.
-
 :::
 
 #### File SPSS, Stata, SAS
