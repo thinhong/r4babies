@@ -1,31 +1,27 @@
 # Giới thiệu
 
-::: {.center-text}
+::: center-text
 [{{< fa link >}} Presentation](https://drthinhong.com/r4babies-slides/intro.html){.btn .btn-outline-secondary role="button"}
 :::
 
-::: {.callout-note}
-
+::: callout-note
 # Trước buổi học
 
-- Cài đặt R và RStudio (xem @sec-install)
-- Cài đặt các R packages này (bấm vào nút copy ở bên phải và paste vào R):
+-   Cài đặt R và RStudio (xem @sec-install)
+-   Cài đặt các R packages này (bấm vào nút copy ở bên phải và paste vào R):
 
 ```{r, eval = F}
 install.packages(c("base64enc", "digest", "evaluate", "glue", "highr", "htmltools", "jsonlite", "knitr", "magrittr", "mime", "rmarkdown", "stringi", "stringr", "xfun", "yaml"))
 ```
-
 :::
 
-::: {.callout-tip}
-
+::: callout-tip
 # Mục tiêu
 
-1. Hiểu ngôn ngữ lập trình là gì và cách học ngôn ngữ lập trình
-2. Hiểu sự khác nhau giữa R và RStudio
-3. Biết cách cài đặt package và gọi library trong R
-4. Biết cách viết file R Script và R Markdown
-
+1.  Hiểu ngôn ngữ lập trình là gì và cách học ngôn ngữ lập trình
+2.  Hiểu sự khác nhau giữa R và RStudio
+3.  Biết cách cài đặt package và gọi library trong R
+4.  Biết cách viết file R Script và R Markdown
 :::
 
 ## R
@@ -45,7 +41,7 @@ Ngôn ngữ là phương tiện để con người giao tiếp với con ngườ
 
 ![](img/intro/program-langs.png)
 
-Một số ngôn ngữ lập trình trong phân tích dữ liệu [[Photo credit](https://medium.com/@andreaskuhn92/how-to-solve-the-same-numerical-problem-in-7-different-programming-languages-a64daac3ed64)]
+Một số ngôn ngữ lập trình trong phân tích dữ liệu \[[Photo credit](https://medium.com/@andreaskuhn92/how-to-solve-the-same-numerical-problem-in-7-different-programming-languages-a64daac3ed64)\]
 
 ### Câu văn trong R
 
@@ -55,9 +51,9 @@ Câu lệnh (command) hoặc hàm (function) chính là những câu văn trong 
 tên-câu-lệnh(tên-tham-số = data-đầu-vào hoặc lựa-chọn)
 ```
 
-- Tên câu lệnh: nằm trước dấu `()`, thể hiện ý nghĩa câu lệnh dùng để làm gì.
-- Tên tham số (argument): nằm trong dấu `()` là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng.
-- Dấu `=`: dùng để gán 1 giá trị cho tham số. Giá trị gán cho tham số có thể là một data đầu vào, hoặc một lựa chọn của người dùng (đúng/sai).
+-   Tên câu lệnh: nằm trước dấu `()`, thể hiện ý nghĩa câu lệnh dùng để làm gì.
+-   Tên tham số (argument): nằm trong dấu `()` là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng.
+-   Dấu `=`: dùng để gán 1 giá trị cho tham số. Giá trị gán cho tham số có thể là một data đầu vào, hoặc một lựa chọn của người dùng (đúng/sai).
 
 Ví dụ:
 
@@ -65,15 +61,13 @@ Ví dụ:
 mean(x = df$col1, na.rm = TRUE)
 ```
 
-- Tên câu lệnh là `mean`: chúng ta đang yêu cầu máy tính hãy tính giá trị trung bình của 1 biến.
-- Các tham số là `x` và `na.rm`:
-  - `x`: là data đầu vào, ở đây chúng ta viết `x = df$col1` để cho máy tính biết data đầu vào là cột `col1` trong bảng data `df`.
-  - `na.rm`: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn `na.rm = TRUE` nghĩa là nếu cột `col1` có NA thì bỏ những giá trị NA đi trước khi tính trung bình.
+-   Tên câu lệnh là `mean`: chúng ta đang yêu cầu máy tính hãy tính giá trị trung bình của 1 biến.
+-   Các tham số là `x` và `na.rm`:
+    -   `x`: là data đầu vào, ở đây chúng ta viết `x = df$col1` để cho máy tính biết data đầu vào là cột `col1` trong bảng data `df`.
+    -   `na.rm`: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn `na.rm = TRUE` nghĩa là nếu cột `col1` có NA thì bỏ những giá trị NA đi trước khi tính trung bình.
 
-::: {.callout-important}
-
+::: callout-important
 Để đọc hướng dẫn sử dụng về câu lệnh, gõ `?tên-câu-lệnh`.
-
 :::
 
 ### R và SPSS, Stata, SAS
@@ -94,13 +88,13 @@ mean(x = df$col1, na.rm = TRUE)
 
 ![](img/intro/r-pkgs.png)
 
-Các gói phần mềm phổ biến trong R [[Photo credit](https://medium.com/@adrian.joseph/improve-your-r-workflow-with-these-must-have-r-packages-be47dacd89bc)]
+Các gói phần mềm phổ biến trong R \[[Photo credit](https://medium.com/@adrian.joseph/improve-your-r-workflow-with-these-must-have-r-packages-be47dacd89bc)\]
 
 3.  Vẽ biểu đồ chất lượng cao.
 
 ![](img/intro/r-viz.png)
 
-Một số biểu đồ vẽ bằng R [[Photo credit](https://towardsdatascience.com/create-beautiful-plots-easily-with-these-r-packages-bf2f278d479c)]
+Một số biểu đồ vẽ bằng R \[[Photo credit](https://towardsdatascience.com/create-beautiful-plots-easily-with-these-r-packages-bf2f278d479c)\]
 
 ## R và RStudio {#sec-install}
 
@@ -116,13 +110,13 @@ Vì vậy, chúng ta cần cài đặt riêng R (ngôn ngữ lập trình) và R
 
 ### Cài đặt R
 
-Truy cập [https://cran.r-project.org/](https://cran.r-project.org/) và tải R cho hệ điều hành của mình.
+Truy cập <https://cran.r-project.org/> và tải R cho hệ điều hành của mình.
 
 ![](img/intro/r-download.png)
 
 ### Cài đặt RStudio
 
-Truy cập [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/) và tải RStudio cho hệ điều hành của mình.
+Truy cập <https://posit.co/download/rstudio-desktop/> và tải RStudio cho hệ điều hành của mình.
 
 ![](img/intro/rstudio-download.png)
 
@@ -136,13 +130,11 @@ R packages là các gói phần mềm được viết bằng ngôn ngữ lập t
 install.packages("readxl")
 ```
 
-::: {.callout-important}
-
+::: callout-important
 # Lưu ý
 
-- Cần có internet để tải và cài đặt R packages bằng lệnh `install.packages()`.
-- Khi cài đặt, tên package phải nằm trong dấu ngoặc kép `""`.
-
+-   Cần có internet để tải và cài đặt R packages bằng lệnh `install.packages()`.
+-   Khi cài đặt, tên package phải nằm trong dấu ngoặc kép `""`.
 :::
 
 ### Sử dụng R packages
@@ -153,13 +145,11 @@ Sau khi cài đặt thì package sẽ trở thành một "thư viện" trong R. 
 library(readxl)
 ```
 
-::: {.callout-important}
-
+::: callout-important
 # Lưu ý
 
-- Không cần internet để sử dụng library.
-- Khi gọi library thì tên library không nằm trong dấu ngoặc kép nữa `""`.
-
+-   Không cần internet để sử dụng library.
+-   Khi gọi library thì tên library không nằm trong dấu ngoặc kép nữa `""`.
 :::
 
 ## R Script và R Markdown
@@ -168,28 +158,28 @@ Các đoạn hội thoại giữa chúng ta và máy tính có thể được l�
 
 ### R Script
 
-Tạo R Script bằng cách vào menu `File` > `New File` > `R Script`.
+Tạo R Script bằng cách vào menu `File` \> `New File` \> `R Script`.
 
 R Script là file chứa các câu lệnh R và những dòng chú thích ngắn gọn về câu lệnh (comments). Có 2 cách để comment:
 
-- Viết dấu `#` đầu dòng để xác định dòng này là comment.
-- Viết dấu `#` ở cuối dòng lệnh.
+-   Viết dấu `#` đầu dòng để xác định dòng này là comment.
+-   Viết dấu `#` ở cuối dòng lệnh.
 
 ![](img/intro/rscript.png)
 
 ### R Markdown
 
-Tạo R Markdown bằng cách vào menu `File` > `New File` > `R Markdown...`.
+Tạo R Markdown bằng cách vào menu `File` \> `New File` \> `R Markdown...`.
 
 R Markdown là công cụ để tạo ra tài liệu tự động. Trong file R Markdown chứa code R xen kẽ với văn bản mô tả, bảng, biểu đồ... có thể xuất ra nhiều loại định dạng như `.docx`, `.pdf`, `.html`, `.pptx`.
 
 Cấu trúc file R Markdown gồm:
 
-- YAML header: nằm ở trên cùng trong và ngăn cách với phần còn lại bằng cặp dấu `---`. Phần này để mô tả tiêu đề tài liệu, tác giả, ngày tháng, định dạng mong muốn
-- Văn bản: phần diễn giải cho tài liệu, gồm các đề mục và chữ diễn giải viết theo ngôn ngữ [markdown](https://rmarkdown.rstudio.com/lesson-8.html).
-  - Đề mục được đánh dấu bằng dấu `#` và các đề mục nhỏ hơn thì tăng thêm số dấu `#` như `##`, `###`.
-  - Phải xuống hàng 2 lần để viết hàng mới trong văn bản.
-- Đoạn code (code chunks): là nơi để viết code và xuất ra các kết quả mong muốn. Code chunks của R được đặt trong cặp dấu:
+-   YAML header: nằm ở trên cùng trong và ngăn cách với phần còn lại bằng cặp dấu `---`. Phần này để mô tả tiêu đề tài liệu, tác giả, ngày tháng, định dạng mong muốn
+-   Văn bản: phần diễn giải cho tài liệu, gồm các đề mục và chữ diễn giải viết theo ngôn ngữ [markdown](https://rmarkdown.rstudio.com/lesson-8.html).
+    -   Đề mục được đánh dấu bằng dấu `#` và các đề mục nhỏ hơn thì tăng thêm số dấu `#` như `##`, `###`.
+    -   Phải xuống hàng 2 lần để viết hàng mới trong văn bản.
+-   Đoạn code (code chunks): là nơi để viết code và xuất ra các kết quả mong muốn. Code chunks của R được đặt trong cặp dấu:
 
 ![](img/intro/rmd-chunk.png)
 
@@ -203,7 +193,7 @@ Ví dụ có file R Markdown sau:
 
 Khi `knit` file R Markdown trên sẽ tạo ra file báo cáo sau với đầy đủ tiêu đề, đề mục, bảng kết quả, biểu đồ... giống như được tạo ra từ 1 chương trình soạn thảo văn bản như Word. Để `knit` file R Markdown thì chọn kí hiệu `knit` trên thanh công cụ:
 
-![](img/intro/rmd-knit.png){width=400}
+![](img/intro/rmd-knit.png){width="400"}
 
 Kết quả `knit` như sau:
 

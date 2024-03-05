@@ -1,3 +1,19 @@
+::: callout-tip
+Mục tiêu
+
+1.  
+:::
+
+::: callout-note
+# Các package được sử dụng trong bài học {.callout-note}
+
+-   readxl
+
+-   janitor
+
+-   tidyverse
+:::
+
 # Làm sạch
 
 Bước đầu tiên sau khi đọc được dữ liệu vào R là "làm sạch" dữ liệu (clean data). Chúng ta chỉ tiến hành phân tích khi chắc chắn dữ liệu đã "sạch" và chính xác.
@@ -15,6 +31,8 @@ Chúng ta sẽ dùng data `gdp-capita.xlsx`
 ```{r}
 library(readxl)
 library(janitor)
+library(tidyverse)
+
 df <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1)
 ```
 
@@ -31,7 +49,6 @@ Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhi
 - `pivot_wider()` - chuyển dữ liệu từ dạng dọc sang ngang.\
 
 ```{r}
-library(tidyverse)
 df <- df %>% 
   pivot_longer(
     cols = starts_with("2"),
@@ -47,8 +64,9 @@ Trong R, tên cột là giá trị trên đỉnh của một cột.
 
 Các quy tắc cho tên cột thường bao gồm:\
 - Tên ngắn\
-- Không có khoảng trắng (thay thế bằng dấu gạch dưới \_).\
-- Không có ký tự đặc biệt (&, #, \<, \>, ...) hoặc dấu. - Không bắt đầu bằng số.
+- Không có khoảng trắng (thay thế bằng dấu gạch dưới \_ ).\
+- Không có ký tự đặc biệt (&, #, \<, \>, ...) hoặc dấu.\
+- Không bắt đầu bằng số.
 
 Lệnh `clean_names()` của package `janitor` được sử dụng để tự động hoá quá trình chuẩn hoá tên cột. Ngoài ra, lệnh `rename()` của package `dplyr` được sử dụng để thay đổi tên cột một cách thủ công.
 
@@ -64,7 +82,7 @@ Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác
 Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package `dplyr` sau đây
 
 | Function     | Công dụng          | GIF minh hoạ                                                                                             |
-|--------------|--------------------|----------------------------------------------------------------------------------------------------------|
+|-------------|-------------|-----------------------------------------------|
 | left_join()  | Nối ngoài bên trái | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join.gif?raw=true){width="283"}       |
 | right_join() | Nối ngoài bên phải | ![]()![](https://github.com/gadenbuie/tidyexplain/blob/main/images/right-join.gif?raw=true){width="282"} |
 | inner_join() | Nối trong          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/inner-join.gif?raw=true){width="281"}      |
@@ -79,7 +97,6 @@ Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác
 [Tổng hợp các lệnh join cùng GIF minh hoạ](https://github.com/gadenbuie/tidyexplain/tree/main)
 
 ```{r}
-library(dplyr)
 mt <- read_excel(path = "data/gdp-capita.xlsx", sheet = 2) %>% 
   clean_names()
 
@@ -87,48 +104,3 @@ mt <- read_excel(path = "data/gdp-capita.xlsx", sheet = 2) %>%
 # Trong trường hợp này, tuy lệnh join_by không cần thiết nhưng có thể giúp cho code rõ ràng hơn 
 left_join(df, mt, by = join_by(country_code == country_code))
 ```
-
-## Định dạng dữ liệu (datatype)
-
-### Các datatype trong R
-
-| Datatype  | Ý nghĩa                                  |
-|-----------|------------------------------------------|
-| numeric   | dữ liệu dạng số nguyên                   |
-| double    | dữ liệu dạng số thập phân                |
-| logical   | dữ liệu dạng đúng/sai (TRUE/FALSE)       |
-| character | dữ liệu dạng chữ (hay còn gọi là string) |
-| Date      | dữ liệu ngày tháng                       |
-| factor    | dữ liệu dạng phân loại (categorical)     |
-
-### Chuyển đổi datatype
-
-Cú pháp chung cho thay đổi datatype là `as.datatype()`
-
-Ví dụ như:\
-- `as.numeric()` chuyển thành định dạng số.\
-- `as.character()` chuyển thành định dạng văn bản.\
-- `as.factor()` chuyển thành định dạng factor.\
-- `as.Date()` chuyển thành định dạng ngày.
-
-Ngoài ra, còn có các lệnh khác để phục vụ cho các mục đích cụ thể hơn, bao gồm:\
-`ifelse()` chuyển thành định dạng logical theo điều kiện nhất định\
-`is.na()` chuyển thành định dạng logical, các dữ liệu trống (`NA`) có giá trị `TRUE` và ngược lại.\
-`dmy()`, `ymd()`, `mdy()`, ... chuyển đổi string theo các format khác nhau thành định dạng ngày
-
-## Dữ liệu string
-
-[Tổng hợp các lệnh từ package stringr](https://stringr.tidyverse.org/reference/index.html)
-
-## Dữ liệu ngày tháng
-
-### Các lệnh liên quan đến ngày tháng
-
-| Function       | Công dụng                               | Package   |
-|----------------|-----------------------------------------|-----------|
-| difftime()     | tính khoảng cách giữa hai mốc thời gian | base      |
-| month()/year() | lấy tháng/ năm                          | lubridate |
-| quarter()      | chuyển ngày sang quý                    | lubridate |
-| today()        | lấy ngày hiện tại                       | lubridate |
-
-[Tổng hợp các lệnh từ package lubridate](https://lubridate.tidyverse.org/reference/index.html)
