@@ -1,17 +1,19 @@
-# R cơ bản
+# Nhập môn R
 
 ::: callout-tip
 # Mục tiêu
 
 1.  Hiểu các thuật ngữ trong R
 2.  Hiểu các datatype trong R
-3.  Học các hàm thông dụng trong R
+3.  Học các package thông dụng trong R
 :::
 
 ::: callout-note
 # Các package được sử dụng trong bài học
 
 -   readxl
+
+-   writexl
 
 -   tidyverse
 :::
@@ -21,7 +23,16 @@
 ```{r}
 library(readxl)
 library(tidyverse)
+library(writexl)
 ```
+
+::: callout-note
+### Package tidyverse
+
+package tidyverse bao hàm nhiều package hỗ trợ trong việc phân tích dữ liệu, bao gồm các package sau: ggplot2, tibble, dplyr, tidyr, stringr, purrr, readr, forcats, lubridate\
+\
+Vì vậy người dùng không cần gọi các thư viện trên sau khi gọi tidyverse
+:::
 
 ## Đối tượng trong R
 
@@ -52,9 +63,9 @@ df
 ```
 
 ::: callout-important
-# Lưu ý
+### Lưu ý
 
-**Giá trị của một đối tượng có thể bị ghi đè** bất kỳ lúc nào bằng cách chạy lệnh gán để định nghĩa lại giá trị của nó. Do đó, **thứ tự của các lệnh được chạy rất quan trọng**.
+Giá trị của một đối tượng **có thể bị ghi đè** bất kỳ lúc nào bằng cách chạy lệnh gán để định nghĩa lại giá trị của nó. Do đó, **thứ tự của các lệnh được chạy rất quan trọng**.
 :::
 
 Lệnh sau sẽ định nghĩa lại giá trị cho đối tượng `file_path`
@@ -89,7 +100,7 @@ mean(x = df$col1, na.rm = TRUE)
     -   `x`: là data đầu vào, ở đây chúng ta viết `x = df$col1` để cho máy tính biết data đầu vào là cột `col1` trong bảng data `df`.
     -   `na.rm`: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn `na.rm = TRUE` nghĩa là nếu cột `col1` có NA thì bỏ những giá trị NA đi trước khi tính trung bình.
 
-::: callout-important
+::: callout-tip
 Để đọc hướng dẫn sử dụng về câu lệnh, gõ `?tên-câu-lệnh`.
 :::
 
@@ -97,16 +108,16 @@ mean(x = df$col1, na.rm = TRUE)
 
 ### Các datatype trong R
 
-| Datatype   | Ý nghĩa                                                                                                                    |
+| Datatype     | Ý nghĩa                                                                                                                    |
 |--------------------------|----------------------------------------------|
-| numeric    | dữ liệu dạng số nguyên                                                                                                     |
-| double     | dữ liệu dạng số thập phân                                                                                                  |
-| logical    | dữ liệu dạng đúng/sai (TRUE/FALSE)                                                                                         |
-| character  | dữ liệu dạng ký tự (hay còn gọi là string), được đặt trong dấu ngoặc kép. Đối tượng dạng ký tự thì **không thể tính toán** |
-| Date       | dữ liệu ngày tháng                                                                                                         |
-| factor     | dữ liệu dạng phân loại (categorical)                                                                                       |
-| data.frame | dữ liệu dạng bảng                                                                                                          |
-| tibble     | dữ liệu dạng bảng tương tự như data.frame, sự khác biệt chính là tibble in đẹp hơn trong R console                         |
+| `numeric`    | dữ liệu dạng số nguyên                                                                                                     |
+| `double`     | dữ liệu dạng số thập phân                                                                                                  |
+| `logical`    | dữ liệu dạng đúng/sai (TRUE/FALSE)                                                                                         |
+| `character`  | dữ liệu dạng ký tự (hay còn gọi là string), được đặt trong dấu ngoặc kép. Đối tượng dạng ký tự thì **không thể tính toán** |
+| `Date`       | dữ liệu ngày tháng                                                                                                         |
+| `factor`     | dữ liệu dạng phân loại (categorical)                                                                                       |
+| `data.frame` | dữ liệu dạng bảng                                                                                                          |
+| `tibble`     | dữ liệu dạng bảng tương tự như data.frame, sự khác biệt chính là tibble in đẹp hơn trong R console                         |
 
 ::: callout-tip
 Để kiểm tra datatype, sử dụng lệnh `class(tên_đối_tượng)`
@@ -116,11 +127,15 @@ mean(x = df$col1, na.rm = TRUE)
 
 Cú pháp chung cho thay đổi datatype là `as.datatype()`
 
-Ví dụ như:\
-- `as.numeric()` chuyển thành định dạng số.\
-- `as.character()` chuyển thành định dạng văn bản.\
-- `as.factor()` chuyển thành định dạng factor.\
-- `as.Date()` chuyển thành định dạng ngày.
+Ví dụ như:
+
+-   `as.numeric()` chuyển thành định dạng số.
+
+-   `as.character()` chuyển thành định dạng văn bản.
+
+-   `as.factor()` chuyển thành định dạng factor.
+
+-   `as.Date()` chuyển thành định dạng ngày.
 
 Ngoài ra, còn có các lệnh khác để phục vụ cho các mục đích cụ thể hơn, bao gồm:\
 `ifelse()` chuyển thành định dạng logical theo điều kiện nhất định\
@@ -150,7 +165,7 @@ class(example_list)
 
 -   Để lấy nhiều cột hay hàng thì cho tên cột hay hàng theo dạng list (chuỗi)
 
-```{r}
+```{r, eval=FALSE}
 # lấy dữ liệu tại hàng thứ 5, cột thứ 2
 df[5 ,2]
 
@@ -170,13 +185,11 @@ df[1:10, c("Country Name", "Country Code", "2015")]
 ```
 
 ::: callout-note
-Đối với cột, còn có cách trích xuất thông dụng khác bằng cách sử dụng dấu `$`. Tuy nhiên, cách này sẽ chỉ trích xuất giá trị trong 1 cột.
-
-\
-VD: df\$col1 sẽ trả về các giá trị trong cột `col1` của bảng `df`
+Đối với cột, còn có cách trích xuất thông dụng khác bằng cách sử dụng dấu `$`. Tuy nhiên, cách này sẽ chỉ trích xuất giá trị trong 1 cột.\
+VD: `df$col1` sẽ trả về các giá trị trong cột `col1` của bảng `df`
 :::
 
-## Chuyển đổi datatype cho cột
+### Chuyển đổi datatype cho cột
 
 Mỗi cột trong data.frame sẽ chứa các giá trị có cùng datatype.
 
@@ -186,34 +199,96 @@ VD:
 
 ```{r}
 # đổi cột country code thành biến phân loại
-
 df$`Country Code` <- as.factor(df$`Country Code`)
 ```
 
 ::: callout-important
-## Lưu ý
+#### Lưu ý
 
 -   Dấu `<-` được sử dụng ở VD trên để **gán giá trị mới** vào cột Country Code (tương đương việc UPDATE cột)
 
 -   Nếu không sử dụng `<-` thì R chỉ trả về kết quả của function `as.factor` và bảng df sẽ **không** có thay đổi
 :::
 
+### Lọc dữ liệu
+
+Function `filter()` được sử dụng cho việc lọc dữ liệu theo điều kiện\
+Một số ký tự thường được sử dụng cho filter bao gồm:
+
+| Ký tự      | Ý nghĩa               |
+|------------|-----------------------|
+| `x == y`   | x bằng y              |
+| `x != y`   | x không bằng y        |
+| `y < x`    | x nhỏ hơn y           |
+| `y <= x`   | x nhỏ hơn hoặc bằng y |
+| `is.na(x)` | x trống               |
+| `A & B`    | A và B                |
+| `A | B`    | A hoặc B              |
+| `!`        | Không là (NOT)        |
+
+```{r, eval=F}
+# Lọc các hàng có country code là ABW
+df %>% filter(`Country Code` == "ABW") 
+
+# Lọc các hàng có GDP năm 2015 hơn 2000
+df %>% filter(`2015` > 2000)
+
+# Lọc các hàng có country code là ABW hoặc GDP năm 2015 hơn 2000
+df %>% filter((`Country Code` == "ABW") | (`2015` > 2000))
+
+# Lọc các hàng có country code là ABW và GDP năm 2015 hơn 2000
+df %>% filter((`Country Code` == "ABW") & (`2015` > 2000))
+```
+
+::: callout-note
+### Dấu `%>% (pipe)` {.callout-note}
+
+`%>%` được dùng để chuyển đối tượng vào 1 function (trong VD trên, `%>%` chuyển `df` vào function `filter`)
+
+`%>%` còn thường được dùng để chuyển các kết quả trung gian sang function tiếp theo, từ đó có thể dùng để nối 1 chuỗi các function để thao tác trên 1 đối tượng\
+\
+VD: lọc các hàng có GDP năm 2015 \> 2000 và sắp xếp các hàng theo GPD từ thấp đến cao
+
+```{r, eval=F}
+df %>% # chuyển df vào filter()
+  filter(`2015` > 2000) %>% # chuyển kết quả của filter() vào arrange()
+  arrange(`2015`)
+```
+:::
+
 ## Dữ liệu string
 
-### Format string
+Gói `stringr` (1 trong các package trong `tidyverse`) thường được sử dụng để xử lý các dữ liệu dạng string.
 
-|                    |             |                                     |
-|--------------------|-------------|-------------------------------------|
-| **Function**       | **Package** | **Công dụng**                       |
-| tolower            | base        | biến thành chữ thường               |
-| toupper            | base        | biến thành chữ hoa                  |
-| str_to_title       | stringr     | in hoa chữ cái đầu tiên của từng từ |
-| stri_trans_general | stringi     | loại bỏ dấu                         |
+Ngoài ra, R còn có package `stringi` dành cho các mục đích cụ thể khác (VD như xử lý dấu, cách mã hoá văn bản, ... )
+
+|                      |             |                                     |
+|----------------------|-------------|-------------------------------------|
+| **Function**         | **Package** | **Công dụng**                       |
+| `tolower`            | base        | biến thành chữ thường               |
+| `toupper`            | base        | biến thành chữ hoa                  |
+| `str_to_title`       | stringr     | in hoa chữ cái đầu tiên của từng từ |
+| `stri_trans_general` | stringi     | loại bỏ dấu                         |
+
+VD: chuyển Country code sang chữ in thường
+
+```{r}
+df %>% 
+  mutate(
+    `Country Code` = tolower(`Country Code`)
+  )
+```
+
+::: callout-note
+### Lệnh `mutate` {.callout-note}
+
+`mutate` được sử dụng để chỉnh sửa giá trị của cột hoặc tạo cột mới
+:::
 
 ### Các hàm thông dụng của stringr
 
 |                 |                                                                              |
-|------------------|------------------------------------------------------|
+|-----------------------|-------------------------------------------------|
 | **Function**    | **Công dụng**                                                                |
 | str_starts      | lọc hàng bắt đầu bằng chuỗi ký tự khớp với pattern                           |
 | str_ends        | lọc hàng kết thúc bằng bằng chuỗi ký tự khớp với pattern                     |
@@ -226,17 +301,112 @@ df$`Country Code` <- as.factor(df$`Country Code`)
 | str_replace     | thay thế 1 chuỗi con (substring) đầu tiên khớp với pattern bằng 1 chuỗi mới  |
 | str_replace_all | thay thế tất cả chuỗi con (substring) khớp với pattern bằng 1 chuỗi mới      |
 
-[Tổng hợp các lệnh từ package stringr](https://stringr.tidyverse.org/reference/index.html)
+::: center-text
+[{{< fa link >}} stringr functions](https://stringr.tidyverse.org/reference/index.html){.btn .btn-outline-secondary role="button"}
+:::
+
+### Regex
+
+Trong R, regex là 1 ngôn ngữ ngắn gọn để mô tả các patterns trong string
+
+Có bốn công cụ cơ bản mà người dùng có thể sử dụng để tạo một biểu thức chính quy cơ bản:
+
+-   Nhóm
+
+```{=html}
+<!-- -->
+```
+-   Bộ ký tự
+
+-   Siêu ký tự
+
+-   Bộ định lượng
+
+**Nhóm** chỉ định các chuỗi cần khớp. Thường được viết trong`()` và phân cách bởi dấu `|` VD: `"(Quận|Huyện)"` - quy định cần khớp chữ `"Quận"` hay `"Huyện"`.
+
+**Bộ ký tự** string được đánh giá khớp tìm thấy bất kỳ ký tự nào trong dấu ngoặc `[ ]` trong chuỗi. Vd, để tìm string chứa các nguyên âm, người ta có thể sử dụng bộ ký tự này: `"[aeiou]"`.
+
+Các bộ ký tự đặc biệt trong R
+
+| Bộ ký tự      | Ý nghĩa                                      |
+|---------------|----------------------------------------------|
+| `"[A-Z]"`     | bất kỳ chữ cái viết hoa đơn lẻ nào           |
+| `"[a-z]"`     | bất kỳ chữ cái viết thường đơn lẻ nào        |
+| `"[0-9]"`     | bất kỳ số nào                                |
+| `"[:alnum:]"` | bất kỳ chữ cái và số nào                     |
+| `"[:digit:]"` | bất kỳ chữ số nào                            |
+| `"[:alpha:]"` | bất kỳ ký tự nào (viết hoa hoặc viết thường) |
+| `"[:upper:]"` | bất kỳ ký tự viết hoa nào                    |
+| `"[:lower:]"` | bất kỳ ký tự viết thường nào                 |
+
+**Siêu ký tự** là phiên bản rút ngắn của 1 số bộ ký tự
+
+| Siêu ký tự | Ý nghĩa                   |
+|------------|---------------------------|
+| `"\\s"`    | khoảng trắng đơn          |
+| `"\\w"`    | tương đương "\[:alnum:\]" |
+| `"\\d"`    | tương đương "\[:digit:\]" |
 
 ## Dữ liệu ngày tháng
 
+Đối với dữ liệu dạng ngày tháng, package thông dụng nhất là `lubridate` (cũng là 1 phần của tidyverse).
+
 ### Các lệnh liên quan đến ngày tháng
 
-| Function       | Công dụng                               | Package   |
-|----------------|-----------------------------------------|-----------|
-| difftime()     | tính khoảng cách giữa hai mốc thời gian | base      |
-| month()/year() | lấy tháng/ năm                          | lubridate |
-| quarter()      | chuyển ngày sang quý                    | lubridate |
-| today()        | lấy ngày hiện tại                       | lubridate |
+| Function            | Công dụng                                           | Package   |
+|------------------|------------------------------------|------------------|
+| difftime()          | tính khoảng cách giữa hai mốc thời gian             | base      |
+| month()/year()      | lấy tháng/ năm                                      | lubridate |
+| quarter()           | chuyển ngày sang quý                                | lubridate |
+| today()             | lấy ngày hiện tại                                   | lubridate |
+| dmy(), ymd(), mdy() | chuyển string theo nhiều format khác nhau sang ngày | lubridate |
 
-[Tổng hợp các lệnh từ package lubridate](https://lubridate.tidyverse.org/reference/index.html)
+::: center-text
+[{{< fa link >}} lubridate functions](https://lubridate.tidyverse.org/reference/index.html){.btn .btn-outline-secondary role="button"}
+:::
+
+## Lưu bảng dữ liệu sau khi chỉnh sửa
+
+R cho phép lưu lại dữ liệu với nhiều format khác nhau, bao gồm:
+
+-   RData - định dạng dữ liệu của R để lưu trữ nhiều đối tượng
+
+-   RDS - định dạng dữ liệu của R để lưu trữ 1 đối tượng
+
+-   excel
+
+::: callout-important
+### Lưu ý
+
+Tốc độ đọc file RData và RDS của R nhanh hơn rất nhiều so với việc đọc file excel.\
+Vì vậy, đối với các dữ liệu có số lượng lớn hoặc cần xử lý thêm trong R, nên lưu trữ dưới dạng RDS/Rdata.
+:::
+
+VD lưu dữ liệu
+
+```{r, eval=FALSE}
+# định nghĩa đường dẫn đến folder chứa data
+data_path <- file.path(getwd(), "data")
+
+# lưu dưới dạng Rdata
+save(df, file = file.path(data_path, "rda_data.Rda"))
+
+# lưu dưới dạng RDS
+saveRDS(df, file = file.path(data_path, "rds_data.Rds"))
+
+# lưu dưới dạng file excel
+write_xlsx(df, path = file.path(data_path, "excel_data.xlsx"))
+```
+
+Đọc dữ liệu được lưu
+
+```{r, eval=FALSE}
+# đọc file Rdata
+load(file.path(data_path, "rda_data.Rda"))
+
+# đọc file RDS
+readRDS(file = file.path(data_path, "rds_data.Rds"))
+
+# đọc file excel
+read_excel(df, path = file.path(data_path, "excel_data.xlsx"))
+```

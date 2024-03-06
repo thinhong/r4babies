@@ -1,3 +1,7 @@
+# Làm sạch
+
+Bước đầu tiên sau khi đọc được dữ liệu vào R là "làm sạch" dữ liệu (clean data). Chúng ta chỉ tiến hành phân tích khi chắc chắn dữ liệu đã "sạch" và chính xác.
+
 ::: callout-tip
 Mục tiêu
 
@@ -13,10 +17,6 @@ Mục tiêu
 
 -   tidyverse
 :::
-
-# Làm sạch
-
-Bước đầu tiên sau khi đọc được dữ liệu vào R là "làm sạch" dữ liệu (clean data). Chúng ta chỉ tiến hành phân tích khi chắc chắn dữ liệu đã "sạch" và chính xác.
 
 ## Data gọn gàng (tidy data)
 
@@ -82,9 +82,9 @@ Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác
 Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package `dplyr` sau đây
 
 | Function     | Công dụng          | GIF minh hoạ                                                                                             |
-|-------------|-------------|-----------------------------------------------|
+|---------------|---------------|------------------------------------------|
 | left_join()  | Nối ngoài bên trái | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join.gif?raw=true){width="283"}       |
-| right_join() | Nối ngoài bên phải | ![]()![](https://github.com/gadenbuie/tidyexplain/blob/main/images/right-join.gif?raw=true){width="282"} |
+| right_join() | Nối ngoài bên phải | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/right-join.gif?raw=true){width="282"} |
 | inner_join() | Nối trong          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/inner-join.gif?raw=true){width="281"}      |
 | full_join()  | Nối ngoài          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/full-join.gif?raw=true){width="281"}       |
 
