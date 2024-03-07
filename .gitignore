@@ -4,3 +4,7 @@
 .Ruserdata
 
 /.quarto/
+
+# --- comment lines below to update html files
+# /docs/
+# /_freeze/

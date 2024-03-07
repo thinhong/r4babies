@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R for babies - 3&nbsp; Nhập môn R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./clean.html" rel="next">
+<link href="./prepare.html" rel="prev">
+<link href="./logo-icon.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-RDC0B0FCNZ"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Nhập môn R</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R for babies</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Tổng quan</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Giới thiệu</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prepare.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Chuẩn bị</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./r_basics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Nhập môn R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clean.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Làm sạch</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Phân tích</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Trực quan hóa</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./viz-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Thực hành trực quan hóa</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./report.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Làm báo cáo bằng R Markdown</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#gọi-các-thư-viện-cho-bài-học" id="toc-gọi-các-thư-viện-cho-bài-học" class="nav-link active" data-scroll-target="#gọi-các-thư-viện-cho-bài-học"><span class="toc-section-number">3.0.1</span>  Gọi các thư viện cho bài học</a></li>
+  <li><a href="#đối-tượng-trong-r" id="toc-đối-tượng-trong-r" class="nav-link" data-scroll-target="#đối-tượng-trong-r"><span class="toc-section-number">3.1</span>  Đối tượng trong R</a></li>
+  <li><a href="#câu-văn-trong-r" id="toc-câu-văn-trong-r" class="nav-link" data-scroll-target="#câu-văn-trong-r"><span class="toc-section-number">3.2</span>  Câu văn trong R</a></li>
+  <li><a href="#loại-dữ-liệu-datatype" id="toc-loại-dữ-liệu-datatype" class="nav-link" data-scroll-target="#loại-dữ-liệu-datatype"><span class="toc-section-number">3.3</span>  Loại dữ liệu (datatype)</a>
+  <ul class="collapse">
+  <li><a href="#các-datatype-trong-r" id="toc-các-datatype-trong-r" class="nav-link" data-scroll-target="#các-datatype-trong-r"><span class="toc-section-number">3.3.1</span>  Các datatype trong R</a></li>
+  <li><a href="#update_datatype" id="toc-update_datatype" class="nav-link" data-scroll-target="#update_datatype"><span class="toc-section-number">3.3.2</span>  Chuyển đổi datatype</a></li>
+  </ul></li>
+  <li><a href="#làm-việc-với-data.frame" id="toc-làm-việc-với-data.frame" class="nav-link" data-scroll-target="#làm-việc-với-data.frame"><span class="toc-section-number">3.4</span>  Làm việc với data.frame</a>
+  <ul class="collapse">
+  <li><a href="#lấy-dữ-liệu-theo-hàngcột" id="toc-lấy-dữ-liệu-theo-hàngcột" class="nav-link" data-scroll-target="#lấy-dữ-liệu-theo-hàngcột"><span class="toc-section-number">3.4.1</span>  Lấy dữ liệu theo hàng/cột</a></li>
+  <li><a href="#chuyển-đổi-datatype-cho-cột" id="toc-chuyển-đổi-datatype-cho-cột" class="nav-link" data-scroll-target="#chuyển-đổi-datatype-cho-cột"><span class="toc-section-number">3.4.2</span>  Chuyển đổi datatype cho cột</a></li>
+  <li><a href="#lọc-dữ-liệu" id="toc-lọc-dữ-liệu" class="nav-link" data-scroll-target="#lọc-dữ-liệu"><span class="toc-section-number">3.4.3</span>  Lọc dữ liệu</a></li>
+  </ul></li>
+  <li><a href="#dữ-liệu-string" id="toc-dữ-liệu-string" class="nav-link" data-scroll-target="#dữ-liệu-string"><span class="toc-section-number">3.5</span>  Dữ liệu string</a>
+  <ul class="collapse">
+  <li><a href="#các-hàm-thông-dụng-của-stringr" id="toc-các-hàm-thông-dụng-của-stringr" class="nav-link" data-scroll-target="#các-hàm-thông-dụng-của-stringr"><span class="toc-section-number">3.5.1</span>  Các hàm thông dụng của stringr</a></li>
+  <li><a href="#regex" id="toc-regex" class="nav-link" data-scroll-target="#regex"><span class="toc-section-number">3.5.2</span>  Regex</a></li>
+  </ul></li>
+  <li><a href="#dữ-liệu-ngày-tháng" id="toc-dữ-liệu-ngày-tháng" class="nav-link" data-scroll-target="#dữ-liệu-ngày-tháng"><span class="toc-section-number">3.6</span>  Dữ liệu ngày tháng</a>
+  <ul class="collapse">
+  <li><a href="#các-lệnh-liên-quan-đến-ngày-tháng" id="toc-các-lệnh-liên-quan-đến-ngày-tháng" class="nav-link" data-scroll-target="#các-lệnh-liên-quan-đến-ngày-tháng"><span class="toc-section-number">3.6.1</span>  Các lệnh liên quan đến ngày tháng</a></li>
+  </ul></li>
+  <li><a href="#lưu-bảng-dữ-liệu-sau-khi-chỉnh-sửa" id="toc-lưu-bảng-dữ-liệu-sau-khi-chỉnh-sửa" class="nav-link" data-scroll-target="#lưu-bảng-dữ-liệu-sau-khi-chỉnh-sửa"><span class="toc-section-number">3.7</span>  Lưu bảng dữ liệu sau khi chỉnh sửa</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Nhập môn R</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Mục tiêu
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Hiểu các thuật ngữ trong R</li>
+<li>Hiểu các datatype trong R</li>
+<li>Học các package thông dụng trong R</li>
+</ol>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Các package được sử dụng trong bài học
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>readxl</p></li>
+<li><p>writexl</p></li>
+<li><p>tidyverse</p></li>
+</ul>
+</div>
+</div>
+<section id="gọi-các-thư-viện-cho-bài-học" class="level3" data-number="3.0.1">
+<h3 data-number="3.0.1" class="anchored" data-anchor-id="gọi-các-thư-viện-cho-bài-học"><span class="header-section-number">3.0.1</span> Gọi các thư viện cho bài học</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'stringr' was built under R version 4.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.0     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Package tidyverse
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>package tidyverse bao hàm nhiều package hỗ trợ trong việc phân tích dữ liệu, bao gồm các package sau: ggplot2, tibble, dplyr, tidyr, stringr, purrr, readr, forcats, lubridate<br>
+<br>
+Vì vậy người dùng không cần gọi các thư viện trên sau khi gọi tidyverse</p>
+</div>
+</div>
+</section>
+<section id="đối-tượng-trong-r" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="đối-tượng-trong-r"><span class="header-section-number">3.1</span> Đối tượng trong R</h2>
+<p>Mọi thứ được lưu trữ trong R - bao gồm bộ dữ liệu, biến số, danh sách tên cột, kết quả đầu ra như biểu đồ - đều là <strong>các đối tượng</strong>, được <strong>gán tên</strong> và <strong>có thể được tham chiếu</strong> trong các lệnh sau đó.</p>
+<p>Để tạo đối tượng trong R, ta dùng cú pháp sau</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tên_đối_tượng <span class="ot">&lt;-</span> giá_trị_của_đối_tượng </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>VD:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tạo đối tượng file_path để lưu trữ đường dẫn đến file excel</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">"data/gdp-capita.xlsx"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># tạo đối tượng df lưu trữ bảng dữ liệu đọc từ file excel</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="at">path =</span> file_path, <span class="at">sheet =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Sau khi tạo 2 đối tượng file_path và df, ta có thể thử xem giá trị được lưu trữ</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>file_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data/gdp-capita.xlsx"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 266 × 10
+   `Country Name`       `Country Code` `2015` `2016` `2017` `2018` `2019` `2020`
+   &lt;chr&gt;                &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 Aruba                ABW            28419. 28450. 29329. 30918. 31903. 24008.
+ 2 Africa Eastern and … AFE             1554.  1444.  1625.  1558.  1508.  1356.
+ 3 Afghanistan          AFG              567.   523.   526.   492.   498.   512.
+ 4 Africa Western and … AFW             1882.  1649.  1590.  1735.  1812.  1688.
+ 5 Angola               AGO             3217.  1810.  2439.  2541.  2191.  1451.
+ 6 Albania              ALB             3953.  4124.  4531.  5288.  5396.  5343.
+ 7 Andorra              AND            38886. 39931. 40632. 42905. 41329. 37207.
+ 8 Arab World           ARB             6287.  6118.  6231.  6579.  6505.  5644.
+ 9 United Arab Emirates ARE            41525. 41055. 43064. 46722. 45376. 37629.
+10 Argentina            ARG            13789. 12790. 14613. 11795.  9964.  8501.
+# ℹ 256 more rows
+# ℹ 2 more variables: `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Lưu ý
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Giá trị của một đối tượng <strong>có thể bị ghi đè</strong> bất kỳ lúc nào bằng cách chạy lệnh gán để định nghĩa lại giá trị của nó. Do đó, <strong>thứ tự của các lệnh được chạy rất quan trọng</strong>.</p>
+</div>
+</div>
+<p>Lệnh sau sẽ định nghĩa lại giá trị cho đối tượng <code>file_path</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">"data/new_path.xlsx"</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># kiểm tra giá trị </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>file_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data/new_path.xlsx"</code></pre>
+</div>
+</div>
+</section>
+<section id="câu-văn-trong-r" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="câu-văn-trong-r"><span class="header-section-number">3.2</span> Câu văn trong R</h2>
+<p>Câu lệnh (command) hoặc hàm (function) chính là những câu văn trong R để giao tiếp với máy tính. Chúng ta phải học ngữ pháp của 1 câu lệnh và ý nghĩa của nó để có thể sử dụng R để ra lệnh cho máy tính. Một câu lệnh trong R thường có dạng như sau:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tên<span class="sc">-</span>câu<span class="sc">-</span>lệnh(tên<span class="sc">-</span>tham<span class="sc">-</span>số <span class="ot">=</span> data<span class="sc">-</span>đầu<span class="sc">-</span>vào hoặc lựa<span class="sc">-</span>chọn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Tên câu lệnh: nằm trước dấu <code>()</code>, thể hiện ý nghĩa câu lệnh dùng để làm gì.</li>
+<li>Tên tham số (argument): nằm trong dấu <code>()</code> là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng.</li>
+<li>Dấu <code>=</code>: dùng để gán 1 giá trị cho tham số. Giá trị gán cho tham số có thể là một data đầu vào, hoặc một lựa chọn của người dùng (đúng/sai).</li>
+</ul>
+<p>Ví dụ:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> df<span class="sc">$</span>col1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Tên câu lệnh là <code>mean</code>: chúng ta đang yêu cầu máy tính hãy tính giá trị trung bình của 1 biến.</li>
+<li>Các tham số là <code>x</code> và <code>na.rm</code>:
+<ul>
+<li><code>x</code>: là data đầu vào, ở đây chúng ta viết <code>x = df$col1</code> để cho máy tính biết data đầu vào là cột <code>col1</code> trong bảng data <code>df</code>.</li>
+<li><code>na.rm</code>: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn <code>na.rm = TRUE</code> nghĩa là nếu cột <code>col1</code> có NA thì bỏ những giá trị NA đi trước khi tính trung bình.</li>
+</ul></li>
+</ul>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Để đọc hướng dẫn sử dụng về câu lệnh, gõ <code>?tên-câu-lệnh</code>.</p>
+</div>
+</div>
+</section>
+<section id="loại-dữ-liệu-datatype" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="loại-dữ-liệu-datatype"><span class="header-section-number">3.3</span> Loại dữ liệu (datatype)</h2>
+<section id="các-datatype-trong-r" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="các-datatype-trong-r"><span class="header-section-number">3.3.1</span> Các datatype trong R</h3>
+<table class="table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Datatype</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>numeric</code></td>
+<td>dữ liệu dạng số nguyên</td>
+</tr>
+<tr class="even">
+<td><code>double</code></td>
+<td>dữ liệu dạng số thập phân</td>
+</tr>
+<tr class="odd">
+<td><code>logical</code></td>
+<td>dữ liệu dạng đúng/sai (TRUE/FALSE)</td>
+</tr>
+<tr class="even">
+<td><code>character</code></td>
+<td>dữ liệu dạng ký tự (hay còn gọi là string), được đặt trong dấu ngoặc kép. Đối tượng dạng ký tự thì <strong>không thể tính toán</strong></td>
+</tr>
+<tr class="odd">
+<td><code>Date</code></td>
+<td>dữ liệu ngày tháng</td>
+</tr>
+<tr class="even">
+<td><code>factor</code></td>
+<td>dữ liệu dạng phân loại (categorical)</td>
+</tr>
+<tr class="odd">
+<td><code>data.frame</code></td>
+<td>dữ liệu dạng bảng</td>
+</tr>
+<tr class="even">
+<td><code>tibble</code></td>
+<td>dữ liệu dạng bảng tương tự như data.frame, sự khác biệt chính là tibble in đẹp hơn trong R console</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Để kiểm tra datatype, sử dụng lệnh <code>class(tên_đối_tượng)</code></p>
+</div>
+</div>
+</section>
+<section id="update_datatype" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="update_datatype"><span class="header-section-number">3.3.2</span> Chuyển đổi datatype</h3>
+<p>Cú pháp chung cho thay đổi datatype là <code>as.datatype()</code></p>
+<p>Ví dụ như:</p>
+<ul>
+<li><p><code>as.numeric()</code> chuyển thành định dạng số.</p></li>
+<li><p><code>as.character()</code> chuyển thành định dạng văn bản.</p></li>
+<li><p><code>as.factor()</code> chuyển thành định dạng factor.</p></li>
+<li><p><code>as.Date()</code> chuyển thành định dạng ngày.</p></li>
+</ul>
+<p>Ngoài ra, còn có các lệnh khác để phục vụ cho các mục đích cụ thể hơn, bao gồm:<br>
+<code>ifelse()</code> chuyển thành định dạng logical theo điều kiện nhất định<br>
+<code>is.na()</code> chuyển thành định dạng logical, các dữ liệu trống (<code>NA</code>) có giá trị <code>TRUE</code> và ngược lại.<br>
+<code>dmy()</code>, <code>ymd()</code>, <code>mdy()</code>, … chuyển đổi string theo các format khác nhau thành định dạng ngày</p>
+<p>VD:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tạo danh sách mẫu</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>example_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># thử sử dụng lệnh mean</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(example_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in mean.default(example_list): argument is not numeric or logical:
+returning NA</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># kiểm tra datatype </span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(example_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: thực hành điều chỉnh example_list để không còn Warning</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="làm-việc-với-data.frame" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="làm-việc-với-data.frame"><span class="header-section-number">3.4</span> Làm việc với data.frame</h2>
+<section id="lấy-dữ-liệu-theo-hàngcột" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="lấy-dữ-liệu-theo-hàngcột"><span class="header-section-number">3.4.1</span> Lấy dữ liệu theo hàng/cột</h3>
+<ul>
+<li><p>Cú pháp: <code>tên_bảng_dữ_liệu[hàng, cột]</code>. Trong đó cột có thể là số thứ tự của cột hoặc tên cột.</p></li>
+<li><p>Để lấy toàn bộ hàng thì để trống cột và ngược lại</p></li>
+<li><p>Để lấy nhiều cột hay hàng thì cho tên cột hay hàng theo dạng list (chuỗi)</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lấy dữ liệu tại hàng thứ 5, cột thứ 2</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">5</span> ,<span class="dv">2</span>]</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lấy dữ liệu tại hàng thứ 5, cột thứ 2</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">5</span> , <span class="st">"Country Code"</span>]</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># lấy hàng thứ 5 trong bảng df</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">5</span>, ]</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#lấy các cột Country Name, Country Code, 2015</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>df[, <span class="fu">c</span>(<span class="st">"Country Name"</span>, <span class="st">"Country Code"</span>, <span class="st">"2015"</span>)] </span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">#lấy 10 hàng đầu tiên của các cột Country Name, Country Code, 2015</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co">#1:10 là cú pháp nhanh để tạo chuỗi từ 1 đến 10</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">c</span>(<span class="st">"Country Name"</span>, <span class="st">"Country Code"</span>, <span class="st">"2015"</span>)] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Đối với cột, còn có cách trích xuất thông dụng khác bằng cách sử dụng dấu <code>$</code>. Tuy nhiên, cách này sẽ chỉ trích xuất giá trị trong 1 cột.<br>
+VD: <code>df$col1</code> sẽ trả về các giá trị trong cột <code>col1</code> của bảng <code>df</code></p>
+</div>
+</div>
+</section>
+<section id="chuyển-đổi-datatype-cho-cột" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="chuyển-đổi-datatype-cho-cột"><span class="header-section-number">3.4.2</span> Chuyển đổi datatype cho cột</h3>
+<p>Mỗi cột trong data.frame sẽ chứa các giá trị có cùng datatype.</p>
+<p>Để thay đổi datatype của cột, ta có thể áp dụng các <a href="#update_datatype">function từ phần trước</a>.</p>
+<p>VD:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># đổi cột country code thành biến phân loại</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span><span class="st">`</span><span class="at">Country Code</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span><span class="st">`</span><span class="at">Country Code</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Lưu ý
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Dấu <code>&lt;-</code> được sử dụng ở VD trên để <strong>gán giá trị mới</strong> vào cột Country Code (tương đương việc UPDATE cột)</p></li>
+<li><p>Nếu không sử dụng <code>&lt;-</code> thì R chỉ trả về kết quả của function <code>as.factor</code> và bảng df sẽ <strong>không</strong> có thay đổi</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="lọc-dữ-liệu" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="lọc-dữ-liệu"><span class="header-section-number">3.4.3</span> Lọc dữ liệu</h3>
+<p>Function <code>filter()</code> được sử dụng cho việc lọc dữ liệu theo điều kiện<br>
+Một số ký tự thường được sử dụng cho filter bao gồm:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Ký tự</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x == y</code></td>
+<td>x bằng y</td>
+</tr>
+<tr class="even">
+<td><code>x != y</code></td>
+<td>x không bằng y</td>
+</tr>
+<tr class="odd">
+<td><code>y &lt; x</code></td>
+<td>x nhỏ hơn y</td>
+</tr>
+<tr class="even">
+<td><code>y &lt;= x</code></td>
+<td>x nhỏ hơn hoặc bằng y</td>
+</tr>
+<tr class="odd">
+<td><code>is.na(x)</code></td>
+<td>x trống</td>
+</tr>
+<tr class="even">
+<td><code>A &amp; B</code></td>
+<td>A và B</td>
+</tr>
+<tr class="odd">
+<td><code>A | B</code></td>
+<td>A hoặc B</td>
+</tr>
+<tr class="even">
+<td><code>!</code></td>
+<td>Không là (NOT)</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các hàng có country code là ABW</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">Country Code</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"ABW"</span>) </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các hàng có GDP năm 2015 hơn 2000</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">2000</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các hàng có country code là ABW hoặc GDP năm 2015 hơn 2000</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>((<span class="st">`</span><span class="at">Country Code</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"ABW"</span>) <span class="sc">|</span> (<span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">2000</span>))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các hàng có country code là ABW và GDP năm 2015 hơn 2000</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>((<span class="st">`</span><span class="at">Country Code</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"ABW"</span>) <span class="sc">&amp;</span> (<span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">2000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Dấu <code>%&gt;% (pipe)</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>%&gt;%</code> được dùng để chuyển đối tượng vào 1 function (trong VD trên, <code>%&gt;%</code> chuyển <code>df</code> vào function <code>filter</code>)</p>
+<p><code>%&gt;%</code> còn thường được dùng để chuyển các kết quả trung gian sang function tiếp theo, từ đó có thể dùng để nối 1 chuỗi các function để thao tác trên 1 đối tượng<br>
+<br>
+VD: lọc các hàng có GDP năm 2015 &gt; 2000 và sắp xếp các hàng theo GPD từ thấp đến cao</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="co"># chuyển df vào filter()</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> <span class="co"># chuyển kết quả của filter() vào arrange()</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="dữ-liệu-string" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="dữ-liệu-string"><span class="header-section-number">3.5</span> Dữ liệu string</h2>
+<p>Gói <code>stringr</code> (1 trong các package trong <code>tidyverse</code>) thường được sử dụng để xử lý các dữ liệu dạng string.</p>
+<p>Ngoài ra, R còn có package <code>stringi</code> dành cho các mục đích cụ thể khác (VD như xử lý dấu, cách mã hoá văn bản, … )</p>
+<table class="table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 18%">
+<col style="width: 51%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Function</strong></td>
+<td><strong>Package</strong></td>
+<td><strong>Công dụng</strong></td>
+</tr>
+<tr class="even">
+<td><code>tolower</code></td>
+<td>base</td>
+<td>biến thành chữ thường</td>
+</tr>
+<tr class="odd">
+<td><code>toupper</code></td>
+<td>base</td>
+<td>biến thành chữ hoa</td>
+</tr>
+<tr class="even">
+<td><code>str_to_title</code></td>
+<td>stringr</td>
+<td>in hoa chữ cái đầu tiên của từng từ</td>
+</tr>
+<tr class="odd">
+<td><code>stri_trans_general</code></td>
+<td>stringi</td>
+<td>loại bỏ dấu</td>
+</tr>
+</tbody>
+</table>
+<p>VD: chuyển Country code sang chữ in thường</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Country Code</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">tolower</span>(<span class="st">`</span><span class="at">Country Code</span><span class="st">`</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 266 × 10
+   `Country Name`       `Country Code` `2015` `2016` `2017` `2018` `2019` `2020`
+   &lt;chr&gt;                &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 Aruba                abw            28419. 28450. 29329. 30918. 31903. 24008.
+ 2 Africa Eastern and … afe             1554.  1444.  1625.  1558.  1508.  1356.
+ 3 Afghanistan          afg              567.   523.   526.   492.   498.   512.
+ 4 Africa Western and … afw             1882.  1649.  1590.  1735.  1812.  1688.
+ 5 Angola               ago             3217.  1810.  2439.  2541.  2191.  1451.
+ 6 Albania              alb             3953.  4124.  4531.  5288.  5396.  5343.
+ 7 Andorra              and            38886. 39931. 40632. 42905. 41329. 37207.
+ 8 Arab World           arb             6287.  6118.  6231.  6579.  6505.  5644.
+ 9 United Arab Emirates are            41525. 41055. 43064. 46722. 45376. 37629.
+10 Argentina            arg            13789. 12790. 14613. 11795.  9964.  8501.
+# ℹ 256 more rows
+# ℹ 2 more variables: `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Lệnh <code>mutate</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mutate</code> được sử dụng để chỉnh sửa giá trị của cột hoặc tạo cột mới</p>
+</div>
+</div>
+<section id="các-hàm-thông-dụng-của-stringr" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="các-hàm-thông-dụng-của-stringr"><span class="header-section-number">3.5.1</span> Các hàm thông dụng của stringr</h3>
+<table class="table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 68%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Function</strong></td>
+<td><strong>Công dụng</strong></td>
+</tr>
+<tr class="even">
+<td>str_starts</td>
+<td>lọc hàng bắt đầu bằng chuỗi ký tự khớp với pattern</td>
+</tr>
+<tr class="odd">
+<td>str_ends</td>
+<td>lọc hàng kết thúc bằng bằng chuỗi ký tự khớp với pattern</td>
+</tr>
+<tr class="even">
+<td>str_detect</td>
+<td>lọc hàng có chứa chuỗi ký tự khớp với pattern</td>
+</tr>
+<tr class="odd">
+<td>str_interp</td>
+<td>chèn giá trị vào string (string interpolation)</td>
+</tr>
+<tr class="even">
+<td>str_extract</td>
+<td>trích 1 chuỗi con (substring) đầu tiên khớp với pattern</td>
+</tr>
+<tr class="odd">
+<td>str_extract_all</td>
+<td>trích tất cả các chuỗi con (substring) khớp với pattern</td>
+</tr>
+<tr class="even">
+<td>str_remove</td>
+<td>xoá 1 chuỗi con (substring) đầu tiên khớp với pattern</td>
+</tr>
+<tr class="odd">
+<td>str_remove_all</td>
+<td>xoá tất cả các chuỗi con (substring) khớp với pattern</td>
+</tr>
+<tr class="even">
+<td>str_replace</td>
+<td>thay thế 1 chuỗi con (substring) đầu tiên khớp với pattern bằng 1 chuỗi mới&nbsp;</td>
+</tr>
+<tr class="odd">
+<td>str_replace_all</td>
+<td>thay thế tất cả chuỗi con (substring) khớp với pattern bằng 1 chuỗi mới&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="center-text">
+<p><a href="https://stringr.tidyverse.org/reference/index.html" class="btn btn-outline-secondary" role="button"><i class="fa-solid fa-link" aria-label="link"></i> stringr functions</a></p>
+</div>
+</section>
+<section id="regex" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="regex"><span class="header-section-number">3.5.2</span> Regex</h3>
+<p>Trong R, regex là 1 ngôn ngữ ngắn gọn để mô tả các patterns trong string</p>
+<p>Có bốn công cụ cơ bản mà người dùng có thể sử dụng để tạo một biểu thức chính quy cơ bản:</p>
+<ul>
+<li>Nhóm</li>
+</ul>
+<!-- -->
+<ul>
+<li><p>Bộ ký tự</p></li>
+<li><p>Siêu ký tự</p></li>
+<li><p>Bộ định lượng</p></li>
+</ul>
+<p><strong>Nhóm</strong> chỉ định các chuỗi cần khớp. Thường được viết trong<code>()</code> và phân cách bởi dấu <code>|</code> VD: <code>"(Quận|Huyện)"</code> - quy định cần khớp chữ <code>"Quận"</code> hay <code>"Huyện"</code>.</p>
+<p><strong>Bộ ký tự</strong> string được đánh giá khớp tìm thấy bất kỳ ký tự nào trong dấu ngoặc <code>[ ]</code> trong chuỗi. Vd, để tìm string chứa các nguyên âm, người ta có thể sử dụng bộ ký tự này: <code>"[aeiou]"</code>.</p>
+<p>Các bộ ký tự đặc biệt trong R</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Bộ ký tự</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"[A-Z]"</code></td>
+<td>bất kỳ chữ cái viết hoa đơn lẻ nào</td>
+</tr>
+<tr class="even">
+<td><code>"[a-z]"</code></td>
+<td>bất kỳ chữ cái viết thường đơn lẻ nào</td>
+</tr>
+<tr class="odd">
+<td><code>"[0-9]"</code></td>
+<td>bất kỳ số nào</td>
+</tr>
+<tr class="even">
+<td><code>"[:alnum:]"</code></td>
+<td>bất kỳ chữ cái và số nào</td>
+</tr>
+<tr class="odd">
+<td><code>"[:digit:]"</code></td>
+<td>bất kỳ chữ số nào</td>
+</tr>
+<tr class="even">
+<td><code>"[:alpha:]"</code></td>
+<td>bất kỳ ký tự nào (viết hoa hoặc viết thường)</td>
+</tr>
+<tr class="odd">
+<td><code>"[:upper:]"</code></td>
+<td>bất kỳ ký tự viết hoa nào</td>
+</tr>
+<tr class="even">
+<td><code>"[:lower:]"</code></td>
+<td>bất kỳ ký tự viết thường nào</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Siêu ký tự</strong> là phiên bản rút ngắn của 1 số bộ ký tự</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Siêu ký tự</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"\\s"</code></td>
+<td>khoảng trắng đơn</td>
+</tr>
+<tr class="even">
+<td><code>"\\w"</code></td>
+<td>tương đương “[:alnum:]”</td>
+</tr>
+<tr class="odd">
+<td><code>"\\d"</code></td>
+<td>tương đương “[:digit:]”</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dữ-liệu-ngày-tháng" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="dữ-liệu-ngày-tháng"><span class="header-section-number">3.6</span> Dữ liệu ngày tháng</h2>
+<p>Đối với dữ liệu dạng ngày tháng, package thông dụng nhất là <code>lubridate</code> (cũng là 1 phần của tidyverse).</p>
+<section id="các-lệnh-liên-quan-đến-ngày-tháng" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="các-lệnh-liên-quan-đến-ngày-tháng"><span class="header-section-number">3.6.1</span> Các lệnh liên quan đến ngày tháng</h3>
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 50%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Công dụng</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>difftime()</td>
+<td>tính khoảng cách giữa hai mốc thời gian</td>
+<td>base</td>
+</tr>
+<tr class="even">
+<td>month()/year()</td>
+<td>lấy tháng/ năm</td>
+<td>lubridate</td>
+</tr>
+<tr class="odd">
+<td>quarter()</td>
+<td>chuyển ngày sang quý</td>
+<td>lubridate</td>
+</tr>
+<tr class="even">
+<td>today()</td>
+<td>lấy ngày hiện tại</td>
+<td>lubridate</td>
+</tr>
+<tr class="odd">
+<td>dmy(), ymd(), mdy()</td>
+<td>chuyển string theo nhiều format khác nhau sang ngày</td>
+<td>lubridate</td>
+</tr>
+</tbody>
+</table>
+<div class="center-text">
+<p><a href="https://lubridate.tidyverse.org/reference/index.html" class="btn btn-outline-secondary" role="button"><i class="fa-solid fa-link" aria-label="link"></i> lubridate functions</a></p>
+</div>
+</section>
+</section>
+<section id="lưu-bảng-dữ-liệu-sau-khi-chỉnh-sửa" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="lưu-bảng-dữ-liệu-sau-khi-chỉnh-sửa"><span class="header-section-number">3.7</span> Lưu bảng dữ liệu sau khi chỉnh sửa</h2>
+<p>R cho phép lưu lại dữ liệu với nhiều format khác nhau, bao gồm:</p>
+<ul>
+<li><p>RData - định dạng dữ liệu của R để lưu trữ nhiều đối tượng</p></li>
+<li><p>RDS - định dạng dữ liệu của R để lưu trữ 1 đối tượng</p></li>
+<li><p>excel</p></li>
+</ul>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Lưu ý
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tốc độ đọc file RData và RDS của R nhanh hơn rất nhiều so với việc đọc file excel.<br>
+Vì vậy, đối với các dữ liệu có số lượng lớn hoặc cần xử lý thêm trong R, nên lưu trữ dưới dạng RDS/Rdata.</p>
+</div>
+</div>
+<p>VD lưu dữ liệu</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># định nghĩa đường dẫn đến folder chứa data</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">getwd</span>(), <span class="st">"data"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lưu dưới dạng Rdata</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(df, <span class="at">file =</span> <span class="fu">file.path</span>(data_path, <span class="st">"rda_data.Rda"</span>))</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># lưu dưới dạng RDS</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(df, <span class="at">file =</span> <span class="fu">file.path</span>(data_path, <span class="st">"rds_data.Rds"</span>))</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># lưu dưới dạng file excel</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(df, <span class="at">path =</span> <span class="fu">file.path</span>(data_path, <span class="st">"excel_data.xlsx"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Đọc dữ liệu được lưu</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># đọc file Rdata</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">file.path</span>(data_path, <span class="st">"rda_data.Rda"</span>))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># đọc file RDS</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(data_path, <span class="st">"rds_data.Rds"</span>))</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># đọc file excel</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(df, <span class="at">path =</span> <span class="fu">file.path</span>(data_path, <span class="st">"excel_data.xlsx"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="thinhong/r4babies" data-repo-id="R_kgDOLQlsRQ" data-category="General" data-category-id="DIC_kwDOLQlsRc4CdLwa" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./prepare.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Chuẩn bị</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./clean.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Làm sạch</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
