@@ -46,9 +46,11 @@ Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhi
 
 Để tuân theo quy tắc tidy data, ta cần format bảng dữ liệu sang `định dạng dọc (long)`
 
-Để format bảng dữ liệu trong R, ta có thể sử dụng các lệnh sau.\
-- `pivot_longer()` - chuyển dữ liệu từ dạng ngang sang dọc.\
-- `pivot_wider()` - chuyển dữ liệu từ dạng dọc sang ngang.\
+Để format bảng dữ liệu trong R, ta có thể sử dụng các lệnh sau.
+
+-    `pivot_longer()` - chuyển dữ liệu từ dạng ngang sang dọc.
+
+-    `pivot_wider()` - chuyển dữ liệu từ dạng dọc sang ngang.\
 
 ```{r}
 df <- df %>% 
@@ -64,11 +66,15 @@ df <- df %>%
 
 Trong R, tên cột là giá trị trên đỉnh của một cột.
 
-Các quy tắc cho tên cột thường bao gồm:\
-- Tên ngắn\
-- Không có khoảng trắng (thay thế bằng dấu gạch dưới \_ ).\
-- Không có ký tự đặc biệt (&, #, \<, \>, ...) hoặc dấu.\
-- Không bắt đầu bằng số.
+Các quy tắc cho tên cột thường bao gồm:
+
+-   Tên ngắn
+
+-   Không có khoảng trắng (thay thế bằng dấu gạch dưới \_ ).
+
+-   Không có ký tự đặc biệt (&, #, \<, \>, ...) hoặc dấu.
+
+-   Không bắt đầu bằng số.
 
 Lệnh `clean_names()` của package `janitor` được sử dụng để tự động hoá quá trình chuẩn hoá tên cột. Ngoài ra, lệnh `rename()` của package `dplyr` được sử dụng để thay đổi tên cột một cách thủ công.
 
@@ -179,5 +185,3 @@ df %>%
 Lệnh `distinct` của gói `dplyr` sẽ dữ lại 1 hàng duy nhất trong các hàng có giá trị bị trùng.
 
 Lệnh `distinct` mặc định sẽ kiểm tra giá trị của tất cả các cột (2 hàng được đánh giá là trùng khi tất cả các trị của chúng giống nhau).
-
-## Chọn câu lệnh mindmap

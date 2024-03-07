@@ -255,7 +255,6 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
   <li><a href="#kiểm-tra-giá-trị" id="toc-kiểm-tra-giá-trị" class="nav-link" data-scroll-target="#kiểm-tra-giá-trị"><span class="toc-section-number">4.3.1</span>  Kiểm tra giá trị</a></li>
   <li><a href="#xử-lý-dữ-liệu" id="toc-xử-lý-dữ-liệu" class="nav-link" data-scroll-target="#xử-lý-dữ-liệu"><span class="toc-section-number">4.3.2</span>  Xử lý dữ liệu</a></li>
   </ul></li>
-  <li><a href="#chọn-câu-lệnh-mindmap" id="toc-chọn-câu-lệnh-mindmap" class="nav-link" data-scroll-target="#chọn-câu-lệnh-mindmap"><span class="toc-section-number">4.4</span>  Chọn câu lệnh mindmap</a></li>
   </ul>
 </nav>
     </div>
@@ -363,10 +362,12 @@ Attaching package: 'janitor'</code></pre>
 <p>Bảng dữ liệu hiện tại chưa tuân theo quy tắc tidy data vì các cột 2015 - 2022 <strong>không phải là biến</strong> và <strong>mỗi hàng đang chứa nhiều quan sát</strong> (quan sát cho các năm từ 2015 - 2022).</p>
 <p>Hiện tại bảng dữ liệu đang ở <code>định dạng ngang (wide)</code>, khi nhiều quan sát của cùng chủ thể (trong VD này là các quốc gia) được lưu trữ trong một hàng duy nhất. Điều này có thể hữu ích cho việc hiển thị, tuy nhiên không lý tưởng cho việc phân tích.</p>
 <p>Để tuân theo quy tắc tidy data, ta cần format bảng dữ liệu sang <code>định dạng dọc (long)</code></p>
-<p>Để format bảng dữ liệu trong R, ta có thể sử dụng các lệnh sau.<br>
-- <code>pivot_longer()</code> - chuyển dữ liệu từ dạng ngang sang dọc.<br>
-- <code>pivot_wider()</code> - chuyển dữ liệu từ dạng dọc sang ngang.<br>
-</p>
+<p>Để format bảng dữ liệu trong R, ta có thể sử dụng các lệnh sau.</p>
+<ul>
+<li><p><code>pivot_longer()</code> - chuyển dữ liệu từ dạng ngang sang dọc.</p></li>
+<li><p><code>pivot_wider()</code> - chuyển dữ liệu từ dạng dọc sang ngang.<br>
+</p></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
@@ -380,11 +381,13 @@ Attaching package: 'janitor'</code></pre>
 <section id="tên-cột" class="level3" data-number="4.1.2">
 <h3 data-number="4.1.2" class="anchored" data-anchor-id="tên-cột"><span class="header-section-number">4.1.2</span> Tên cột</h3>
 <p>Trong R, tên cột là giá trị trên đỉnh của một cột.</p>
-<p>Các quy tắc cho tên cột thường bao gồm:<br>
-- Tên ngắn<br>
-- Không có khoảng trắng (thay thế bằng dấu gạch dưới _ ).<br>
-- Không có ký tự đặc biệt (&amp;, #, &lt;, &gt;, …) hoặc dấu.<br>
-- Không bắt đầu bằng số.</p>
+<p>Các quy tắc cho tên cột thường bao gồm:</p>
+<ul>
+<li><p>Tên ngắn</p></li>
+<li><p>Không có khoảng trắng (thay thế bằng dấu gạch dưới _ ).</p></li>
+<li><p>Không có ký tự đặc biệt (&amp;, #, &lt;, &gt;, …) hoặc dấu.</p></li>
+<li><p>Không bắt đầu bằng số.</p></li>
+</ul>
 <p>Lệnh <code>clean_names()</code> của package <code>janitor</code> được sử dụng để tự động hoá quá trình chuẩn hoá tên cột. Ngoài ra, lệnh <code>rename()</code> của package <code>dplyr</code> được sử dụng để thay đổi tên cột một cách thủ công.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chuẩn hoá tên cột tự động</span></span>
@@ -528,11 +531,6 @@ Attaching package: 'janitor'</code></pre>
 <h4 data-number="4.3.2.2" class="anchored" data-anchor-id="lọc-trùng"><span class="header-section-number">4.3.2.2</span> Lọc trùng</h4>
 <p>Lệnh <code>distinct</code> của gói <code>dplyr</code> sẽ dữ lại 1 hàng duy nhất trong các hàng có giá trị bị trùng.</p>
 <p>Lệnh <code>distinct</code> mặc định sẽ kiểm tra giá trị của tất cả các cột (2 hàng được đánh giá là trùng khi tất cả các trị của chúng giống nhau).</p>
-</section>
-</section>
-</section>
-<section id="chọn-câu-lệnh-mindmap" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="chọn-câu-lệnh-mindmap"><span class="header-section-number">4.4</span> Chọn câu lệnh mindmap</h2>
 
 
 <div id="refs" class="references csl-bib-body" data-line-spacing="2" role="doc-bibliography" style="display: none">
@@ -540,6 +538,8 @@ Attaching package: 'janitor'</code></pre>
 <div class="csl-left-margin">1. </div><div class="csl-right-inline">Wickham, H. <a href="https://doi.org/10.18637/jss.v059.i10">Tidy Data</a>. <em>Journal of Statistical Software</em> <strong>59</strong>, (2014).</div>
 </div>
 </div>
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
