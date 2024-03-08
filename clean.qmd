@@ -8,6 +8,8 @@ Mục tiêu
 1.  Hiểu khái niệm dữ liệu gọn gàng
 
 2.  Hiểu cách sử dụng các lệnh join
+
+3.  Học các cách xử lý dữ liệu lỗi
 :::
 
 ::: callout-note
@@ -48,9 +50,9 @@ Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhi
 
 Để format bảng dữ liệu trong R, ta có thể sử dụng các lệnh sau.
 
--    `pivot_longer()` - chuyển dữ liệu từ dạng ngang sang dọc.
+-   `pivot_longer()` - chuyển dữ liệu từ dạng ngang sang dọc.
 
--    `pivot_wider()` - chuyển dữ liệu từ dạng dọc sang ngang.\
+-   `pivot_wider()` - chuyển dữ liệu từ dạng dọc sang ngang.\
 
 ```{r}
 df <- df %>% 
@@ -90,7 +92,7 @@ Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác
 Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package `dplyr` sau đây
 
 | Function     | Công dụng          | GIF minh hoạ                                                                                        |
-|-----------------|-----------------|---------------------------------------|
+|--------------|--------------------|-----------------------------------------------------------------------------------------------------|
 | left_join()  | Nối ngoài bên trái | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join.gif?raw=true){width="283"}  |
 | right_join() | Nối ngoài bên phải | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/right-join.gif?raw=true){width="282"} |
 | inner_join() | Nối trong          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/inner-join.gif?raw=true){width="281"} |
@@ -115,7 +117,7 @@ left_join(df, mt, by = join_by(country_code == country_code))
 
 ## Xử lý các dữ liệu lỗi
 
-### Kiểm tra giá trị 
+### Kiểm tra giá trị
 
 Thường bao gồm các bước chính
 

@@ -1,0 +1,14 @@
+{
+  "hash": "1adcfae073f18cee2eb2ba06070eb8b6",
+  "result": {
+    "markdown": "# Phân tích\n\n::: callout-tip\nMục tiêu\n\n1.  Học các cách khái quát thống kê trong R\n:::\n\n::: callout-note\nCác package được sử dụng trong bài học\n\n-   tidyverse\n\n-   gtsummary\n:::\n\nLoad các package cần sử dụng\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n\n::: {.cell-output .cell-output-stderr}\n```\nWarning: package 'dplyr' was built under R version 4.3.1\n```\n:::\n\n::: {.cell-output .cell-output-stderr}\n```\nWarning: package 'stringr' was built under R version 4.3.1\n```\n:::\n\n::: {.cell-output .cell-output-stderr}\n```\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.0     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors\n```\n:::\n\n```{.r .cell-code}\nlibrary(gtsummary)\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n#BlackLivesMatter\n```\n:::\n:::\n\n\n## summarize\n\nHàm `summarize` của package `dplyr` được sử dụng chung với các hàm thống kê (aggregation function) để tạo bảng mô tả thống kê cho dữ liệu.\n\n\\\nMột số hàm thống kê thông dụng.\n\n| Hàm        | Công dụng        |\n|------------|------------------|\n| mean()     | tính trung bình  |\n| min()      | giá trị nhỏ nhất |\n| max()      | giá trị lớn nhất |\n| median()   | số trung vị      |\n| quantile() | điểm phân vị     |\n| sd()       | độ lệch chuẩn    |\n\nHàm `group_by` được sử dụng khi cần chia dữ liệu theo nhóm trước khi tính toán thống kê cho từng nhóm.\n\n## gtsummary\n\nPackage `gtsummary` có thể hỗ trợ người dùng vẽ các bảng thống kê một cách nhanh chóng\n\n\n::: {.cell}\n\n:::\n\n\n## Các phép kiểm thường dùng\n\n## So sánh\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

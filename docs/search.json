@@ -208,5 +208,54 @@
     "title": "4  Làm sạch",
     "section": "4.4 Chọn câu lệnh mindmap",
     "text": "4.4 Chọn câu lệnh mindmap\n\n\n\n\n1. Wickham, H. Tidy Data. Journal of Statistical Software 59, (2014)."
+  },
+  {
+    "objectID": "viz.html#ggplot",
+    "href": "viz.html#ggplot",
+    "title": "6  Trực quan hóa",
+    "section": "6.1 ggplot",
+    "text": "6.1 ggplot\n\n6.1.1 Giới thiệu ggplot\nVẽ đồ thị với ggplot2 dựa trên việc “thêm” các lớp đồ thị và các phần tử thiết kế chồng lên nhau, với mỗi lệnh được thêm vào các lệnh trước bằng một dấu cộng +\nThứ tự cơ bản để vẽ 1 đồ thị ggplot như sau:\n\nBắt đầu với lớp nền bằng lệnh ggplot() - lệnh này “mở” ggplot và cho phép các hàm tiếp theo được thêm vào với dấu +. Thông thường, đối tượng cần vẽ được chỉ định trong lệnh này\nThêm các lớp geom - mỗi lớp geom sẽ thêm 1 loại biểu đồ (VD: biểu đồ cột, biểu đồ đường, biểu đồ phân tán, histogram). Các hàm này đều bắt đầu bằng geom_\nThêm các yếu tố thiết kế vào đồ thị, chẳng hạn như nhãn trục, tiêu đề, phông chữ, kích thước, phối màu, chú giải hoặc xoay trục\n\n\n# vẽ đồ thị từ bảng dữ liệu my_data\nggplot(data = my_data)+                   \n  geom_point(                             # vẽ đồ thị phân tán\n    mapping = aes(x = col1, y = col2),    # dùng giá trị cột col1 làm trục x và col2 làm trục y\n    color = \"red\")+                       # tuỳ chọn khác\n  labs()+                                 # thêm tên bảng và tên các trục\n  theme()                                 # chỉnh thêm màu sắc, font, size\n\n\n\n\n\n\n\nChọn màu cho ggplot\n\n\n\nNgoài các màu cơ bản, ta có thể quy định màu trong R dưới dạng hex color\nVD\n\nggplot(data = my_data)+                   \n  geom_point(                             \n    mapping = aes(x = col1, y = col2),    \n    color = \"#03d3fc\")\n\nĐể có được hex color, ta có thể google “hex color”, chọn màu phù hợp và copy HEX\n\n\n\n\n\n6.1.2 Một số geom_ thông dụng\n\nHistograms - geom_histogram()\nBiểu đồ cột - geom_bar() hoặc geom_col()\nBox plots - geom_boxplot()\nĐiểm (vd: biểu đồ phân tán) - geom_point()\nBiểu đồ đường - geom_line() hoặc geom_path()\nĐường xu hướng - geom_smooth()\n\n\n\n\n\n\n\nNote\n\n\n\nArgument stat của hàm geom\n\n\"identity\" lấy dữ liệu thô\n\"count\" đếm số quan sát (số hàng) trong từng phân nhóm\n\"sum\" tính tổng của các hàng trong từng phân nhóm\n\n\n\n\n\n6.1.3 Facet\nFacets, hay “chia nhỏ biểu đồ”, được sử dụng để chia một biểu đồ thành nhiều phần nhỏ, với mỗi phần (“facet”) đại diện cho một nhóm của dữ liệu.\nTrong ggplot, có 2 loại facet chính\n\nfacet_wrap() hiện thị các biểu đồ khác nhau cho từng nhóm của một biến số. (VD: thể hiện các đường cong dịch bệnh khác nhau cho từng khu vực).\nfacet_grid() áp dụng khi muốn đưa một biến thứ hai vào sắp xếp các biểu đồ con. Ở đây mỗi ô thể hiện sự giao nhau của các giá trị giữa hai cột.\n\nVD:\n\n\n\n\n\n\n\nfacet_wrap\nfacet_grid\n\n\n\n\nbiểu đồ số ca bệnh sốt rét chia theo tỉnh (tên tỉnh ở phía trên mỗi biểu đồ)\nbiểu đồ số ca bệnh sốt rét chia theo tỉnh và nhóm tuổi"
+  },
+  {
+    "objectID": "viz.html#plotly",
+    "href": "viz.html#plotly",
+    "title": "6  Trực quan hóa",
+    "section": "6.2 Plotly",
+    "text": "6.2 Plotly\nPackage plotly cung cấp lệnh ggplotly giúp người dùng nhanh chóng biến biểu đồ của ggplot thành biểu đồ tương tác (interactive plot).\nVD\n\n# Vẽ biểu đồ bằng ggplot \nplot <- ggplot(data = my_data)+                   \n  geom_point(                             \n    mapping = aes(x = col1, y = col2),    \n    color = \"#03d3fc\")\n\n# Dùng lệnh ggplotly để biến thành biểu đồ tương tác\nggplotly(plot)\n\n\n\n\n\n\n\nImportant\n\n\n\nLưu ý\nKhi knit file .Rmd sang các định dạng file khác, tính tương tác của đồ thị chỉ còn khi người dùng knit thành file .html"
+  },
+  {
+    "objectID": "viz.html#vẽ-bản-đồ",
+    "href": "viz.html#vẽ-bản-đồ",
+    "title": "6  Trực quan hóa",
+    "section": "6.3 Vẽ bản đồ",
+    "text": "6.3 Vẽ bản đồ\n\n6.3.0.1 Dữ liệu bản đồ\nTrước tiên, ta cần dữ liệu để vẽ biểu đồ trong R. Trong khoá học này ta sẽ sử dụng dữ liệu được cấp bởi GADM.\n\nĐể download dữ liệu biểu đồ Việt Nam, thực hiện các bước sau:\n\nVào trang https://gadm.org/download_country.html\nChọn Vietnam trong danh sách Country\nBấm Geopackage\nFile được tải về có tên là gadm41_VNM.gpkg\n\n\n\n\n\n\n\nImportant\n\n\n\nLưu ý\n\nCác nguồn bản đồ mở thường sẽ không có các phần lãnh thổ tranh chấp (VD: Hoàng Sa, Trường Sa)\nCác thay đổi về bản đồ hành chính có thể không được cập nhật kịp thời (VD: các quận được sáp nhập thành TP. Thủ Đức)\n\n\n\nDữ liệu bản đồ tải về sẽ có 3 cấp bậc\n\nCấp tỉnh/ thành phố\nCấp quận/ huyện\nCấp phường/ xã\n\nĐể đọc dữ liệu bản đồ, dùng lệnh st_read của package sf\nĐể vẽ dữ liệu đọc được, dùng lệnh geom_sf của ggplot\n\n# Đọc dữ liệu bản đồ\nmap_path <- \"data\"\nvn_tinh <- st_read(dsn = file.path(map_path, \"gadm41_VNM.gpkg\"), layer = \"ADM_ADM_1\")\nvn_qh <- st_read(dsn = file.path(map_path, \"gadm41_VNM.gpkg\"), layer = \"ADM_ADM_2\")\nvn_px <- st_read(dsn = file.path(map_path, \"gadm41_VNM.gpkg\"), layer = \"ADM_ADM_3\")\n\n\n# Vẽ dữ liệu đọc được \nvn_tinh %>% \n  ggplot() +\n  ggplot2::geom_sf()\n\nvn_qh %>% \n  ggplot() +\n  geom_sf()\n\nvn_px %>% \n  ggplot() +\n  geom_sf()\n\n\n\n6.3.1 Leaflet\nGói leaflet được dùng để vẽ bản đồ tương tác.\nChúng ta sử dụng leaflet thay vì ggplot + plotly vì bản đồ vẽ bởi leaflet thường đẹp hơn\n\n\nlabels <- sprintf(\"<strong> %s </strong> \", vn_tinh$NAME_1) %>%\n  lapply(htmltools::HTML)\nleaflet(vn_tinh) %>%\n  #addTiles() %>%\n  addPolygons(color = \"grey\", weight = 1,label = labels)"
+  },
+  {
+    "objectID": "analysis.html#summarize",
+    "href": "analysis.html#summarize",
+    "title": "5  Phân tích",
+    "section": "5.1 summarize",
+    "text": "5.1 summarize\nHàm summarize của package dplyr được sử dụng chung với các hàm thống kê (aggregation function) để tạo bảng mô tả thống kê cho dữ liệu.\n\nMột số hàm thống kê thông dụng.\n\n\n\nHàm\nCông dụng\n\n\n\n\nmean()\ntính trung bình\n\n\nmin()\ngiá trị nhỏ nhất\n\n\nmax()\ngiá trị lớn nhất\n\n\nmedian()\nsố trung vị\n\n\nquantile()\nđiểm phân vị\n\n\nsd()\nđộ lệch chuẩn\n\n\n\nHàm group_by được sử dụng khi cần chia dữ liệu theo nhóm trước khi tính toán thống kê cho từng nhóm."
+  },
+  {
+    "objectID": "analysis.html#gtsummary",
+    "href": "analysis.html#gtsummary",
+    "title": "5  Phân tích",
+    "section": "5.2 gtsummary",
+    "text": "5.2 gtsummary\nPackage gtsummary có thể hỗ trợ người dùng vẽ các bảng thống kê một cách nhanh chóng"
+  },
+  {
+    "objectID": "analysis.html#các-phép-kiểm-thường-dùng",
+    "href": "analysis.html#các-phép-kiểm-thường-dùng",
+    "title": "5  Phân tích",
+    "section": "5.3 Các phép kiểm thường dùng",
+    "text": "5.3 Các phép kiểm thường dùng"
+  },
+  {
+    "objectID": "analysis.html#so-sánh",
+    "href": "analysis.html#so-sánh",
+    "title": "5  Phân tích",
+    "section": "5.4 So sánh",
+    "text": "5.4 So sánh"
   }
 ]
