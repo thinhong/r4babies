@@ -9,7 +9,7 @@ Khóa học được thiết kế để hướng dẫn đội ngũ nhân viên c
 
 ## Chương trình
 
-Khóa học kéo dài tổng cộng 7 buổi. Trong buổi đầu tiên, học viên đăng kí nhóm (3-4 người/nhóm, các thành viên trong nhóm phải ở cùng khoa). Sau mỗi buổi học lý thuyết - thực hành trên dữ liệu mẫu, bài tập về nhà là các nhóm tự thực hành sử dụng R để làm việc trên dữ liệu hiện có của khoa mình và soạn bài thuyết trình. Bài thuyết trình trong 20 phút cần có các nội dung sau:
+Khóa học kéo dài tổng cộng 8 ngày. Trong ngày đầu tiên, học viên đăng kí nhóm (3-4 người/nhóm, các thành viên trong nhóm phải ở cùng khoa). Sau mỗi buổi học lý thuyết - thực hành trên dữ liệu mẫu, bài tập về nhà là các nhóm tự thực hành sử dụng R để làm việc trên dữ liệu hiện có của khoa mình và soạn bài thuyết trình. Bài thuyết trình trong 20 phút cần có các nội dung sau:
 
 -   Giới thiệu sơ lược dữ liệu đang sử dụng
 -   Nhóm muốn làm gì trên dữ liệu của mình
@@ -18,43 +18,47 @@ Khóa học kéo dài tổng cộng 7 buổi. Trong buổi đầu tiên, học v
 
 Trong 1 tuần trước buổi học kế tiếp, các nhóm tự đăng kí hoặc giảng viên chọn ra 3 nhóm sẽ thuyết trình. Thời gian thuyết trình của mỗi nhóm là 30-40 phút, gồm 20 phút trình bày và 10-20 phút để các nhóm khác góp ý, đặt câu hỏi. Nhóm cũng có thể tự đặt câu hỏi của mình để mọi người cùng giải đáp.
 
-+---------------+--------------------------------+-----------------------------------------------------------------------+
-|               | Hoạt động                      | Nội dung                                                              |
-+===============+================================+=======================================================================+
-| Buổi 1        | Lý thuyết                      | Giới thiệu R                                                          |
-|               |                                |                                                                       |
-|               | Thực hành trên dữ liệu mẫu     | Các bước chuẩn bị cho phân tích dữ liệu                               |
-|               |                                |                                                                       |
-|               |                                | Chia nhóm thuyết trình                                                |
-+---------------+--------------------------------+-----------------------------------------------------------------------+
-| Buổi 2        | Lý thuyết                      | Làm sạch dữ liệu                                                      |
-|               |                                |                                                                       |
-|               | Thực hành trên dữ liệu mẫu     | Thực hành làm sạch dữ liệu                                            |
-+---------------+--------------------------------+-----------------------------------------------------------------------+
-| Buổi 3        | Ứng dụng trên dữ liệu của HCDC | Thuyết trình nhóm: làm sạch dữ liệu                                   |
-|               |                                |                                                                       |
-|               |                                | Giải đáp thắc mắc                                                     |
-+---------------+--------------------------------+-----------------------------------------------------------------------+
-| Buổi 4        | Lý thuyết                      | Phân tích dữ liệu                                                     |
-|               |                                |                                                                       |
-|               | Thực hành trên dữ liệu mẫu     | Thực hành phân tích dữ liệu                                           |
-+---------------+--------------------------------+-----------------------------------------------------------------------+
-| Buổi 5        | Ứng dụng trên dữ liệu của HCDC | Thuyết trình nhóm: phân tích dữ liệu                                  |
-|               |                                |                                                                       |
-|               |                                | Giải đáp thắc mắc                                                     |
-+---------------+--------------------------------+-----------------------------------------------------------------------+
-| Buổi 6        | Lý thuyết                      | Trực quan hóa dữ liệu                                                 |
-|               |                                |                                                                       |
-|               | Thực hành trên dữ liệu mẫu     | Làm file báo cáo bằng R Markdown                                      |
-|               |                                |                                                                       |
-|               |                                | Thực hành trực quan hóa dữ liệu                                       |
-+---------------+--------------------------------+-----------------------------------------------------------------------+
-| Buổi 7        | Ứng dụng trên dữ liệu của HCDC | Thuyết trình nhóm: viết và xuất file báo cáo tự động bằng R Markdown. |
-|               |                                |                                                                       |
-|               |                                | Giải đáp thắc mắc                                                     |
-|               |                                |                                                                       |
-|               |                                | Tổng kết                                                              |
-+---------------+--------------------------------+-----------------------------------------------------------------------+
++--------------+--------------------------------+-----------------------------------------------------------------------+--------------+
+|              | Hoạt động                      | Nội dung                                                              | Thuyết trình |
++==============+================================+=======================================================================+==============+
+| Ngày 1       | Lý thuyết                      | Bài 1. Giới thiệu R                                                   | OUCRU        |
+|              |                                |                                                                       |              |
+|              | Thực hành trên dữ liệu mẫu     | Bài 2. Các bước chuẩn bị cho phân tích dữ liệu                        |              |
+|              |                                |                                                                       |              |
+|              |                                | Chia nhóm thuyết trình                                                |              |
++--------------+--------------------------------+-----------------------------------------------------------------------+--------------+
+| Ngày 2       | Lý thuyết                      | Bài 3. Làm sạch dữ liệu 1                                             | OUCRU        |
+|              |                                |                                                                       |              |
+|              | Thực hành trên dữ liệu mẫu     | Thực hành làm sạch dữ liệu                                            |              |
++--------------+--------------------------------+-----------------------------------------------------------------------+--------------+
+| Ngày 3       | Lý thuyết                      | Bài 4. Làm sạch dữ liệu 2                                             | OUCRU        |
+|              |                                |                                                                       |              |
+|              | Thực hành trên dữ liệu mẫu     | Thực hành làm sạch dữ liệu                                            |              |
++--------------+--------------------------------+-----------------------------------------------------------------------+--------------+
+| Ngày 4       | Ứng dụng trên dữ liệu của HCDC | Thuyết trình nhóm: làm sạch dữ liệu                                   | HCDC         |
+|              |                                |                                                                       |              |
+|              |                                | Giải đáp thắc mắc                                                     |              |
++--------------+--------------------------------+-----------------------------------------------------------------------+--------------+
+| Ngày 5       | Lý thuyết                      | Bài 5. Phân tích dữ liệu                                              | OUCRU        |
+|              |                                |                                                                       |              |
+|              | Thực hành trên dữ liệu mẫu     | Thực hành phân tích dữ liệu                                           |              |
++--------------+--------------------------------+-----------------------------------------------------------------------+--------------+
+| Ngày 6       | Ứng dụng trên dữ liệu của HCDC | Thuyết trình nhóm: phân tích dữ liệu                                  | HCDC         |
+|              |                                |                                                                       |              |
+|              |                                | Giải đáp thắc mắc                                                     |              |
++--------------+--------------------------------+-----------------------------------------------------------------------+--------------+
+| Ngày 7       | Lý thuyết                      | Bài 6. Trực quan hóa dữ liệu                                          | OUCRU        |
+|              |                                |                                                                       |              |
+|              | Thực hành trên dữ liệu mẫu     | Bài 7. Thực hành trực quan hóa dữ liệu                                |              |
+|              |                                |                                                                       |              |
+|              |                                | Bài 8. Làm file báo cáo bằng R Markdown                               |              |
++--------------+--------------------------------+-----------------------------------------------------------------------+--------------+
+| Ngày 8       | Ứng dụng trên dữ liệu của HCDC | Thuyết trình nhóm: viết và xuất file báo cáo tự động bằng R Markdown. | HCDC         |
+|              |                                |                                                                       |              |
+|              |                                | Giải đáp thắc mắc                                                     |              |
+|              |                                |                                                                       |              |
+|              |                                | Tổng kết                                                              |              |
++--------------+--------------------------------+-----------------------------------------------------------------------+--------------+
 
 ## Lời cảm ơn
 
