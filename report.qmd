@@ -1,8 +1,112 @@
 # Làm báo cáo bằng R Markdown
 
 ::: callout-tip
-Mục tiêu
+### Mục tiêu
 
 1.  Học cách viết file .Rmd
 2.  Học cách knit file .Rmd
 :::
+
+## Giới thiệu file Rmd
+
+### File .R vs .Rmd (R markdown)
+
+-   File `.R`: chỉ chứa các lệnh R
+
+-   File `.Rmd`: thường được dùng cho báo cáo vì có thể kết hợp các lệnh R, văn bản thường, đồ thị trong 1 file 
+
+### Cấu trúc file Rmd
+
+Gồm 3 phần chính:
+
+-   phần YAML header: nằm ở trên cùng trong và ngăn cách với phần còn lại bằng cặp dấu `---`. Phần này để mô tả tiêu đề tài liệu, tác giả, ngày tháng, định dạng mong muốn
+-   Phần văn bản (được viết bằng ngôn ngữ **markdown**)
+-   Phần lệnh R (được gọi là **chunk**). Phần kết quả của câu lệnh R có thể hiển thị dưới dạng string, bảng dữ liệu hoặc đồ thị.
+
+![](img/report/rmd_components.png)
+
+### Markdown
+
+Người dùng có thể điều chỉnh format (VD: heading, in đậm, in nghiêng) của văn bản trong Markdown bằng cách sử dụng các cú pháp nhất định.
+
+Một số cú pháp thông dụng:
+
+-   `#` Tiêu đề (Heading) - số dấu `#` tượng trưng cho cấp độ tiêu đề.
+
+    VD:
+
+    +-------------------------+--------------------------------+
+    | Markdown                | Output                         |
+    +=========================+================================+
+    | `# This is Heading 1`   | ```{=html}                     |
+    |                         | <h1>This is Heading 1</h1>     |
+    |                         | ```                            |
+    +-------------------------+--------------------------------+
+    | `## This is Heading 2`  | ```{=html}                     |
+    |                         | <h2>This is Heading 2</h2>     |
+    |                         | ```                            |
+    +-------------------------+--------------------------------+
+    | `### This is Heading 3` | ```{=html}                     |
+    |                         | <h3>This is Heading 3</h3>     |
+    |                         | ```                            |
+    +-------------------------+--------------------------------+
+
+-   `*` Đặt trước và sau cụm từ. Tuỳ vào số dấu `*`, văn bản sẽ được in đậm, in nghiêng hoặc cả 2
+
+    | Markdown                | Output                |
+    |-------------------------|-----------------------|
+    | `*Italic*`              | *Italic*              |
+    | `**Bold**`              | **Bold**              |
+    | `***Bold and Italic***` | ***Bold and Italic*** |
+
+[Tổng hợp các cú pháp markdown](https://quantrimang.com/cong-nghe/cu-phap-markdown-can-ban-163963)
+
+::: callout-note
+### Rmd outline
+
+Ta có thể xem cấu trúc của 1 file `Rmd` theo 2 cách
+
+-   Bấm `Outline` để hiện danh sách Header (theo format markdown).
+
+-   Xem mục lục các Header và Chunk ở thanh ngang gần console.
+
+    +-----------------------------------------------------------+----------------------------------------------+
+    | Cách 1                                                    | Cách 2                                       |
+    +===========================================================+==============================================+
+    | ![](img/report/outline.png){fig-align="left" width="220"} | ![](img/report/outline_alt.png){width="317"} |
+    +-----------------------------------------------------------+----------------------------------------------+
+:::
+
+### Chunk
+
+Trong Rmd, chunk có format là 
+
+\`\`\`{r tên chunk}
+
+các dòng lệnh R
+
+\`\`\`
+
+Để tạo 1 chunk mới, người dùng đặt con trỏ ở vị trí muốn tạo chunk mới → bấm **nút tạo chunk (1)** → chọn **R (2)**
+
+![](img/report/create_chunk.png)
+
+Để chạy chunk, người dùng có thể chọn **chạy từng dòng** hoặc **chạy cả chunk**
+
+-   Chạy từng dòng: để con trỏ tại hàng cần chạy → **Run** → **Run Selected Line(s)** (Shortcut: `Ctrl`+`Enter`)
+
+-   Chạy cả chunk: 
+
+    -   Để con trỏ tại chunk cần chạy → **Run** → **Run Current Chunk**
+
+    -   Hoặc trực tiếp bấm nút **Run** ở chunk
+
+        ![](img/report/run_chunk.png)
+
+        ![](img/report/other_run_chunk.png)
+
+## Xuất file .Rmd sang định dạng khác
+
+Bấm mũi tên bên cạnh chữ `Knit` → chọn định dạng file xuất (HTML/Word/PDF)
+
+![](img/report/knit_rmd.png){width="1357"}

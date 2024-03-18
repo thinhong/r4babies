@@ -53,7 +53,7 @@
     "href": "intro.html#sec-install",
     "title": "1  Giới thiệu",
     "section": "1.3 R và RStudio",
-    "text": "1.3 R và RStudio\nR là ngôn ngữ lập trình. Sau khi cài R, chúng ta mở lên sẽ thấy giao diện giống như một khung chat trống. Khung chat này là nơi chúng ta viết code để giao tiếp với máy tính.\n\nRStudio là một môi trường phát triển tích hợp (integrated development environment hay IDE) hay nói đơn giản là một phần mềm để viết code R hiệu quả hơn.\n\nVì vậy, chúng ta cần cài đặt riêng R (ngôn ngữ lập trình) và RStudio (IDE).\n\n1.3.1 Cài đặt R\nTruy cập https://cran.r-project.org/ và tải R cho hệ điều hành của mình.\n\n\n\n1.3.2 Cài đặt RStudio\nTruy cập https://posit.co/download/rstudio-desktop/ và tải RStudio cho hệ điều hành của mình."
+    "text": "1.3 R và RStudio\nR là ngôn ngữ lập trình. Sau khi cài R, chúng ta mở lên sẽ thấy giao diện giống như một khung chat trống. Khung chat này là nơi chúng ta viết code để giao tiếp với máy tính.\n\nRStudio là một môi trường phát triển tích hợp (integrated development environment hay IDE) hay nói đơn giản là một phần mềm để viết code R hiệu quả hơn.\nVì vậy, chúng ta cần cài đặt riêng R (ngôn ngữ lập trình) và RStudio (IDE).\n\n1.3.1 Cài đặt R\nTruy cập https://cran.r-project.org/ và tải R cho hệ điều hành của mình.\n\n\n\n1.3.2 Cài đặt RStudio\nTruy cập https://posit.co/download/rstudio-desktop/ và tải RStudio cho hệ điều hành của mình."
   },
   {
     "objectID": "intro.html#sec-r-pkgs",
@@ -257,5 +257,19 @@
     "title": "5  Phân tích",
     "section": "5.4 So sánh",
     "text": "5.4 So sánh"
+  },
+  {
+    "objectID": "report.html#giới-thiệu-file-rmd",
+    "href": "report.html#giới-thiệu-file-rmd",
+    "title": "8  Làm báo cáo bằng R Markdown",
+    "section": "8.1 Giới thiệu file Rmd",
+    "text": "8.1 Giới thiệu file Rmd\n\n8.1.1 File .R vs .Rmd (R markdown)\n\nFile .R: chỉ chứa các lệnh R\nFile .Rmd: thường được dùng cho báo cáo vì có thể kết hợp các lệnh R, văn bản thường, đồ thị trong 1 file \n\n\n\n8.1.2 Cấu trúc file Rmd\nGồm 3 phần chính:\n\nphần YAML header: nằm ở trên cùng trong và ngăn cách với phần còn lại bằng cặp dấu ---. Phần này để mô tả tiêu đề tài liệu, tác giả, ngày tháng, định dạng mong muốn\nPhần văn bản (được viết bằng ngôn ngữ markdown)\nPhần lệnh R (được gọi là chunk). Phần kết quả của câu lệnh R có thể hiển thị dưới dạng string, bảng dữ liệu hoặc đồ thị.\n\n\n\n\n8.1.3 Markdown\nNgười dùng có thể điều chỉnh format (VD: heading, in đậm, in nghiêng) của văn bản trong Markdown bằng cách sử dụng các cú pháp nhất định.\nMột số cú pháp thông dụng:\n\n# Tiêu đề (Heading) - số dấu # tượng trưng cho cấp độ tiêu đề.\nVD:\n\n\n\n\n\n\n\nMarkdown\nOutput\n\n\n\n\n# This is Heading 1\nThis is Heading 1\n\n\n## This is Heading 2\nThis is Heading 2\n\n\n### This is Heading 3\nThis is Heading 3\n\n\n\n* Đặt trước và sau cụm từ. Tuỳ vào số dấu *, văn bản sẽ được in đậm, in nghiêng hoặc cả 2\n\n\n\nMarkdown\nOutput\n\n\n\n\n*Italic*\nItalic\n\n\n**Bold**\nBold\n\n\n***Bold and Italic***\nBold and Italic\n\n\n\n\nTổng hợp các cú pháp markdown\n\n\n\n\n\n\nRmd outline\n\n\n\nTa có thể xem cấu trúc của 1 file Rmd theo 2 cách\n\nBấm Outline để hiện danh sách Header (theo format markdown).\nXem mục lục các Header và Chunk ở thanh ngang gần console.\n\n\n\n\n\n\n\nCách 1\nCách 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n8.1.4 Chunk\nTrong Rmd, chunk có format là \n```{r tên chunk}\ncác dòng lệnh R\n```\nĐể tạo 1 chunk mới, người dùng đặt con trỏ ở vị trí muốn tạo chunk mới → bấm nút tạo chunk (1) → chọn R (2)\n\nĐể chạy chunk, người dùng có thể chọn chạy từng dòng hoặc chạy cả chunk\n\nChạy từng dòng: để con trỏ tại hàng cần chạy → Run → Run Selected Line(s) (Shortcut: Ctrl+Enter)\nChạy cả chunk: \n\nĐể con trỏ tại chunk cần chạy → Run → Run Current Chunk\nHoặc trực tiếp bấm nút Run ở chunk"
+  },
+  {
+    "objectID": "report.html#xuất-file-.rmd-sang-định-dạng-khác",
+    "href": "report.html#xuất-file-.rmd-sang-định-dạng-khác",
+    "title": "8  Làm báo cáo bằng R Markdown",
+    "section": "8.2 Xuất file .Rmd sang định dạng khác",
+    "text": "8.2 Xuất file .Rmd sang định dạng khác\nBấm mũi tên bên cạnh chữ Knit → chọn định dạng file xuất (HTML/Word/PDF)"
   }
 ]

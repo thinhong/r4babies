@@ -158,7 +158,20 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#giới-thiệu-file-rmd" id="toc-giới-thiệu-file-rmd" class="nav-link active" data-scroll-target="#giới-thiệu-file-rmd"><span class="toc-section-number">8.1</span>  Giới thiệu file Rmd</a>
+  <ul class="collapse">
+  <li><a href="#file-.r-vs-.rmd-r-markdown" id="toc-file-.r-vs-.rmd-r-markdown" class="nav-link" data-scroll-target="#file-.r-vs-.rmd-r-markdown"><span class="toc-section-number">8.1.1</span>  File .R vs .Rmd (R markdown)</a></li>
+  <li><a href="#cấu-trúc-file-rmd" id="toc-cấu-trúc-file-rmd" class="nav-link" data-scroll-target="#cấu-trúc-file-rmd"><span class="toc-section-number">8.1.2</span>  Cấu trúc file Rmd</a></li>
+  <li><a href="#markdown" id="toc-markdown" class="nav-link" data-scroll-target="#markdown"><span class="toc-section-number">8.1.3</span>  Markdown</a></li>
+  <li><a href="#chunk" id="toc-chunk" class="nav-link" data-scroll-target="#chunk"><span class="toc-section-number">8.1.4</span>  Chunk</a></li>
+  </ul></li>
+  <li><a href="#xuất-file-.rmd-sang-định-dạng-khác" id="toc-xuất-file-.rmd-sang-định-dạng-khác" class="nav-link" data-scroll-target="#xuất-file-.rmd-sang-định-dạng-khác"><span class="toc-section-number">8.2</span>  Xuất file .Rmd sang định dạng khác</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -180,8 +193,163 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 
 </header>
 
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Mục tiêu
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Học cách viết file .Rmd</li>
+<li>Học cách knit file .Rmd</li>
+</ol>
+</div>
+</div>
+<section id="giới-thiệu-file-rmd" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="giới-thiệu-file-rmd"><span class="header-section-number">8.1</span> Giới thiệu file Rmd</h2>
+<section id="file-.r-vs-.rmd-r-markdown" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="file-.r-vs-.rmd-r-markdown"><span class="header-section-number">8.1.1</span> File .R vs .Rmd (R markdown)</h3>
+<ul>
+<li><p>File <code>.R</code>: chỉ chứa các lệnh R</p></li>
+<li><p>File <code>.Rmd</code>: thường được dùng cho báo cáo vì có thể kết hợp các lệnh R, văn bản thường, đồ thị trong 1 file&nbsp;</p></li>
+</ul>
+</section>
+<section id="cấu-trúc-file-rmd" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="cấu-trúc-file-rmd"><span class="header-section-number">8.1.2</span> Cấu trúc file Rmd</h3>
+<p>Gồm 3 phần chính:</p>
+<ul>
+<li>phần YAML header: nằm ở trên cùng trong và ngăn cách với phần còn lại bằng cặp dấu <code>---</code>. Phần này để mô tả tiêu đề tài liệu, tác giả, ngày tháng, định dạng mong muốn</li>
+<li>Phần văn bản (được viết bằng ngôn ngữ <strong>markdown</strong>)</li>
+<li>Phần lệnh R (được gọi là <strong>chunk</strong>). Phần kết quả của câu lệnh R có thể hiển thị dưới dạng string, bảng dữ liệu hoặc đồ thị.</li>
+</ul>
+<p><img src="img/report/rmd_components.png" class="img-fluid"></p>
+</section>
+<section id="markdown" class="level3" data-number="8.1.3">
+<h3 data-number="8.1.3" class="anchored"><span class="header-section-number">8.1.3</span> Markdown</h3>
+<p>Người dùng có thể điều chỉnh format (VD: heading, in đậm, in nghiêng) của văn bản trong Markdown bằng cách sử dụng các cú pháp nhất định.</p>
+<p>Một số cú pháp thông dụng:</p>
+<ul>
+<li><p><code>#</code> Tiêu đề (Heading) - số dấu <code>#</code> tượng trưng cho cấp độ tiêu đề.</p>
+<p>VD:</p>
+<table class="table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Markdown</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code># This is Heading 1</code></td>
+<td><h1>This is Heading 1</h1></td>
+</tr>
+<tr class="even">
+<td><code>## This is Heading 2</code></td>
+<td><h2 class="anchored" data-anchor-id="markdown">This is Heading 2</h2></td>
+</tr>
+<tr class="odd">
+<td><code>### This is Heading 3</code></td>
+<td><h3 class="anchored">This is Heading 3</h3></td>
+</tr>
+</tbody>
+</table></li>
+<li><p><code>*</code> Đặt trước và sau cụm từ. Tuỳ vào số dấu <code>*</code>, văn bản sẽ được in đậm, in nghiêng hoặc cả 2</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Markdown</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>*Italic*</code></td>
+<td><em>Italic</em></td>
+</tr>
+<tr class="even">
+<td><code>**Bold**</code></td>
+<td><strong>Bold</strong></td>
+</tr>
+<tr class="odd">
+<td><code>***Bold and Italic***</code></td>
+<td><strong><em>Bold and Italic</em></strong></td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<p><a href="https://quantrimang.com/cong-nghe/cu-phap-markdown-can-ban-163963">Tổng hợp các cú pháp markdown</a></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Rmd outline
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ta có thể xem cấu trúc của 1 file <code>Rmd</code> theo 2 cách</p>
+<ul>
+<li><p>Bấm <code>Outline</code> để hiện danh sách Header (theo format markdown).</p></li>
+<li><p>Xem mục lục các Header và Chunk ở thanh ngang gần console.</p>
+<table class="table">
+<colgroup>
+<col style="width: 56%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cách 1</th>
+<th>Cách 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="img/report/outline.png" class="img-fluid" data-fig-align="left" width="220"></td>
+<td><img src="img/report/outline_alt.png" class="img-fluid" width="317"></td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="chunk" class="level3" data-number="8.1.4">
+<h3 data-number="8.1.4" class="anchored" data-anchor-id="chunk"><span class="header-section-number">8.1.4</span> Chunk</h3>
+<p>Trong Rmd, chunk có format là&nbsp;</p>
+<p>```{r tên chunk}</p>
+<p>các dòng lệnh R</p>
+<p>```</p>
+<p>Để tạo 1 chunk mới, người dùng đặt con trỏ ở vị trí muốn tạo chunk mới → bấm <strong>nút tạo chunk (1)</strong> → chọn&nbsp;<strong>R (2)</strong></p>
+<p><img src="img/report/create_chunk.png" class="img-fluid"></p>
+<p>Để chạy chunk, người dùng có thể chọn <strong>chạy từng dòng</strong> hoặc <strong>chạy cả chunk</strong></p>
+<ul>
+<li><p>Chạy từng dòng: để con trỏ tại hàng cần chạy → <strong>Run</strong> → <strong>Run Selected Line(s)</strong> (Shortcut: <code>Ctrl</code>+<code>Enter</code>)</p></li>
+<li><p>Chạy cả chunk:&nbsp;</p>
+<ul>
+<li><p>Để con trỏ tại chunk cần chạy → <strong>Run</strong> → <strong>Run Current Chunk</strong></p></li>
+<li><p>Hoặc trực tiếp bấm nút <strong>Run</strong> ở chunk</p>
+<p><img src="img/report/run_chunk.png" class="img-fluid"></p>
+<p><img src="img/report/other_run_chunk.png" class="img-fluid"></p></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="xuất-file-.rmd-sang-định-dạng-khác" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="xuất-file-.rmd-sang-định-dạng-khác"><span class="header-section-number">8.2</span> Xuất file .Rmd sang định dạng khác</h2>
+<p>Bấm mũi tên bên cạnh chữ <code>Knit</code> → chọn định dạng file xuất (HTML/Word/PDF)</p>
+<p><img src="img/report/knit_rmd.png" class="img-fluid" width="1357"></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

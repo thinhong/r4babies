@@ -104,9 +104,7 @@ R là ngôn ngữ lập trình. Sau khi cài R, chúng ta mở lên sẽ thấy 
 
 RStudio là một môi trường phát triển tích hợp (integrated development environment hay IDE) hay nói đơn giản là một phần mềm để viết code R hiệu quả hơn.
 
-![](img/intro/rstudio.png)
-
-Vì vậy, chúng ta cần cài đặt riêng R (ngôn ngữ lập trình) và RStudio (IDE).
+![](img/intro/rstudio_components.png)Vì vậy, chúng ta cần cài đặt riêng R (ngôn ngữ lập trình) và RStudio (IDE).
 
 ### Cài đặt R
 
