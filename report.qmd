@@ -1,1 +1,8 @@
 # Làm báo cáo bằng R Markdown
+
+::: callout-tip
+Mục tiêu
+
+1.  Học cách viết file .Rmd
+2.  Học cách knit file .Rmd
+:::

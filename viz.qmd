@@ -1,7 +1,7 @@
 # Trực quan hóa
 
 ::: callout-note
-Các package được sử dụng trong bài học
+# Các package được sử dụng trong bài học
 
 -   tidyverse
 
@@ -84,7 +84,7 @@ ggplot(data = my_data)+
 -   Đường xu hướng - `geom_smooth()`
 
 ::: callout-note
-Argument `stat` của hàm `geom`
+#### Argument `stat` của hàm `geom`
 
 -   `"identity"` lấy dữ liệu thô
 
@@ -128,7 +128,7 @@ ggplotly(plot)
 ```
 
 ::: callout-important
-Lưu ý
+#### Lưu ý
 
 Khi knit file `.Rmd` sang các định dạng file khác, tính tương tác của đồ thị **chỉ còn** **khi người dùng knit thành file `.html`**
 :::
@@ -150,7 +150,7 @@ Trước tiên, ta cần dữ liệu để vẽ biểu đồ trong R. Trong kho�
 -   File được tải về có tên là `gadm41_VNM.gpkg`
 
 ::: callout-important
-Lưu ý
+#### Lưu ý
 
 -   Các nguồn bản đồ mở thường sẽ không có các phần lãnh thổ tranh chấp (VD: Hoàng Sa, Trường Sa)
 

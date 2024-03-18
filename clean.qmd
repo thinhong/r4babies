@@ -3,7 +3,7 @@
 Bước đầu tiên sau khi đọc được dữ liệu vào R là "làm sạch" dữ liệu (clean data). Chúng ta chỉ tiến hành phân tích khi chắc chắn dữ liệu đã "sạch" và chính xác.
 
 ::: callout-tip
-Mục tiêu
+# Mục tiêu
 
 1.  Hiểu khái niệm dữ liệu gọn gàng
 
@@ -141,7 +141,9 @@ Một số trường hợp có thể xảy ra lỗi bao gồm:
 
 Trong R có lệnh `summary` để người dùng có thể nhanh chóng kiểm tra các khoảng giá trị và số dữ liệu NA trong từng cột.
 
-Ngoài ra, tuỳ vào bộ dữ liệu, có thể cần kiểm tra giá trị giữa các cột (VD: trong dữ liệu tiêm chủng có thể có mũi 2 trùng hoặc trước ngày tiêm mũi 1)\
+Ngoài ra, tuỳ vào bộ dữ liệu, có thể cần kiểm tra giá trị giữa các cột (VD: trong dữ liệu tiêm chủng có thể có mũi 2 trùng hoặc trước ngày tiêm mũi 1)
+
+------------------------------------------------------------------------
 
 ### Xử lý dữ liệu
 

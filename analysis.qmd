@@ -1,13 +1,13 @@
 # Phân tích
 
 ::: callout-tip
-Mục tiêu
+# Mục tiêu
 
 1.  Học các cách khái quát thống kê trong R
 :::
 
 ::: callout-note
-Các package được sử dụng trong bài học
+# Các package được sử dụng trong bài học
 
 -   tidyverse
 
