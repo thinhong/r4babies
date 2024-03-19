@@ -2,36 +2,190 @@
 
 Bước đầu tiên sau khi đọc được dữ liệu vào R là "làm sạch" dữ liệu (clean data). Chúng ta chỉ tiến hành phân tích khi chắc chắn dữ liệu đã "sạch" và chính xác.
 
+::: callout-tip
+# Mục tiêu
+
+1.  Hiểu khái niệm dữ liệu gọn gàng
+
+2.  Hiểu cách sử dụng các lệnh join
+
+3.  Học các cách xử lý dữ liệu lỗi
+:::
+
+::: callout-note
+# Các package được sử dụng trong bài học {.callout-note}
+
+-   readxl
+
+-   janitor
+
+-   tidyverse
+:::
+
 ## Data gọn gàng (tidy data)
 
 Dữ liệu gọn gàng có các đặc điểm sau:[@wickham2014]
 
-- Mỗi biến là một cột; mỗi cột là một biến
-- Mỗi quan sát là một hàng; mỗi hàng là một quan sát
-- Mỗi giá trị nằm trong một ô; mỗi ô chứa một giá trị duy nhất
+-   Mỗi biến là một cột; mỗi cột là một biến
+-   Mỗi quan sát là một hàng; mỗi hàng là một quan sát
+-   Mỗi giá trị nằm trong một ô; mỗi ô chứa một giá trị duy nhất
 
 Chúng ta sẽ dùng data `gdp-capita.xlsx`
 
 ```{r}
 library(readxl)
 library(janitor)
+library(tidyverse)
+
 df <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1)
 ```
 
-## Tên cột
+### Format bảng
+
+Bảng dữ liệu hiện tại chưa tuân theo quy tắc tidy data vì các cột 2015 - 2022 **không phải là biến** và **mỗi hàng đang chứa nhiều quan sát** (quan sát cho các năm từ 2015 - 2022).
+
+Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhiều quan sát của cùng chủ thể (trong VD này là các quốc gia) được lưu trữ trong một hàng duy nhất. Điều này có thể hữu ích cho việc hiển thị, tuy nhiên không lý tưởng cho việc phân tích.
+
+Để tuân theo quy tắc tidy data, ta cần format bảng dữ liệu sang `định dạng dọc (long)`
+
+Để format bảng dữ liệu trong R, ta có thể sử dụng các lệnh sau.
+
+-   `pivot_longer()` - chuyển dữ liệu từ dạng ngang sang dọc.
+
+-   `pivot_wider()` - chuyển dữ liệu từ dạng dọc sang ngang.\
+
+```{r}
+df <- df %>% 
+  pivot_longer(
+    cols = starts_with("2"),
+    # đặt tên mới cho biến
+    names_to = "year",
+    # đặt tên mới cho cột giá trị tương ứng
+    values_to = "gdp")
+```
+
+### Tên cột
 
 Trong R, tên cột là giá trị trên đỉnh của một cột.
 
+Các quy tắc cho tên cột thường bao gồm:
+
+-   Tên ngắn
+
+-   Không có khoảng trắng (thay thế bằng dấu gạch dưới \_ ).
+
+-   Không có ký tự đặc biệt (&, #, \<, \>, ...) hoặc dấu.
+
+-   Không bắt đầu bằng số.
+
+Lệnh `clean_names()` của package `janitor` được sử dụng để tự động hoá quá trình chuẩn hoá tên cột. Ngoài ra, lệnh `rename()` của package `dplyr` được sử dụng để thay đổi tên cột một cách thủ công.
+
 ```{r}
+# chuẩn hoá tên cột tự động
 df <- clean_names(df)
 ```
 
 ## Kết hợp dữ liệu
 
-Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác nhau và để phân tích thì chúng ta phải kết hợp các bảng lại. Ví dụ 
+Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác nhau và để phân tích thì chúng ta phải kết hợp các bảng lại.
+
+Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package `dplyr` sau đây
+
+| Function     | Công dụng          | GIF minh hoạ                                                                                        |
+|--------------|--------------------|-----------------------------------------------------------------------------------------------------|
+| left_join()  | Nối ngoài bên trái | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join.gif?raw=true){width="283"}  |
+| right_join() | Nối ngoài bên phải | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/right-join.gif?raw=true){width="282"} |
+| inner_join() | Nối trong          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/inner-join.gif?raw=true){width="281"} |
+| full_join()  | Nối ngoài          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/full-join.gif?raw=true){width="281"}  |
+
+Để sử dụng lệnh join, ta cần cung cấp cho R các thông tin sau:
+
+-   2 bảng cần nối
+
+-   các cột chung để nối bằng lệnh `join_by` (R mặc định nối 2 bảng bằng cột có tên giống nhau)
+
+[Tổng hợp các lệnh join cùng GIF minh hoạ](https://github.com/gadenbuie/tidyexplain/tree/main)
 
 ```{r}
-mt <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1)
+mt <- read_excel(path = "data/gdp-capita.xlsx", sheet = 2) %>% 
+  clean_names()
+
+# --- Nối 2 bảng bằng lệnh left_join
+# Trong trường hợp này, tuy lệnh join_by không cần thiết nhưng có thể giúp cho code rõ ràng hơn 
+left_join(df, mt, by = join_by(country_code == country_code))
 ```
 
-## Dữ liệu ngày tháng
+## Xử lý các dữ liệu lỗi
+
+### Kiểm tra giá trị
+
+Thường bao gồm các bước chính
+
+-   Kiểm tra datatype
+
+-   Kiểm tra các giá trị NA
+
+-   Kiểm tra các khoảng giá trị của từng cột
+
+#### Kiểm tra datatype
+
+Khi đọc dữ liệu, R sẽ tự động đổi datatype của các cột sang dạng phù hợp nhất. Tuy nhiên, đôi lúc R sẽ chuyển thành datatype khác với mong muốn.
+
+Một số trường hợp có thể xảy ra lỗi bao gồm:
+
+-   Cột số nhưng có 1 số hàng chứa chữ
+
+-   Ngày theo format khác với format tiêu chuẩn của R (VD: `as.Date("01-01-2014")`)
+
+#### Kiểm tra NA/ khoảng giá trị của từng cột
+
+Trong R có lệnh `summary` để người dùng có thể nhanh chóng kiểm tra các khoảng giá trị và số dữ liệu NA trong từng cột.
+
+Ngoài ra, tuỳ vào bộ dữ liệu, có thể cần kiểm tra giá trị giữa các cột (VD: trong dữ liệu tiêm chủng có thể có mũi 2 trùng hoặc trước ngày tiêm mũi 1)
+
+------------------------------------------------------------------------
+
+### Xử lý dữ liệu
+
+-   Mã hoá lại dữ liệu
+
+-   Xử lý các hàng có giá trị lỗi
+
+-   Lọc trùng
+
+#### Mã hoá dữ liệu
+
+Các trường hợp có thể cần mã hoá lại dữ liệu:
+
+-   Dữ liệu NA (trống)
+
+-   Các dữ liệu dạng TRUE/FALSE được hiển thị bằng cách khác trong dữ liệu gốc (VD: Đánh dấu X hoặc bỏ trống trong file excel)
+
+Các lệnh liên quan đến mã hoá dữ liệu:
+
+-   `replace_na` thay thế giá trị `NA` bằng giá trị được cung cấp
+
+-   `is.na` chuyển thành định dạng logical, các dữ liệu trống (NA) có giá trị TRUE và ngược lại
+
+-   `ifelse` mã hoá theo điều kiện đơn giản, chỉ có 2 trường hợp khi đáp ứng điều kiện hoặc không.
+
+-   `case_when` mã hóa giá trị cho nhiều trường hợp nhất định
+
+```{r, eval=F}
+# --- Thay thế các giá trị NA trong cột col1 thành "default"
+df %>% 
+  mutate(col1 = replace_na("default"))
+
+# --- Thay thế các giá trị được đánh dấu trong col2 thành TRUE và ngược lại
+df %>% 
+  mutate(col2 = !is.na(col2))
+# Cách làm khác bằng ifelse
+df %>% 
+  mutate(col2 = ifelse(is.na(col2), FALSE, TRUE))
+```
+
+#### Lọc trùng
+
+Lệnh `distinct` của gói `dplyr` sẽ dữ lại 1 hàng duy nhất trong các hàng có giá trị bị trùng.
+
+Lệnh `distinct` mặc định sẽ kiểm tra giá trị của tất cả các cột (2 hàng được đánh giá là trùng khi tất cả các trị của chúng giống nhau).

@@ -66,13 +66,15 @@ C:\\Users\\ongph\\github\\r4babies\\data
 
 ### MacOS
 
-Trên thanh công cụ của Finder, chọn `Show Path Bar`
+Để hiển thị đường dẫn trong `Finder`, trên thanh menu chọn `View` \> `Show Path Bar`
 
-![](img/prepare/path-mac-1.png)
+![](img/prepare/path-mac-option.png){fig-alt="path-mac" width="354"}
 
-Click chuột phải vào file/folder trên Path Bar, chọn `Copy "..." as Pathname`
+Tại thanh đường dẫn (Path Bar), nhấn chuột phải vào folder hoặc file, sau đó chọn `Copy "tên_folder" as Pathname` để copy đường dẫn đến folder.
 
-![](img/prepare/path-mac-2.png)
+Trong ví dụ sau, đường dẫn được copy là `/Users/anhptq/Desktop/r4babies/data`
+
+![](img/prepare/path-mac-1.png){width="671"}
 
 ### Absolute path và relative path {#sec-abs-rel-path}
 

@@ -15,6 +15,7 @@ book:
     - index.qmd
     - intro.qmd
     - prepare.qmd
+    - r_basics.qmd
     - clean.qmd
     - analysis.qmd
     - viz.qmd

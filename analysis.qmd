@@ -1,7 +1,51 @@
 # Phân tích
 
-gtsummary
+::: callout-tip
+# Mục tiêu
 
-Các phép kiểm thường dùng
+1.  Học các cách khái quát thống kê trong R
+:::
 
-So sánh 
+::: callout-note
+# Các package được sử dụng trong bài học
+
+-   tidyverse
+
+-   gtsummary
+:::
+
+Load các package cần sử dụng
+
+```{r}
+library(tidyverse)
+library(gtsummary)
+```
+
+## summarize
+
+Hàm `summarize` của package `dplyr` được sử dụng chung với các hàm thống kê (aggregation function) để tạo bảng mô tả thống kê cho dữ liệu.
+
+\
+Một số hàm thống kê thông dụng.
+
+| Hàm        | Công dụng        |
+|------------|------------------|
+| mean()     | tính trung bình  |
+| min()      | giá trị nhỏ nhất |
+| max()      | giá trị lớn nhất |
+| median()   | số trung vị      |
+| quantile() | điểm phân vị     |
+| sd()       | độ lệch chuẩn    |
+
+Hàm `group_by` được sử dụng khi cần chia dữ liệu theo nhóm trước khi tính toán thống kê cho từng nhóm.
+
+## gtsummary
+
+Package `gtsummary` có thể hỗ trợ người dùng vẽ các bảng thống kê một cách nhanh chóng
+
+```{r}
+```
+
+## Các phép kiểm thường dùng
+
+## So sánh
