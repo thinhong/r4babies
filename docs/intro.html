@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -142,7 +113,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-RDC0B0FCNZ"></script>
@@ -162,11 +134,16 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Giới thiệu</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Giới thiệu</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -174,99 +151,110 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">R for babies</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Tổng quan</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tổng quan</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Giới thiệu</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Giới thiệu</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prepare.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Chuẩn bị</span></a>
+  <a href="./prepare.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Chuẩn bị</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Nhập môn R</span></a>
+  <a href="./r_basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Nhập môn R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clean.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Làm sạch</span></a>
+  <a href="./clean.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Làm sạch</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Phân tích</span></a>
+  <a href="./analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Phân tích</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Trực quan hóa</span></a>
+  <a href="./viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Trực quan hóa</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./viz-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Thực hành trực quan hóa</span></a>
+  <a href="./viz-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Thực hành trực quan hóa</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./report.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Làm báo cáo bằng R Markdown</span></a>
+  <a href="./report.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Làm báo cáo bằng R Markdown</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#r" id="toc-r" class="nav-link active" data-scroll-target="#r"><span class="toc-section-number">1.1</span>  R</a>
+  <li><a href="#r" id="toc-r" class="nav-link active" data-scroll-target="#r"><span class="header-section-number">1.1</span> R</a>
   <ul class="collapse">
-  <li><a href="#ngôn-ngữ-lập-trình" id="toc-ngôn-ngữ-lập-trình" class="nav-link" data-scroll-target="#ngôn-ngữ-lập-trình"><span class="toc-section-number">1.1.1</span>  Ngôn ngữ lập trình</a></li>
-  <li><a href="#câu-văn-trong-r" id="toc-câu-văn-trong-r" class="nav-link" data-scroll-target="#câu-văn-trong-r"><span class="toc-section-number">1.1.2</span>  Câu văn trong R</a></li>
-  <li><a href="#r-và-spss-stata-sas" id="toc-r-và-spss-stata-sas" class="nav-link" data-scroll-target="#r-và-spss-stata-sas"><span class="toc-section-number">1.1.3</span>  R và SPSS, Stata, SAS</a></li>
+  <li><a href="#ngôn-ngữ-lập-trình" id="toc-ngôn-ngữ-lập-trình" class="nav-link" data-scroll-target="#ngôn-ngữ-lập-trình"><span class="header-section-number">1.1.1</span> Ngôn ngữ lập trình</a></li>
+  <li><a href="#câu-văn-trong-r" id="toc-câu-văn-trong-r" class="nav-link" data-scroll-target="#câu-văn-trong-r"><span class="header-section-number">1.1.2</span> Câu văn trong R</a></li>
+  <li><a href="#r-và-spss-stata-sas" id="toc-r-và-spss-stata-sas" class="nav-link" data-scroll-target="#r-và-spss-stata-sas"><span class="header-section-number">1.1.3</span> R và SPSS, Stata, SAS</a></li>
   </ul></li>
-  <li><a href="#tại-sao-học-r" id="toc-tại-sao-học-r" class="nav-link" data-scroll-target="#tại-sao-học-r"><span class="toc-section-number">1.2</span>  Tại sao học R?</a></li>
-  <li><a href="#sec-install" id="toc-sec-install" class="nav-link" data-scroll-target="#sec-install"><span class="toc-section-number">1.3</span>  R và RStudio</a>
+  <li><a href="#tại-sao-học-r" id="toc-tại-sao-học-r" class="nav-link" data-scroll-target="#tại-sao-học-r"><span class="header-section-number">1.2</span> Tại sao học R?</a></li>
+  <li><a href="#sec-install" id="toc-sec-install" class="nav-link" data-scroll-target="#sec-install"><span class="header-section-number">1.3</span> R và RStudio</a>
   <ul class="collapse">
-  <li><a href="#cài-đặt-r" id="toc-cài-đặt-r" class="nav-link" data-scroll-target="#cài-đặt-r"><span class="toc-section-number">1.3.1</span>  Cài đặt R</a></li>
-  <li><a href="#cài-đặt-rstudio" id="toc-cài-đặt-rstudio" class="nav-link" data-scroll-target="#cài-đặt-rstudio"><span class="toc-section-number">1.3.2</span>  Cài đặt RStudio</a></li>
+  <li><a href="#cài-đặt-r" id="toc-cài-đặt-r" class="nav-link" data-scroll-target="#cài-đặt-r"><span class="header-section-number">1.3.1</span> Cài đặt R</a></li>
+  <li><a href="#cài-đặt-rstudio" id="toc-cài-đặt-rstudio" class="nav-link" data-scroll-target="#cài-đặt-rstudio"><span class="header-section-number">1.3.2</span> Cài đặt RStudio</a></li>
   </ul></li>
-  <li><a href="#sec-r-pkgs" id="toc-sec-r-pkgs" class="nav-link" data-scroll-target="#sec-r-pkgs"><span class="toc-section-number">1.4</span>  R packages</a>
+  <li><a href="#sec-r-pkgs" id="toc-sec-r-pkgs" class="nav-link" data-scroll-target="#sec-r-pkgs"><span class="header-section-number">1.4</span> R packages</a>
   <ul class="collapse">
-  <li><a href="#cài-đặt-r-packages" id="toc-cài-đặt-r-packages" class="nav-link" data-scroll-target="#cài-đặt-r-packages"><span class="toc-section-number">1.4.1</span>  Cài đặt R packages</a></li>
-  <li><a href="#sử-dụng-r-packages" id="toc-sử-dụng-r-packages" class="nav-link" data-scroll-target="#sử-dụng-r-packages"><span class="toc-section-number">1.4.2</span>  Sử dụng R packages</a></li>
+  <li><a href="#cài-đặt-r-packages" id="toc-cài-đặt-r-packages" class="nav-link" data-scroll-target="#cài-đặt-r-packages"><span class="header-section-number">1.4.1</span> Cài đặt R packages</a></li>
+  <li><a href="#sử-dụng-r-packages" id="toc-sử-dụng-r-packages" class="nav-link" data-scroll-target="#sử-dụng-r-packages"><span class="header-section-number">1.4.2</span> Sử dụng R packages</a></li>
   </ul></li>
-  <li><a href="#r-script-và-r-markdown" id="toc-r-script-và-r-markdown" class="nav-link" data-scroll-target="#r-script-và-r-markdown"><span class="toc-section-number">1.5</span>  R Script và R Markdown</a>
+  <li><a href="#r-script-và-r-markdown" id="toc-r-script-và-r-markdown" class="nav-link" data-scroll-target="#r-script-và-r-markdown"><span class="header-section-number">1.5</span> R Script và R Markdown</a>
   <ul class="collapse">
-  <li><a href="#r-script" id="toc-r-script" class="nav-link" data-scroll-target="#r-script"><span class="toc-section-number">1.5.1</span>  R Script</a></li>
-  <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown"><span class="toc-section-number">1.5.2</span>  R Markdown</a></li>
+  <li><a href="#r-script" id="toc-r-script" class="nav-link" data-scroll-target="#r-script"><span class="header-section-number">1.5.1</span> R Script</a></li>
+  <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown"><span class="header-section-number">1.5.2</span> R Markdown</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -276,7 +264,7 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Giới thiệu</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Giới thiệu</span></h1>
 </div>
 
 
@@ -294,18 +282,18 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 <div class="center-text">
 <p><a href="https://drthinhong.com/r4babies-slides/intro.html" class="btn btn-outline-secondary" role="button"><i class="fa-solid fa-link" aria-label="link"></i> Presentation</a></p>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Trước buổi học
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Cài đặt R và RStudio (xem <a href="#sec-install"><span>Section&nbsp;1.3</span></a>)</li>
+<li>Cài đặt R và RStudio (xem <a href="#sec-install"><span class="quarto-unresolved-ref">sec-install</span></a>)</li>
 <li>Cài đặt các R packages này (bấm vào nút copy ở bên phải và paste vào R):</li>
 </ul>
 <div class="cell">
@@ -313,12 +301,12 @@ Trước buổi học
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Mục tiêu
 </div>
 </div>
@@ -333,16 +321,16 @@ Mục tiêu
 </div>
 <section id="r" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="r"><span class="header-section-number">1.1</span> R</h2>
-<p>R là một ngôn ngữ lập trình được phát triển bởi GS. Robert Gentleman và GS. Ross Ihaka tại Đại học Auckland<span class="citation" data-cites="ihaka1996"><sup><a href="references.html#ref-ihaka1996" role="doc-biblioref">1</a></sup></span>. Tên gọi R được đặt theo chữ cái đầu của tên 2 tác giả (Robert và Ross).</p>
+<p>R là một ngôn ngữ lập trình được phát triển bởi GS. Robert Gentleman và GS. Ross Ihaka tại Đại học Auckland<span class="citation" data-cites="ihaka1996"><sup><a href="#ref-ihaka1996" role="doc-biblioref">1</a></sup></span>. Tên gọi R được đặt theo chữ cái đầu của tên 2 tác giả (Robert và Ross).</p>
 <p><img src="img/intro/ross-robert.png" class="img-fluid"></p>
 <blockquote class="blockquote">
 <p>Robert Gentleman: “Let’s write some software.”<br>
-Ross Ihaka: “Sure, that sounds like fun.”<span class="citation" data-cites="ihaka1998"><sup><a href="references.html#ref-ihaka1998" role="doc-biblioref">2</a></sup></span></p>
+Ross Ihaka: “Sure, that sounds like fun.”<span class="citation" data-cites="ihaka1998"><sup><a href="#ref-ihaka1998" role="doc-biblioref">2</a></sup></span></p>
 </blockquote>
 <section id="ngôn-ngữ-lập-trình" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="ngôn-ngữ-lập-trình"><span class="header-section-number">1.1.1</span> Ngôn ngữ lập trình</h3>
-<p>Ngôn ngữ lập trình là một tập hợp các hướng dẫn để yêu cầu máy tính thực hiện một số tác vụ nhất định.<span class="citation" data-cites="lenovo2024"><sup><a href="references.html#ref-lenovo2024" role="doc-biblioref">3</a></sup></span></p>
-<p>Ngôn ngữ là phương tiện để con người giao tiếp với con người. Ngôn ngữ lập trình là phương tiện để con người giao tiếp với máy tính.<span class="citation" data-cites="lenovo2024"><sup><a href="references.html#ref-lenovo2024" role="doc-biblioref">3</a></sup></span> Vì vậy, học ngôn ngữ lập trình cũng giống như học ngoại ngữ, bao gồm từ vựng, ngữ pháp, cụm từ, mệnh đề… để viết thành một câu văn mà máy tính có thể hiểu được và làm đúng những gì con người muốn.</p>
+<p>Ngôn ngữ lập trình là một tập hợp các hướng dẫn để yêu cầu máy tính thực hiện một số tác vụ nhất định.<span class="citation" data-cites="lenovo2024"><sup><a href="#ref-lenovo2024" role="doc-biblioref">3</a></sup></span></p>
+<p>Ngôn ngữ là phương tiện để con người giao tiếp với con người. Ngôn ngữ lập trình là phương tiện để con người giao tiếp với máy tính.<span class="citation" data-cites="lenovo2024"><sup><a href="#ref-lenovo2024" role="doc-biblioref">3</a></sup></span> Vì vậy, học ngôn ngữ lập trình cũng giống như học ngoại ngữ, bao gồm từ vựng, ngữ pháp, cụm từ, mệnh đề… để viết thành một câu văn mà máy tính có thể hiểu được và làm đúng những gì con người muốn.</p>
 <p><img src="img/intro/program-langs.png" class="img-fluid"></p>
 <p>Một số ngôn ngữ lập trình trong phân tích dữ liệu [<a href="https://medium.com/@andreaskuhn92/how-to-solve-the-same-numerical-problem-in-7-different-programming-languages-a64daac3ed64">Photo credit</a>]</p>
 </section>
@@ -369,12 +357,12 @@ Ross Ihaka: “Sure, that sounds like fun.”<span class="citation" data-cites="
 <li><code>na.rm</code>: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn <code>na.rm = TRUE</code> nghĩa là nếu cột <code>col1</code> có NA thì bỏ những giá trị NA đi trước khi tính trung bình.</li>
 </ul></li>
 </ul>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -436,12 +424,12 @@ Important
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Lưu ý
 </div>
 </div>
@@ -459,12 +447,12 @@ Lưu ý
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Lưu ý
 </div>
 </div>
@@ -515,14 +503,14 @@ Lưu ý
 <p><img src="img/intro/rmd-outp.png" class="img-fluid"></p>
 
 
-<div id="refs" class="references csl-bib-body" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-ihaka1996" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body" data-line-spacing="2" role="list">
+<div id="ref-ihaka1996" class="csl-entry" role="listitem">
 <div class="csl-left-margin">1. </div><div class="csl-right-inline">Ihaka, R. &amp; Gentleman, R. <a href="https://doi.org/10.1080/10618600.1996.10474713">R: A Language for Data Analysis and Graphics</a>. <em>Journal of Computational and Graphical Statistics</em> <strong>5</strong>, 299–314 (1996).</div>
 </div>
-<div id="ref-ihaka1998" class="csl-entry" role="doc-biblioentry">
+<div id="ref-ihaka1998" class="csl-entry" role="listitem">
 <div class="csl-left-margin">2. </div><div class="csl-right-inline">Ihaka, R. <a href="https://www.stat.auckland.ac.nz/~ihaka/downloads/Otago.pdf">The R Project: A Brief History and Thoughts About the Future</a>. (1998).</div>
 </div>
-<div id="ref-lenovo2024" class="csl-entry" role="doc-biblioentry">
+<div id="ref-lenovo2024" class="csl-entry" role="listitem">
 <div class="csl-left-margin">3. </div><div class="csl-right-inline">Lenovo, Inc. <a href="https://www.lenovo.com/in/en/glossary/programming-language/">Programming Language: What is a programming language?</a> (2024).</div>
 </div>
 </div>
@@ -557,9 +545,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -624,6 +626,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
