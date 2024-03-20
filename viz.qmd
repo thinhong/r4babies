@@ -23,7 +23,7 @@ library(rio)
 
 # install.packages("maptools", repos="http://R-Forge.R-project.org")
 # devtools::install_github('oswaldosantos/ggsn')
-# library(ggsn)
+library(ggsn)
 ```
 
 ## ggplot
@@ -178,20 +178,39 @@ vn_px <- st_read(dsn = file.path(map_path, "gadm41_VNM.gpkg"), layer = "ADM_ADM_
 
 ```
 
-```{r, eval=F}
-# Vẽ dữ liệu đọc được 
+```{r, eval=T}
+# Vẽ dữ liệu đọc được
 vn_tinh %>% 
   ggplot() +
   ggplot2::geom_sf()
 
 vn_qh %>% 
   ggplot() +
-  geom_sf()
+  ggplot2::geom_sf()
 
 vn_px %>% 
   ggplot() +
-  geom_sf()
+  ggplot2::geom_sf()
 ```
+
+::: callout-warning
+## Debug package sf {.callout-warning}
+
+Nếu gặp lỗi như sau khi chạy geom_sf()
+
+```         
+In CPL_crs_from_input(x) :
+  GDAL Error 1: PROJ: proj_create_from_database: Cannot find proj.db
+```
+
+Chạy dòng code sau để giải quyết lỗi ([\@edzer](https://github.com/r-spatial/sf/issues/2298#issuecomment-1867563910))
+
+```{r, eval=F}
+remove.packages("sf")
+install.packages('sf', repos = c('https://r-spatial.r-universe.dev'))
+library(sf)
+```
+:::
 
 ### Leaflet
 
