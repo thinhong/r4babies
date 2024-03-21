@@ -62,6 +62,7 @@ df <- df %>%
     names_to = "year",
     # đặt tên mới cho cột giá trị tương ứng
     values_to = "gdp")
+head(df)
 ```
 
 ### Tên cột
@@ -92,7 +93,7 @@ Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác
 Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package `dplyr` sau đây
 
 | Function     | Công dụng          | GIF minh hoạ                                                                                        |
-|--------------|--------------------|-----------------------------------------------------------------------------------------------------|
+|-------------|-------------|-----------------------------------------------|
 | left_join()  | Nối ngoài bên trái | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join.gif?raw=true){width="283"}  |
 | right_join() | Nối ngoài bên phải | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/right-join.gif?raw=true){width="282"} |
 | inner_join() | Nối trong          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/inner-join.gif?raw=true){width="281"} |
@@ -147,9 +148,7 @@ Ngoài ra, tuỳ vào bộ dữ liệu, có thể cần kiểm tra giá trị gi
 
 ### Xử lý dữ liệu
 
--   Mã hoá lại dữ liệu
-
--   Xử lý các hàng có giá trị lỗi
+-   Mã hoá lại dữ liệu/ Xử lý các hàng có giá trị lỗi
 
 -   Lọc trùng
 
@@ -189,3 +188,8 @@ df %>%
 Lệnh `distinct` của gói `dplyr` sẽ dữ lại 1 hàng duy nhất trong các hàng có giá trị bị trùng.
 
 Lệnh `distinct` mặc định sẽ kiểm tra giá trị của tất cả các cột (2 hàng được đánh giá là trùng khi tất cả các trị của chúng giống nhau).
+
+```{r, eval = F}
+df %>% distinct()
+
+```

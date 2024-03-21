@@ -375,7 +375,19 @@ Attaching package: 'janitor'</code></pre>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># đặt tên mới cho biến</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># đặt tên mới cho cột giá trị tương ứng</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"gdp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"gdp"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  `Country Name` `Country Code` year     gdp
+  &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;  &lt;dbl&gt;
+1 Aruba          ABW            2015  28419.
+2 Aruba          ABW            2016  28450.
+3 Aruba          ABW            2017  29329.
+4 Aruba          ABW            2018  30918.
+5 Aruba          ABW            2019  31903.
+6 Aruba          ABW            2020  24008.</code></pre>
+</div>
 </div>
 </section>
 <section id="tên-cột" class="level3" data-number="4.1.2">
@@ -390,8 +402,8 @@ Attaching package: 'janitor'</code></pre>
 </ul>
 <p>Lệnh <code>clean_names()</code> của package <code>janitor</code> được sử dụng để tự động hoá quá trình chuẩn hoá tên cột. Ngoài ra, lệnh <code>rename()</code> của package <code>dplyr</code> được sử dụng để thay đổi tên cột một cách thủ công.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chuẩn hoá tên cột tự động</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chuẩn hoá tên cột tự động</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -401,9 +413,9 @@ Attaching package: 'janitor'</code></pre>
 <p>Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package <code>dplyr</code> sau đây</p>
 <table class="table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 14%">
-<col style="width: 74%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 64%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -442,12 +454,12 @@ Attaching package: 'janitor'</code></pre>
 </ul>
 <p><a href="https://github.com/gadenbuie/tidyexplain/tree/main">Tổng hợp các lệnh join cùng GIF minh hoạ</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mt <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">"data/gdp-capita.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Nối 2 bảng bằng lệnh left_join</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Trong trường hợp này, tuy lệnh join_by không cần thiết nhưng có thể giúp cho code rõ ràng hơn </span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(df, mt, <span class="at">by =</span> <span class="fu">join_by</span>(country_code <span class="sc">==</span> country_code))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mt <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">"data/gdp-capita.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Nối 2 bảng bằng lệnh left_join</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Trong trường hợp này, tuy lệnh join_by không cần thiết nhưng có thể giúp cho code rõ ràng hơn </span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(df, mt, <span class="at">by =</span> <span class="fu">join_by</span>(country_code <span class="sc">==</span> country_code))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,128 × 8
    country_name      country_code year     gdp region income_group special_notes
@@ -496,8 +508,7 @@ Attaching package: 'janitor'</code></pre>
 <section id="xử-lý-dữ-liệu" class="level3" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="xử-lý-dữ-liệu"><span class="header-section-number">4.3.2</span> Xử lý dữ liệu</h3>
 <ul>
-<li><p>Mã hoá lại dữ liệu</p></li>
-<li><p>Xử lý các hàng có giá trị lỗi</p></li>
+<li><p>Mã hoá lại dữ liệu/ Xử lý các hàng có giá trị lỗi</p></li>
 <li><p>Lọc trùng</p></li>
 </ul>
 <section id="mã-hoá-dữ-liệu" class="level4" data-number="4.3.2.1">
@@ -515,22 +526,25 @@ Attaching package: 'janitor'</code></pre>
 <li><p><code>case_when</code> mã hóa giá trị cho nhiều trường hợp nhất định</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Thay thế các giá trị NA trong cột col1 thành "default"</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col1 =</span> <span class="fu">replace_na</span>(<span class="st">"default"</span>))</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Thay thế các giá trị được đánh dấu trong col2 thành TRUE và ngược lại</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col2 =</span> <span class="sc">!</span><span class="fu">is.na</span>(col2))</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Cách làm khác bằng ifelse</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col2 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(col2), <span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Thay thế các giá trị NA trong cột col1 thành "default"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col1 =</span> <span class="fu">replace_na</span>(<span class="st">"default"</span>))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Thay thế các giá trị được đánh dấu trong col2 thành TRUE và ngược lại</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col2 =</span> <span class="sc">!</span><span class="fu">is.na</span>(col2))</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Cách làm khác bằng ifelse</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col2 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(col2), <span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="lọc-trùng" class="level4" data-number="4.3.2.2">
 <h4 data-number="4.3.2.2" class="anchored" data-anchor-id="lọc-trùng"><span class="header-section-number">4.3.2.2</span> Lọc trùng</h4>
 <p>Lệnh <code>distinct</code> của gói <code>dplyr</code> sẽ dữ lại 1 hàng duy nhất trong các hàng có giá trị bị trùng.</p>
 <p>Lệnh <code>distinct</code> mặc định sẽ kiểm tra giá trị của tất cả các cột (2 hàng được đánh giá là trùng khi tất cả các trị của chúng giống nhau).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">distinct</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body" data-line-spacing="2" role="doc-bibliography" style="display: none">

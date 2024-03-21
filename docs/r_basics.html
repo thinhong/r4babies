@@ -245,6 +245,7 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
   <ul class="collapse">
   <li><a href="#các-hàm-thông-dụng-của-stringr" id="toc-các-hàm-thông-dụng-của-stringr" class="nav-link" data-scroll-target="#các-hàm-thông-dụng-của-stringr"><span class="toc-section-number">3.5.1</span>  Các hàm thông dụng của stringr</a></li>
   <li><a href="#regex" id="toc-regex" class="nav-link" data-scroll-target="#regex"><span class="toc-section-number">3.5.2</span>  Regex</a></li>
+  <li><a href="#một-số-ví-dụ-sử-dụng-hàm-của-stringr-cùng-regex" id="toc-một-số-ví-dụ-sử-dụng-hàm-của-stringr-cùng-regex" class="nav-link" data-scroll-target="#một-số-ví-dụ-sử-dụng-hàm-của-stringr-cùng-regex"><span class="toc-section-number">3.5.3</span>  Một số ví dụ sử dụng hàm của <code>stringr</code> cùng regex</a></li>
   </ul></li>
   <li><a href="#dữ-liệu-ngày-tháng" id="toc-dữ-liệu-ngày-tháng" class="nav-link" data-scroll-target="#dữ-liệu-ngày-tháng"><span class="toc-section-number">3.6</span>  Dữ liệu ngày tháng</a>
   <ul class="collapse">
@@ -302,17 +303,16 @@ Các package được sử dụng trong bài học
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p>readxl</p></li>
-<li><p>writexl</p></li>
 <li><p>tidyverse</p></li>
+<li><p>stringi</p></li>
+<li><p>writexl</p></li>
 </ul>
 </div>
 </div>
 <section id="gọi-các-thư-viện-cho-bài-học" class="level3" data-number="3.0.1">
 <h3 data-number="3.0.1" class="anchored" data-anchor-id="gọi-các-thư-viện-cho-bài-học"><span class="header-section-number">3.0.1</span> Gọi các thư viện cho bài học</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'dplyr' was built under R version 4.3.1</code></pre>
 </div>
@@ -331,7 +331,11 @@ Các package được sử dụng trong bài học
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'stringi' was built under R version 4.3.1</code></pre>
+</div>
 </div>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -354,39 +358,59 @@ Vì vậy người dùng không cần gọi các thư viện trên sau khi gọi
 <p>Mọi thứ được lưu trữ trong R - bao gồm bộ dữ liệu, biến số, danh sách tên cột, kết quả đầu ra như biểu đồ - đều là <strong>các đối tượng</strong>, được <strong>gán tên</strong> và <strong>có thể được tham chiếu</strong> trong các lệnh sau đó.</p>
 <p>Để tạo đối tượng trong R, ta dùng cú pháp sau</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tên_đối_tượng <span class="ot">&lt;-</span> giá_trị_của_đối_tượng </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tên_đối_tượng <span class="ot">&lt;-</span> giá_trị_của_đối_tượng </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>VD:</p>
+<p><strong>VD</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tạo đối tượng file_path để lưu trữ đường dẫn đến file excel</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">"data/gdp-capita.xlsx"</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># tạo đối tượng df lưu trữ bảng dữ liệu đọc từ file excel</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="at">path =</span> file_path, <span class="at">sheet =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tạo đối tượng file_path để lưu trữ đường dẫn đến file csv</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>life_exp_path <span class="ot">&lt;-</span> <span class="st">"data/life-exp.csv"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>practising_cert_path <span class="ot">&lt;-</span> <span class="st">"data/practising_cert.csv"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tạo đối tượng df lưu trữ bảng dữ liệu đọc từ file csv</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>life_exp_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> life_exp_path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>practising_cert_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> practising_cert_path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Sau khi tạo 2 đối tượng file_path và df, ta có thể thử xem giá trị được lưu trữ</p>
+<p>Sau khi tạo các đối tượng, ta có thể thử xem giá trị được lưu trữ</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>file_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>life_exp_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "data/gdp-capita.xlsx"</code></pre>
+<pre><code>[1] "data/life-exp.csv"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>practising_cert_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 266 × 10
-   `Country Name`       `Country Code` `2015` `2016` `2017` `2018` `2019` `2020`
-   &lt;chr&gt;                &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Aruba                ABW            28419. 28450. 29329. 30918. 31903. 24008.
- 2 Africa Eastern and … AFE             1554.  1444.  1625.  1558.  1508.  1356.
- 3 Afghanistan          AFG              567.   523.   526.   492.   498.   512.
- 4 Africa Western and … AFW             1882.  1649.  1590.  1735.  1812.  1688.
- 5 Angola               AGO             3217.  1810.  2439.  2541.  2191.  1451.
- 6 Albania              ALB             3953.  4124.  4531.  5288.  5396.  5343.
- 7 Andorra              AND            38886. 39931. 40632. 42905. 41329. 37207.
- 8 Arab World           ARB             6287.  6118.  6231.  6579.  6505.  5644.
- 9 United Arab Emirates ARE            41525. 41055. 43064. 46722. 45376. 37629.
-10 Argentina            ARG            13789. 12790. 14613. 11795.  9964.  8501.
-# ℹ 256 more rows
-# ℹ 2 more variables: `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;</code></pre>
+<pre><code>[1] "data/practising_cert.csv"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(life_exp_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 22
+  Country      Year Status   `Life expectancy` `Adult Mortality` `infant deaths`
+  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;             &lt;dbl&gt;           &lt;dbl&gt;
+1 Afghanistan  2015 Develop…              65                 263              62
+2 Afghanistan  2014 Develop…              59.9               271              64
+3 Afghanistan  2013 Develop…              59.9               268              66
+4 Afghanistan  2012 Develop…              59.5               272              69
+5 Afghanistan  2011 Develop…              59.2               275              71
+6 Afghanistan  2010 Develop…              58.8               279              74
+# ℹ 16 more variables: Alcohol &lt;dbl&gt;, `percentage expenditure` &lt;dbl&gt;,
+#   `Hepatitis B` &lt;dbl&gt;, Measles &lt;dbl&gt;, BMI &lt;dbl&gt;, `under-five deaths` &lt;dbl&gt;,
+#   Polio &lt;dbl&gt;, `Total expenditure` &lt;dbl&gt;, Diphtheria &lt;dbl&gt;, `HIV/AIDS` &lt;dbl&gt;,
+#   GDP &lt;dbl&gt;, Population &lt;dbl&gt;, `thinness  1-19 years` &lt;dbl&gt;,
+#   `thinness 5-9 years` &lt;dbl&gt;, `Income composition of resources` &lt;dbl&gt;,
+#   Schooling &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(practising_cert_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 9
+  HoTen                TenQuocTich SoChungChi NoiCapChungChi NgayCapChungChi    
+  &lt;chr&gt;                &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dttm&gt;             
+1 Phạm Thị Bình Minh   Việt Nam    000001/HC… 4              2012-03-27 00:00:00
+2 Trần Thủy Cần        Việt Nam    000001/KG… 4              2012-05-08 00:00:00
+3 Trần Thị Phương Thu  Việt Nam    000002/HC… 4              2012-03-27 00:00:00
+4 Nguyễn Thị Minh Tâm  Việt Nam    0000027/H… 4              2014-04-18 00:00:00
+5 Nguyễn Thái Thảo Ng… Việt Nam    000003/HC… 4              2012-04-06 00:00:00
+6 ĐẶNG HOÀNG ANH       None        000004/CM… 16             2012-11-22 00:00:00
+# ℹ 4 more variables: TenPhamViHoatDong &lt;chr&gt;, TinhTrang &lt;chr&gt;, TenCoSo &lt;chr&gt;,
+#   DiaChiCS &lt;chr&gt;</code></pre>
 </div>
 </div>
 <div class="callout-important callout callout-style-default callout-captioned">
@@ -402,12 +426,12 @@ Lưu ý
 <p>Giá trị của một đối tượng <strong>có thể bị ghi đè</strong> bất kỳ lúc nào bằng cách chạy lệnh gán để định nghĩa lại giá trị của nó. Do đó, <strong>thứ tự của các lệnh được chạy rất quan trọng</strong>.</p>
 </div>
 </div>
-<p>Lệnh sau sẽ định nghĩa lại giá trị cho đối tượng <code>file_path</code></p>
+<p>Lệnh sau sẽ định nghĩa lại giá trị cho đối tượng <code>life_exp_path</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">"data/new_path.xlsx"</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># kiểm tra giá trị </span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>file_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>life_exp_path <span class="ot">&lt;-</span> <span class="st">"data/new_path.xlsx"</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># kiểm tra giá trị </span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>life_exp_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data/new_path.xlsx"</code></pre>
 </div>
@@ -417,23 +441,23 @@ Lưu ý
 <h2 data-number="3.2" class="anchored" data-anchor-id="câu-văn-trong-r"><span class="header-section-number">3.2</span> Câu văn trong R</h2>
 <p>Câu lệnh (command) hoặc hàm (function) chính là những câu văn trong R để giao tiếp với máy tính. Chúng ta phải học ngữ pháp của 1 câu lệnh và ý nghĩa của nó để có thể sử dụng R để ra lệnh cho máy tính. Một câu lệnh trong R thường có dạng như sau:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tên<span class="sc">-</span>câu<span class="sc">-</span>lệnh(tên<span class="sc">-</span>tham<span class="sc">-</span>số <span class="ot">=</span> data<span class="sc">-</span>đầu<span class="sc">-</span>vào hoặc lựa<span class="sc">-</span>chọn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tên<span class="sc">-</span>câu<span class="sc">-</span>lệnh(tên<span class="sc">-</span>tham<span class="sc">-</span>số <span class="ot">=</span> data<span class="sc">-</span>đầu<span class="sc">-</span>vào hoặc lựa<span class="sc">-</span>chọn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Tên câu lệnh: nằm trước dấu <code>()</code>, thể hiện ý nghĩa câu lệnh dùng để làm gì.</li>
 <li>Tên tham số (argument): nằm trong dấu <code>()</code> là những tham số của câu lệnh đó. Tham số là những yêu cầu nhỏ và cụ thể để máy tính hiểu rõ hơn yêu cầu của người dùng.</li>
 <li>Dấu <code>=</code>: dùng để gán 1 giá trị cho tham số. Giá trị gán cho tham số có thể là một data đầu vào, hoặc một lựa chọn của người dùng (đúng/sai).</li>
 </ul>
-<p>Ví dụ:</p>
+<p><strong>VD</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> df<span class="sc">$</span>col1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> life_exp_df<span class="sc">$</span>GDP, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Tên câu lệnh là <code>mean</code>: chúng ta đang yêu cầu máy tính hãy tính giá trị trung bình của 1 biến.</li>
 <li>Các tham số là <code>x</code> và <code>na.rm</code>:
 <ul>
-<li><code>x</code>: là data đầu vào, ở đây chúng ta viết <code>x = df$col1</code> để cho máy tính biết data đầu vào là cột <code>col1</code> trong bảng data <code>df</code>.</li>
-<li><code>na.rm</code>: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn <code>na.rm = TRUE</code> nghĩa là nếu cột <code>col1</code> có NA thì bỏ những giá trị NA đi trước khi tính trung bình.</li>
+<li><code>x</code>: là data đầu vào, ở đây chúng ta viết <code>x = life_exp_df$GDP</code> để cho máy tính biết data đầu vào là cột <code>GDP</code> trong bảng data <code>life_exp_df</code>.</li>
+<li><code>na.rm</code>: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn <code>na.rm = TRUE</code> nghĩa là nếu cột <code>GDP</code> có NA thì bỏ những giá trị NA đi trước khi tính trung bình.</li>
 </ul></li>
 </ul>
 <div class="callout-tip callout callout-style-default callout-captioned">
@@ -456,8 +480,8 @@ Tip
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="các-datatype-trong-r"><span class="header-section-number">3.3.1</span> Các datatype trong R</h3>
 <table class="table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 89%">
+<col style="width: 23%">
+<col style="width: 76%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -528,12 +552,12 @@ Tip
 <code>ifelse()</code> chuyển thành định dạng logical theo điều kiện nhất định<br>
 <code>is.na()</code> chuyển thành định dạng logical, các dữ liệu trống (<code>NA</code>) có giá trị <code>TRUE</code> và ngược lại.<br>
 <code>dmy()</code>, <code>ymd()</code>, <code>mdy()</code>, … chuyển đổi string theo các format khác nhau thành định dạng ngày</p>
-<p>VD:</p>
+<p><strong>VD</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tạo danh sách mẫu</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>example_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># thử sử dụng lệnh mean</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(example_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tạo danh sách mẫu</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>example_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># thử sử dụng lệnh mean</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(example_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in mean.default(example_list): argument is not numeric or logical:
 returning NA</code></pre>
@@ -541,12 +565,12 @@ returning NA</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># kiểm tra datatype </span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(example_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># kiểm tra datatype </span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(example_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: thực hành điều chỉnh example_list để không còn Warning</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: thực hành điều chỉnh example_list để không còn Warning</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -560,21 +584,50 @@ returning NA</code></pre>
 <li><p>Để lấy nhiều cột hay hàng thì cho tên cột hay hàng theo dạng list (chuỗi)</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lấy dữ liệu tại hàng thứ 5, cột thứ 2</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">5</span> ,<span class="dv">2</span>]</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lấy dữ liệu tại hàng thứ 5, cột thứ 2</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">5</span> , <span class="st">"Country Code"</span>]</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># lấy hàng thứ 5 trong bảng df</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">5</span>, ]</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#lấy các cột Country Name, Country Code, 2015</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>df[, <span class="fu">c</span>(<span class="st">"Country Name"</span>, <span class="st">"Country Code"</span>, <span class="st">"2015"</span>)] </span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">#lấy 10 hàng đầu tiên của các cột Country Name, Country Code, 2015</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co">#1:10 là cú pháp nhanh để tạo chuỗi từ 1 đến 10</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">c</span>(<span class="st">"Country Name"</span>, <span class="st">"Country Code"</span>, <span class="st">"2015"</span>)] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lấy dữ liệu tại hàng thứ 5, cột thứ 2</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>life_exp_df[<span class="dv">5</span> ,<span class="dv">2</span>]</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lấy dữ liệu tại hàng thứ 5, cột thứ 2</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>life_exp_df[<span class="dv">5</span> , <span class="st">"Country"</span>]</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># lấy hàng thứ 5 trong bảng df</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>life_exp_df[<span class="dv">5</span>, ]</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">#lấy các cột Country, Year, GDP</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>life_exp_df[, <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Year"</span>, <span class="st">"GDP"</span>)] </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co">#lấy 10 hàng đầu tiên của các cột Country, Year, GDP</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">#1:10 là cú pháp nhanh để tạo chuỗi từ 1 đến 10</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>life_exp_df[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Year"</span>, <span class="st">"GDP"</span>)] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Xem tên các cột
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Lệnh <code>colnames</code> được sử dụng để xem danh sách tên các cột trong bảng</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(life_exp_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Country"                         "Year"                           
+ [3] "Status"                          "Life expectancy"                
+ [5] "Adult Mortality"                 "infant deaths"                  
+ [7] "Alcohol"                         "percentage expenditure"         
+ [9] "Hepatitis B"                     "Measles"                        
+[11] "BMI"                             "under-five deaths"              
+[13] "Polio"                           "Total expenditure"              
+[15] "Diphtheria"                      "HIV/AIDS"                       
+[17] "GDP"                             "Population"                     
+[19] "thinness  1-19 years"            "thinness 5-9 years"             
+[21] "Income composition of resources" "Schooling"                      </code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -587,7 +640,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>Đối với cột, còn có cách trích xuất thông dụng khác bằng cách sử dụng dấu <code>$</code>. Tuy nhiên, cách này sẽ chỉ trích xuất giá trị trong 1 cột.<br>
-VD: <code>df$col1</code> sẽ trả về các giá trị trong cột <code>col1</code> của bảng <code>df</code></p>
+<strong>VD</strong>: <code>df$col1</code> sẽ trả về các giá trị trong cột <code>col1</code> của bảng <code>df</code></p>
 </div>
 </div>
 </section>
@@ -595,10 +648,10 @@ VD: <code>df$col1</code> sẽ trả về các giá trị trong cột <code>col1<
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="chuyển-đổi-datatype-cho-cột"><span class="header-section-number">3.4.2</span> Chuyển đổi datatype cho cột</h3>
 <p>Mỗi cột trong data.frame sẽ chứa các giá trị có cùng datatype.</p>
 <p>Để thay đổi datatype của cột, ta có thể áp dụng các <a href="#update_datatype">function từ phần trước</a>.</p>
-<p>VD:</p>
+<p><strong>VD</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># đổi cột country code thành biến phân loại</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span><span class="st">`</span><span class="at">Country Code</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span><span class="st">`</span><span class="at">Country Code</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># đổi cột Status thành biến phân loại</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>life_exp_df<span class="sc">$</span>Status <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(life_exp_df<span class="sc">$</span>Status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -611,7 +664,7 @@ Lưu ý
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p>Dấu <code>&lt;-</code> được sử dụng ở VD trên để <strong>gán giá trị mới</strong> vào cột Country Code (tương đương việc UPDATE cột)</p></li>
+<li><p>Dấu <code>&lt;-</code> được sử dụng ở VD trên để <strong>gán giá trị mới</strong> vào cột Country (tương đương việc UPDATE cột)</p></li>
 <li><p>Nếu không sử dụng <code>&lt;-</code> thì R chỉ trả về kết quả của function <code>as.factor</code> và bảng df sẽ <strong>không</strong> có thay đổi</p></li>
 </ul>
 </div>
@@ -664,17 +717,17 @@ Một số ký tự thường được sử dụng cho filter bao gồm:</p>
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các hàng có country code là ABW</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">Country Code</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"ABW"</span>) </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các hàng có GDP năm 2015 hơn 2000</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">2000</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các hàng có country code là ABW hoặc GDP năm 2015 hơn 2000</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>((<span class="st">`</span><span class="at">Country Code</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"ABW"</span>) <span class="sc">|</span> (<span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">2000</span>))</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các hàng có country code là ABW và GDP năm 2015 hơn 2000</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>((<span class="st">`</span><span class="at">Country Code</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"ABW"</span>) <span class="sc">&amp;</span> (<span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">2000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các dữ liệu của Thái Lan</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>life_exp_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"Thailand"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Country, Year, GDP)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các hàng có GDP năm 2015 hơn 2000</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>life_exp_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2015</span> <span class="sc">&amp;</span> GDP <span class="sc">&gt;</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Country, Year, GDP)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các hàng có Country là Thailand hoặc GDP &gt; 2000</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>life_exp_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"Thailand"</span> <span class="sc">|</span> (GDP <span class="sc">&gt;</span> <span class="dv">2000</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Country, Year, GDP)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Lọc các hàng có Country là Thailand và GDP &gt; 2000</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>life_exp_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"Thailand"</span> <span class="sc">&amp;</span> (GDP <span class="sc">&gt;</span> <span class="dv">2000</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Country, Year, GDP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -689,11 +742,11 @@ Dấu <code>%&gt;% (pipe)</code>
 <p><code>%&gt;%</code> được dùng để chuyển đối tượng vào 1 function (trong VD trên, <code>%&gt;%</code> chuyển <code>df</code> vào function <code>filter</code>)</p>
 <p><code>%&gt;%</code> còn thường được dùng để chuyển các kết quả trung gian sang function tiếp theo, từ đó có thể dùng để nối 1 chuỗi các function để thao tác trên 1 đối tượng<br>
 <br>
-VD: lọc các hàng có GDP năm 2015 &gt; 2000 và sắp xếp các hàng theo GPD từ thấp đến cao</p>
+<strong>VD</strong>: lọc các hàng có GDP &gt; 2000 và sắp xếp các hàng theo GPD từ thấp đến cao</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="co"># chuyển df vào filter()</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> <span class="co"># chuyển kết quả của filter() vào arrange()</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>life_exp_df <span class="sc">%&gt;%</span> <span class="co"># chuyển df vào filter()</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(GDP <span class="sc">&gt;</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> <span class="co"># chuyển kết quả của filter() vào arrange()</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(GDP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -737,28 +790,25 @@ VD: lọc các hàng có GDP năm 2015 &gt; 2000 và sắp xếp các hàng theo
 </tr>
 </tbody>
 </table>
-<p>VD: chuyển Country code sang chữ in thường</p>
+<p><strong>VD</strong>: xoá dấu trong cột <code>HoTen</code> của <code>practising_cert_df</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Country Code</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">tolower</span>(<span class="st">`</span><span class="at">Country Code</span><span class="st">`</span>)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>practising_cert_df <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">HoTen =</span> <span class="fu">stri_trans_general</span>(HoTen, <span class="st">"latin-ascii"</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="co"># lệnh head để trả về 6 hàng đầu tiên thay vì toàn bộ</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 266 × 10
-   `Country Name`       `Country Code` `2015` `2016` `2017` `2018` `2019` `2020`
-   &lt;chr&gt;                &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Aruba                abw            28419. 28450. 29329. 30918. 31903. 24008.
- 2 Africa Eastern and … afe             1554.  1444.  1625.  1558.  1508.  1356.
- 3 Afghanistan          afg              567.   523.   526.   492.   498.   512.
- 4 Africa Western and … afw             1882.  1649.  1590.  1735.  1812.  1688.
- 5 Angola               ago             3217.  1810.  2439.  2541.  2191.  1451.
- 6 Albania              alb             3953.  4124.  4531.  5288.  5396.  5343.
- 7 Andorra              and            38886. 39931. 40632. 42905. 41329. 37207.
- 8 Arab World           arb             6287.  6118.  6231.  6579.  6505.  5644.
- 9 United Arab Emirates are            41525. 41055. 43064. 46722. 45376. 37629.
-10 Argentina            arg            13789. 12790. 14613. 11795.  9964.  8501.
-# ℹ 256 more rows
-# ℹ 2 more variables: `2021` &lt;dbl&gt;, `2022` &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 6 × 9
+  HoTen                TenQuocTich SoChungChi NoiCapChungChi NgayCapChungChi    
+  &lt;chr&gt;                &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dttm&gt;             
+1 Pham Thi Binh Minh   Việt Nam    000001/HC… 4              2012-03-27 00:00:00
+2 Tran Thuy Can        Việt Nam    000001/KG… 4              2012-05-08 00:00:00
+3 Tran Thi Phuong Thu  Việt Nam    000002/HC… 4              2012-03-27 00:00:00
+4 Nguyen Thi Minh Tam  Việt Nam    0000027/H… 4              2014-04-18 00:00:00
+5 Nguyen Thai Thao Ng… Việt Nam    000003/HC… 4              2012-04-06 00:00:00
+6 DANG HOANG ANH       None        000004/CM… 16             2012-11-22 00:00:00
+# ℹ 4 more variables: TenPhamViHoatDong &lt;chr&gt;, TinhTrang &lt;chr&gt;, TenCoSo &lt;chr&gt;,
+#   DiaChiCS &lt;chr&gt;</code></pre>
 </div>
 </div>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -778,8 +828,8 @@ Lệnh <code>mutate</code>
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="các-hàm-thông-dụng-của-stringr"><span class="header-section-number">3.5.1</span> Các hàm thông dụng của stringr</h3>
 <table class="table">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 82%">
+<col style="width: 25%">
+<col style="width: 75%">
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -787,43 +837,43 @@ Lệnh <code>mutate</code>
 <td><strong>Công dụng</strong></td>
 </tr>
 <tr class="even">
-<td>str_starts</td>
+<td><code>str_starts</code></td>
 <td>lọc hàng bắt đầu bằng chuỗi ký tự khớp với pattern</td>
 </tr>
 <tr class="odd">
-<td>str_ends</td>
+<td><code>str_ends</code></td>
 <td>lọc hàng kết thúc bằng bằng chuỗi ký tự khớp với pattern</td>
 </tr>
 <tr class="even">
-<td>str_detect</td>
+<td><code>str_detect</code></td>
 <td>lọc hàng có chứa chuỗi ký tự khớp với pattern</td>
 </tr>
 <tr class="odd">
-<td>str_interp</td>
+<td><code>str_interp</code></td>
 <td>chèn giá trị vào string (string interpolation)</td>
 </tr>
 <tr class="even">
-<td>str_extract</td>
+<td><code>str_extract</code></td>
 <td>trích 1 chuỗi con (substring) đầu tiên khớp với pattern</td>
 </tr>
 <tr class="odd">
-<td>str_extract_all</td>
+<td><code>str_extract_all</code></td>
 <td>trích tất cả các chuỗi con (substring) khớp với pattern</td>
 </tr>
 <tr class="even">
-<td>str_remove</td>
+<td><code>str_remove</code></td>
 <td>xoá 1 chuỗi con (substring) đầu tiên khớp với pattern</td>
 </tr>
 <tr class="odd">
-<td>str_remove_all</td>
+<td><code>str_remove_all</code></td>
 <td>xoá tất cả các chuỗi con (substring) khớp với pattern</td>
 </tr>
 <tr class="even">
-<td>str_replace</td>
+<td><code>str_replace</code></td>
 <td>thay thế 1 chuỗi con (substring) đầu tiên khớp với pattern bằng 1 chuỗi mới&nbsp;</td>
 </tr>
 <tr class="odd">
-<td>str_replace_all</td>
+<td><code>str_replace_all</code></td>
 <td>thay thế tất cả chuỗi con (substring) khớp với pattern bằng 1 chuỗi mới&nbsp;</td>
 </tr>
 </tbody>
@@ -838,14 +888,12 @@ Lệnh <code>mutate</code>
 <p>Có bốn công cụ cơ bản mà người dùng có thể sử dụng để tạo một biểu thức chính quy cơ bản:</p>
 <ul>
 <li>Nhóm</li>
+<li>Bộ ký tự</li>
+<li>Siêu ký tự</li>
+<li>Bộ định lượng</li>
 </ul>
-<!-- -->
-<ul>
-<li><p>Bộ ký tự</p></li>
-<li><p>Siêu ký tự</p></li>
-<li><p>Bộ định lượng</p></li>
-</ul>
-<p><strong>Nhóm</strong> chỉ định các chuỗi cần khớp. Thường được viết trong<code>()</code> và phân cách bởi dấu <code>|</code> VD: <code>"(Quận|Huyện)"</code> - quy định cần khớp chữ <code>"Quận"</code> hay <code>"Huyện"</code>.</p>
+<p><strong>Nhóm</strong> chỉ định các chuỗi cần khớp. Thường được viết trong<code>()</code> và phân cách bởi dấu <code>|</code></p>
+<p><em>VD</em>: <code>"(Quận|Huyện)"</code> - quy định cần khớp chữ <code>"Quận"</code> hay <code>"Huyện"</code>.</p>
 <p><strong>Bộ ký tự</strong> string được đánh giá khớp tìm thấy bất kỳ ký tự nào trong dấu ngoặc <code>[ ]</code> trong chuỗi. Vd, để tìm string chứa các nguyên âm, người ta có thể sử dụng bộ ký tự này: <code>"[aeiou]"</code>.</p>
 <p>Các bộ ký tự đặc biệt trong R</p>
 <table class="table">
@@ -890,6 +938,17 @@ Lệnh <code>mutate</code>
 </tr>
 </tbody>
 </table>
+<p><strong>Bộ định lượng</strong> chỉ định độ dài của pattern Bộ định lượng là các số được viết trong dấu ngoặc nhọn <code>{ }</code> sau pattern mà chúng đang định lượng. Ngoài ra có 2 ký tự đặc biệt khác cho bộ định lượng, bao gồm:</p>
+<ul>
+<li><p>Dấu <code>*</code> : khớp khi có 0 hoặc nhiều hơn pattern được định lượng.</p></li>
+<li><p>Dấu <code>+</code> : khớp khi có 1 hoặc nhiều hơn pattern được định lượng.</p></li>
+</ul>
+<p><em>VD</em>:</p>
+<ul>
+<li><p><code>"A{2}"</code> quy định khớp khi có hai chữ cái A viết hoa.</p></li>
+<li><p><code>"[:digit:]{2}"</code> quy định khớp khi có hai chữ số.</p></li>
+<li><p><code>"[:alpha:]+"</code> quy định khớp khi có ít nhất 1 chữ cái.</p></li>
+</ul>
 <p><strong>Siêu ký tự</strong> là phiên bản rút ngắn của 1 số bộ ký tự</p>
 <table class="table">
 <thead>
@@ -914,6 +973,75 @@ Lệnh <code>mutate</code>
 </tbody>
 </table>
 </section>
+<section id="một-số-ví-dụ-sử-dụng-hàm-của-stringr-cùng-regex" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="một-số-ví-dụ-sử-dụng-hàm-của-stringr-cùng-regex"><span class="header-section-number">3.5.3</span> Một số ví dụ sử dụng hàm của <code>stringr</code> cùng regex</h3>
+<p><strong><em>VD1</em></strong>: Cần tìm kiếm thông tin cho những ai có tên là Thịnh/Hằng/Diễm</p>
+<ul>
+<li><p>Chọn câu lệnh: cần tìm theo tên –&gt; <u>cần kiểm tra chữ cuối</u> trong string -&gt;dùng lệnh <code>str_ends</code></p></li>
+<li><p>Quy định pattern bằng regex: cần string khớp với 1 trong các tên nêu trên -&gt; áp dụng <strong>Nhóm</strong></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>practising_cert_df <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>( <span class="co"># gọi filter để lọc </span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_ends</span>( <span class="co"># gọi lệnh str_ends để kiểm tra các ký tự cuối của string </span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>      HoTen, <span class="co"># cần kiểm tra cột HoTen</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">"(Thịnh|Hằng|Diễm)"</span> <span class="co"># quy định pattern cần khớp</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 920 × 9
+   HoTen               TenQuocTich SoChungChi NoiCapChungChi NgayCapChungChi    
+   &lt;chr&gt;               &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dttm&gt;             
+ 1 Nguyễn Thị Thu Hằng Việt Nam    000092/ĐT… 4              2012-04-26 00:00:00
+ 2 La Hằng             Việt Nam    000119/HC… 4              2012-04-23 00:00:00
+ 3 Nguyễn Văn Thịnh    Việt Nam    000152/HC… 4              2012-04-23 00:00:00
+ 4 Phan Thị Thúy Diễm  None        0001586/K… 32             2013-12-12 00:00:00
+ 5 Lê Thị Thu Hằng     Việt Nam    0002257/Q… 4              2015-11-20 00:00:00
+ 6 Nguyễn Thị Thúy Hằ… Việt Nam    0002562/Q… 50             2016-01-22 00:00:00
+ 7 Nguyễn Thị Thúy Di… None        0003849/Đ… 23             2014-11-19 00:00:00
+ 8 Lê Ngọc Thịnh       Việt Nam    0004194/K… 32             2015-09-29 00:00:00
+ 9 Nguyễn Đức Thịnh    Việt Nam    0004235/Đ… 4              2014-06-08 00:00:00
+10 Huỳnh Thị Hằng      Việt Nam    0004402/B… 12             2015-01-15 00:00:00
+# ℹ 910 more rows
+# ℹ 4 more variables: TenPhamViHoatDong &lt;chr&gt;, TinhTrang &lt;chr&gt;, TenCoSo &lt;chr&gt;,
+#   DiaChiCS &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p><strong><em>VD 2</em></strong>: cần tìm thông tin cho những ai được cấp chứng chỉ chữa bệnh chuyên khoa răng hàm mặt hoặc mắt</p>
+<ul>
+<li><p>Chọn câu lệnh: cần lọc các hàng có Phạm Vi Hoạt động <u>chứa dòng chữ</u> “răng hàm mặt” hoặc “mắt” –&gt; dùng lệnh <code>str_detect</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>practising_cert_df <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># chuyển thành in thường để tránh các tình trạng không khớp vì khác case</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TenPhamViHoatDong =</span> <span class="fu">tolower</span>(TenPhamViHoatDong)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>      TenPhamViHoatDong, </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"(răng hàm mặt|mắt)"</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(HoTen, TenPhamViHoatDong)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,575 × 2
+   HoTen                     TenPhamViHoatDong                             
+   &lt;chr&gt;                     &lt;chr&gt;                                         
+ 1 Trần Thị Phương Thu       khám bệnh, chữa bệnh chuyên khoa mắt.         
+ 2 Nguyễn Thái Thảo Nguyên   khám bệnh, chữa bệnh chuyên khoa răng hàm mặt.
+ 3 Đoàn Thị Thùy Trang       khám bệnh, chữa bệnh chuyên khoa răng hàm mặt.
+ 4 Ngô Ngọc Liêm             khám bệnh, chữa bệnh chuyên khoa mắt.         
+ 5 Ngô Ngọc Liêm             khám bệnh, chữa bệnh chuyên khoa mắt.         
+ 6 Trần Thu Trang            khám bệnh, chữa bệnh chuyên khoa răng hàm mặt.
+ 7 Phạm Bảo Chung            khám bệnh, chữa bệnh chuyên khoa răng hàm mặt.
+ 8 Võ Văn Minh Hoài          khám bệnh, chữa bệnh chuyên khoa răng hàm mặt.
+ 9 Nguyễn Thành Tung Ái Quốc khám bệnh, chữa bệnh chuyên khoa mắt.         
+10 Đoàn Thị Thúy Hòa         khám bệnh, chữa bệnh chuyên khoa răng hàm mặt.
+# ℹ 2,565 more rows</code></pre>
+</div>
+</div></li>
+</ul>
+</section>
 </section>
 <section id="dữ-liệu-ngày-tháng" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="dữ-liệu-ngày-tháng"><span class="header-section-number">3.6</span> Dữ liệu ngày tháng</h2>
@@ -922,9 +1050,9 @@ Lệnh <code>mutate</code>
 <h3 data-number="3.6.1" class="anchored" data-anchor-id="các-lệnh-liên-quan-đến-ngày-tháng"><span class="header-section-number">3.6.1</span> Các lệnh liên quan đến ngày tháng</h3>
 <table class="table">
 <colgroup>
-<col style="width: 24%">
-<col style="width: 62%">
-<col style="width: 12%">
+<col style="width: 23%">
+<col style="width: 52%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -935,27 +1063,27 @@ Lệnh <code>mutate</code>
 </thead>
 <tbody>
 <tr class="odd">
-<td>difftime()</td>
+<td><code>difftime</code></td>
 <td>tính khoảng cách giữa hai mốc thời gian</td>
 <td>base</td>
 </tr>
 <tr class="even">
-<td>month()/year()</td>
+<td><code>month</code>/<code>year</code></td>
 <td>lấy tháng/ năm</td>
 <td>lubridate</td>
 </tr>
 <tr class="odd">
-<td>quarter()</td>
+<td><code>quarter</code></td>
 <td>chuyển ngày sang quý</td>
 <td>lubridate</td>
 </tr>
 <tr class="even">
-<td>today()</td>
+<td><code>today</code></td>
 <td>lấy ngày hiện tại</td>
 <td>lubridate</td>
 </tr>
 <tr class="odd">
-<td>dmy(), ymd(), mdy()</td>
+<td><code>dmy</code>, <code>ymd</code>, <code>mdy</code></td>
 <td>chuyển string theo nhiều format khác nhau sang ngày</td>
 <td>lubridate</td>
 </tr>
@@ -964,6 +1092,63 @@ Lệnh <code>mutate</code>
 <div class="center-text">
 <p><a href="https://lubridate.tidyverse.org/reference/index.html" class="btn btn-outline-secondary" role="button"><i class="fa-solid fa-link" aria-label="link"></i> lubridate functions</a></p>
 </div>
+<p><strong>VD</strong>: cần tìm những ai được cấp chứng chỉ hành nghề trong vòng 5 năm gần đây</p>
+<ul>
+<li><p>Cần lấy ngày hiện tại để tính toán –&gt; dùng lệnh <code>today()</code></p></li>
+<li><p>Cần tính khoảng thời gian từ lúc cấp chứng chỉ đến hiện tại -&gt; dùng lệnh <code>difftime()</code> với unit là days (difftime không có unit year) sau đó chia cho 365</p>
+<p><u>hoặc</u> dùng lệnh <code>year</code> để lấy năm của 2 mốc thời gian rồi trừ nhau</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Cách 1</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>practising_cert_df <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># gọi difftime để tính khoảng cách thời gian</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">difftime</span>(<span class="fu">today</span>(), NgayCapChungChi, <span class="at">units =</span> <span class="st">"days"</span>)<span class="sc">/</span><span class="dv">365</span> <span class="sc">&lt;=</span> <span class="dv">5</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 44 × 9
+   HoTen               TenQuocTich SoChungChi NoiCapChungChi NgayCapChungChi    
+   &lt;chr&gt;               &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dttm&gt;             
+ 1 Nguyễn Cẩm Tú       Việt Nam    001982/LA… 39             2019-09-27 00:00:00
+ 2 Nguyễn Hoàng Thùy … Việt Nam    0027044    4              2019-03-26 00:00:00
+ 3 NGUYỄN ĐĂNG GIÁP    None        003982/QB… 46             2019-09-15 00:00:00
+ 4 Nguyễn Thị Anh Thư  Việt Nam    004856/QN… 48             2019-04-16 00:00:00
+ 5 Nguyễn Thị Thanh H… Việt Nam    006349/BĐ… 12             2019-03-26 00:00:00
+ 6 Đỗ Thị Thái         Việt Nam    006353/BĐ… 12             2019-03-26 00:00:00
+ 7 Trần Thảo Quyên     Việt Nam    007945/ĐN… 3              2019-03-28 00:00:00
+ 8 Phan Thanh Duy      Việt Nam    008141/ĐL… 19             2019-05-18 00:00:00
+ 9 Quách Thị Bích Vân  Việt Nam    011513/ĐN… 22             2019-04-18 00:00:00
+10 BISET JEAN-FRANCOI… Pháp        039596/BY… 64             2019-03-29 00:00:00
+# ℹ 34 more rows
+# ℹ 4 more variables: TenPhamViHoatDong &lt;chr&gt;, TinhTrang &lt;chr&gt;, TenCoSo &lt;chr&gt;,
+#   DiaChiCS &lt;chr&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Cách 2</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>practising_cert_df <span class="sc">%&gt;%</span> </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Gọi year để lấy năm sau đó trừ nhau</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">year</span>(<span class="fu">today</span>()) <span class="sc">-</span> <span class="fu">year</span>(NgayCapChungChi)  <span class="sc">&lt;=</span> <span class="dv">5</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 77 × 9
+   HoTen               TenQuocTich SoChungChi NoiCapChungChi NgayCapChungChi    
+   &lt;chr&gt;               &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dttm&gt;             
+ 1 TRẦN QUỐC KHƯƠNG    Việt Nam    0003464/V… 61             2019-01-31 00:00:00
+ 2 Nguyễn Cẩm Tú       Việt Nam    001982/LA… 39             2019-09-27 00:00:00
+ 3 Nguyễn Hoàng Thùy … Việt Nam    0027044    4              2019-03-26 00:00:00
+ 4 Nguyễn Hoàng Anh Tú Việt Nam    003457/TV… 59             2019-01-25 00:00:00
+ 5 NGUYỄN ĐĂNG GIÁP    None        003982/QB… 46             2019-09-15 00:00:00
+ 6 Nguyễn Cảnh Lộc     Việt Nam    004854/GL… 24             2019-02-28 00:00:00
+ 7 Nguyễn Thị Anh Thư  Việt Nam    004856/QN… 48             2019-04-16 00:00:00
+ 8 Nguyễn Thị Thanh H… Việt Nam    006349/BĐ… 12             2019-03-26 00:00:00
+ 9 Đỗ Thị Thái         Việt Nam    006353/BĐ… 12             2019-03-26 00:00:00
+10 Trần Hữu Nghĩa      Việt Nam    006869     47             2019-01-10 00:00:00
+# ℹ 67 more rows
+# ℹ 4 more variables: TenPhamViHoatDong &lt;chr&gt;, TinhTrang &lt;chr&gt;, TenCoSo &lt;chr&gt;,
+#   DiaChiCS &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Trong 2 ví dụ trên, cách 1 sẽ chính xác hơn vì ta tính cả ngày/tháng khi sử dụng difftime còn cách 2 chỉ lấy 2 năm trừ nhau</p>
 </section>
 </section>
 <section id="lưu-bảng-dữ-liệu-sau-khi-chỉnh-sửa" class="level2" data-number="3.7">
@@ -988,30 +1173,30 @@ Lưu ý
 Vì vậy, đối với các dữ liệu có số lượng lớn hoặc cần xử lý thêm trong R, nên lưu trữ dưới dạng RDS/Rdata.</p>
 </div>
 </div>
-<p>VD lưu dữ liệu</p>
+<p><strong>VD:</strong> lưu dữ liệu</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># định nghĩa đường dẫn đến folder chứa data</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">getwd</span>(), <span class="st">"data"</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lưu dưới dạng Rdata</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(df, <span class="at">file =</span> <span class="fu">file.path</span>(data_path, <span class="st">"rda_data.Rda"</span>))</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># lưu dưới dạng RDS</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(df, <span class="at">file =</span> <span class="fu">file.path</span>(data_path, <span class="st">"rds_data.Rds"</span>))</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># lưu dưới dạng file excel</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(df, <span class="at">path =</span> <span class="fu">file.path</span>(data_path, <span class="st">"excel_data.xlsx"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># định nghĩa đường dẫn đến folder chứa data</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">getwd</span>(), <span class="st">"data"</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lưu dưới dạng Rdata</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(df, <span class="at">file =</span> <span class="fu">file.path</span>(data_path, <span class="st">"rda_data.Rda"</span>))</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co"># lưu dưới dạng RDS</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(df, <span class="at">file =</span> <span class="fu">file.path</span>(data_path, <span class="st">"rds_data.Rds"</span>))</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co"># lưu dưới dạng file excel</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(df, <span class="at">path =</span> <span class="fu">file.path</span>(data_path, <span class="st">"excel_data.xlsx"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Đọc dữ liệu được lưu</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># đọc file Rdata</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">file.path</span>(data_path, <span class="st">"rda_data.Rda"</span>))</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># đọc file RDS</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(data_path, <span class="st">"rds_data.Rds"</span>))</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># đọc file excel</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(df, <span class="at">path =</span> <span class="fu">file.path</span>(data_path, <span class="st">"excel_data.xlsx"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># đọc file Rdata</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">file.path</span>(data_path, <span class="st">"rda_data.Rda"</span>))</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># đọc file RDS</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(data_path, <span class="st">"rds_data.Rds"</span>))</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co"># đọc file excel</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(df, <span class="at">path =</span> <span class="fu">file.path</span>(data_path, <span class="st">"excel_data.xlsx"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
