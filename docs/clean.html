@@ -250,10 +250,15 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
   <li><a href="#tên-cột" id="toc-tên-cột" class="nav-link" data-scroll-target="#tên-cột"><span class="toc-section-number">4.1.2</span>  Tên cột</a></li>
   </ul></li>
   <li><a href="#kết-hợp-dữ-liệu" id="toc-kết-hợp-dữ-liệu" class="nav-link" data-scroll-target="#kết-hợp-dữ-liệu"><span class="toc-section-number">4.2</span>  Kết hợp dữ liệu</a></li>
-  <li><a href="#xử-lý-các-dữ-liệu-lỗi" id="toc-xử-lý-các-dữ-liệu-lỗi" class="nav-link" data-scroll-target="#xử-lý-các-dữ-liệu-lỗi"><span class="toc-section-number">4.3</span>  Xử lý các dữ liệu lỗi</a>
+  <li><a href="#biến-đổi-cột" id="toc-biến-đổi-cột" class="nav-link" data-scroll-target="#biến-đổi-cột"><span class="toc-section-number">4.3</span>  Biến đổi cột</a>
   <ul class="collapse">
-  <li><a href="#kiểm-tra-giá-trị" id="toc-kiểm-tra-giá-trị" class="nav-link" data-scroll-target="#kiểm-tra-giá-trị"><span class="toc-section-number">4.3.1</span>  Kiểm tra giá trị</a></li>
-  <li><a href="#xử-lý-dữ-liệu" id="toc-xử-lý-dữ-liệu" class="nav-link" data-scroll-target="#xử-lý-dữ-liệu"><span class="toc-section-number">4.3.2</span>  Xử lý dữ liệu</a></li>
+  <li><a href="#chọn-cột" id="toc-chọn-cột" class="nav-link" data-scroll-target="#chọn-cột"><span class="toc-section-number">4.3.1</span>  Chọn cột</a></li>
+  <li><a href="#tạo-cột-mới" id="toc-tạo-cột-mới" class="nav-link" data-scroll-target="#tạo-cột-mới"><span class="toc-section-number">4.3.2</span>  Tạo cột mới</a></li>
+  </ul></li>
+  <li><a href="#xử-lý-các-dữ-liệu-lỗi" id="toc-xử-lý-các-dữ-liệu-lỗi" class="nav-link" data-scroll-target="#xử-lý-các-dữ-liệu-lỗi"><span class="toc-section-number">4.4</span>  Xử lý các dữ liệu lỗi</a>
+  <ul class="collapse">
+  <li><a href="#kiểm-tra-giá-trị" id="toc-kiểm-tra-giá-trị" class="nav-link" data-scroll-target="#kiểm-tra-giá-trị"><span class="toc-section-number">4.4.1</span>  Kiểm tra giá trị</a></li>
+  <li><a href="#xử-lý-dữ-liệu" id="toc-xử-lý-dữ-liệu" class="nav-link" data-scroll-target="#xử-lý-dữ-liệu"><span class="toc-section-number">4.4.2</span>  Xử lý dữ liệu</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -413,9 +418,9 @@ Attaching package: 'janitor'</code></pre>
 <p>Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package <code>dplyr</code> sau đây</p>
 <table class="table">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 17%">
-<col style="width: 64%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 58%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -459,7 +464,144 @@ Attaching package: 'janitor'</code></pre>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Nối 2 bảng bằng lệnh left_join</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Trong trường hợp này, tuy lệnh join_by không cần thiết nhưng có thể giúp cho code rõ ràng hơn </span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(df, mt, <span class="at">by =</span> <span class="fu">join_by</span>(country_code <span class="sc">==</span> country_code))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">left_join</span>(df, mt, <span class="at">by =</span> <span class="fu">join_by</span>(country_code <span class="sc">==</span> country_code))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  country_name country_code year     gdp region       income_group special_notes
+  &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;        
+1 Aruba        ABW          2015  28419. Latin Ameri… High income  &lt;NA&gt;         
+2 Aruba        ABW          2016  28450. Latin Ameri… High income  &lt;NA&gt;         
+3 Aruba        ABW          2017  29329. Latin Ameri… High income  &lt;NA&gt;         
+4 Aruba        ABW          2018  30918. Latin Ameri… High income  &lt;NA&gt;         
+5 Aruba        ABW          2019  31903. Latin Ameri… High income  &lt;NA&gt;         
+6 Aruba        ABW          2020  24008. Latin Ameri… High income  &lt;NA&gt;         
+# ℹ 1 more variable: table_name &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="biến-đổi-cột" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="biến-đổi-cột"><span class="header-section-number">4.3</span> Biến đổi cột</h2>
+<section id="chọn-cột" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="chọn-cột"><span class="header-section-number">4.3.1</span> Chọn cột</h3>
+<p>Ngoài cách chọn cột theo tên cơ bản như đã học ở phần <a href="r_basics.html#sec-df-row-col"><span>Section&nbsp;3.4</span></a>, lệnh <code>select</code> của dplyr cũng thường được sử dụng cho các cách chọn cột phức tạp hơn, bao gồm:</p>
+<ul>
+<li><p>Chọn cột có tên bắt đầu/kết thúc bằng chuỗi ký tự được chỉ định bằng <code>starts_with</code>/<code>ends_with</code></p></li>
+<li><p>Chọn cột có tên chứa chuỗi được quy định bằng <code>contains</code></p></li>
+<li><p>Dùng <code>where()</code>&nbsp;để áp dụng một hàm cho tất cả các cột và chọn những cột trả về giá trị TRUE</p></li>
+<li><p>Xoá cột bằng cách thêm dấu <code>-</code> trước tên cột</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Chọn cột bắt đầu bằng chữ country</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"country"</span>)) <span class="sc">%&gt;%</span> <span class="fu">colnames</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "country_name" "country_code"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Chọn cột kết thúc bằng chữ code</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">"code"</span>)) <span class="sc">%&gt;%</span> <span class="fu">colnames</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "country_code"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Chọn cột có tên chứa dấu _</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"_"</span>)) <span class="sc">%&gt;%</span> <span class="fu">colnames</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "country_name"  "country_code"  "income_group"  "special_notes"
+[5] "table_name"   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Chọn cột có datatype là char</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(is.character)) <span class="sc">%&gt;%</span> <span class="fu">colnames</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "country_name"  "country_code"  "year"          "region"       
+[5] "income_group"  "special_notes" "table_name"   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Xóa cột </span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>country_name) <span class="sc">%&gt;%</span> <span class="fu">colnames</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "country_code"  "year"          "gdp"           "region"       
+[5] "income_group"  "special_notes" "table_name"   </code></pre>
+</div>
+</div>
+</section>
+<section id="tạo-cột-mới" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="tạo-cột-mới"><span class="header-section-number">4.3.2</span> Tạo cột mới</h3>
+<p>Như đã được nhắc đến trong phần 3, lệnh <code>mutate</code> được sử dụng để tạo cột mới hoặc chỉnh sửa giá trị của cột.</p>
+<p>Một số argument (tham số) thông dụng của lệnh <code>mutate</code></p>
+<ul>
+<li><p><code>.before</code> / <code>.after</code> quy định vị trí của cột mới trước hoặc sau cột được chỉ định</p></li>
+<li><p><code>.keep</code> quy định các cột được giữ lại sau lệnh <code>mutate</code></p>
+<ul>
+<li><p><code>"all"</code> giữ lại tất cả các cột gốc (default)</p></li>
+<li><p><code>"none"</code> không giữ lại các cột gốc</p></li>
+<li><p><code>"used"</code> giữ lại các cột được sử dụng trong <code>mutate</code></p></li>
+<li><p><code>"unused"</code> giữ lại các cột <u>không</u> được sử dụng</p></li>
+</ul></li>
+</ul>
+<p><strong>VD</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># tạo cột mới kết hợp 3 cột country_name, country_code, region</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">country_details =</span> <span class="fu">str_glue</span>(<span class="st">"Name: {country_name} Code:{country_code} Region: {region}"</span>),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"used"</span>, <span class="co"># giữ các cột được sử dụng</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before =</span> country_name <span class="co"># đặt cột country_details trước cột country_name</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,128 × 4
+   country_details                              country_name country_code region
+   &lt;glue&gt;                                       &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; 
+ 1 Name: Aruba Code:ABW Region: Latin America … Aruba        ABW          Latin…
+ 2 Name: Aruba Code:ABW Region: Latin America … Aruba        ABW          Latin…
+ 3 Name: Aruba Code:ABW Region: Latin America … Aruba        ABW          Latin…
+ 4 Name: Aruba Code:ABW Region: Latin America … Aruba        ABW          Latin…
+ 5 Name: Aruba Code:ABW Region: Latin America … Aruba        ABW          Latin…
+ 6 Name: Aruba Code:ABW Region: Latin America … Aruba        ABW          Latin…
+ 7 Name: Aruba Code:ABW Region: Latin America … Aruba        ABW          Latin…
+ 8 Name: Aruba Code:ABW Region: Latin America … Aruba        ABW          Latin…
+ 9 Name: Africa Eastern and Southern Code:AFE … Africa East… AFE          &lt;NA&gt;  
+10 Name: Africa Eastern and Southern Code:AFE … Africa East… AFE          &lt;NA&gt;  
+# ℹ 2,118 more rows</code></pre>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Hàm <code>mutate_at</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Được sử dụng khi cần áp dụng 1 function lên nhiều cột cùng lúc<br>
+VD: chuyển region, income_group sang dạng factor</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"income_group"</span>), as.factor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="xử-lý-các-dữ-liệu-lỗi" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="xử-lý-các-dữ-liệu-lỗi"><span class="header-section-number">4.4</span> Xử lý các dữ liệu lỗi</h2>
+<section id="kiểm-tra-giá-trị" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="kiểm-tra-giá-trị"><span class="header-section-number">4.4.1</span> Kiểm tra giá trị</h3>
+<p>Thường bao gồm các bước chính</p>
+<ul>
+<li><p>Kiểm tra datatype</p></li>
+<li><p>Kiểm tra các giá trị NA</p></li>
+<li><p>Kiểm tra các khoảng giá trị của từng cột</p></li>
+</ul>
+<section id="kiểm-tra-datatype" class="level4" data-number="4.4.1.1">
+<h4 data-number="4.4.1.1" class="anchored" data-anchor-id="kiểm-tra-datatype"><span class="header-section-number">4.4.1.1</span> Kiểm tra datatype</h4>
+<p>Khi đọc dữ liệu, R sẽ tự động đổi datatype của các cột sang dạng phù hợp nhất. Tuy nhiên, đôi lúc R sẽ chuyển thành datatype khác với mong muốn.</p>
+<p>Một số trường hợp có thể xảy ra lỗi bao gồm:</p>
+<ul>
+<li><p>Cột số nhưng có 1 số hàng chứa chữ</p></li>
+<li><p>Ngày theo format khác với format tiêu chuẩn của R (VD: <code>as.Date("01-01-2014")</code>)</p></li>
+</ul>
+<p>Để kiểm tra datatype, ta có thể print bảng và xem tên datatype bên dưới tên mỗi cột</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,128 × 8
    country_name      country_code year     gdp region income_group special_notes
@@ -479,40 +621,44 @@ Attaching package: 'janitor'</code></pre>
 </div>
 </div>
 </section>
-<section id="xử-lý-các-dữ-liệu-lỗi" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="xử-lý-các-dữ-liệu-lỗi"><span class="header-section-number">4.3</span> Xử lý các dữ liệu lỗi</h2>
-<section id="kiểm-tra-giá-trị" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="kiểm-tra-giá-trị"><span class="header-section-number">4.3.1</span> Kiểm tra giá trị</h3>
-<p>Thường bao gồm các bước chính</p>
-<ul>
-<li><p>Kiểm tra datatype</p></li>
-<li><p>Kiểm tra các giá trị NA</p></li>
-<li><p>Kiểm tra các khoảng giá trị của từng cột</p></li>
-</ul>
-<section id="kiểm-tra-datatype" class="level4" data-number="4.3.1.1">
-<h4 data-number="4.3.1.1" class="anchored" data-anchor-id="kiểm-tra-datatype"><span class="header-section-number">4.3.1.1</span> Kiểm tra datatype</h4>
-<p>Khi đọc dữ liệu, R sẽ tự động đổi datatype của các cột sang dạng phù hợp nhất. Tuy nhiên, đôi lúc R sẽ chuyển thành datatype khác với mong muốn.</p>
-<p>Một số trường hợp có thể xảy ra lỗi bao gồm:</p>
-<ul>
-<li><p>Cột số nhưng có 1 số hàng chứa chữ</p></li>
-<li><p>Ngày theo format khác với format tiêu chuẩn của R (VD: <code>as.Date("01-01-2014")</code>)</p></li>
-</ul>
-</section>
-<section id="kiểm-tra-na-khoảng-giá-trị-của-từng-cột" class="level4" data-number="4.3.1.2">
-<h4 data-number="4.3.1.2" class="anchored" data-anchor-id="kiểm-tra-na-khoảng-giá-trị-của-từng-cột"><span class="header-section-number">4.3.1.2</span> Kiểm tra NA/ khoảng giá trị của từng cột</h4>
+<section id="kiểm-tra-na-khoảng-giá-trị-của-từng-cột" class="level4" data-number="4.4.1.2">
+<h4 data-number="4.4.1.2" class="anchored" data-anchor-id="kiểm-tra-na-khoảng-giá-trị-của-từng-cột"><span class="header-section-number">4.4.1.2</span> Kiểm tra NA/ khoảng giá trị của từng cột</h4>
 <p>Trong R có lệnh <code>summary</code> để người dùng có thể nhanh chóng kiểm tra các khoảng giá trị và số dữ liệu NA trong từng cột.</p>
 <p>Ngoài ra, tuỳ vào bộ dữ liệu, có thể cần kiểm tra giá trị giữa các cột (VD: trong dữ liệu tiêm chủng có thể có mũi 2 trùng hoặc trước ngày tiêm mũi 1)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> country_name       country_code           year                gdp          
+ Length:2128        Length:2128        Length:2128        Min.   :   216.8  
+ Class :character   Class :character   Class :character   1st Qu.:  2181.9  
+ Mode  :character   Mode  :character   Mode  :character   Median :  6690.6  
+                                                          Mean   : 16939.5  
+                                                          3rd Qu.: 20256.4  
+                                                          Max.   :240862.2  
+                                                          NA's   :78        
+    region          income_group       special_notes       table_name       
+ Length:2128        Length:2128        Length:2128        Length:2128       
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+                                                                            </code></pre>
+</div>
+</div>
 <hr>
 </section>
 </section>
-<section id="xử-lý-dữ-liệu" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="xử-lý-dữ-liệu"><span class="header-section-number">4.3.2</span> Xử lý dữ liệu</h3>
+<section id="xử-lý-dữ-liệu" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="xử-lý-dữ-liệu"><span class="header-section-number">4.4.2</span> Xử lý dữ liệu</h3>
+<p>Thường bao gồm các bước chính</p>
 <ul>
-<li><p>Mã hoá lại dữ liệu/ Xử lý các hàng có giá trị lỗi</p></li>
+<li><p>Mã hoá lại dữ liệu</p></li>
 <li><p>Lọc trùng</p></li>
+<li><p>Lọc hàng</p></li>
 </ul>
-<section id="mã-hoá-dữ-liệu" class="level4" data-number="4.3.2.1">
-<h4 data-number="4.3.2.1" class="anchored" data-anchor-id="mã-hoá-dữ-liệu"><span class="header-section-number">4.3.2.1</span> Mã hoá dữ liệu</h4>
+<section id="mã-hoá-dữ-liệu" class="level4" data-number="4.4.2.1">
+<h4 data-number="4.4.2.1" class="anchored" data-anchor-id="mã-hoá-dữ-liệu"><span class="header-section-number">4.4.2.1</span> Mã hoá dữ liệu</h4>
 <p>Các trường hợp có thể cần mã hoá lại dữ liệu:</p>
 <ul>
 <li><p>Dữ liệu NA (trống)</p></li>
@@ -526,24 +672,113 @@ Attaching package: 'janitor'</code></pre>
 <li><p><code>case_when</code> mã hóa giá trị cho nhiều trường hợp nhất định</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Thay thế các giá trị NA trong cột col1 thành "default"</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col1 =</span> <span class="fu">replace_na</span>(<span class="st">"default"</span>))</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Thay thế các giá trị được đánh dấu trong col2 thành TRUE và ngược lại</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col2 =</span> <span class="sc">!</span><span class="fu">is.na</span>(col2))</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Cách làm khác bằng ifelse</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col2 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(col2), <span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Thay thế các giá trị NA trong cột col1 thành "default"</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col1 =</span> <span class="fu">replace_na</span>(<span class="st">"default"</span>))</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Thay thế các giá trị được đánh dấu trong col2 thành TRUE và ngược lại</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col2 =</span> <span class="sc">!</span><span class="fu">is.na</span>(col2))</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Cách làm khác bằng ifelse</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col2 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(col2), <span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="lọc-trùng" class="level4" data-number="4.3.2.2">
-<h4 data-number="4.3.2.2" class="anchored" data-anchor-id="lọc-trùng"><span class="header-section-number">4.3.2.2</span> Lọc trùng</h4>
+<section id="lọc-trùng" class="level4" data-number="4.4.2.2">
+<h4 data-number="4.4.2.2" class="anchored" data-anchor-id="lọc-trùng"><span class="header-section-number">4.4.2.2</span> Lọc trùng</h4>
 <p>Lệnh <code>distinct</code> của gói <code>dplyr</code> sẽ dữ lại 1 hàng duy nhất trong các hàng có giá trị bị trùng.</p>
 <p>Lệnh <code>distinct</code> mặc định sẽ kiểm tra giá trị của tất cả các cột (2 hàng được đánh giá là trùng khi tất cả các trị của chúng giống nhau).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">distinct</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">distinct</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lọc-hàng" class="level4" data-number="4.4.2.3">
+<h4 data-number="4.4.2.3" class="anchored" data-anchor-id="lọc-hàng"><span class="header-section-number">4.4.2.3</span> Lọc hàng</h4>
+<p>Bước làm sạch điển hình sau khi đã làm sạch các cột và các giá trị được mã hóa lại đó là&nbsp;<em>lọc</em>&nbsp;bộ dữ liệu cho các hàng cụ thể</p>
+<p>Để lọc hàng, ta dùng lệnh <code>filter</code> kết hợp với điều kiện lọc như đã học ở phần <a href="r_basics.html#sec-filter-condition"><span>Section&nbsp;3.4.3</span></a></p>
+<p>Một số điều kiện lọc:</p>
+<ul>
+<li><p>Loại bỏ <code>NA</code>: <code>!is.na()</code></p></li>
+<li><p>Lọc bằng số thứ tự hàng</p></li>
+<li><p>Lọc theo giá trị</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># --- Loại các hàng có NA tại cột year hoặc gdp </span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(year) <span class="sc">|</span> <span class="sc">!</span><span class="fu">is.na</span>(gdp))</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Lọc hàng 10 đến hàng 20</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>, ] <span class="co"># Lọc theo cách của base R </span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>)) <span class="co"># lọc theo cách của dplyr</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Lọc hàng theo giá trị</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">2016</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Lệnh <code>drop_NA</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>drop_NA</code> là lệnh để nhanh chóng drop các hàng có chứa giá trị <code>NA</code> (ở bất kỳ cột nào)<br>
+Nếu tên cột được cung cấp, <code>drop_NA</code> chỉ drop các hàng có giá trị <code>NA</code> ở các cột được quy định</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- drop tất cả các hàng có giá trị NA</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 690 × 8
+   country_name country_code year    gdp region       income_group special_notes
+   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;        
+ 1 Afghanistan  AFG          2015   567. South Asia   Low income   "The reporti…
+ 2 Afghanistan  AFG          2016   523. South Asia   Low income   "The reporti…
+ 3 Afghanistan  AFG          2017   526. South Asia   Low income   "The reporti…
+ 4 Afghanistan  AFG          2018   492. South Asia   Low income   "The reporti…
+ 5 Afghanistan  AFG          2019   498. South Asia   Low income   "The reporti…
+ 6 Afghanistan  AFG          2020   512. South Asia   Low income   "The reporti…
+ 7 Afghanistan  AFG          2021   356. South Asia   Low income   "The reporti…
+ 8 Angola       AGO          2015  3217. Sub-Saharan… Lower middl… "The World B…
+ 9 Angola       AGO          2016  1810. Sub-Saharan… Lower middl… "The World B…
+10 Angola       AGO          2017  2439. Sub-Saharan… Lower middl… "The World B…
+# ℹ 680 more rows
+# ℹ 1 more variable: table_name &lt;chr&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- chỉ drop các hàng có giá trị NA tại cột year</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,128 × 8
+   country_name      country_code year     gdp region income_group special_notes
+   &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;        
+ 1 Aruba             ABW          2015  28419. Latin… High income  &lt;NA&gt;         
+ 2 Aruba             ABW          2016  28450. Latin… High income  &lt;NA&gt;         
+ 3 Aruba             ABW          2017  29329. Latin… High income  &lt;NA&gt;         
+ 4 Aruba             ABW          2018  30918. Latin… High income  &lt;NA&gt;         
+ 5 Aruba             ABW          2019  31903. Latin… High income  &lt;NA&gt;         
+ 6 Aruba             ABW          2020  24008. Latin… High income  &lt;NA&gt;         
+ 7 Aruba             ABW          2021  29128. Latin… High income  &lt;NA&gt;         
+ 8 Aruba             ABW          2022  33301. Latin… High income  &lt;NA&gt;         
+ 9 Africa Eastern a… AFE          2015   1554. &lt;NA&gt;   &lt;NA&gt;         26 countries…
+10 Africa Eastern a… AFE          2016   1444. &lt;NA&gt;   &lt;NA&gt;         26 countries…
+# ℹ 2,118 more rows
+# ℹ 1 more variable: table_name &lt;chr&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Lọc hàng khi còn giá trị NA
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Việc lọc với điều kiện lớn hơn (&gt;) hoặc nhỏ hơn (&lt;) một ngày hoặc số có thể loại bỏ bất kỳ hàng nào có giá trị <code>NA</code>. Điều này là do&nbsp;<code>NA</code>&nbsp;được coi là giá trị lớn hoặc nhỏ vô hạn.</p>
+</div>
 </div>
 
 

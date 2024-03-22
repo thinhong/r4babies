@@ -43,7 +43,8 @@ Hàm `group_by` được sử dụng khi cần chia dữ liệu theo nhóm trư�
 
 Package `gtsummary` có thể hỗ trợ người dùng vẽ các bảng thống kê một cách nhanh chóng
 
-```{r}
+```{r, eval=F}
+df %>% tbl_summary()
 ```
 
 ## Các phép kiểm thường dùng

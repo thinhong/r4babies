@@ -159,7 +159,7 @@ class(example_list)
 # TODO: thực hành điều chỉnh example_list để không còn Warning
 ```
 
-## Làm việc với data.frame
+## Làm việc với data.frame {#sec-df-row-col}
 
 ### Lấy dữ liệu theo hàng/cột
 
@@ -224,10 +224,10 @@ life_exp_df$Status <- as.factor(life_exp_df$Status)
 -   Nếu không sử dụng `<-` thì R chỉ trả về kết quả của function `as.factor` và bảng df sẽ **không** có thay đổi
 :::
 
-### Lọc dữ liệu
+### Lọc dữ liệu {#sec-filter-condition}
 
 Function `filter()` được sử dụng cho việc lọc dữ liệu theo điều kiện\
-Một số ký tự thường được sử dụng cho filter bao gồm:
+Một số ký tự thường được sử dụng để quy định điều kiện bao gồm:
 
 | Ký tự      | Ý nghĩa               |
 |------------|-----------------------|
@@ -295,7 +295,7 @@ practising_cert_df %>%
 ```
 
 ::: callout-note
-### Lệnh `mutate` {.callout-note}
+### Lệnh `mutate` {#sec-mutate .callout-note}
 
 `mutate` được sử dụng để chỉnh sửa giá trị của cột hoặc tạo cột mới
 :::

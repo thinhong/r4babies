@@ -93,7 +93,7 @@ Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác
 Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package `dplyr` sau đây
 
 | Function     | Công dụng          | GIF minh hoạ                                                                                        |
-|-------------|-------------|-----------------------------------------------|
+|---------------|---------------|------------------------------------------|
 | left_join()  | Nối ngoài bên trái | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join.gif?raw=true){width="283"}  |
 | right_join() | Nối ngoài bên phải | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/right-join.gif?raw=true){width="282"} |
 | inner_join() | Nối trong          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/inner-join.gif?raw=true){width="281"} |
@@ -113,8 +113,82 @@ mt <- read_excel(path = "data/gdp-capita.xlsx", sheet = 2) %>%
 
 # --- Nối 2 bảng bằng lệnh left_join
 # Trong trường hợp này, tuy lệnh join_by không cần thiết nhưng có thể giúp cho code rõ ràng hơn 
-left_join(df, mt, by = join_by(country_code == country_code))
+df <- left_join(df, mt, by = join_by(country_code == country_code))
+head(df)
 ```
+
+## Biến đổi cột
+
+### Chọn cột
+
+Ngoài cách chọn cột theo tên cơ bản như đã học ở phần @sec-df-row-col, lệnh `select` của dplyr cũng thường được sử dụng cho các cách chọn cột phức tạp hơn, bao gồm:
+
+-   Chọn cột có tên bắt đầu/kết thúc bằng chuỗi ký tự được chỉ định bằng `starts_with`/`ends_with`
+
+-   Chọn cột có tên chứa chuỗi được quy định bằng `contains`
+
+-   Dùng `where()` để áp dụng một hàm cho tất cả các cột và chọn những cột trả về giá trị TRUE
+
+-   Xoá cột bằng cách thêm dấu `-` trước tên cột
+
+```{r}
+# --- Chọn cột bắt đầu bằng chữ country
+df %>% select(starts_with("country")) %>% colnames()
+
+# --- Chọn cột kết thúc bằng chữ code
+df %>% select(ends_with("code")) %>% colnames()
+              
+# --- Chọn cột có tên chứa dấu _
+df %>% select(contains("_")) %>% colnames()
+
+# --- Chọn cột có datatype là char
+df %>% select(where(is.character)) %>% colnames()
+
+# --- Xóa cột 
+df %>% select(-country_name) %>% colnames()
+```
+
+### Tạo cột mới 
+
+Như đã được nhắc đến trong phần 3, lệnh `mutate` được sử dụng để tạo cột mới hoặc chỉnh sửa giá trị của cột.
+
+Một số argument (tham số) thông dụng của lệnh `mutate`
+
+-   `.before` / `.after` quy định vị trí của cột mới trước hoặc sau cột được chỉ định
+
+-   `.keep` quy định các cột được giữ lại sau lệnh `mutate`
+
+    -   `"all"` giữ lại tất cả các cột gốc (default)
+
+    -   `"none"` không giữ lại các cột gốc
+
+    -   `"used"` giữ lại các cột được sử dụng trong `mutate`
+
+    -   `"unused"` giữ lại các cột [không]{.underline} được sử dụng
+
+**VD**:
+
+```{r}
+df %>% 
+  mutate(
+    # tạo cột mới kết hợp 3 cột country_name, country_code, region
+    country_details = str_glue("Name: {country_name} Code:{country_code} Region: {region}"),
+    .keep = "used", # giữ các cột được sử dụng
+    .before = country_name # đặt cột country_details trước cột country_name
+  )
+
+```
+
+::: callout-note
+### Hàm `mutate_at`
+
+Được sử dụng khi cần áp dụng 1 function lên nhiều cột cùng lúc\
+VD: chuyển region, income_group sang dạng factor
+
+```{r, eval=F}
+df %>% mutate_at(c("region", "income_group"), as.factor)
+```
+:::
 
 ## Xử lý các dữ liệu lỗi
 
@@ -138,19 +212,34 @@ Một số trường hợp có thể xảy ra lỗi bao gồm:
 
 -   Ngày theo format khác với format tiêu chuẩn của R (VD: `as.Date("01-01-2014")`)
 
+Để kiểm tra datatype, ta có thể print bảng và xem tên datatype bên dưới tên mỗi cột
+
+```{r}
+df
+
+```
+
 #### Kiểm tra NA/ khoảng giá trị của từng cột
 
 Trong R có lệnh `summary` để người dùng có thể nhanh chóng kiểm tra các khoảng giá trị và số dữ liệu NA trong từng cột.
 
 Ngoài ra, tuỳ vào bộ dữ liệu, có thể cần kiểm tra giá trị giữa các cột (VD: trong dữ liệu tiêm chủng có thể có mũi 2 trùng hoặc trước ngày tiêm mũi 1)
 
+```{r}
+summary(df)
+```
+
 ------------------------------------------------------------------------
 
 ### Xử lý dữ liệu
 
--   Mã hoá lại dữ liệu/ Xử lý các hàng có giá trị lỗi
+Thường bao gồm các bước chính
+
+-   Mã hoá lại dữ liệu
 
 -   Lọc trùng
+
+-   Lọc hàng
 
 #### Mã hoá dữ liệu
 
@@ -193,3 +282,52 @@ Lệnh `distinct` mặc định sẽ kiểm tra giá trị của tất cả các
 df %>% distinct()
 
 ```
+
+#### Lọc hàng
+
+Bước làm sạch điển hình sau khi đã làm sạch các cột và các giá trị được mã hóa lại đó là *lọc* bộ dữ liệu cho các hàng cụ thể
+
+Để lọc hàng, ta dùng lệnh `filter` kết hợp với điều kiện lọc như đã học ở phần @sec-filter-condition
+
+Một số điều kiện lọc:
+
+-   Loại bỏ `NA`: `!is.na()`
+
+-   Lọc bằng số thứ tự hàng
+
+-   Lọc theo giá trị
+
+```{r, eval=F }
+ # --- Loại các hàng có NA tại cột year hoặc gdp 
+df %>% filter(!is.na(year) | !is.na(gdp))
+
+# --- Lọc hàng 10 đến hàng 20
+df[10:20, ] # Lọc theo cách của base R 
+df %>% filter(row_number() %in% c(10:20)) # lọc theo cách của dplyr
+
+# --- Lọc hàng theo giá trị
+df %>% filter(year > 2016)
+
+```
+
+::: callout-note
+### Lệnh `drop_NA` {.callout-note}
+
+`drop_NA` là lệnh để nhanh chóng drop các hàng có chứa giá trị `NA` (ở bất kỳ cột nào) \
+Nếu tên cột được cung cấp, `drop_NA` chỉ drop các hàng có giá trị `NA` ở các cột được quy định
+
+```{r}
+# --- drop tất cả các hàng có giá trị NA
+df %>% drop_na()
+
+# --- chỉ drop các hàng có giá trị NA tại cột year
+df %>% drop_na(year)
+
+```
+:::
+
+::: callout-important
+### Lọc hàng khi còn giá trị NA
+
+Việc lọc với điều kiện lớn hơn (\>) hoặc nhỏ hơn (\<) một ngày hoặc số có thể loại bỏ bất kỳ hàng nào có giá trị `NA`. Điều này là do `NA` được coi là giá trị lớn hoặc nhỏ vô hạn.
+:::
