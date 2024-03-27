@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R for babies - 3&nbsp; Nhập môn R</title>
+<title>R for babies - 3&nbsp; Làm sạch (p1)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -145,7 +145,7 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Nhập môn R</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Làm sạch (p1)</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -185,12 +185,12 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_basics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Nhập môn R</span></a>
+  <a href="./r_basics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Làm sạch (p1)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clean.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Làm sạch</span></a>
+  <a href="./clean.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Làm sạch (p2)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -260,7 +260,7 @@ gtag('config', 'G-RDC0B0FCNZ', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Nhập môn R</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Làm sạch (p1)</span></h1>
 </div>
 
 
@@ -1106,20 +1106,20 @@ Lệnh <code>mutate</code>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">difftime</span>(<span class="fu">today</span>(), NgayCapChungChi, <span class="at">units =</span> <span class="st">"days"</span>)<span class="sc">/</span><span class="dv">365</span> <span class="sc">&lt;=</span> <span class="dv">5</span></span>
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 44 × 9
+<pre><code># A tibble: 33 × 9
    HoTen               TenQuocTich SoChungChi NoiCapChungChi NgayCapChungChi    
    &lt;chr&gt;               &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dttm&gt;             
  1 Nguyễn Cẩm Tú       Việt Nam    001982/LA… 39             2019-09-27 00:00:00
- 2 Nguyễn Hoàng Thùy … Việt Nam    0027044    4              2019-03-26 00:00:00
- 3 NGUYỄN ĐĂNG GIÁP    None        003982/QB… 46             2019-09-15 00:00:00
- 4 Nguyễn Thị Anh Thư  Việt Nam    004856/QN… 48             2019-04-16 00:00:00
- 5 Nguyễn Thị Thanh H… Việt Nam    006349/BĐ… 12             2019-03-26 00:00:00
- 6 Đỗ Thị Thái         Việt Nam    006353/BĐ… 12             2019-03-26 00:00:00
- 7 Trần Thảo Quyên     Việt Nam    007945/ĐN… 3              2019-03-28 00:00:00
- 8 Phan Thanh Duy      Việt Nam    008141/ĐL… 19             2019-05-18 00:00:00
- 9 Quách Thị Bích Vân  Việt Nam    011513/ĐN… 22             2019-04-18 00:00:00
-10 BISET JEAN-FRANCOI… Pháp        039596/BY… 64             2019-03-29 00:00:00
-# ℹ 34 more rows
+ 2 NGUYỄN ĐĂNG GIÁP    None        003982/QB… 46             2019-09-15 00:00:00
+ 3 Nguyễn Thị Anh Thư  Việt Nam    004856/QN… 48             2019-04-16 00:00:00
+ 4 Phan Thanh Duy      Việt Nam    008141/ĐL… 19             2019-05-18 00:00:00
+ 5 Quách Thị Bích Vân  Việt Nam    011513/ĐN… 22             2019-04-18 00:00:00
+ 6 BISET JEAN-FRANCOI… Pháp        039596/BY… 64             2019-03-29 00:00:00
+ 7 Phạm Thị Hiền       None        039670/BY… 64             2019-04-05 00:00:00
+ 8 Lương Thị Mỹ Hạnh   None        039671/BY… 64             2019-04-05 00:00:00
+ 9 Trương Như Hảo      Việt Nam    039717/BY… 64             2019-04-05 00:00:00
+10 NGUYỄN HOÀNG THỦY … Việt Nam    044540/HC… 4              2019-05-09 00:00:00
+# ℹ 23 more rows
 # ℹ 4 more variables: TenPhamViHoatDong &lt;chr&gt;, TinhTrang &lt;chr&gt;, TenCoSo &lt;chr&gt;,
 #   DiaChiCS &lt;chr&gt;</code></pre>
 </div>
@@ -1346,7 +1346,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./clean.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Làm sạch</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Làm sạch (p2)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

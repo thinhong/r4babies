@@ -1,4 +1,4 @@
-# Nhập môn R
+# Làm sạch (p1)
 
 ::: callout-tip
 # Mục tiêu
