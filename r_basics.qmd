@@ -9,29 +9,18 @@
 :::
 
 ::: callout-note
-# Các package được sử dụng trong bài học
+## Trước buổi học
 
--   tidyverse
+Tải các package sau: tidyverse, writexl, stringi
 
--   stringi
+Và load các package\
 
--   writexl
-:::
-
-### Gọi các thư viện cho bài học
-
-```{r}
+```{r,  warning=FALSE}
 library(tidyverse)
 library(writexl)
+library(readxl)
 library(stringi)
 ```
-
-::: callout-note
-### Package tidyverse
-
-package tidyverse bao hàm nhiều package hỗ trợ trong việc phân tích dữ liệu, bao gồm các package sau: ggplot2, tibble, dplyr, tidyr, stringr, purrr, readr, forcats, lubridate\
-\
-Vì vậy người dùng không cần gọi các thư viện trên sau khi gọi tidyverse
 :::
 
 ## Đối tượng trong R
@@ -113,7 +102,7 @@ mean(x = life_exp_df$GDP, na.rm = TRUE)
 ### Các datatype trong R
 
 | Datatype     | Ý nghĩa                                                                                                                    |
-|-----------------|-------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | `numeric`    | dữ liệu dạng số nguyên                                                                                                     |
 | `double`     | dữ liệu dạng số thập phân                                                                                                  |
 | `logical`    | dữ liệu dạng đúng/sai (TRUE/FALSE)                                                                                         |
@@ -303,7 +292,7 @@ practising_cert_df %>%
 ### Các hàm thông dụng của stringr
 
 |                   |                                                                              |
-|------------------|------------------------------------------------------|
+|--------------------|----------------------------------------------------|
 | **Function**      | **Công dụng**                                                                |
 | `str_starts`      | lọc hàng bắt đầu bằng chuỗi ký tự khớp với pattern                           |
 | `str_ends`        | lọc hàng kết thúc bằng bằng chuỗi ký tự khớp với pattern                     |
@@ -417,7 +406,7 @@ practising_cert_df %>%
 ### Các lệnh liên quan đến ngày tháng
 
 | Function            | Công dụng                                           | Package   |
-|-----------------|--------------------------------------|-----------------|
+|------------------|------------------------------------|------------------|
 | `difftime`          | tính khoảng cách giữa hai mốc thời gian             | base      |
 | `month`/`year`      | lấy tháng/ năm                                      | lubridate |
 | `quarter`           | chuyển ngày sang quý                                | lubridate |

@@ -106,7 +106,7 @@ Trong ggplot, có 2 loại facet chính
 VD:
 
 | facet_wrap                                                                        | facet_grid                                                                        |
-|------------------------------------|------------------------------------|
+|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
 | biểu đồ số ca bệnh sốt rét chia theo tỉnh (tên tỉnh ở phía trên mỗi biểu đồ)      | biểu đồ số ca bệnh sốt rét chia theo tỉnh **và** nhóm tuổi                        |
 | ![](https://epirhandbook.com/vn/_main_files/figure-html/unnamed-chunk-1044-1.png) | ![](https://epirhandbook.com/vn/_main_files/figure-html/unnamed-chunk-1047-1.png) |
 

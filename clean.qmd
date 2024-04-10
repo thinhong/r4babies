@@ -93,7 +93,7 @@ Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác
 Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package `dplyr` sau đây
 
 | Function     | Công dụng          | GIF minh hoạ                                                                                        |
-|-----------------|-----------------|---------------------------------------|
+|--------------|--------------------|-----------------------------------------------------------------------------------------------------|
 | left_join()  | Nối ngoài bên trái | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join.gif?raw=true){width="283"}  |
 | right_join() | Nối ngoài bên phải | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/right-join.gif?raw=true){width="282"} |
 | inner_join() | Nối trong          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/inner-join.gif?raw=true){width="281"} |
