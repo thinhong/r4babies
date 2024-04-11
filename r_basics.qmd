@@ -5,21 +5,27 @@
 
 1.  Hiểu các thuật ngữ trong R
 2.  Hiểu các datatype trong R
-3.  Học các package thông dụng trong R
+3.  Học các thao tác cơ bản khi làm việc với data.frame
+4.  Học về các package hỗ trợ khi làm việc với các datatype phức tạp hơn (string, Date)
 :::
 
 ::: callout-note
 ## Trước buổi học
 
-Tải các package sau: tidyverse, writexl, stringi
+-   Tải data thực hành
 
-Và load các package\
+{{< downloadthis data/vaccine_data.xlsx dname="vaccine_data" label="vaccine_data.xlsx" type=light >}} {{< downloadthis data/practising_cert.csv dname="practising_cert" label="practising_cert.xlsx" type=light >}} {{< downloadthis data/life-exp.csv dname="life-exp" label="life-exp.csv" type=light >}}
 
-```{r,  warning=FALSE}
+-   Tải các package sau: `tidyverse`, `readxl`, `writexl`, `stringi`, `janitor`
+
+-   Và load các package\
+
+```{r,  output=FALSE, warning=FALSE}
 library(tidyverse)
 library(writexl)
 library(readxl)
 library(stringi)
+library(janitor)
 ```
 :::
 
@@ -34,25 +40,23 @@ tên_đối_tượng <- giá_trị_của_đối_tượng
 
 ```
 
-**VD**:
+**VD**: Đọc file `vaccine_data.xlsx` để sử dụng trong bài học
 
 ```{r warning=FALSE}
-# tạo đối tượng file_path để lưu trữ đường dẫn đến file csv
-life_exp_path <- "data/life-exp.csv"
-practising_cert_path <- "data/practising_cert.csv"
+# tạo đối tượng file_path để lưu trữ đường dẫn đến file excel
+data_path <- "data/vaccine_data.xlsx"
 
-# tạo đối tượng df lưu trữ bảng dữ liệu đọc từ file csv
-life_exp_df <- read_csv(file = life_exp_path, show_col_types = FALSE)
-practising_cert_df <- read_csv(file = practising_cert_path, show_col_types = FALSE)
+# tạo đối tượng df lưu trữ bảng dữ liệu đọc từ file excel
+df <- read_excel(path = data_path)
 ```
 
 Sau khi tạo các đối tượng, ta có thể thử xem giá trị được lưu trữ
 
 ```{r}
-life_exp_path
-practising_cert_path
-head(life_exp_df)
-head(practising_cert_df)
+data_path
+
+# sử dụng lệnh head để xem 6 hàng đầu thay vì toàn bộ bảng
+head(df) 
 ```
 
 ::: callout-important
@@ -61,13 +65,13 @@ head(practising_cert_df)
 Giá trị của một đối tượng **có thể bị ghi đè** bất kỳ lúc nào bằng cách chạy lệnh gán để định nghĩa lại giá trị của nó. Do đó, **thứ tự của các lệnh được chạy rất quan trọng**.
 :::
 
-Lệnh sau sẽ định nghĩa lại giá trị cho đối tượng `life_exp_path`
+Lệnh sau sẽ định nghĩa lại giá trị cho đối tượng `data_path`
 
 ```{r}
-life_exp_path <- "data/new_path.xlsx"
+data_path <- "data/new_path.xlsx"
 
 # kiểm tra giá trị 
-life_exp_path
+data_path
 ```
 
 ## Câu văn trong R
@@ -84,37 +88,63 @@ tên-câu-lệnh(tên-tham-số = data-đầu-vào hoặc lựa-chọn)
 
 **VD**:
 
-```{r, eval = F}
-mean(x = life_exp_df$GDP, na.rm = TRUE)
+```{r}
+max(x = df$id, na.rm = TRUE)
 ```
 
--   Tên câu lệnh là `mean`: chúng ta đang yêu cầu máy tính hãy tính giá trị trung bình của 1 biến.
+-   Tên câu lệnh là `max`: chúng ta đang yêu cầu máy tính hãy tìm giá trị lớn nhất của 1 biến.
 -   Các tham số là `x` và `na.rm`:
-    -   `x`: là data đầu vào, ở đây chúng ta viết `x = life_exp_df$GDP` để cho máy tính biết data đầu vào là cột `GDP` trong bảng data `life_exp_df`.
-    -   `na.rm`: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn `na.rm = TRUE` nghĩa là nếu cột `GDP` có NA thì bỏ những giá trị NA đi trước khi tính trung bình.
+    -   `x`: là data đầu vào, ở đây chúng ta viết `x = df$id` để cho máy tính biết data đầu vào là cột `id` trong bảng data `df`.
+    -   `na.rm`: là yêu cầu cụ thể cách giải quyết khi gặp missing value (NA), ở đây chúng ta lựa chọn `na.rm = TRUE` nghĩa là nếu cột `id` có NA thì bỏ những giá trị NA đi trước khi tìm giá trị lớn nhất.
 
 ::: callout-tip
 Để đọc hướng dẫn sử dụng về câu lệnh, gõ `?tên-câu-lệnh`.
 :::
 
-## Loại dữ liệu (datatype)
+## Loại dữ liệu (datatype) trong R
+
+Trong R, mỗi đối tượng được quy định phải theo 1 loại dữ liệu (datatype) nhất định
 
 ### Các datatype trong R
 
-| Datatype     | Ý nghĩa                                                                                                                    |
-|-------------------|-----------------------------------------------------|
-| `numeric`    | dữ liệu dạng số nguyên                                                                                                     |
-| `double`     | dữ liệu dạng số thập phân                                                                                                  |
-| `logical`    | dữ liệu dạng đúng/sai (TRUE/FALSE)                                                                                         |
-| `character`  | dữ liệu dạng ký tự (hay còn gọi là string), được đặt trong dấu ngoặc kép. Đối tượng dạng ký tự thì **không thể tính toán** |
-| `Date`       | dữ liệu ngày tháng                                                                                                         |
-| `factor`     | dữ liệu dạng phân loại (categorical)                                                                                       |
-| `data.frame` | dữ liệu dạng bảng                                                                                                          |
-| `tibble`     | dữ liệu dạng bảng tương tự như data.frame, sự khác biệt chính là tibble in đẹp hơn trong R console                         |
++--------------+----------------------------------------------------------------------------------------------------+--------------------------------+
+| Datatype     | Ý nghĩa                                                                                            | Ví dụ                          |
++==============+====================================================================================================+================================+
+| `numeric`    | dữ liệu dạng số                                                                                    | -1, -2, 0, 1.5, ...            |
++--------------+----------------------------------------------------------------------------------------------------+--------------------------------+
+| `logical`    | dữ liệu dạng đúng/sai                                                                              | \[TRUE, FALSE\] hoặc \[1, 0\]  |
++--------------+----------------------------------------------------------------------------------------------------+--------------------------------+
+| `character`  | dữ liệu dạng ký tự (hay còn gọi là string), được đặt trong dấu ngoặc kép `""`.\                    |                                |
+|              | đối tượng dạng ký tự thì **không thể tính toán**                                                   |                                |
++--------------+----------------------------------------------------------------------------------------------------+--------------------------------+
+| `Date`       | dữ liệu ngày tháng                                                                                 | 2024-04-01, 2024-04-02, ...    |
++--------------+----------------------------------------------------------------------------------------------------+--------------------------------+
+| `factor`     | dữ liệu dạng phân loại (categorical)                                                               | giới tính: nam, nữ\            |
+|              |                                                                                                    | tỉnh thành \                   |
+|              |                                                                                                    | dân tộc                        |
++--------------+----------------------------------------------------------------------------------------------------+--------------------------------+
+| `data.frame` | dữ liệu dạng bảng                                                                                  |                                |
++--------------+----------------------------------------------------------------------------------------------------+--------------------------------+
+| `tibble`     | dữ liệu dạng bảng tương tự như data.frame, sự khác biệt chính là tibble in đẹp hơn trong R console |                                |
++--------------+----------------------------------------------------------------------------------------------------+--------------------------------+
 
 ::: callout-tip
-Để kiểm tra datatype, sử dụng lệnh `class(tên_đối_tượng)`
+Để kiểm tra datatype của 1 đối tượng, sử dụng lệnh `class(tên_đối_tượng)`
+
+Để kiểm tra datatype của các cột trong data.frame, ta có thể sử dụng lệnh `str` hoặc kiểm tra tại mục `Data` của RStudio
+
+![](img/clean_p1/view_datatype.png){width="311"}
 :::
+
+VD:
+
+```{r}
+# kiểm tra datatype của df
+class(df)
+
+# kiểm tra datatype của các cột trong df
+str(df)
+```
 
 ### Chuyển đổi datatype {#update_datatype}
 
@@ -130,25 +160,66 @@ Ví dụ như:
 
 -   `as.Date()` chuyển thành định dạng ngày.
 
-Ngoài ra, còn có các lệnh khác để phục vụ cho các mục đích cụ thể hơn, bao gồm:\
-`ifelse()` chuyển thành định dạng logical theo điều kiện nhất định\
-`is.na()` chuyển thành định dạng logical, các dữ liệu trống (`NA`) có giá trị `TRUE` và ngược lại.\
-`dmy()`, `ymd()`, `mdy()`, ... chuyển đổi string theo các format khác nhau thành định dạng ngày
+Ngoài ra, còn có các lệnh khác để phục vụ cho các mục đích cụ thể hơn, bao gồm:
 
-**VD**:
+-   `ifelse()` chuyển thành định dạng logical theo điều kiện nhất định
+
+-   `is.na()` chuyển thành định dạng logical, các dữ liệu trống (`NA`) có giá trị `TRUE` và ngược lại.
+
+-   `dmy()`, `ymd()`, `mdy()`, ... chuyển đổi string theo các format khác nhau thành định dạng ngày
+
+## Các thao tác thông dụng với data.frame {#sec-df-row-col}
+
+### Làm sạch tên cột
+
+Trong R, tên cột là giá trị trên đỉnh của một cột.
+
+Các quy tắc cho tên cột thường bao gồm:
+
+-   Tên ngắn
+
+-   Không có khoảng trắng (thay thế bằng dấu gạch dưới \_ ).
+
+-   Không có ký tự đặc biệt (&, #, \<, \>, ...) hoặc dấu.
+
+-   Không bắt đầu bằng số.
+
+Lệnh `clean_names()` của package `janitor` được sử dụng để tự động hoá quá trình chuẩn hoá tên cột. Ngoài ra, lệnh `rename()` của package `dplyr` được sử dụng để thay đổi tên cột một cách thủ công.
 
 ```{r}
-# tạo danh sách mẫu
-example_list <- c("1", "2", "3", "4", "5")
-# thử sử dụng lệnh mean
-mean(example_list)
-# kiểm tra datatype 
-class(example_list)
+df %>% colnames()
+df %>% clean_names() %>% colnames()
 
-# TODO: thực hành điều chỉnh example_list để không còn Warning
+df <- df %>% 
+  clean_names() %>% # dùng clean names để tự động làm sạch tên cột
+  rename( # dùng rename để chỉnh sửa thêm
+    vgb_truoc_24 = vgb_24,
+    vgb_sau_24 = vgb_24_2
+  )
+
 ```
 
-## Làm việc với data.frame {#sec-df-row-col}
+::: callout-important
+#### Lưu ý
+
+-   Dấu `<-` được sử dụng ở VD trên để **gán giá trị mới** vào cột Country (tương đương việc UPDATE cột)
+
+-   Nếu không sử dụng `<-` thì R chỉ trả về kết quả của các câu lệnh nhưng bảng df sẽ **không** có thay đổi
+:::
+
+::: callout-tip
+### Xem tên các cột {.callout-tip}
+
+Lệnh `colnames` được sử dụng để xem danh sách tên các cột trong bảng
+:::
+
+::: callout-note
+### Dấu `%>% (pipe)` {.callout-note}
+
+`%>%` được dùng để chuyển đối tượng vào 1 function (trong VD đầu, `%>%` chuyển `df` vào function `colnames`)
+
+`%>%` còn thường được dùng để chuyển các kết quả trung gian sang function tiếp theo, từ đó có thể dùng để nối 1 chuỗi các function để thao tác trên 1 đối tượng
+:::
 
 ### Lấy dữ liệu theo hàng/cột
 
@@ -160,32 +231,22 @@ class(example_list)
 
 ```{r, eval=FALSE}
 # lấy dữ liệu tại hàng thứ 5, cột thứ 2
-life_exp_df[5 ,2]
+df[5 ,2]
 
 # lấy dữ liệu tại hàng thứ 5, cột thứ 2
-life_exp_df[5 , "Country"]
+df[5 , "vgb_truoc_24"]
 
 # lấy hàng thứ 5 trong bảng df
-life_exp_df[5, ]
+df[5, ]
 
-#lấy các cột Country, Year, GDP
-life_exp_df[, c("Country", "Year", "GDP")] 
+#lấy các cột id, ngaysinh, vgb_truoc_24
+df[, c("id", "ngaysinh", "vgb_truoc_24")] 
 
 #lấy 10 hàng đầu tiên của các cột Country, Year, GDP
 #1:10 là cú pháp nhanh để tạo chuỗi từ 1 đến 10
-life_exp_df[1:10, c("Country", "Year", "GDP")] 
+df[1:10, c("id", "ngaysinh", "vgb_truoc_24")] 
 
 ```
-
-::: callout-tip
-### Xem tên các cột {.callout-tip}
-
-Lệnh `colnames` được sử dụng để xem danh sách tên các cột trong bảng
-
-```{r}
-colnames(life_exp_df)
-```
-:::
 
 ::: callout-note
 Đối với cột, còn có cách trích xuất thông dụng khác bằng cách sử dụng dấu `$`. Tuy nhiên, cách này sẽ chỉ trích xuất giá trị trong 1 cột.\
@@ -194,26 +255,51 @@ colnames(life_exp_df)
 
 ### Chuyển đổi datatype cho cột
 
-Mỗi cột trong data.frame sẽ chứa các giá trị có cùng datatype.
+Khi đọc dữ liệu vào R, các cột sẽ được tự động chuyển thành datatype hợp lý nhất
+
+Trong df, cột `id` được tự động chuyển thành dạng `numeric`
+
+Tuy nhiên, có nhiều cột cần người dùng chuyển một cách thủ công, bao gồm:
+
+-   Các cột ngày tháng (`ngaysinh` và các cột ngày tiêm): R không thể tự động chuyển sang `Date` vì format này không khớp với format thông dụng (`YYYY-MM-dd` , `YYYY/MM/dd`, ...)
+
+-   Cột `gioitinh` nên được đổi thành `factor` để hỗ trợ trong quá trình phân tích về sau
+
+-   Cột `tinhtrang` nên được đổi thành `logical` để thể hiện đúng ý nghĩa là biến đúng/sai
 
 Để thay đổi datatype của cột, ta có thể áp dụng các [function từ phần trước](#update_datatype).
 
 **VD**:
 
 ```{r}
-# đổi cột Status thành biến phân loại
-life_exp_df$Status <- as.factor(life_exp_df$Status)
+date_cols <- c("ngaysinh", "vgb_truoc_24","vgb_sau_24","vgb_1","vgb_2","vgb_3","vgb4","hg_1","hg_2","hg_3","hg4","uv_1","uv_2","uv_3","uv_4")
+
+df <- df %>% 
+  mutate(
+    gioitinh = as.factor(gioitinh),
+    tinhtrang = ifelse(tinhtrang == "theo dõi", TRUE, FALSE)
+  ) %>% 
+  mutate_at(
+    # áp dụng lệnh dmy lên tất cả các cột ngày
+    date_cols, 
+    dmy
+  ) %>% 
+  rename(
+    theodoi = tinhtrang
+  )
+
+str(df)
 ```
 
-::: callout-important
-#### Lưu ý
+::: callout-note
+### Lệnh `mutate` và `mutate_at`
 
--   Dấu `<-` được sử dụng ở VD trên để **gán giá trị mới** vào cột Country (tương đương việc UPDATE cột)
+`mutate` được sử dụng để chỉnh sửa giá trị của cột hoặc tạo cột mới
 
--   Nếu không sử dụng `<-` thì R chỉ trả về kết quả của function `as.factor` và bảng df sẽ **không** có thay đổi
+`mutate_at` được sử dụng khi cần chỉnh sửa nhiều cột cùng lúc
 :::
 
-### Lọc dữ liệu {#sec-filter-condition}
+### Lọc dữ liệu
 
 Function `filter()` được sử dụng cho việc lọc dữ liệu theo điều kiện\
 Một số ký tự thường được sử dụng để quy định điều kiện bao gồm:
@@ -230,34 +316,18 @@ Một số ký tự thường được sử dụng để quy định điều ki�
 | `!`        | Không là (NOT)        |
 
 ```{r, eval=F}
-# Lọc các dữ liệu của Thái Lan
-life_exp_df %>% filter(Country == "Thailand") %>% select(Country, Year, GDP)
+# Lọc các dữ liệu của quận 2
+df %>% filter(huyen == "Quận 2") %>% select(id, huyen)
 
-# Lọc các hàng có GDP năm 2015 hơn 2000
-life_exp_df %>% filter(Year == 2015 & GDP > 2000) %>% select(Country, Year, GDP)
+# Lọc các trẻ có ngày tiêm vgb_1 trước ngày 20/2/2024 
+df %>% filter(vgb_1 < as.Date("2024-02-20")) %>% select(id, vgb_1)
 
-# Lọc các hàng có Country là Thailand hoặc GDP > 2000
-life_exp_df %>% filter(Country == "Thailand" | (GDP > 2000)) %>% select(Country, Year, GDP)
+# Lọc các trẻ ở quận 2 hoặc trước ngày 20/02/2024
+df %>% filter(huyen == "Quận 2" | vgb_1 < as.Date("2024-02-20")) %>% select(id, huyen, vgb_1)
 
-# Lọc các hàng có Country là Thailand và GDP > 2000
-life_exp_df %>% filter(Country == "Thailand" & (GDP > 2000)) %>% select(Country, Year, GDP)
+# Lọc các trẻ ở quận 2 và trước ngày 20/02/2024
+df %>% filter(huyen == "Quận 2" & vgb_1 < as.Date("2024-02-20")) %>% select(id, huyen, vgb_1)
 ```
-
-::: callout-note
-### Dấu `%>% (pipe)` {.callout-note}
-
-`%>%` được dùng để chuyển đối tượng vào 1 function (trong VD trên, `%>%` chuyển `df` vào function `filter`)
-
-`%>%` còn thường được dùng để chuyển các kết quả trung gian sang function tiếp theo, từ đó có thể dùng để nối 1 chuỗi các function để thao tác trên 1 đối tượng\
-\
-**VD**: lọc các hàng có GDP \> 2000 và sắp xếp các hàng theo GPD từ thấp đến cao
-
-```{r, eval=F}
-life_exp_df %>% # chuyển df vào filter()
-  filter(GDP > 2000) %>% # chuyển kết quả của filter() vào arrange()
-  arrange(GDP)
-```
-:::
 
 ## Dữ liệu string
 
@@ -265,45 +335,55 @@ Gói `stringr` (1 trong các package trong `tidyverse`) thường được sử 
 
 Ngoài ra, R còn có package `stringi` dành cho các mục đích cụ thể khác (VD như xử lý dấu, cách mã hoá văn bản, ... )
 
-|                      |             |                                     |
-|----------------------|-------------|-------------------------------------|
-| **Function**         | **Package** | **Công dụng**                       |
-| `tolower`            | base        | biến thành chữ thường               |
-| `toupper`            | base        | biến thành chữ hoa                  |
-| `str_to_title`       | stringr     | in hoa chữ cái đầu tiên của từng từ |
-| `stri_trans_general` | stringi     | loại bỏ dấu                         |
++----------------------+---------------+-------------------------------------+
+| **Function**         | **Package**   | **Công dụng**                       |
++----------------------+---------------+-------------------------------------+
+| `tolower`            | base          | biến thành chữ thường               |
++----------------------+---------------+-------------------------------------+
+| `toupper`            | base          | biến thành chữ hoa                  |
++----------------------+---------------+-------------------------------------+
+| `str_to_title`       | stringr       | in hoa chữ cái đầu tiên của từng từ |
++----------------------+---------------+-------------------------------------+
+| `stri_trans_general` | stringi       | loại bỏ dấu                         |
++----------------------+---------------+-------------------------------------+
 
-**VD**: xoá dấu trong cột `HoTen` của `practising_cert_df`
+**VD**: xoá dấu trong cột `tinh` `huyen` `xa`
 
 ```{r}
-practising_cert_df %>% 
+df %>% 
   mutate(
-    HoTen = stri_trans_general(HoTen, "latin-ascii")
+    tinh_mod = stri_trans_general(tinh, "latin-ascii"),
+    huyen_mod = stri_trans_general(huyen, "latin-ascii"),
+    xa_mod = stri_trans_general(xa, "latin-ascii")
   ) %>% 
-  head() # lệnh head để trả về 6 hàng đầu tiên thay vì toàn bộ
+  select(id, tinh, tinh_mod, huyen, huyen_mod, xa, xa_mod)
 ```
-
-::: callout-note
-### Lệnh `mutate` {#sec-mutate .callout-note}
-
-`mutate` được sử dụng để chỉnh sửa giá trị của cột hoặc tạo cột mới
-:::
 
 ### Các hàm thông dụng của stringr
 
-|                   |                                                                              |
-|--------------------|----------------------------------------------------|
-| **Function**      | **Công dụng**                                                                |
-| `str_starts`      | lọc hàng bắt đầu bằng chuỗi ký tự khớp với pattern                           |
-| `str_ends`        | lọc hàng kết thúc bằng bằng chuỗi ký tự khớp với pattern                     |
-| `str_detect`      | lọc hàng có chứa chuỗi ký tự khớp với pattern                                |
-| `str_interp`      | chèn giá trị vào string (string interpolation)                               |
-| `str_extract`     | trích 1 chuỗi con (substring) đầu tiên khớp với pattern                      |
-| `str_extract_all` | trích tất cả các chuỗi con (substring) khớp với pattern                      |
-| `str_remove`      | xoá 1 chuỗi con (substring) đầu tiên khớp với pattern                        |
-| `str_remove_all`  | xoá tất cả các chuỗi con (substring) khớp với pattern                        |
-| `str_replace`     | thay thế 1 chuỗi con (substring) đầu tiên khớp với pattern bằng 1 chuỗi mới  |
-| `str_replace_all` | thay thế tất cả chuỗi con (substring) khớp với pattern bằng 1 chuỗi mới      |
++-------------------+-----------------------------------------------------------------------------+
+| **Function**      | **Công dụng**                                                               |
++-------------------+-----------------------------------------------------------------------------+
+| `str_starts`      | lọc hàng bắt đầu bằng chuỗi ký tự khớp với pattern                          |
++-------------------+-----------------------------------------------------------------------------+
+| `str_ends`        | lọc hàng kết thúc bằng bằng chuỗi ký tự khớp với pattern                    |
++-------------------+-----------------------------------------------------------------------------+
+| `str_detect`      | lọc hàng có chứa chuỗi ký tự khớp với pattern                               |
++-------------------+-----------------------------------------------------------------------------+
+| `str_interp`      | chèn giá trị vào string (string interpolation)                              |
++-------------------+-----------------------------------------------------------------------------+
+| `str_extract`     | trích 1 chuỗi con (substring) đầu tiên khớp với pattern                     |
++-------------------+-----------------------------------------------------------------------------+
+| `str_extract_all` | trích tất cả các chuỗi con (substring) khớp với pattern                     |
++-------------------+-----------------------------------------------------------------------------+
+| `str_remove`      | xoá 1 chuỗi con (substring) đầu tiên khớp với pattern                       |
++-------------------+-----------------------------------------------------------------------------+
+| `str_remove_all`  | xoá tất cả các chuỗi con (substring) khớp với pattern                       |
++-------------------+-----------------------------------------------------------------------------+
+| `str_replace`     | thay thế 1 chuỗi con (substring) đầu tiên khớp với pattern bằng 1 chuỗi mới |
++-------------------+-----------------------------------------------------------------------------+
+| `str_replace_all` | thay thế tất cả chuỗi con (substring) khớp với pattern bằng 1 chuỗi mới     |
++-------------------+-----------------------------------------------------------------------------+
 
 ::: center-text
 [{{< fa link >}} stringr functions](https://stringr.tidyverse.org/reference/index.html){.btn .btn-outline-secondary role="button"}
@@ -363,41 +443,36 @@ Các bộ ký tự đặc biệt trong R
 
 ### Một số ví dụ sử dụng hàm của `stringr` cùng regex
 
-***VD1***: Cần tìm kiếm thông tin cho những ai có tên là Thịnh/Hằng/Diễm
+***VD1***: Tìm các hàng có xã số
 
--   Chọn câu lệnh: cần tìm theo tên --\> [cần kiểm tra chữ cuối]{.underline} trong string -\>dùng lệnh `str_ends`
+-   Chọn câu lệnh: cần tìm theo tên --\> [cần kiểm tra chữ cuối]{.underline} trong string -\>dùng lệnh `str_detect`
 
--   Quy định pattern bằng regex: cần string khớp với 1 trong các tên nêu trên -\> áp dụng **Nhóm**
+```{=html}
+<!-- -->
+```
+-   Quy định pattern bằng regex: cần string chứa số-\> áp dụng **Nhóm**
 
 ```{r}
-practising_cert_df %>% 
-  filter( # gọi filter để lọc 
-    str_ends( # gọi lệnh str_ends để kiểm tra các ký tự cuối của string 
-      HoTen, # cần kiểm tra cột HoTen
-      "(Thịnh|Hằng|Diễm)" # quy định pattern cần khớp
-      )
+df %>% 
+  filter(
+    str_detect(xa, "[:digit:]")
   ) 
 
 ```
 
-***VD 2***: cần tìm thông tin cho những ai được cấp chứng chỉ chữa bệnh chuyên khoa răng hàm mặt hoặc mắt
+***VD 2***: cần tìm các trẻ ở quận Phú Nhuận hoặc Bình Thạnh
 
--   Chọn câu lệnh: cần lọc các hàng có Phạm Vi Hoạt động [chứa dòng chữ]{.underline} "răng hàm mặt" hoặc "mắt" --\> dùng lệnh `str_detect`
+Chọn câu lệnh: cần lọc các hàng có `huyen` [chứa dòng chữ]{.underline} "Phú Nhuận" hoặc "Bình Thạnh" --\> dùng lệnh `str_detect`
 
-    ```{r}
-    practising_cert_df %>% 
-      mutate(
-        # chuyển thành in thường để tránh các tình trạng không khớp vì khác case
-        TenPhamViHoatDong = tolower(TenPhamViHoatDong)
-      ) %>% 
-      filter(
-        str_detect(
-          TenPhamViHoatDong, 
-          "(răng hàm mặt|mắt)"
-        )
-      ) %>% 
-      select(HoTen, TenPhamViHoatDong)
-    ```
+```{r}
+df %>% 
+  filter(
+    str_detect(
+      huyen, 
+      "(Phú Nhuận|Bình Thạnh)"
+    )
+  )
+```
 
 ## Dữ liệu ngày tháng
 
@@ -405,43 +480,50 @@ practising_cert_df %>%
 
 ### Các lệnh liên quan đến ngày tháng
 
-| Function            | Công dụng                                           | Package   |
-|------------------|------------------------------------|------------------|
-| `difftime`          | tính khoảng cách giữa hai mốc thời gian             | base      |
-| `month`/`year`      | lấy tháng/ năm                                      | lubridate |
-| `quarter`           | chuyển ngày sang quý                                | lubridate |
-| `today`             | lấy ngày hiện tại                                   | lubridate |
-| `dmy`, `ymd`, `mdy` | chuyển string theo nhiều format khác nhau sang ngày | lubridate |
++---------------------+-----------------------------------------------------+--------------+
+| Function            | Công dụng                                           | Package      |
++=====================+=====================================================+==============+
+| `difftime`          | tính khoảng cách giữa hai mốc thời gian             | base         |
++---------------------+-----------------------------------------------------+--------------+
+| `month`/`year`      | lấy tháng/ năm                                      | lubridate    |
++---------------------+-----------------------------------------------------+--------------+
+| `quarter`           | chuyển ngày sang quý                                | lubridate    |
++---------------------+-----------------------------------------------------+--------------+
+| `today`             | lấy ngày hiện tại                                   | lubridate    |
++---------------------+-----------------------------------------------------+--------------+
+| `dmy`, `ymd`, `mdy` | chuyển string theo nhiều format khác nhau sang ngày | lubridate    |
++---------------------+-----------------------------------------------------+--------------+
 
 ::: center-text
 [{{< fa link >}} lubridate functions](https://lubridate.tidyverse.org/reference/index.html){.btn .btn-outline-secondary role="button"}
 :::
 
-**VD**: cần tìm những ai được cấp chứng chỉ hành nghề trong vòng 5 năm gần đây
+**VD**: tìm các trẻ được tiêm vgb_2 trong 1 tháng kể từ ngày sinh
 
--   Cần lấy ngày hiện tại để tính toán --\> dùng lệnh `today()`
+-   Cần tính khoảng thời gian từ lúc cấp chứng chỉ đến hiện tại -\> dùng lệnh `difftime()` với unit là days (difftime không có unit month) sau đó chia cho 365
 
--   Cần tính khoảng thời gian từ lúc cấp chứng chỉ đến hiện tại -\> dùng lệnh `difftime()` với unit là days (difftime không có unit year) sau đó chia cho 365
-
-    [hoặc]{.underline} dùng lệnh `year` để lấy năm của 2 mốc thời gian rồi trừ nhau
+```{=html}
+<!-- -->
+```
+-   [hoặc]{.underline} dùng lệnh `month` để lấy tháng của 2 mốc thời gian rồi trừ nhau
 
 ```{r}
 # --- Cách 1
-practising_cert_df %>% 
+df %>% 
   filter(
     # gọi difftime để tính khoảng cách thời gian
-    difftime(today(), NgayCapChungChi, units = "days")/365 <= 5
+    difftime(vgb_2, ngaysinh, units = "days")/30 <= 2
   )
 
 # --- Cách 2
-practising_cert_df %>% 
+df %>% 
   filter(
-    # Gọi year để lấy năm sau đó trừ nhau
-    year(today()) - year(NgayCapChungChi)  <= 5
+    # Gọi month để lấy tháng sau đó trừ nhau
+    month(vgb_2) - month(ngaysinh)  <= 2
   )
 ```
 
-Trong 2 ví dụ trên, cách 1 sẽ chính xác hơn vì ta tính cả ngày/tháng khi sử dụng difftime còn cách 2 chỉ lấy 2 năm trừ nhau
+Trong 2 ví dụ trên, cách 1 sẽ chính xác hơn vì ta tính cả ngày khi sử dụng difftime còn cách 2 chỉ lấy 2 tháng trừ nhau
 
 ## Lưu bảng dữ liệu sau khi chỉnh sửa
 
@@ -487,4 +569,200 @@ readRDS(file = file.path(data_path, "rds_data.Rds"))
 
 # đọc file excel
 read_excel(df, path = file.path(data_path, "excel_data.xlsx"))
+```
+
+## Thực hành
+
+### Đọc dữ liệu 
+
+Đọc 2 bộ dữ liệu sau
+
+-   `life-exp.csv`
+
+-   `practising_cert.csv`
+
+Và làm sạch tên cột
+
+```{=html}
+<details>
+<summary>Code</summary>
+```
+
+```{r, eval=F}
+life_exp_path <- "data/life-exp.csv"
+practising_cert_path <- "data/practising_cert.csv"
+
+# tạo đối tượng để lưu trữ bảng dữ liệu đọc từ file csv
+life_exp_df <- read_csv(file = life_exp_path, show_col_types = FALSE)
+practising_cert_df <- read_csv(file = practising_cert_path, show_col_types = FALSE)
+
+# làm sạch tên cột 
+life_exp_df <- clean_names(life_exp_df)
+practising_cert_df <- clean_names(practising_cert_df)
+```
+
+```{=html}
+
+</details>
+```
+### Lọc dữ liệu đơn giản 
+
+Từ bảng dữ liệu `life-exp`
+
+-   Lọc các dữ liệu của Thái Lan
+
+-   Lọc các hàng có `GDP` năm 2015 hơn 2000
+
+-   Lọc các hàng có `country` là Thailand **hoặc** `GDP` \> 2000
+
+-   Lọc các hàng có `country` là Thailand **và** `GDP` \> 2000
+
+**Note**: không cần lưu những dữ liệu được lọc
+
+```{=html}
+<details>
+  <summary>
+    Code 
+  </summary>
+```
+```{r, eval = F}
+# Lọc các dữ liệu của Thái Lan
+life_exp_df %>% filter(country == "Thailand")
+
+# Lọc các hàng có GDP năm 2015 hơn 2000
+life_exp_df %>% filter(year == 2015 & gdp > 2000)
+
+# Lọc các hàng có Country là Thailand hoặc GDP > 2000
+life_exp_df %>% filter(country == "Thailand" | (gdp > 2000))
+
+# Lọc các hàng có Country là Thailand và GDP > 2000
+life_exp_df %>% filter(country == "Thailand" & (gdp > 2000))
+```
+
+```{=html}
+</details>
+```
+### Lọc dữ liệu phức tạp
+
+Các bài thực hành sau sẽ được áp dụng trên dữ liệu `practising_cert.csv`
+
+#### Dữ liệu string
+
+1.  Tìm kiếm thông tin cho những ai có tên là Thịnh/Hằng/Diễm
+
+```{=html}
+<details>
+  <summary>
+    Gợi ý
+  </summary>
+```
+::: {.callout-caution icon="false"}
+## Gợi ý
+
+-   Chọn câu lệnh: cần tìm theo tên --\> cần kiểm tra chữ cuối trong string -\>dùng lệnh `str_ends`
+
+-   Quy định pattern bằng regex: cần khớp với 1 trong các tên nêu trên -\> áp dụng **Nhóm**
+:::
+
+```{=html}
+</details>
+```
+```{=html}
+<details>
+  <summary>Code</summary>
+```
+```{r, eval = F}
+practising_cert_df %>%
+  filter( # gọi filter để lọc
+    str_ends( # gọi lệnh str_ends để kiểm tra các ký tự cuối của string
+      ho_ten, # cần kiểm tra cột HoTen
+      "(Thịnh|Hằng|Diễm)" # quy định pattern cần khớp
+      )
+  )
+```
+
+```{=html}
+</details>
+```
+
+2.  Tìm thông tin cho những ai được cấp chứng chỉ chữa bệnh chuyên khoa răng hàm mặt hoặc mắt
+
+```{=html}
+<details>
+  <summary> Gợi ý </summary>
+```
+::: callout-caution
+## Gợi ý
+
+Chọn câu lệnh: cần lọc các hàng có Phạm Vi Hoạt động [chứa dòng chữ]{.underline} "răng hàm mặt" hoặc "mắt" --\> dùng lệnh `str_detect`
+:::
+
+```{=html}
+</details>
+```
+```{=html}
+<details>
+  <summary>Code</summary>
+```
+```{r, eval = F}
+practising_cert_df %>%
+  mutate(
+    # chuyển thành in thường để tránh các tình trạng không khớp vì khác case
+    ten_pham_vi_hoat_dong = tolower(ten_pham_vi_hoat_dong)
+  ) %>%
+  filter(
+    str_detect(
+      ten_pham_vi_hoat_dong,
+      "(răng hàm mặt|mắt)"
+    )
+  )
+```
+
+```{=html}
+</details>
+```
+
+#### Dữ liệu ngày tháng
+
+Tìm những ai được cấp chứng chỉ hành nghề trong vòng 5 năm gần đây
+
+```{=html}
+<details>
+  <summary> Gợi ý </summary>
+```
+::: {.callout-caution icon="false"}
+## Gợi ý
+
+-   Cần lấy ngày hiện tại để tính toán --\> dùng lệnh `today()`
+
+-   Cần tính khoảng thời gian từ lúc cấp chứng chỉ đến hiện tại -\> dùng lệnh `difftime()` với unit là days (difftime không có unit year) sau đó chia cho 365
+
+    [*hoặc*]{.underline} dùng lệnh `year` để lấy năm của 2 mốc thời gian rồi trừ nhau
+:::
+
+```{=html}
+</details>
+```
+```{=html}
+<details>
+  <summary> Code </summary>
+```
+```{r, eval = F}
+# --- Cách 1
+practising_cert_df %>%
+  filter(
+    # gọi difftime để tính khoảng cách thời gian
+    difftime(today(), ngay_cap_chung_chi, units = "days")/365 <= 5
+  )
+
+# --- Cách 2
+practising_cert_df %>%
+  filter(
+    # Gọi year để lấy năm sau đó trừ nhau
+    year(today()) - year(ngay_cap_chung_chi)  <= 5
+  )
+```
+
+```{=html}
+</details>
 ```
