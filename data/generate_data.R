@@ -35,7 +35,7 @@ for (i in 1:length(cols)){
   }
   else{
     # --- special handling while sampling date 
-    if (cols[i] %in% c("VGB <24", "VGB >24", "HG_1", "UV_1","Hib_1")){
+    if (cols[i] %in% c("VGB <24", "VGB >24", "HG_1", "UV_1")){
       data[[ cols[i] ]] <- data[[ "ngaysinh" ]] + sample(c(0, 1))
     }else{
       # if not the 1st shot, sample by caculating some date away fr the prev shot
