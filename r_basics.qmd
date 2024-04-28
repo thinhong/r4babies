@@ -1,14 +1,5 @@
 # Làm sạch (p1)
 
-::: callout-tip
-# Mục tiêu
-
-1.  Hiểu các thuật ngữ trong R
-2.  Hiểu các datatype trong R
-3.  Học các thao tác cơ bản khi làm việc với data.frame
-4.  Học về các package hỗ trợ khi làm việc với các datatype phức tạp hơn (string, Date)
-:::
-
 ::: callout-note
 ## Trước buổi học
 
@@ -16,9 +7,13 @@
 
 {{< downloadthis data/vaccine_data.xlsx dname="vaccine_data" label="vaccine_data.xlsx" type=light >}} {{< downloadthis data/practising_cert.csv dname="practising_cert" label="practising_cert.xlsx" type=light >}} {{< downloadthis data/life-exp.csv dname="life-exp" label="life-exp.csv" type=light >}}
 
--   Tải các package sau: `tidyverse`, `readxl`, `writexl`, `stringi`, `janitor`
+-   Cái đặt các package sau (chỉ cần làm 1 lần):
 
--   Và load các package\
+```{r, eval = F}
+install.packages(c("tidyverse", "readxl", "writexl", "stringi", "janitor"))
+```
+
+-   Và load các package:
 
 ```{r,  output=FALSE, warning=FALSE}
 library(tidyverse)
@@ -28,6 +23,25 @@ library(stringi)
 library(janitor)
 ```
 :::
+
+::: callout-tip
+# Mục tiêu
+
+1.  Hiểu các thuật ngữ trong R
+2.  Hiểu các datatype trong R
+3.  Học các thao tác cơ bản khi làm việc với data.frame
+4.  Học về các package hỗ trợ khi làm việc với các datatype phức tạp hơn (string, Date)
+:::
+
+## Tại sao làm sạch số liệu bằng R?
+
+Sử dụng R để làm sạch số liệu có nhiều ưu điểm hơn dùng excel:
+
+- R có nhiều chức năng tìm và sàng lọc vấn đề cần làm sạch: Có thể viết thành 1 quy trình kiểm tra dữ liệu tự động, kết hợp thống kê mô tả và trực quan hóa để phát hiện vấn đề cần làm sạch. Có nhiều chức năng đã được các tác giả khác viết thành những package thuận tiện cho việc sử dụng.
+
+- Tất cả các công đoạn làm sạch đều được lưu lại: Chúng ta có thể lưu thành file R code hoặc Rmd, trong đó mỗi câu lệnh là 1 hay nhiều bước làm sạch. Trong tương lai, chỉ cần đọc file R code hoặc Rmd để dễ dàng tra cứu lại những thay đổi giữa file số liệu được phân tích và file gốc. Nếu dự án nghiên cứu có thành viên mới tham gia, quá trình chuyển giao công việc sẽ thuận lợi hơn vì mọi thứ đều được lưu trong file R code hoặc Rmd nên sẽ không sợ bị sót hay quên thông tin.
+
+- Tiết kiệm thời gian làm sạch số liệu mới: Nếu tiếp tục các đợt thu thập số liệu mới, có thể tái sử dụng file R code hoặc Rmd để làm sạch các vấn đề tương tự đã gặp trong số liệu cũ đã xử lý.
 
 ## Đối tượng trong R
 

@@ -20,10 +20,6 @@ library(tidyverse)
 library(sf)
 library(leaflet)
 library(rio)
-
-# install.packages("maptools", repos="http://R-Forge.R-project.org")
-# devtools::install_github('oswaldosantos/ggsn')
-library(ggsn)
 ```
 
 ## ggplot
