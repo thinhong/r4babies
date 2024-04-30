@@ -10,6 +10,7 @@ book:
     - name: Thinh Ong
       url: https://drthinhong.com
       orcid: 0000-0001-6772-9291
+    - name: Phan Truong Quynh Anh
   date: "02/09/2024"
   chapters:
     - index.qmd
