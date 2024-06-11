@@ -13,14 +13,159 @@ Bước đầu tiên sau khi đọc được dữ liệu vào R là "làm sạch
 :::
 
 ::: callout-note
-# Các package được sử dụng trong bài học {.callout-note}
+# Trước buổi học {.callout-note}
 
--   readxl
+-   Tải data thực hành
 
--   janitor
+{{< downloadthis data/vaccine_data.xlsx dname="vaccine_data" label="vaccine_data.xlsx" type=light >}} {{< downloadthis data/qhpx_hcm.rds dname="qhpx_hcm" label="qhpx_hcm.rds" type=light >}} {{< downloadthis data/life-exp.csv dname="life-exp" label="life-exp.csv" type=light >}}
 
--   tidyverse
+-   Tải các package sau: `tidyverse`, `readxl`, `writexl`, `janitor`
+
+-   Và load các package
+
+```{r, output=FALSE, warnings=FALSE}
+library(readxl)
+library(janitor)
+library(tidyverse)
+```
 :::
+
+## Tổng quan quá trình làm sạch dữ liệu
+
+Thường bao gồm các bước:
+
+-   [ ] Làm sạch tên cột (từ phần 1)
+
+-   [ ] Kiểm tra datatype (từ phần 1)
+
+-   [ ] Kiểm tra giá trị
+
+-   [ ] Format bảng theo quy tắc dữ liệu gọn gàng
+
+-   [ ] Nối bảng (nếu cần thiết)
+
+-   [ ] Xử lý các dữ liệu lỗi
+
+## Làm sạch tên cột & kiểm tra datatype
+
+Chúng ta sẽ dùng `vaccine_data.xlsx` từ phần trước
+
+```{r}
+df <- read_excel(path = "data/vaccine_data.xlsx", sheet = 1)
+```
+
+```{=html}
+<details>
+  <summary>
+    Làm sạch tên cột, thay đổi datatype
+  </summary>
+```
+```{r}
+df <- df %>% clean_names() %>%  
+  rename(
+    vgb_truoc_24 = vgb_24,
+    vgb_sau_24 = vgb_24_2
+  )
+```
+
+Code tương ứng khi không dùng dấu `%>%`
+
+```{r, eval=FALSE}
+# ---Code không dùng %>%
+df <- clean_names(df) 
+df <- rename(df, 
+    vgb_truoc_24 = vgb_24,
+    vgb_sau_24 = vgb_24_2
+  )
+```
+
+</details>
+
+```{=html}
+<details>
+  <summary>
+    Kiểm tra và thay đổi datatype 
+  </summary>
+```
+```{r}
+# --- Điều chỉnh datatype
+date_cols <- c("ngaysinh", "vgb_truoc_24","vgb_sau_24","vgb_1","vgb_2","vgb_3","vgb_4","hg_1","hg_2","hg_3","hg_4","uv_1","uv_2","uv_3","uv_4")
+
+df <- mutate(df,
+    gioitinh = as.factor(gioitinh),
+    tinhtrang = ifelse(tinhtrang == "theo dõi", TRUE, FALSE)
+  ) %>% 
+  mutate_at(date_cols, dmy) %>% 
+  rename(theodoi = tinhtrang)
+```
+
+Code tương ứng khi không dùng dấu `%>%`
+
+```{r, eval=FALSE}
+df <- mutate(df,
+    gioitinh = as.factor(gioitinh),
+    tinhtrang = ifelse(tinhtrang == "theo dõi", TRUE, FALSE)
+  )
+df <- mutate_at(df, date_cols, dmy) 
+df <- rename(df, theodoi = tinhtrang)
+```
+
+</details>
+
+## Kiểm tra giá trị
+
+Thường bao gồm các thao tác chính
+
+-   Kiểm tra các giá trị NA
+
+-   Kiểm tra các khoảng giá trị của từng cột/ kiểm tra các giá trị bất thường (outlier)
+
+Trong R có lệnh `summary` để người dùng có thể nhanh chóng kiểm tra các khoảng giá trị và số dữ liệu NA trong từng cột.
+
+```{r}
+summary(df)
+```
+
+### Outlier
+
+Để kiểm tra các giá trị outlier, ta có thể sử dụng `boxplot` để tìm các điểm giá trị cách xa các giá trị còn lại
+
+![](img/clean_p2/boxplot.png){width="445"}
+
+**Ví dụ:** sử dụng boxplot để kiểm tra outlier của cột `vgb_1`
+
+```{r}
+boxplot(df$vgb_1)
+```
+
+### Kiểm tra giá trị giữa các cột
+
+Ngoài ra, tuỳ vào bộ dữ liệu, có thể cần kiểm tra giá trị giữa các cột (VD: trong dữ liệu tiêm chủng có thể có mũi 2 trùng hoặc trước ngày tiêm mũi 1)
+
+**Ví dụ**: lọc các hàng có ngày tiêm không đúng thứ tự
+
+```{r}
+# --- Kiểm tra các mũi vgb
+df %>% 
+  filter(
+  (vgb_truoc_24 > vgb_sau_24) | (vgb_sau_24 > vgb_1) | (vgb_1 > vgb_2) | (vgb_2 > vgb_3) | (vgb_3 > vgb_4) ) %>% 
+  select(vgb_truoc_24, vgb_sau_24, vgb_1, vgb_2, vgb_3, vgb_4)
+
+# --- Kiểm tra các mũi ho gà
+df %>% 
+  filter(
+  (hg_1 > hg_2) | (hg_2 > hg_3) | (hg_3 > hg_4)) %>% 
+  select(hg_1, hg_2, hg_3, hg_4)
+
+# --- Kiểm tra các mũi uốn ván
+df %>% 
+  filter(
+  (uv_1 > uv_2) | (uv_2 > uv_3) | (uv_3 > uv_4) )%>% 
+  select(uv_1, uv_2, uv_3, uv_4)
+
+```
+
+------------------------------------------------------------------------
 
 ## Data gọn gàng (tidy data)
 
@@ -30,21 +175,11 @@ Dữ liệu gọn gàng có các đặc điểm sau:[@wickham2014]
 -   Mỗi quan sát là một hàng; mỗi hàng là một quan sát
 -   Mỗi giá trị nằm trong một ô; mỗi ô chứa một giá trị duy nhất
 
-Chúng ta sẽ dùng data `gdp-capita.xlsx`
-
-```{r}
-library(readxl)
-library(janitor)
-library(tidyverse)
-
-df <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1)
-```
-
 ### Format bảng
 
-Bảng dữ liệu hiện tại chưa tuân theo quy tắc tidy data vì các cột 2015 - 2022 **không phải là biến** và **mỗi hàng đang chứa nhiều quan sát** (quan sát cho các năm từ 2015 - 2022).
+Bảng dữ liệu hiện tại chưa tuân theo quy tắc tidy data vì các cột kháng nguyên (`vgb_1`, `vgb_2`, ...) **không phải là biến** và **mỗi hàng đang chứa nhiều quan sát** (ngày tiêm cho các mũi tiêm khác nhau).
 
-Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhiều quan sát của cùng chủ thể (trong VD này là các quốc gia) được lưu trữ trong một hàng duy nhất. Điều này có thể hữu ích cho việc hiển thị, tuy nhiên không lý tưởng cho việc phân tích.
+Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhiều quan sát của cùng chủ thể (trong VD này là trẻ được tiêm) được lưu trữ trong một hàng duy nhất. Điều này có thể hữu ích cho việc hiển thị, tuy nhiên không lý tưởng cho việc phân tích.
 
 Để tuân theo quy tắc tidy data, ta cần format bảng dữ liệu sang `định dạng dọc (long)`
 
@@ -55,35 +190,15 @@ Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhi
 -   `pivot_wider()` - chuyển dữ liệu từ dạng dọc sang ngang.\
 
 ```{r}
-df <- df %>% 
-  pivot_longer(
-    cols = starts_with("2"),
-    # đặt tên mới cho biến
-    names_to = "year",
-    # đặt tên mới cho cột giá trị tương ứng
-    values_to = "gdp")
+cols <- which(str_ends(colnames(df), "[:digit:]"))
+df <- pivot_longer(df,
+      cols = any_of(cols),
+      # đặt tên mới cho biến
+      names_to = "khangnguyen",
+      # đặt tên mới cho cột giá trị tương ứng
+      values_to = "ngaytiem") 
+
 head(df)
-```
-
-### Tên cột
-
-Trong R, tên cột là giá trị trên đỉnh của một cột.
-
-Các quy tắc cho tên cột thường bao gồm:
-
--   Tên ngắn
-
--   Không có khoảng trắng (thay thế bằng dấu gạch dưới \_ ).
-
--   Không có ký tự đặc biệt (&, #, \<, \>, ...) hoặc dấu.
-
--   Không bắt đầu bằng số.
-
-Lệnh `clean_names()` của package `janitor` được sử dụng để tự động hoá quá trình chuẩn hoá tên cột. Ngoài ra, lệnh `rename()` của package `dplyr` được sử dụng để thay đổi tên cột một cách thủ công.
-
-```{r}
-# chuẩn hoá tên cột tự động
-df <- clean_names(df)
 ```
 
 ## Kết hợp dữ liệu
@@ -107,149 +222,78 @@ Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác
 
 [Tổng hợp các lệnh join cùng GIF minh hoạ](https://github.com/gadenbuie/tidyexplain/tree/main)
 
+**Ví dụ:**
+
+Nối cột để kiểm tra các quận huyện trong bộ dữ liệu và xoá các dữ liệu có Quận/Huyện không hợp lý
+
+```{=html}
+<details>
+  <summary>
+    Thông tin về bảng dữ liệu <code>qhpx_hcm.rds</code>
+  </summary>
+```
+Dùng để đối chiếu và kiểm tra xem các quận huyện trong bộ dữ liệu vaccine có hợp lệ hay không (quận + huyện có tồn tại hay không). Ví dụ một số dữ liệu không hợp lệ \[ (Quận 6, Xã Bình Trung), (Quận 6, Xã Xuân Bắc), ...\]
+
+Đồng thời cung cấp tên quận và xã được đồng nhất
+
+***Từ điển biến số***
+
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+| Tên biến  | Ý nghĩa                                                                                                                      |
++===========+==============================================================================================================================+
+| qh        | tên quận/huyện xuất hiện trong bộ dữ liệu vaccine                                                                            |
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+| px        | tên phường/xã xuất hiện trong bộ dữ liệu vaccine                                                                             |
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+| qh_update | tên quận/huyện được đồng bộ hoá theo format "Quận *số*" đối với các quận có tên số hoặc "*Tên quận*" đối với quận chữ\       |
+|           | VD: "Quận Thủ Đức"/ "Thành phố Thủ đức" được đồng bộ hoá thành "Thủ Đức"                                                     |
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+| px_update | tên phường/xã được đồng bộ hoá theo format "Phường *số*" đối với các phường có tên số hoặc "*Tên phường*" đối với phường chữ |
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+| ma_px     | mã cho phường/xã                                                                                                             |
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+
+</details>
+
 ```{r}
-mt <- read_excel(path = "data/gdp-capita.xlsx", sheet = 2) %>% 
-  clean_names()
+# --- Đọc bảng quận huyện phường xã 
+qhpx <- readRDS("data/qhpx_hcm.rds")
 
 # --- Nối 2 bảng bằng lệnh left_join
-# Trong trường hợp này, tuy lệnh join_by không cần thiết nhưng có thể giúp cho code rõ ràng hơn 
-df <- left_join(df, mt, by = join_by(country_code == country_code))
-head(df)
+joined_df <- left_join(df, qhpx, by = join_by(huyen == qh, xa == px)) 
 ```
 
-## Biến đổi cột
+Sau khi nối bằng `left_join`, các hàng của bảng trái (`df`) không nối được với bảng phải (`qhpx`) sẽ được chèn giá trị `NA`
 
-### Chọn cột
+Vì vậy, các hàng có `qh_update` hoặc `px_update` là `NA` sẽ là các hàng có quận/huyện và phường/xã không khợp lệ
 
-Ngoài cách chọn cột theo tên cơ bản như đã học ở phần @sec-df-row-col, lệnh `select` của dplyr cũng thường được sử dụng cho các cách chọn cột phức tạp hơn, bao gồm:
+Ta có thể xem các hàng có lỗi như sau
 
--   Chọn cột có tên bắt đầu/kết thúc bằng chuỗi ký tự được chỉ định bằng `starts_with`/`ends_with`
-
--   Chọn cột có tên chứa chuỗi được quy định bằng `contains`
-
--   Dùng `where()` để áp dụng một hàm cho tất cả các cột và chọn những cột trả về giá trị TRUE
-
--   Xoá cột bằng cách thêm dấu `-` trước tên cột
-
-```{r}
-# --- Chọn cột bắt đầu bằng chữ country
-df %>% select(starts_with("country")) %>% colnames()
-
-# --- Chọn cột kết thúc bằng chữ code
-df %>% select(ends_with("code")) %>% colnames()
-              
-# --- Chọn cột có tên chứa dấu _
-df %>% select(contains("_")) %>% colnames()
-
-# --- Chọn cột có datatype là char
-df %>% select(where(is.character)) %>% colnames()
-
-# --- Xóa cột 
-df %>% select(-country_name) %>% colnames()
+```{r, eval=FALSE}
+joined_df %>% filter(is.na(qh_update))
 ```
 
-### Tạo cột mới
+## Xử lý dữ liệu
 
-Như đã được nhắc đến trong phần 3, lệnh `mutate` được sử dụng để tạo cột mới hoặc chỉnh sửa giá trị của cột.
+Thường bao gồm
 
-Một số argument (tham số) thông dụng của lệnh `mutate`
-
--   `.before` / `.after` quy định vị trí của cột mới trước hoặc sau cột được chỉ định
-
--   `.keep` quy định các cột được giữ lại sau lệnh `mutate`
-
-    -   `"all"` giữ lại tất cả các cột gốc (default)
-
-    -   `"none"` không giữ lại các cột gốc
-
-    -   `"used"` giữ lại các cột được sử dụng trong `mutate`
-
-    -   `"unused"` giữ lại các cột [không]{.underline} được sử dụng
-
-**VD**:
-
-```{r}
-df %>% 
-  mutate(
-    # tạo cột mới kết hợp 3 cột country_name, country_code, region
-    country_details = str_glue("Name: {country_name} Code:{country_code} Region: {region}"),
-    .keep = "used", # giữ các cột được sử dụng
-    .before = country_name # đặt cột country_details trước cột country_name
-  )
-
-```
-
-::: callout-note
-### Hàm `mutate_at`
-
-Được sử dụng khi cần áp dụng 1 function lên nhiều cột cùng lúc\
-VD: chuyển region, income_group sang dạng factor
-
-```{r, eval=F}
-df %>% mutate_at(c("region", "income_group"), as.factor)
-```
-:::
-
-## Xử lý các dữ liệu lỗi
-
-### Kiểm tra giá trị
-
-Thường bao gồm các bước chính
-
--   Kiểm tra datatype
-
--   Kiểm tra các giá trị NA
-
--   Kiểm tra các khoảng giá trị của từng cột
-
-#### Kiểm tra datatype
-
-Khi đọc dữ liệu, R sẽ tự động đổi datatype của các cột sang dạng phù hợp nhất. Tuy nhiên, đôi lúc R sẽ chuyển thành datatype khác với mong muốn.
-
-Một số trường hợp có thể xảy ra lỗi bao gồm:
-
--   Cột số nhưng có 1 số hàng chứa chữ
-
--   Ngày theo format khác với format tiêu chuẩn của R (VD: `as.Date("01-01-2014")`)
-
-Để kiểm tra datatype, ta có thể print bảng và xem tên datatype bên dưới tên mỗi cột
-
-```{r}
-df
-
-```
-
-#### Kiểm tra NA/ khoảng giá trị của từng cột
-
-Trong R có lệnh `summary` để người dùng có thể nhanh chóng kiểm tra các khoảng giá trị và số dữ liệu NA trong từng cột.
-
-Ngoài ra, tuỳ vào bộ dữ liệu, có thể cần kiểm tra giá trị giữa các cột (VD: trong dữ liệu tiêm chủng có thể có mũi 2 trùng hoặc trước ngày tiêm mũi 1)
-
-```{r}
-summary(df)
-```
-
-------------------------------------------------------------------------
-
-### Xử lý dữ liệu
-
-Thường bao gồm các bước chính
-
--   Mã hoá lại dữ liệu
+-   Chỉnh sửa giá trị dữ liệu
 
 -   Lọc trùng
 
 -   Lọc hàng
 
-#### Mã hoá dữ liệu
+#### Chỉnh sửa giá trị dữ liệu
 
-Các trường hợp có thể cần mã hoá lại dữ liệu:
+Các trường hợp có thể cần chỉnh sửa lại dữ liệu:
 
 -   Dữ liệu NA (trống)
 
 -   Các dữ liệu dạng TRUE/FALSE được hiển thị bằng cách khác trong dữ liệu gốc (VD: Đánh dấu X hoặc bỏ trống trong file excel)
 
-Các lệnh liên quan đến mã hoá dữ liệu:
+-   Đồng nhất dữ liệu
+
+Một số lệnh liên quan:
 
 -   `replace_na` thay thế giá trị `NA` bằng giá trị được cung cấp
 
@@ -259,10 +303,12 @@ Các lệnh liên quan đến mã hoá dữ liệu:
 
 -   `case_when` mã hóa giá trị cho nhiều trường hợp nhất định
 
+Code mô phỏng sử dụng các lệnh trên
+
 ```{r, eval=F}
 # --- Thay thế các giá trị NA trong cột col1 thành "default"
 df %>% 
-  mutate(col1 = replace_na("default"))
+  mutate(col1 = replace_na(col1, "default"))
 
 # --- Thay thế các giá trị được đánh dấu trong col2 thành TRUE và ngược lại
 df %>% 
@@ -270,18 +316,26 @@ df %>%
 # Cách làm khác bằng ifelse
 df %>% 
   mutate(col2 = ifelse(is.na(col2), FALSE, TRUE))
+
+# --- Mã hoá giá trị cho nhiều trường hợp
+df %>% 
+  mutate(col2 = case_when(
+    condition_1 ~ val_1, # nếu col2 thoả điều kiện condition_1 -> gán giá trị val_1
+    condition_2 ~ val_2, # nếu col2 thoả điều kiện condition_2 -> gán giá trị val_2
+    condition_3 ~ val_3, # nếu col2 thoả điều kiện condition_3 -> gán giá trị val_3
+    .default = default_val # trong các trường hợp khác -> gán giá trị default_val
+  ))
 ```
 
-#### Lọc trùng
+**Thực hiện các bước chỉnh sửa giá trị dữ liệu trên bộ dữ liệu vaccine**
 
-Lệnh `distinct` của gói `dplyr` sẽ dữ lại 1 hàng duy nhất trong các hàng có giá trị bị trùng.
+Đồng nhất tên quận, phường theo cột `qh_update`, `px_update`
 
-Lệnh `distinct` mặc định sẽ kiểm tra giá trị của tất cả các cột (2 hàng được đánh giá là trùng khi tất cả các trị của chúng giống nhau).
-
-```{r, eval = F}
-df %>% distinct()
-
+```{r}
+joined_df <- joined_df %>% mutate(qh = qh_update, px = px_update)
 ```
+
+Đối với trường hợp này, các giá trị `NA` sẽ được loại bỏ ở bước tiếp theo thay vì được thay thế bằng các giá trị khác
 
 #### Lọc hàng
 
@@ -297,32 +351,18 @@ Một số điều kiện lọc:
 
 -   Lọc theo giá trị
 
-```{r, eval=F }
- # --- Loại các hàng có NA tại cột year hoặc gdp 
-df %>% filter(!is.na(year) | !is.na(gdp))
-
-# --- Lọc hàng 10 đến hàng 20
-df[10:20, ] # Lọc theo cách của base R 
-df %>% filter(row_number() %in% c(10:20)) # lọc theo cách của dplyr
-
-# --- Lọc hàng theo giá trị
-df %>% filter(year > 2016)
-
-```
-
 ::: callout-note
 ### Lệnh `drop_NA` {.callout-note}
 
 `drop_NA` là lệnh để nhanh chóng drop các hàng có chứa giá trị `NA` (ở bất kỳ cột nào)\
 Nếu tên cột được cung cấp, `drop_NA` chỉ drop các hàng có giá trị `NA` ở các cột được quy định
 
-```{r}
+```{r, eval=FALSE}
 # --- drop tất cả các hàng có giá trị NA
 df %>% drop_na()
 
-# --- chỉ drop các hàng có giá trị NA tại cột year
-df %>% drop_na(year)
-
+# --- chỉ drop các hàng có giá trị NA tại cột ngaytiem
+df %>% drop_na(ngaytiem)
 ```
 :::
 
@@ -331,3 +371,157 @@ df %>% drop_na(year)
 
 Việc lọc với điều kiện lớn hơn (\>) hoặc nhỏ hơn (\<) một ngày hoặc số có thể loại bỏ bất kỳ hàng nào có giá trị `NA`. Điều này là do `NA` được coi là giá trị lớn hoặc nhỏ vô hạn.
 :::
+
+**Thực hiện lọc giá trị trên dữ liệu vaccine**
+
+Loại bỏ các dữ liệu có qh px không hợp lý
+
+```{r}
+joined_df <- joined_df %>% filter(!is.na(qh_update)) 
+```
+
+Loại bỏ các dữ liệu có ngày tiêm `NA`
+
+```{r}
+joined_df <- joined_df %>% drop_na(ngaytiem)
+```
+
+Loại bỏ các ngày tiêm trước ngày sinh
+
+```{r}
+joined_df <- joined_df %>% filter(ngaytiem >= ngaysinh)
+```
+
+#### Lọc trùng
+
+Lệnh `distinct` của gói `dplyr` sẽ dữ lại 1 hàng duy nhất trong các hàng có giá trị bị trùng.
+
+Lệnh `distinct` mặc định sẽ kiểm tra giá trị của tất cả các cột (2 hàng được đánh giá là trùng khi tất cả các trị của chúng giống nhau).
+
+```{r, eval = F}
+df <- df %>% distinct()
+```
+
+## Biến đổi cột
+
+### Chọn cột
+
+Lệnh `select` của dplyr thường được sử dụng để chọn lọc cột một cách nhanh chóng
+
+-   Để chọn cột, chỉ cần gõ tên các cột được chọn, phân cách bởi dấu `,`
+
+-   Để xoá cột, thêm dấu `-` trước tên cột
+
+**Ví dụ:** xoá các cột `qh_update`, `px_update` sau khi đã chỉnh sửa tên quận, xã
+
+```{r}
+# --- Xóa cột 
+joined_df <- joined_df %>% select(-qh_update, -px_update)
+```
+
+### Tạo cột mới
+
+Như đã được nhắc đến trong các phần trước, lệnh `mutate` được sử dụng để tạo cột mới hoặc chỉnh sửa giá trị của cột.
+
+Một số argument (tham số) thông dụng của lệnh `mutate`
+
+-   `.before` / `.after` quy định vị trí của cột mới trước hoặc sau cột được chỉ định
+
+-   `.keep` quy định các cột được giữ lại sau lệnh `mutate`
+
+    -   `"all"` giữ lại tất cả các cột gốc (default)
+
+    -   `"none"` không giữ lại các cột gốc
+
+    -   `"used"` giữ lại các cột được sử dụng trong `mutate`
+
+    -   `"unused"` giữ lại các cột [không]{.underline} được sử dụng
+
+**VD**: tạo cột mới tên qhpx kết hợp cột `huyen`, `xa`
+
+```{r}
+df %>% 
+  mutate(
+    # tạo cột mới kết hợp quận và phường
+    qhpx = str_glue("{huyen}_{xa}"),
+    .keep = "used", # giữ các cột được sử dụng
+    .after = xa # cột được tạo sau cột xa
+  )
+```
+
+## Bài tập
+
+```{=html}
+<details>
+  <summary>
+    Load file <code> gdp-capita.xlsx </code>
+  </summary>
+```
+```{r}
+library(readxl)
+library(janitor)
+library(tidyverse)
+
+gdp <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1) %>% clean_names()
+```
+
+</details>
+
+```{=html}
+<details>
+  <summary>
+    Xoay trục dữ liệu
+  </summary>
+```
+Bảng dữ liệu hiện tại chưa tuân theo quy tắc tidy data vì các cột 2015 - 2022 **không phải là biến** và **mỗi hàng đang chứa nhiều quan sát** (quan sát cho các năm từ 2015 - 2022).
+
+Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhiều quan sát của cùng chủ thể (trong VD này là các quốc gia) được lưu trữ trong một hàng duy nhất.
+
+```{r}
+gdp <- gdp %>% 
+  pivot_longer(
+    cols = starts_with("x"),
+    # đặt tên mới cho biến
+    names_to = "year",
+    # đặt tên mới cho cột giá trị tương ứng
+    values_to = "gdp")
+head(gdp)
+```
+
+</details>
+
+```{=html}
+<details>
+  <summary>
+    Đọc sheet thứ 2 của file <code>gdp-capita.xlsx</code> và nối với <code>gdp</code>
+  </summary>
+```
+```{r}
+mt <- read_excel(path = "data/gdp-capita.xlsx", sheet = 2) %>% 
+  clean_names()
+
+# --- Nối 2 bảng bằng lệnh left_join
+# Trong trường hợp này, tuy lệnh join_by không cần thiết nhưng có thể giúp cho code rõ ràng hơn 
+joined_gdp <- left_join(gdp, mt, by = join_by(country_code == country_code))
+head(joined_gdp)
+```
+
+</details>
+
+```{=html}
+<details>
+  <summary>
+    Tạo cột mới tên <code>country_details</code> nối cột country_name và country_code theo format "Name: [country_name] Code: [country_code]" 
+  </summary>
+```
+```{r}
+joined_gdp %>% 
+  mutate(
+    # tạo cột mới kết hợp 3 cột country_name, country_code, region
+    country_details = str_glue("Name: {country_name} Code:{country_code} Region: {region}"),
+    .keep = "used", # giữ các cột được sử dụng
+    .before = country_name # đặt cột country_details trước cột country_name
+  )
+```
+
+</details>

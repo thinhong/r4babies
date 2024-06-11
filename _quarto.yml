@@ -33,6 +33,10 @@ format:
   html:
     theme: [cosmo, theme.scss]
     code-overflow: wrap
+    # css: styles.css
+    # include-in-header:
+    #   text: |
+    #     <script src="./slider.js"></script>
   pdf:
     documentclass: scrreprt
 
