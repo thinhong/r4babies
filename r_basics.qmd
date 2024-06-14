@@ -37,11 +37,11 @@ library(janitor)
 
 Sử dụng R để làm sạch số liệu có nhiều ưu điểm hơn dùng excel:
 
-- R có nhiều chức năng tìm và sàng lọc vấn đề cần làm sạch: Có thể viết thành 1 quy trình kiểm tra dữ liệu tự động, kết hợp thống kê mô tả và trực quan hóa để phát hiện vấn đề cần làm sạch. Có nhiều chức năng đã được các tác giả khác viết thành những package thuận tiện cho việc sử dụng.
+-   R có nhiều chức năng tìm và sàng lọc vấn đề cần làm sạch: Có thể viết thành 1 quy trình kiểm tra dữ liệu tự động, kết hợp thống kê mô tả và trực quan hóa để phát hiện vấn đề cần làm sạch. Có nhiều chức năng đã được các tác giả khác viết thành những package thuận tiện cho việc sử dụng.
 
-- Tất cả các công đoạn làm sạch đều được lưu lại: Chúng ta có thể lưu thành file R code hoặc Rmd, trong đó mỗi câu lệnh là 1 hay nhiều bước làm sạch. Trong tương lai, chỉ cần đọc file R code hoặc Rmd để dễ dàng tra cứu lại những thay đổi giữa file số liệu được phân tích và file gốc. Nếu dự án nghiên cứu có thành viên mới tham gia, quá trình chuyển giao công việc sẽ thuận lợi hơn vì mọi thứ đều được lưu trong file R code hoặc Rmd nên sẽ không sợ bị sót hay quên thông tin.
+-   Tất cả các công đoạn làm sạch đều được lưu lại: Chúng ta có thể lưu thành file R code hoặc Rmd, trong đó mỗi câu lệnh là 1 hay nhiều bước làm sạch. Trong tương lai, chỉ cần đọc file R code hoặc Rmd để dễ dàng tra cứu lại những thay đổi giữa file số liệu được phân tích và file gốc. Nếu dự án nghiên cứu có thành viên mới tham gia, quá trình chuyển giao công việc sẽ thuận lợi hơn vì mọi thứ đều được lưu trong file R code hoặc Rmd nên sẽ không sợ bị sót hay quên thông tin.
 
-- Tiết kiệm thời gian làm sạch số liệu mới: Nếu tiếp tục các đợt thu thập số liệu mới, có thể tái sử dụng file R code hoặc Rmd để làm sạch các vấn đề tương tự đã gặp trong số liệu cũ đã xử lý.
+-   Tiết kiệm thời gian làm sạch số liệu mới: Nếu tiếp tục các đợt thu thập số liệu mới, có thể tái sử dụng file R code hoặc Rmd để làm sạch các vấn đề tương tự đã gặp trong số liệu cũ đã xử lý.
 
 ## Đối tượng trong R
 
@@ -85,29 +85,51 @@ Nhiều giá trị được làm sai (dữ liệu thiếu, mũi 2 trước mũi 
 
 ***Từ điển biến số***
 
-| Tên biến  | Ý nghĩa                                                                                 | Khoảng giá trị               |
-|-----------|-----------------------------------------------------------------------------------------|------------------------------|
-| id        | số thứ tự trẻ                                                                           |                              |
-| gioitinh  | giới tính                                                                               | nam, nữ                      |
-| ngaysinh  | ngày sinh của trẻ                                                                       | \[01/01/2014, 01/04/2024\]   |
-| huyen     | địa chỉ đăng ký tiêm chủng                                                              |                              |
-| xa        | địa chỉ đăng ký tiêm chủng                                                              |                              |
-| tinh      | địa chỉ đăng ký tiêm chủng                                                              |                              |
-| VGB \<24  | Ngày tiêm mũi vắc xin Viêm gan B sơ sinh trước 24h                                      |                              |
-| VGB \>24  | Ngày tiêm mũi vắc xin Viêm gan B sơ sinh sau 24h (tiêm trong vòng 28 ngày đầu sau sinh) |                              |
-| VGB_1     | Ngày tiêm mũi tiêm chứa kháng nguyên Viêm gan B mũi 1                                   |                              |
-| VGB_2     | Ngày tiêm mũi tiêm chứa kháng nguyên Viêm gan B mũi 2                                   |                              |
-| VGB_3     | Ngày tiêm mũi tiêm chứa kháng nguyên Viêm gan B mũi 3                                   |                              |
-| VGB_4+    | Ngày tiêm mũi tiêm chứa kháng nguyên Viêm gan B mũi 4 trở lên (mũi gần nhất)            |                              |
-| HG_1      | Ngày tiêm mũi tiêm chứa kháng nguyên ho gà mũi 1                                        |                              |
-| HG_2      | Ngày tiêm mũi tiêm chứa kháng nguyên ho gà mũi 2                                        |                              |
-| HG_3      | Ngày tiêm mũi tiêm chứa kháng nguyên ho gà mũi 3                                        |                              |
-| HG_4+     | Ngày tiêm mũi tiêm chứa kháng nguyên ho gà mũi 4 trở lên (mũi gần nhất)                 |                              |
-| UV_1      | Ngày tiêm mũi tiêm chứa kháng nguyên uốn ván mũi 1                                      |                              |
-| UV_2      | Ngày tiêm mũi tiêm chứa kháng nguyên uốn ván mũi 2                                      |                              |
-| UV_3      | Ngày tiêm mũi tiêm chứa kháng nguyên uốn ván mũi 3                                      |                              |
-| UV_4+     | Ngày tiêm mũi tiêm chứa kháng nguyên uốn ván mũi 4 trở lên (mũi gần nhất)               |                              |
-| tinhtrang | Trạng thái theo dõi                                                                     | "ngừng theo dõi", "theo dõi" |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| Tên biến   | Ý nghĩa                                                                                 | Khoảng giá trị               |
++============+=========================================================================================+==============================+
+| id         | số thứ tự trẻ                                                                           |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| gioitinh   | giới tính                                                                               | nam, nữ                      |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| ngaysinh   | ngày sinh của trẻ                                                                       | \[01/01/2014, 01/04/2024\]   |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| huyen      | địa chỉ đăng ký tiêm chủng                                                              |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| xa         | địa chỉ đăng ký tiêm chủng                                                              |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| tinh       | địa chỉ đăng ký tiêm chủng                                                              |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| VGB \<24   | Ngày tiêm mũi vắc xin Viêm gan B sơ sinh trước 24h                                      |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| VGB \>24   | Ngày tiêm mũi vắc xin Viêm gan B sơ sinh sau 24h (tiêm trong vòng 28 ngày đầu sau sinh) |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| VGB_1      | Ngày tiêm mũi tiêm chứa kháng nguyên Viêm gan B mũi 1                                   |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| VGB_2      | Ngày tiêm mũi tiêm chứa kháng nguyên Viêm gan B mũi 2                                   |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| VGB_3      | Ngày tiêm mũi tiêm chứa kháng nguyên Viêm gan B mũi 3                                   |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| VGB_4+     | Ngày tiêm mũi tiêm chứa kháng nguyên Viêm gan B mũi 4 trở lên (mũi gần nhất)            |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| HG_1       | Ngày tiêm mũi tiêm chứa kháng nguyên ho gà mũi 1                                        |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| HG_2       | Ngày tiêm mũi tiêm chứa kháng nguyên ho gà mũi 2                                        |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| HG_3       | Ngày tiêm mũi tiêm chứa kháng nguyên ho gà mũi 3                                        |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| HG_4+      | Ngày tiêm mũi tiêm chứa kháng nguyên ho gà mũi 4 trở lên (mũi gần nhất)                 |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| UV_1       | Ngày tiêm mũi tiêm chứa kháng nguyên uốn ván mũi 1                                      |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| UV_2       | Ngày tiêm mũi tiêm chứa kháng nguyên uốn ván mũi 2                                      |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| UV_3       | Ngày tiêm mũi tiêm chứa kháng nguyên uốn ván mũi 3                                      |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| UV_4+      | Ngày tiêm mũi tiêm chứa kháng nguyên uốn ván mũi 4 trở lên (mũi gần nhất)               |                              |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
+| tinhtrang  | Trạng thái theo dõi                                                                     | "ngừng theo dõi", "theo dõi" |
++------------+-----------------------------------------------------------------------------------------+------------------------------+
 
 </details>
 
@@ -198,7 +220,7 @@ class(df)
 str(df)
 ```
 
-### Chuyển đổi datatype {#update_datatype}
+### Chuyển đổi datatype {#sec-update-datatype}
 
 Cú pháp chung cho thay đổi datatype là `as.datatype()`
 
@@ -222,7 +244,7 @@ Ngoài ra, còn có các lệnh khác để phục vụ cho các mục đích c�
 
 ## Các thao tác thông dụng với data.frame {#sec-df-row-col}
 
-### Làm sạch tên cột
+### Làm sạch tên cột {#sec-clean_colnames}
 
 Trong R, tên cột là giá trị trên đỉnh của một cột.
 
@@ -324,7 +346,7 @@ Tuy nhiên, có nhiều cột cần người dùng chuyển một cách thủ c�
 **VD**:
 
 ```{r}
-date_cols <- c("ngaysinh", "vgb_truoc_24","vgb_sau_24","vgb_1","vgb_2","vgb_3","vgb4","hg_1","hg_2","hg_3","hg4","uv_1","uv_2","uv_3","uv_4")
+date_cols <- c("ngaysinh", "vgb_truoc_24","vgb_sau_24","vgb_1","vgb_2","vgb_3","vgb_4","hg_1","hg_2","hg_3","hg_4","uv_1","uv_2","uv_3","uv_4")
 
 df <- df %>% 
   mutate(
@@ -387,13 +409,17 @@ Gói `stringr` (1 trong các package trong `tidyverse`) thường được sử 
 
 Ngoài ra, R còn có package `stringi` dành cho các mục đích cụ thể khác (VD như xử lý dấu, cách mã hoá văn bản, ... )
 
-|                      |             |                                     |
-|----------------------|-------------|-------------------------------------|
-| **Function**         | **Package** | **Công dụng**                       |
-| `tolower`            | base        | biến thành chữ thường               |
-| `toupper`            | base        | biến thành chữ hoa                  |
-| `str_to_title`       | stringr     | in hoa chữ cái đầu tiên của từng từ |
-| `stri_trans_general` | stringi     | loại bỏ dấu                         |
++----------------------+---------------+-------------------------------------+
+| **Function**         | **Package**   | **Công dụng**                       |
++----------------------+---------------+-------------------------------------+
+| `tolower`            | base          | biến thành chữ thường               |
++----------------------+---------------+-------------------------------------+
+| `toupper`            | base          | biến thành chữ hoa                  |
++----------------------+---------------+-------------------------------------+
+| `str_to_title`       | stringr       | in hoa chữ cái đầu tiên của từng từ |
++----------------------+---------------+-------------------------------------+
+| `stri_trans_general` | stringi       | loại bỏ dấu                         |
++----------------------+---------------+-------------------------------------+
 
 **VD**: xoá dấu trong cột `tinh` `huyen` `xa`
 
@@ -409,19 +435,29 @@ df %>%
 
 ### Các hàm thông dụng của stringr
 
-|                   |                                                                             |
-|-------------------|-----------------------------------------------------------------------------|
++-------------------+-----------------------------------------------------------------------------+
 | **Function**      | **Công dụng**                                                               |
++-------------------+-----------------------------------------------------------------------------+
 | `str_starts`      | lọc hàng bắt đầu bằng chuỗi ký tự khớp với pattern                          |
++-------------------+-----------------------------------------------------------------------------+
 | `str_ends`        | lọc hàng kết thúc bằng bằng chuỗi ký tự khớp với pattern                    |
++-------------------+-----------------------------------------------------------------------------+
 | `str_detect`      | lọc hàng có chứa chuỗi ký tự khớp với pattern                               |
++-------------------+-----------------------------------------------------------------------------+
 | `str_interp`      | chèn giá trị vào string (string interpolation)                              |
++-------------------+-----------------------------------------------------------------------------+
 | `str_extract`     | trích 1 chuỗi con (substring) đầu tiên khớp với pattern                     |
++-------------------+-----------------------------------------------------------------------------+
 | `str_extract_all` | trích tất cả các chuỗi con (substring) khớp với pattern                     |
++-------------------+-----------------------------------------------------------------------------+
 | `str_remove`      | xoá 1 chuỗi con (substring) đầu tiên khớp với pattern                       |
++-------------------+-----------------------------------------------------------------------------+
 | `str_remove_all`  | xoá tất cả các chuỗi con (substring) khớp với pattern                       |
++-------------------+-----------------------------------------------------------------------------+
 | `str_replace`     | thay thế 1 chuỗi con (substring) đầu tiên khớp với pattern bằng 1 chuỗi mới |
++-------------------+-----------------------------------------------------------------------------+
 | `str_replace_all` | thay thế tất cả chuỗi con (substring) khớp với pattern bằng 1 chuỗi mới     |
++-------------------+-----------------------------------------------------------------------------+
 
 ::: center-text
 [{{< fa link >}} stringr functions](https://stringr.tidyverse.org/reference/index.html){.btn .btn-outline-secondary role="button"}
@@ -514,13 +550,19 @@ df %>%
 
 ### Các lệnh liên quan đến ngày tháng
 
-| Function            | Công dụng                                           | Package   |
-|---------------------|-----------------------------------------------------|-----------|
-| `difftime`          | tính khoảng cách giữa hai mốc thời gian             | base      |
-| `month`/`year`      | lấy tháng/ năm                                      | lubridate |
-| `quarter`           | chuyển ngày sang quý                                | lubridate |
-| `today`             | lấy ngày hiện tại                                   | lubridate |
-| `dmy`, `ymd`, `mdy` | chuyển string theo nhiều format khác nhau sang ngày | lubridate |
++---------------------+-----------------------------------------------------+--------------+
+| Function            | Công dụng                                           | Package      |
++=====================+=====================================================+==============+
+| `difftime`          | tính khoảng cách giữa hai mốc thời gian             | base         |
++---------------------+-----------------------------------------------------+--------------+
+| `month`/`year`      | lấy tháng/ năm                                      | lubridate    |
++---------------------+-----------------------------------------------------+--------------+
+| `quarter`           | chuyển ngày sang quý                                | lubridate    |
++---------------------+-----------------------------------------------------+--------------+
+| `today`             | lấy ngày hiện tại                                   | lubridate    |
++---------------------+-----------------------------------------------------+--------------+
+| `dmy`, `ymd`, `mdy` | chuyển string theo nhiều format khác nhau sang ngày | lubridate    |
++---------------------+-----------------------------------------------------+--------------+
 
 ::: center-text
 [{{< fa link >}} lubridate functions](https://lubridate.tidyverse.org/reference/index.html){.btn .btn-outline-secondary role="button"}

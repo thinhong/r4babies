@@ -32,11 +32,11 @@ library(tidyverse)
 
 ## Tổng quan quá trình làm sạch dữ liệu
 
-Thường bao gồm các bước:
+Quá trình làm sach dữ liệu thường bao gồm các bước theo thứ tự sau
 
--   [ ] Làm sạch tên cột (từ phần 1)
+-   [ ] Làm sạch tên cột (Từ phần 1: @sec-clean_colnames)
 
--   [ ] Kiểm tra datatype (từ phần 1)
+-   [ ] Kiểm tra datatype (Từ phần 1: @sec-update-datatype)
 
 -   [ ] Kiểm tra giá trị
 
@@ -54,10 +54,43 @@ Chúng ta sẽ dùng `vaccine_data.xlsx` từ phần trước
 df <- read_excel(path = "data/vaccine_data.xlsx", sheet = 1)
 ```
 
+::: {#tip-colname-coltype .callout-tip}
+## Vì sao cần xử lý tên cột và datatype?
+
+-   Như đã được giới thiệu tại phần 1 (@sec-clean_colnames), các tên cột nên được làm sạch theo các quy tắc của R để tránh gặp lỗi khi chỉnh sửa, trích xuất dữ liệu cột.
+
+-   Các datatype cũng cần được kiểm tra và update vì **mỗi datatype trong R sẽ có các câu lệnh tính toán, phân tích, xử lý khác nhau**
+
+    **VD:**
+
+    -   Lệnh `difftime()` dùng để tính khoảng thời gian giữa 2 mốc thời gian yêu cầu 2 tham số phải theo datatype là Date
+
+    -   Lệnh `sum()` dùng để tính tổng của một dãy số yêu cầu tham số phải là 1 vector numeric
+
+    Dữ liệu không theo đúng datatype thường sẽ gặp ERROR trong R, nhưng cũng có các trường hợp không có ERROR nhưng trả về kết quả không mong muốn.
+
+    ```{r, error=TRUE}
+    # ---- Sử dụng difftime nhưng không chuyển datatype thành Date 
+    difftime("05/01/2022", "03/01/2022")
+
+    # ---- So sánh ngày nhưng không chuyển datatype sang Date
+    print("25/01/2021" < "03/01/2022")
+
+    # ---- Tính tổng nhưng không chuyển datatype sang numeric
+    sum(c("1", "3", "4"))
+    ```
+:::
+
+**Dữ liệu trước khi sửa**
+
+```{r, echo=FALSE}
+rmarkdown::paged_table(head(df))
+```
+
 ```{=html}
 <details>
   <summary>
-    Làm sạch tên cột, thay đổi datatype
+    Làm sạch tên cột
   </summary>
 ```
 ```{r}
@@ -87,6 +120,8 @@ df <- rename(df,
     Kiểm tra và thay đổi datatype 
   </summary>
 ```
+Như đã được giới thiệu trong phần @sec-update-datatype, cần chuyển đổi các cột ngày, cột có giá trị phân loại, giá trị TRUE/FALSE sang đúng datatype để thể hiện rõ hơn ý nghĩa giá trị từng cột cũng như tránh xảy ra lỗi khi sử dụng các lệnh xử lý dữ liệu trong R.
+
 ```{r}
 # --- Điều chỉnh datatype
 date_cols <- c("ngaysinh", "vgb_truoc_24","vgb_sau_24","vgb_1","vgb_2","vgb_3","vgb_4","hg_1","hg_2","hg_3","hg_4","uv_1","uv_2","uv_3","uv_4")
@@ -102,6 +137,8 @@ df <- mutate(df,
 Code tương ứng khi không dùng dấu `%>%`
 
 ```{r, eval=FALSE}
+date_cols <- c("ngaysinh", "vgb_truoc_24","vgb_sau_24","vgb_1","vgb_2","vgb_3","vgb_4","hg_1","hg_2","hg_3","hg_4","uv_1","uv_2","uv_3","uv_4")
+
 df <- mutate(df,
     gioitinh = as.factor(gioitinh),
     tinhtrang = ifelse(tinhtrang == "theo dõi", TRUE, FALSE)
@@ -111,6 +148,12 @@ df <- rename(df, theodoi = tinhtrang)
 ```
 
 </details>
+
+**Dữ liệu sau khi sửa**
+
+```{r, echo = FALSE}
+rmarkdown::paged_table(head(df))
+```
 
 ## Kiểm tra giá trị
 
@@ -126,9 +169,64 @@ Trong R có lệnh `summary` để người dùng có thể nhanh chóng kiểm 
 summary(df)
 ```
 
+### Giá trị NA
+
+**Giá trị NA** (hay giá trị missing) là các giá trị được bỏ trống
+
+::: callout-tip
+## Vì sao phải xử lý các giá trị NA 
+
+Trong R, `NA` là một giá trị đặc biệt khi không thể tính toán hay so sánh với các datatype khác (kết quả luôn trả về `NA`).
+
+Vì vậy dữ liệu NA nên được xử lý trước khi thực hiện tính toán hay phân tích với dữ liệu.\
+VD:
+
+```{r}
+# các phép tính toán khi có NA sẽ trả về NA
+sum(c(1, 2, 3, 4, NA))
+
+# khi thống kê với dữ liệu có chứa NA sẽ trả về NA
+max(c(1, 2, 3, 4, NA))
+
+```
+:::
+
 ### Outlier
 
-Để kiểm tra các giá trị outlier, ta có thể sử dụng `boxplot` để tìm các điểm giá trị cách xa các giá trị còn lại
+**Outlier** là các giá trị khác đáng kể so với các giá trị khác
+
+Cách xác định outlier đơn giản nhất là bằng cách sử dụng thuật toán Tukey. Trong đó, outlier được định nghĩa là:
+
+-   Các giá trị lớn hơn `Q3 + (Q3 - Q1)*1.5`
+
+-   Các giá trị nhỏ hơn `Q1 - (Q3 - Q1)*1.5`
+
+::: callout-tip
+## Vì sao phải xử lý outlier
+
+-   Về mặt quản lý dữ liệu, outlier thường là dấu hiệu cho thấy dữ liệu được nhập có thể là dữ liệu sai cần được kiểm tra lại
+
+-   Về mặt phân tích, outlier có thể gây ra độ lệch rất lớn trong một kết quả thống kê
+
+VD:
+
+```{r}
+# ---- ví dụ dãy số có outlier
+example_outlier <- c(-10, 1,3,4,1,2,5,20)
+
+# --- kết quả tính mean khi có outlier
+mean(example_outlier)
+
+# --- kết quả tính mean sau khi lọc outlier theo công thức xác định outlier
+q1 <- quantile(example_outlier, 0.25)
+q3 <- quantile(example_outlier, 0.75)
+iqr <- IQR(example_outlier)
+filter_outlier <- example_outlier[(example_outlier > q1 - iqr*1.5)&(example_outlier < q3 + iqr*1.5)]
+mean(filter_outlier)
+```
+:::
+
+Để nhanh chóng kiểm tra dữ liệu có chứa outlier hay không, ta có thể sử dụng `boxplot` để tìm các điểm giá trị cách xa các giá trị còn lại
 
 ![](img/clean_p2/boxplot.png){width="445"}
 
@@ -136,6 +234,9 @@ summary(df)
 
 ```{r}
 boxplot(df$vgb_1)
+
+# xem các giá trị được phân loại là outlier
+boxplot(df$vgb_1, plot=FALSE)$out
 ```
 
 ### Kiểm tra giá trị giữa các cột
@@ -144,25 +245,45 @@ Ngoài ra, tuỳ vào bộ dữ liệu, có thể cần kiểm tra giá trị gi
 
 **Ví dụ**: lọc các hàng có ngày tiêm không đúng thứ tự
 
-```{r}
+```{r, output = FALSE}
 # --- Kiểm tra các mũi vgb
-df %>% 
+incorrect_vgb <- df %>% 
   filter(
-  (vgb_truoc_24 > vgb_sau_24) | (vgb_sau_24 > vgb_1) | (vgb_1 > vgb_2) | (vgb_2 > vgb_3) | (vgb_3 > vgb_4) ) %>% 
-  select(vgb_truoc_24, vgb_sau_24, vgb_1, vgb_2, vgb_3, vgb_4)
+  (vgb_truoc_24 > vgb_sau_24) | (vgb_sau_24 > vgb_1) | (vgb_1 > vgb_2) | (vgb_2 > vgb_3) | (vgb_3 > vgb_4) 
+  ) %>% 
+  select(vgb_truoc_24, vgb_sau_24, vgb_1, vgb_2, vgb_3, vgb_4) 
+incorrect_vgb
+```
 
+```{r, echo = FALSE}
+# print with rmarkdown paged table for prettier output
+rmarkdown::paged_table(incorrect_vgb)
+```
+
+```{r, output = FALSE}
 # --- Kiểm tra các mũi ho gà
-df %>% 
+incorrect_hg <- df %>% 
   filter(
   (hg_1 > hg_2) | (hg_2 > hg_3) | (hg_3 > hg_4)) %>% 
   select(hg_1, hg_2, hg_3, hg_4)
+incorrect_hg
+```
 
+```{r, echo=FALSE}
+rmarkdown::paged_table(incorrect_hg)
+```
+
+```{r, output=FALSE}
 # --- Kiểm tra các mũi uốn ván
-df %>% 
+incorrect_uv <- df %>% 
   filter(
   (uv_1 > uv_2) | (uv_2 > uv_3) | (uv_3 > uv_4) )%>% 
   select(uv_1, uv_2, uv_3, uv_4)
+incorrect_uv
+```
 
+```{r, echo=FALSE}
+rmarkdown::paged_table(incorrect_uv)
 ```
 
 ------------------------------------------------------------------------
@@ -174,6 +295,8 @@ Dữ liệu gọn gàng có các đặc điểm sau:[@wickham2014]
 -   Mỗi biến là một cột; mỗi cột là một biến
 -   Mỗi quan sát là một hàng; mỗi hàng là một quan sát
 -   Mỗi giá trị nằm trong một ô; mỗi ô chứa một giá trị duy nhất
+
+Ví dụ dữ liệu tidy và không tidy
 
 ### Format bảng
 
@@ -207,12 +330,17 @@ Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác
 
 Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package `dplyr` sau đây
 
++--------------+--------------------+-----------------------------------------------------------------------------------------------------+
 | Function     | Công dụng          | GIF minh hoạ                                                                                        |
-|--------------|--------------------|-----------------------------------------------------------------------------------------------------|
++==============+====================+=====================================================================================================+
 | left_join()  | Nối ngoài bên trái | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join.gif?raw=true){width="283"}  |
++--------------+--------------------+-----------------------------------------------------------------------------------------------------+
 | right_join() | Nối ngoài bên phải | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/right-join.gif?raw=true){width="282"} |
++--------------+--------------------+-----------------------------------------------------------------------------------------------------+
 | inner_join() | Nối trong          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/inner-join.gif?raw=true){width="281"} |
++--------------+--------------------+-----------------------------------------------------------------------------------------------------+
 | full_join()  | Nối ngoài          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/full-join.gif?raw=true){width="281"}  |
++--------------+--------------------+-----------------------------------------------------------------------------------------------------+
 
 Để sử dụng lệnh join, ta cần cung cấp cho R các thông tin sau:
 
