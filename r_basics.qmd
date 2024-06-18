@@ -373,7 +373,7 @@ str(df)
 `mutate_at` được sử dụng khi cần chỉnh sửa nhiều cột cùng lúc
 :::
 
-### Lọc dữ liệu
+### Lọc dữ liệu {#sec-filter-conditions}
 
 Function `filter()` được sử dụng cho việc lọc dữ liệu theo điều kiện\
 Một số ký tự thường được sử dụng để quy định điều kiện bao gồm:
