@@ -85,6 +85,10 @@ df <- read_excel(path = "data/vaccine_data.xlsx", sheet = 1)
 
 ***Dữ liệu trước khi sửa***
 
+```{r, eval=FALSE}
+head(df)
+```
+
 ```{r, echo=FALSE}
 rmarkdown::paged_table(head(df))
 ```
@@ -152,6 +156,10 @@ df <- rename(df, theodoi = tinhtrang)
 </details>
 
 ***Dữ liệu sau khi sửa***
+
+```{r, output = FALSE}
+head(df)
+```
 
 ```{r, echo = FALSE}
 rmarkdown::paged_table(head(df))
@@ -421,8 +429,12 @@ Cách sắp xếp hiện tại còn được gọi là dữ liệu `định dạ
 
 **Dữ liệu trước khi format**
 
+```{r, output = FALSE}
+head(df, n = 10)
+```
+
 ```{r, echo=FALSE}
-rmarkdown::paged_table(df)
+rmarkdown::paged_table(head(df, n = 10))
 ```
 
 Bảng dữ liệu vaccine đang thể hiện thông tin về [từng đợt tiêm vaccine của từng trẻ.]{.underline} Vì vậy, các biến sẽ là các đặc điểm của [1 đợt tiêm,]{.underline} và mỗi quan sát sẽ là thông tin về mỗi đợt tiêm (có thể hiểu là giá trị của các biến cho mỗi đợt tiêm khác nhau)
@@ -456,8 +468,12 @@ df <- pivot_longer(df,
 
 **Dữ liệu sau khi format**
 
+```{r, eval=FALSE}
+head(df, n=10)
+```
+
 ```{r, echo=FALSE}
-rmarkdown::paged_table(df)
+rmarkdown::paged_table(head(df, n=10))
 ```
 
 ## Nối bảng
@@ -571,14 +587,22 @@ qhpx
 
 Bảng `qhpx`
 
+```{r, output = FALSE}
+head(qhpx, n=10)
+```
+
 ```{r, echo = FALSE}
-rmarkdown::paged_table(qhpx)
+rmarkdown::paged_table(head(qhpx, n=10))
 ```
 
 Bảng dữ liệu vaccine
 
+```{r, eval = FALSE}
+head(df, n=10)
+```
+
 ```{r, echo = FALSE}
-rmarkdown::paged_table(df)
+rmarkdown::paged_table(head(df, n=10))
 ```
 
 2 bảng sẽ được nối bằng giá trị cột huyện và xã
@@ -768,11 +792,11 @@ example_qhpx <- joined_df %>%
     # tạo cột mới kết hợp quận và phường
     qhpx = str_glue("{huyen}_{xa}"),
   )
-example_qhpx
+head(example_qhpx, n=10)
 ```
 
 ```{r, echo=FALSE}
-rmarkdown::paged_table(example_qhpx)
+rmarkdown::paged_table(head(example_qhpx, n=10))
 ```
 
 **Ví dụ 2:** tạo cột nhóm tuổi với `case_when`
@@ -788,16 +812,38 @@ example_age_group <- joined_df %>%
       .default = "> 20"
     )
   )
-example_age_group
+head(example_age_group, n=10)
 ```
 
-```{r}
-rmarkdown::paged_table(example_age_group)
+```{r, echo=FALSE}
+rmarkdown::paged_table(head(example_age_group, n=10))
 ```
 
 ## Bài tập
 
 Đọc dữ liệu từ sheet 1 của file `gdp-capita.xlsx` và làm sạch tên cột
+
+```{=html}
+<details>
+  <summary>
+    Thông tin về bộ dữ liệu
+  </summary>
+```
+Bảng dữ liệu chứa thông tin về GDP của các quốc gia qua các năm (từ 2015 - 2022)
+
++--------------------------------------------------------------------------+----------------------------+
+| Tên cột                                                                  | Ý nghĩa                    |
++==========================================================================+============================+
+| country                                                                  | tên quốc gia               |
++--------------------------------------------------------------------------+----------------------------+
+| code                                                                     | mã quốc gia 3 ký tự        |
++--------------------------------------------------------------------------+----------------------------+
+| \`2015\` \`2016\` \`2017\` \`2018\` \`2019\` \`2020\` \`2021\` \`2022\`  | các cột năm                |
++--------------------------------------------------------------------------+----------------------------+
+
+```{=html}
+</details>
+```
 
 ```{=html}
 <details>
@@ -854,6 +900,8 @@ head(gdp)
 ### Nối bảng
 
 Đọc sheet thứ 2 của file `gdp-capita.xlsx` chứa thông tin từng quốc gia và nối với bảng dữ liệu đã được chỉnh sửa
+
+2 bảng có cột chung là `country_code`
 
 ```{=html}
 <details>
