@@ -34,6 +34,7 @@ format:
   html:
     theme: [cosmo, theme.scss]
     code-overflow: wrap
+    code-copy: true
     # css: styles.css
     # include-in-header:
     #   text: |
