@@ -35,11 +35,13 @@ for (i in 1:length(cols)){
   }
   else{
     # --- special handling while sampling date 
-    if (cols[i] %in% c("VGB <24", "VGB >24", "HG_1", "UV_1")){
-      data[[ cols[i] ]] <- data[[ "ngaysinh" ]] + sample(c(0, 1))
+    if (cols[i] %in% c("VGB <24", "HG_1", "UV_1")){
+      data[[ cols[i] ]] <- data[[ "ngaysinh" ]] + sample(c(0, 1), size = nrows, replace=TRUE)
+    }else if (cols[i] == "VGB >24"){
+      data[[ cols[i] ]] <- data[[ "VGB <24" ]] + sample(c(-1, 0, 1), prob = c(0.01, 0.09, 0.9), size = nrows, replace = TRUE)
     }else{
-      # if not the 1st shot, sample by caculating some date away fr the prev shot
-      data[[ cols[i] ]] <- data[[ cols[i-1] ]] + sample(c(-2:15), size = nrows, replace = TRUE)
+      # if not the 1st shot, sample by add a few days fr the prev shot
+      data[[ cols[i] ]] <- data[[ cols[i-1] ]] + sample(c(-2, -1, 0, 1, 3, 4, 10, 15), prob=c(0.005, 0.005, 0.045, 0.045, 0.05, 0.05, 0.4, 0.4), size = nrows, replace = TRUE)
     }
     
     next
@@ -58,8 +60,8 @@ data <- data %>%
   rename(
   `VGB <24` = VGB..24 ,
   `VGB >24` = VGB..24.1,
-  `VGB4+` = VGB_4.,
-  `HG4+` = HG_4.,
+  `VGB_4+` = VGB_4.,
+  `HG_4+` = HG_4.,
   `UV_4+` = UV_4.
   ) 
 
@@ -67,11 +69,21 @@ data <- data %>%
 date_index <- which(str_detect(colnames(data), "[:digit:]"))
 for (i in 1:nrows){
   # sample no NA cols
-  sample_no_na <- sample(0:4, 1)
+  sample_no_na <- sample(c(0, 1, 2, 3, 4), prob = c(0.96, 0.01, 0.01, 0.01, 0.01), 1)
   # sample cols to make it NA
   sample_col <- sample(date_index, sample_no_na)
   
   data[i,sample_col] <- NA
+}
+
+# --- Add outliers
+for (i in 1:nrows){
+  # sample no outiler cols
+  sample_no_outlier <- sample(c(0, 1, 2, 3, 4), prob = c(0.96, 0.01, 0.01, 0.01, 0.01), 1)
+  # sample cols to make it an outlier
+  sample_col <- sample(date_index, sample_no_outlier)
+
+  data[i, sample_col] <- "01/01/0001"
 }
 
 # --- Add id columns

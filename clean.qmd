@@ -13,38 +13,437 @@ Bước đầu tiên sau khi đọc được dữ liệu vào R là "làm sạch
 :::
 
 ::: callout-note
-# Các package được sử dụng trong bài học {.callout-note}
+# Trước buổi học {.callout-note}
 
--   readxl
+-   Tải data thực hành
 
--   janitor
+{{< downloadthis data/vaccine_data.xlsx dname="vaccine_data" label="vaccine_data.xlsx" type=light >}} {{< downloadthis data/qhpx_hcm.rds dname="qhpx_hcm" label="qhpx_hcm.rds" type=light >}} {{< downloadthis data/life-exp.csv dname="life-exp" label="life-exp.csv" type=light >}}
 
--   tidyverse
+-   Tải các package sau: `tidyverse`, `readxl`, `writexl`, `janitor`
+
+-   Và load các package
+
+```{r, output=FALSE, warnings=FALSE}
+library(readxl)
+library(janitor)
+library(tidyverse)
+```
 :::
 
-## Data gọn gàng (tidy data)
+## Tổng quan quá trình làm sạch dữ liệu
 
-Dữ liệu gọn gàng có các đặc điểm sau:[@wickham2014]
+Quá trình làm sach dữ liệu thường bao gồm các bước theo thứ tự sau
+
+-   [ ] Làm sạch tên cột (Từ phần 1: @sec-clean_colnames)
+
+-   [ ] Kiểm tra datatype (Từ phần 1: @sec-update-datatype)
+
+-   [ ] Kiểm tra giá trị
+
+-   [ ] Format bảng theo quy tắc dữ liệu gọn gàng
+
+-   [ ] Nối bảng (nếu cần thiết)
+
+-   [ ] Xử lý các dữ liệu lỗi
+
+## Làm sạch tên cột & kiểm tra datatype
+
+Chúng ta sẽ dùng `vaccine_data.xlsx` từ phần trước
+
+```{r}
+df <- read_excel(path = "data/vaccine_data.xlsx", sheet = 1)
+```
+
+::: {#tip-colname-coltype .callout-tip}
+## Vì sao cần xử lý tên cột và datatype?
+
+-   Như đã được giới thiệu tại phần 1 (@sec-clean_colnames), các tên cột nên được làm sạch theo các quy tắc của R để tránh gặp lỗi khi chỉnh sửa, trích xuất dữ liệu cột.
+
+-   Các datatype cũng cần được kiểm tra và update vì **mỗi datatype trong R sẽ có các câu lệnh tính toán, phân tích, xử lý khác nhau**
+
+    **Ví dụ:**
+
+    -   Lệnh `difftime()` dùng để tính khoảng thời gian giữa 2 mốc thời gian yêu cầu 2 tham số phải theo datatype là Date
+
+    -   Lệnh `sum()` dùng để tính tổng của một dãy số yêu cầu tham số phải là 1 vector numeric
+
+    Dữ liệu không theo đúng datatype thường sẽ gặp ERROR trong R, nhưng cũng có các trường hợp không có ERROR nhưng trả về kết quả không mong muốn.
+
+    ```{r, error=TRUE}
+    # ---- Sử dụng difftime nhưng không chuyển datatype thành Date 
+    difftime("05/01/2022", "03/01/2022")
+
+    # ---- So sánh ngày nhưng không chuyển datatype sang Date
+    print("25/01/2021" < "03/01/2022")
+
+    # ---- Tính tổng nhưng không chuyển datatype sang numeric
+    sum(c("1", "3", "4"))
+    ```
+:::
+
+**Thực hiện làm sạch tên cột và chỉnh datatype cho dữ liệu vaccine**
+
+***Dữ liệu trước khi sửa***
+
+```{r, eval=FALSE}
+head(df)
+```
+
+```{r, echo=FALSE}
+rmarkdown::paged_table(head(df))
+```
+
+```{=html}
+<details>
+  <summary>
+    Làm sạch tên cột
+  </summary>
+```
+```{r}
+df <- df %>% clean_names() %>%  
+  rename(
+    vgb_truoc_24 = vgb_24,
+    vgb_sau_24 = vgb_24_2
+  )
+```
+
+Code tương ứng khi không dùng dấu `%>%`
+
+```{r, eval=FALSE}
+# ---Code không dùng %>%
+df <- clean_names(df) 
+df <- rename(df, 
+    vgb_truoc_24 = vgb_24,
+    vgb_sau_24 = vgb_24_2
+  )
+```
+
+</details>
+
+```{=html}
+<details>
+  <summary>
+    Kiểm tra và thay đổi datatype 
+  </summary>
+```
+Như đã được giới thiệu trong phần @sec-update-datatype, cần chuyển đổi các cột ngày, cột có giá trị phân loại, giá trị TRUE/FALSE sang đúng datatype để thể hiện rõ hơn ý nghĩa giá trị từng cột cũng như tránh xảy ra lỗi khi sử dụng các lệnh xử lý dữ liệu trong R.
+
+```{r}
+# --- Điều chỉnh datatype
+date_cols <- c("ngaysinh", "vgb_truoc_24","vgb_sau_24","vgb_1","vgb_2","vgb_3","vgb_4","hg_1","hg_2","hg_3","hg_4","uv_1","uv_2","uv_3","uv_4")
+
+df <- mutate(df,
+    gioitinh = as.factor(gioitinh),
+    tinhtrang = ifelse(tinhtrang == "theo dõi", TRUE, FALSE)
+  ) %>% 
+  mutate_at(date_cols, dmy) %>% 
+  rename(theodoi = tinhtrang)
+```
+
+Code tương ứng khi không dùng dấu `%>%`
+
+```{r, eval=FALSE}
+date_cols <- c("ngaysinh", "vgb_truoc_24","vgb_sau_24","vgb_1","vgb_2","vgb_3","vgb_4","hg_1","hg_2","hg_3","hg_4","uv_1","uv_2","uv_3","uv_4")
+
+df <- mutate(df,
+    gioitinh = as.factor(gioitinh),
+    tinhtrang = ifelse(tinhtrang == "theo dõi", TRUE, FALSE)
+  )
+df <- mutate_at(df, date_cols, dmy) 
+df <- rename(df, theodoi = tinhtrang)
+```
+
+</details>
+
+***Dữ liệu sau khi sửa***
+
+```{r, output = FALSE}
+head(df)
+```
+
+```{r, echo = FALSE}
+rmarkdown::paged_table(head(df))
+```
+
+## Kiểm tra giá trị
+
+Thường bao gồm các thao tác chính
+
+-   Kiểm tra các giá trị NA
+
+-   Kiểm tra các giá trị bất thường (outlier) và các khoảng giá trị của từng cột
+
+-   Kiểm tra giá trị giữa các cột (nếu cần thiết)
+
+Trong R có lệnh `summary` để người dùng có thể nhanh chóng kiểm tra các khoảng giá trị và số dữ liệu NA trong từng cột.
+
+```{r}
+summary(df)
+```
+
+```{=html}
+<details>
+  <summary>
+    Thông tin về các output của lệnh <code>summary</code>
+  </summary>
+```
+-   Đối với dữ liệu `numeric`: `summary` sẽ cho các thông tin sau
+
+    +------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+    | Ouput      | Ý nghĩa                                                                              | Công dụng                                                                              |
+    +============+======================================================================================+========================================================================================+
+    | Min        | Giá trị nhỏ nhất của cột                                                             | cùng với `Max`, kiểm tra khoảng giá trị có hợp lệ không.\                              |
+    |            |                                                                                      | VD: đối với cột tuổi, `Max` là 150 có khả năng cao là giá trị sai                      |
+    +------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+    | Max        | Giá trị lớn nhất của cột                                                             | cùng với `Min`, kiểm tra khoảng giá trị có hợp lệ không                                |
+    +------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+    | Mean       | Giá trị trung bình của cột                                                           |                                                                                        |
+    +------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+    | Median     | Số trung vị -- giá trị lớn hơn 50% số giá trị trong cột                              |                                                                                        |
+    +------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+    | 1st Qu.    | Tứ phân vị thứ nhất (trung vị phần dưới) -- giá trị lớn hơn 25% số giá trị trong cột | cung cấp thêm thông tin về khoảng giá trị của cột, có thể được sử dụng để tính outlier |
+    +------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+    | 3rd Qu.    | Tứ phân vị thứ 3 (trung vị phần trên) - giá trị lớn hơn 75% số giá trị trong cột     | cung cấp thêm thông tin về khoảng giá trị của cột, có thể được sử dụng để tính outlier |
+    +------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+    | NA         | Số giá trị trống trong cột                                                           |                                                                                        |
+    +------------+--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+
+-   Đối với dữ liệu `character`: `summary` cho biết tổng số hàng và số dữ liệu `NA`
+
+-   Đối với dữ liệu `factor` hay `logical`: `summary` sẽ cho biết số lượng dữ liệu cho từng nhóm và số dữ liệu `NA`
+
+</details>
+
+### Giá trị NA
+
+**Giá trị NA** (hay giá trị missing) là các giá trị được bỏ trống
+
+::: callout-tip
+## Vì sao phải kiểm tra các giá trị NA
+
+Trong R, `NA` là một giá trị đặc biệt khi không thể tính toán hay so sánh với các datatype khác (kết quả luôn trả về `NA`).
+
+Vì vậy dữ liệu NA nên được xử lý trước khi thực hiện tính toán hay phân tích với dữ liệu.\
+**Ví dụ**:
+
+```{r}
+# các phép tính toán khi có NA sẽ trả về NA
+sum(c(1, 2, 3, 4, NA))
+
+# khi thống kê với dữ liệu có chứa NA sẽ trả về NA
+max(c(1, 2, 3, 4, NA))
+
+```
+:::
+
+**Xử lý giá trị NA**
+
+Tuỳ vào trường hợp, các giá trị `NA` có thể được xử lý 1 trong 2 cách
+
+-   Thay thế NA bằng một giá trị khác (@sec-mutate-data)
+
+-   Loại bỏ các hàng chứa `NA` (@sec-filter-rows)
+
+### Outlier {#sec-check-outlier}
+
+**Outlier** là các giá trị khác đáng kể so với các giá trị khác
+
+Cách xác định outlier đơn giản nhất là bằng cách sử dụng thuật toán Tukey. Trong đó, outlier được định nghĩa là:
+
+-   Các giá trị lớn hơn `Q3 + (Q3 - Q1)*1.5`
+
+-   Các giá trị nhỏ hơn `Q1 - (Q3 - Q1)*1.5`
+
+::: callout-tip
+## Vì sao phải kiểm tra outlier
+
+-   Về mặt quản lý dữ liệu, outlier thường là dấu hiệu cho thấy dữ liệu được nhập có thể là dữ liệu sai cần được kiểm tra lại
+
+-   Về mặt phân tích, outlier có thể gây ra độ lệch rất lớn trong một kết quả thống kê
+
+**Ví dụ:**
+
+```{r}
+# ---- ví dụ dãy số có outlier
+example_outlier <- c(-10, 1,3,4,1,2,5,20)
+
+# --- kết quả tính mean khi có outlier
+mean(example_outlier)
+
+# --- kết quả tính mean sau khi lọc outlier theo công thức xác định outlier
+q1 <- quantile(example_outlier, 0.25)
+q3 <- quantile(example_outlier, 0.75)
+iqr <- q3 - q1
+filter_outlier <- subset(example_outlier, (example_outlier > q1 - iqr*1.5)&(example_outlier < q3 + iqr*1.5))
+mean(filter_outlier)
+```
+:::
+
+Để nhanh chóng kiểm tra dữ liệu có chứa outlier hay không, ta có thể sử dụng `boxplot` để tìm các điểm giá trị cách xa các giá trị còn lại
+
+![](img/clean_p2/boxplot.png){width="445"}
+
+**Ví dụ:** sử dụng boxplot để kiểm tra outlier của cột `vgb_1`
+
+```{r}
+boxplot(df$vgb_1)
+
+# xem các giá trị được phân loại là outlier
+boxplot(df$vgb_1, plot=FALSE)$out
+```
+
+```{=html}
+<details>
+  <summary>
+    Thực hiện phép kiểm tra outlier trên các cột còn lại của dữ liệu vaccine
+  </summary>
+```
+```{r}
+# --- các mũi vgb
+boxplot(df$vgb_truoc_24, plot=FALSE)$out
+boxplot(df$vgb_sau_24, plot=FALSE)$out
+boxplot(df$vgb_2, plot=FALSE)$out
+boxplot(df$vgb_3, plot=FALSE)$out
+boxplot(df$vgb_4, plot=FALSE)$out
+# ---- hg
+boxplot(df$hg_1, plot=FALSE)$out
+boxplot(df$hg_2, plot=FALSE)$out
+boxplot(df$hg_3, plot=FALSE)$out
+boxplot(df$hg_4, plot=FALSE)$out
+# --- uv
+boxplot(df$uv_1, plot=FALSE)$out
+boxplot(df$uv_2, plot=FALSE)$out
+boxplot(df$uv_3, plot=FALSE)$out
+boxplot(df$uv_4, plot=FALSE)$out
+```
+
+</details>
+
+**Xử lý outlier**
+
+Trong nhiều trường hợp, các dữ liệu được xem là outlier vẫn có thể là một giá trị hợp lệ và nên được giữ cho việc phân tích.
+
+Tuy nhiên, nếu outlier được xác định là dữ liệu sai (trong bộ dữ liệu vaccine, ngày tiêm "01-01-0001" có thể được xác định là sai) thì có thể xem các outlier đó là dữ liệu `NA` và xử lý một cách tương tự
+
+### Kiểm tra giá trị giữa các cột
+
+Ngoài ra, tuỳ vào bộ dữ liệu, có thể cần kiểm tra giá trị giữa các cột (VD: trong dữ liệu tiêm chủng có thể có mũi 2 trùng hoặc trước ngày tiêm mũi 1)
+
+Kiểm tra các hàng có ngày tiêm không đúng thứ tự
+
+```{r, output = FALSE}
+# --- Kiểm tra các mũi vgb
+incorrect_vgb <- df %>% 
+  filter(
+  (vgb_truoc_24 > vgb_sau_24) | (vgb_sau_24 > vgb_1) | (vgb_1 > vgb_2) | (vgb_2 > vgb_3) | (vgb_3 > vgb_4) 
+  ) %>% 
+  select(vgb_truoc_24, vgb_sau_24, vgb_1, vgb_2, vgb_3, vgb_4) 
+incorrect_vgb
+```
+
+```{r, echo = FALSE}
+# print with rmarkdown paged table for prettier output
+rmarkdown::paged_table(incorrect_vgb)
+```
+
+```{r, output = FALSE}
+# --- Kiểm tra các mũi ho gà
+incorrect_hg <- df %>% 
+  filter(
+  (hg_1 > hg_2) | (hg_2 > hg_3) | (hg_3 > hg_4)) %>% 
+  select(hg_1, hg_2, hg_3, hg_4)
+incorrect_hg
+```
+
+```{r, echo=FALSE}
+rmarkdown::paged_table(incorrect_hg)
+```
+
+```{r, output=FALSE}
+# --- Kiểm tra các mũi uốn ván
+incorrect_uv <- df %>% 
+  filter(
+  (uv_1 > uv_2) | (uv_2 > uv_3) | (uv_3 > uv_4) )%>% 
+  select(uv_1, uv_2, uv_3, uv_4)
+incorrect_uv
+```
+
+```{r, echo=FALSE}
+rmarkdown::paged_table(incorrect_uv)
+```
+
+------------------------------------------------------------------------
+
+## Dữ liệu gọn gàng (tidy data)
+
+### Dữ liệu gọn gàng là gì?
+
+Dữ liệu gọn gàng cần có các đặc điểm sau:[@wickham2014]
 
 -   Mỗi biến là một cột; mỗi cột là một biến
 -   Mỗi quan sát là một hàng; mỗi hàng là một quan sát
 -   Mỗi giá trị nằm trong một ô; mỗi ô chứa một giá trị duy nhất
 
-Chúng ta sẽ dùng data `gdp-capita.xlsx`
+**Ví dụ**: dữ liệu không gọn gàng và gọn gàng
 
-```{r}
-library(readxl)
-library(janitor)
-library(tidyverse)
+```{r, include = FALSE}
+gdp <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1) %>% 
+  rename(country = `Country Name`, code = `Country Code`)
+untidy_gdp <- head(gdp[,1:4]) 
 
-df <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1)
+untidy_cols <- which(str_starts(colnames(untidy_gdp), "[:digit:]"))
+tidy_gdp <- untidy_gdp %>% pivot_longer(cols = any_of(untidy_cols), names_to = "year", values_to = "gdp")
 ```
 
-### Format bảng
+***Dữ liệu không gọn gàng***
 
-Bảng dữ liệu hiện tại chưa tuân theo quy tắc tidy data vì các cột 2015 - 2022 **không phải là biến** và **mỗi hàng đang chứa nhiều quan sát** (quan sát cho các năm từ 2015 - 2022).
+```{r, echo=FALSE}
+knitr::kable(untidy_gdp)
+```
 
-Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhiều quan sát của cùng chủ thể (trong VD này là các quốc gia) được lưu trữ trong một hàng duy nhất. Điều này có thể hữu ích cho việc hiển thị, tuy nhiên không lý tưởng cho việc phân tích.
+Bảng ví dụ này đang thể hiện [GDP của từng quốc gia qua từng năm]{.underline}. Trong đó, chủ thể sẽ là các [quốc gia]{.underline} và các đặc điểm là [năm]{.underline} và [GDP]{.underline}
+
+Đối chiếu với các đặc điểm của tidy data nêu trên, bảng dữ liệu này không phải là dữ liệu gọn gàng vì những lí do sau:
+
+-   2015, 2016 không phải là biến vì chúng không phải là các đặc điểm của chủ thể (trong VD này là các quốc gia), mà là giá trị cho biến (đặc điểm) [năm]{.underline}
+
+-   Trong bảng dữ liệu này, mỗi quan sát sẽ là GDP của 1 quốc gia trong 1 năm, vì vậy bảng dữ liệu này cũng đang vi phạm quy tắc của tidy data vì mỗi hàng đang chứa 2 quan sát (GDP cho 2 năm)
+
+Cách sắp xếp hiện tại còn được gọi là dữ liệu `dạng ngang (wide)` vì các quan sát cho một chủ thể đều được sắp xếp trong 1 hàng.
+
+***Dữ liệu gọn gàng***
+
+Để bảng ví dụ GDP tuân theo quy tắc tidy, ta cần tạo một cột mới cho biến [năm]{.underline} và cột [gdp]{.underline} để chứa giá trị GDP tương ứng.
+
+Bảng dữ liệu GDP theo quy tắc tidy data sẽ như sau
+
+```{r, echo=FALSE}
+knitr::kable(tidy_gdp)
+```
+
+Cách sắp xếp hiện tại còn được gọi là dữ liệu `định dạng dọc (long)` vì các quan sát được xếp theo chiều dọc (mỗi hàng chỉ chứa 1 quan sát duy nhất).
+
+### Format bảng dữ liệu vaccine
+
+**Dữ liệu trước khi format**
+
+```{r, output = FALSE}
+head(df, n = 10)
+```
+
+```{r, echo=FALSE}
+rmarkdown::paged_table(head(df, n = 10))
+```
+
+Bảng dữ liệu vaccine đang thể hiện thông tin về [từng đợt tiêm vaccine của từng trẻ.]{.underline} Vì vậy, các biến sẽ là các đặc điểm của [1 đợt tiêm,]{.underline} và mỗi quan sát sẽ là thông tin về mỗi đợt tiêm (có thể hiểu là giá trị của các biến cho mỗi đợt tiêm khác nhau)
+
+Bảng dữ liệu hiện tại chưa tuân theo quy tắc tidy data vì các lý do sau:
+
+-   Mỗi hàng đang chứa nhiều quan sát (chứa "ngày tiêm" của nhiều lần tiêm khác nhau).
+
+<!-- -->
+
+-   Các cột kháng nguyên (`vgb_1`, `vgb_2`, ...) là [giá trị]{.underline} cho đặc điểm "loại kháng nguyên" của các đợt tiêm khác nhau.
 
 Để tuân theo quy tắc tidy data, ta cần format bảng dữ liệu sang `định dạng dọc (long)`
 
@@ -55,49 +454,86 @@ Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhi
 -   `pivot_wider()` - chuyển dữ liệu từ dạng dọc sang ngang.\
 
 ```{r}
-df <- df %>% 
-  pivot_longer(
-    cols = starts_with("2"),
-    # đặt tên mới cho biến
-    names_to = "year",
-    # đặt tên mới cho cột giá trị tương ứng
-    values_to = "gdp")
-head(df)
+cols <- which(str_ends(colnames(df), "[:digit:]"))
+df <- pivot_longer(df,
+      cols = any_of(cols),
+      # đặt tên mới cho biến
+      names_to = "khangnguyen",
+      # đặt tên mới cho cột giá trị tương ứng
+      values_to = "ngaytiem") 
 ```
 
-### Tên cột
+**Dữ liệu sau khi format**
 
-Trong R, tên cột là giá trị trên đỉnh của một cột.
-
-Các quy tắc cho tên cột thường bao gồm:
-
--   Tên ngắn
-
--   Không có khoảng trắng (thay thế bằng dấu gạch dưới \_ ).
-
--   Không có ký tự đặc biệt (&, #, \<, \>, ...) hoặc dấu.
-
--   Không bắt đầu bằng số.
-
-Lệnh `clean_names()` của package `janitor` được sử dụng để tự động hoá quá trình chuẩn hoá tên cột. Ngoài ra, lệnh `rename()` của package `dplyr` được sử dụng để thay đổi tên cột một cách thủ công.
-
-```{r}
-# chuẩn hoá tên cột tự động
-df <- clean_names(df)
+```{r, eval=FALSE}
+head(df, n=10)
 ```
 
-## Kết hợp dữ liệu
+```{r, echo=FALSE}
+rmarkdown::paged_table(head(df, n=10))
+```
 
-Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác nhau và để phân tích thì chúng ta phải kết hợp các bảng lại.
+## Nối bảng
+
+Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác nhau và để phân tích thì chúng ta phải nối các bảng lại. **(Lưu ý:** để nối 2 bảng với nhau, 2 bảng cần có các cột chứa giá trị để xác định các hàng tương ứng cần được nối)
+
+**Ví dụ:** Có 2 bảng bệnh nhân và bệnh viện như sau
+
+```{r, include=FALSE}
+sample_table_right <- data.frame(id = c(1:2),
+                                hospital_name = c("Bệnh viện Bệnh Nhiệt đới", 
+                                         "Bệnh viện Nhi đồng 1"),
+                                address = c("764 Đ. Võ Văn Kiệt, Phường 1, Quận 5", 
+                                            "341 Đ. Sư Vạn Hạnh, Phường 10, Quận 10") )
+sample_table_left <- data.frame(
+  patient_id = c(1:4),
+  age = c(28, 30, 10, 12), 
+  gender = c("nam", "nữ", "nam", "nữ"),
+  hospital_id = c(1,2,1,1))
+
+sample_joined <- sample_table_left%>% 
+  inner_join(sample_table_right, by = join_by(hospital_id == id))
+```
+
+Bảng bệnh nhân
+
+```{r, echo=FALSE}
+knitr::kable(sample_table_left)
+```
+
+Bảng bệnh viện
+
+```{r, echo=FALSE}
+knitr::kable(sample_table_right)
+```
+
+Để có đầy đủ thông tin bệnh nhân và bệnh viện, ta cần ghép 2 bảng với nhau. Cột để xác định các hàng cần được nối là cột `hospital_id` bên bảng bệnh nhân và cột `id` bên bảng bệnh viện.
+
+Bảng sau khi nối sẽ như sau
+
+```{r, echo=FALSE}
+knitr::kable(sample_joined)
+```
+
+### Nối bảng trong R
 
 Để nối 2 bảng với nhau trong R, ta sử dụng 1 trong các lệnh join của package `dplyr` sau đây
 
-| Function     | Công dụng          | GIF minh hoạ                                                                                        |
-|--------------|--------------------|-----------------------------------------------------------------------------------------------------|
-| left_join()  | Nối ngoài bên trái | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join.gif?raw=true){width="283"}  |
-| right_join() | Nối ngoài bên phải | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/right-join.gif?raw=true){width="282"} |
-| inner_join() | Nối trong          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/inner-join.gif?raw=true){width="281"} |
-| full_join()  | Nối ngoài          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/full-join.gif?raw=true){width="281"}  |
++--------------+-------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| Function     | Công dụng                                                                                             | GIF minh hoạ                                                                                        |
++==============+=======================================================================================================+=====================================================================================================+
+| left_join()  | Nối ngoài bên trái: lấy bảng bên trái làm chuẩn, và tìm kiếm các hàng tương ứng của bảng phải để nối. | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join.gif?raw=true){width="283"}  |
+|              |                                                                                                       |                                                                                                     |
+|              | Nếu không có hàng tương ứng để nối **thì sẽ để giá trị `NA`**                                         |                                                                                                     |
++--------------+-------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| inner_join() | Nối trong: lấy bảng bên trái làm chuẩn, và tìm kiếm các hàng tương ứng của bảng phải để nối.          | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/inner-join.gif?raw=true){width="281"} |
+|              |                                                                                                       |                                                                                                     |
+|              | Các hàng không có hàng tương ứng để nối **sẽ bị xoá**                                                 |                                                                                                     |
++--------------+-------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+| full_join()  | Nối ngoài: giữ tất cả các hàng của 2 bảng sau khi nối                                                 | ![](https://github.com/gadenbuie/tidyexplain/blob/main/images/full-join.gif?raw=true){width="281"}  |
+|              |                                                                                                       |                                                                                                     |
+|              | Các hàng của 2 bảng không nối được sẽ được chèn giá trị `NA`                                          |                                                                                                     |
++--------------+-------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
 
 Để sử dụng lệnh join, ta cần cung cấp cho R các thông tin sau:
 
@@ -107,149 +543,105 @@ Trong nhiều trường hợp, dữ liệu bị chia thành nhiều bảng khác
 
 [Tổng hợp các lệnh join cùng GIF minh hoạ](https://github.com/gadenbuie/tidyexplain/tree/main)
 
-```{r}
-mt <- read_excel(path = "data/gdp-capita.xlsx", sheet = 2) %>% 
-  clean_names()
+**Nối bảng dữ liệu vaccine**
 
+Thực hiện nối bảng trên dữ liệu vaccine để kiểm tra và loại bỏ các hàng quận/huyện, phường/xã không hợp lệ
+
+```{=html}
+<details>
+  <summary>
+    Thông tin về bảng dữ liệu <code>qhpx_hcm.rds</code>
+  </summary>
+```
+Dùng để đối chiếu và kiểm tra xem các quận huyện trong bộ dữ liệu vaccine có hợp lệ hay không (quận + huyện có tồn tại hay không). Ví dụ một số dữ liệu không hợp lệ \[ (Quận 6, Xã Bình Trung), (Quận 6, Xã Xuân Bắc), ...\]
+
+Đồng thời cung cấp tên quận và xã được đồng nhất
+
+***Từ điển biến số***
+
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+| Tên biến  | Ý nghĩa                                                                                                                      |
++===========+==============================================================================================================================+
+| qh        | tên quận/huyện xuất hiện trong bộ dữ liệu vaccine                                                                            |
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+| px        | tên phường/xã xuất hiện trong bộ dữ liệu vaccine                                                                             |
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+| qh_update | tên quận/huyện được đồng bộ hoá theo format "Quận *số*" đối với các quận có tên số hoặc "*Tên quận*" đối với quận chữ\       |
+|           | VD: "Quận Thủ Đức"/ "Thành phố Thủ đức" được đồng bộ hoá thành "Thủ Đức"                                                     |
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+| px_update | tên phường/xã được đồng bộ hoá theo format "Phường *số*" đối với các phường có tên số hoặc "*Tên phường*" đối với phường chữ |
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+| ma_px     | mã cho phường/xã                                                                                                             |
++-----------+------------------------------------------------------------------------------------------------------------------------------+
+
+</details>
+
+```{r, output=FALSE}
+# --- Đọc bảng quận huyện phường xã 
+qhpx <- readRDS("data/qhpx_hcm.rds")
+qhpx
+```
+
+Bảng `qhpx`
+
+```{r, output = FALSE}
+head(qhpx, n=10)
+```
+
+```{r, echo = FALSE}
+rmarkdown::paged_table(head(qhpx, n=10))
+```
+
+Bảng dữ liệu vaccine
+
+```{r, eval = FALSE}
+head(df, n=10)
+```
+
+```{r, echo = FALSE}
+rmarkdown::paged_table(head(df, n=10))
+```
+
+2 bảng sẽ được nối bằng giá trị cột huyện và xã
+
+```{r}
 # --- Nối 2 bảng bằng lệnh left_join
-# Trong trường hợp này, tuy lệnh join_by không cần thiết nhưng có thể giúp cho code rõ ràng hơn 
-df <- left_join(df, mt, by = join_by(country_code == country_code))
-head(df)
+joined_df <- left_join(df, qhpx, by = join_by(huyen == qh, xa == px)) 
 ```
 
-## Biến đổi cột
+Sau khi nối bằng `left_join`, các hàng của bảng trái (`df`) không nối được với bảng phải (`qhpx`) sẽ được chèn giá trị `NA`. Vì vậy, các hàng có `qh_update` hoặc `px_update` là `NA` sẽ là các hàng có quận/huyện và phường/xã không khợp lệ
 
-### Chọn cột
+Ta có thể xem các hàng có lỗi như sau
 
-Ngoài cách chọn cột theo tên cơ bản như đã học ở phần @sec-df-row-col, lệnh `select` của dplyr cũng thường được sử dụng cho các cách chọn cột phức tạp hơn, bao gồm:
-
--   Chọn cột có tên bắt đầu/kết thúc bằng chuỗi ký tự được chỉ định bằng `starts_with`/`ends_with`
-
--   Chọn cột có tên chứa chuỗi được quy định bằng `contains`
-
--   Dùng `where()` để áp dụng một hàm cho tất cả các cột và chọn những cột trả về giá trị TRUE
-
--   Xoá cột bằng cách thêm dấu `-` trước tên cột
-
-```{r}
-# --- Chọn cột bắt đầu bằng chữ country
-df %>% select(starts_with("country")) %>% colnames()
-
-# --- Chọn cột kết thúc bằng chữ code
-df %>% select(ends_with("code")) %>% colnames()
-              
-# --- Chọn cột có tên chứa dấu _
-df %>% select(contains("_")) %>% colnames()
-
-# --- Chọn cột có datatype là char
-df %>% select(where(is.character)) %>% colnames()
-
-# --- Xóa cột 
-df %>% select(-country_name) %>% colnames()
+```{r, eval=FALSE}
+joined_df %>% filter(is.na(qh_update))
 ```
 
-### Tạo cột mới
-
-Như đã được nhắc đến trong phần 3, lệnh `mutate` được sử dụng để tạo cột mới hoặc chỉnh sửa giá trị của cột.
-
-Một số argument (tham số) thông dụng của lệnh `mutate`
-
--   `.before` / `.after` quy định vị trí của cột mới trước hoặc sau cột được chỉ định
-
--   `.keep` quy định các cột được giữ lại sau lệnh `mutate`
-
-    -   `"all"` giữ lại tất cả các cột gốc (default)
-
-    -   `"none"` không giữ lại các cột gốc
-
-    -   `"used"` giữ lại các cột được sử dụng trong `mutate`
-
-    -   `"unused"` giữ lại các cột [không]{.underline} được sử dụng
-
-**VD**:
-
-```{r}
-df %>% 
-  mutate(
-    # tạo cột mới kết hợp 3 cột country_name, country_code, region
-    country_details = str_glue("Name: {country_name} Code:{country_code} Region: {region}"),
-    .keep = "used", # giữ các cột được sử dụng
-    .before = country_name # đặt cột country_details trước cột country_name
-  )
-
+```{r, echo=FALSE}
+joined_df %>% filter(is.na(qh_update)) %>% rmarkdown::paged_table()
 ```
 
-::: callout-note
-### Hàm `mutate_at`
+## Xử lý dữ liệu
 
-Được sử dụng khi cần áp dụng 1 function lên nhiều cột cùng lúc\
-VD: chuyển region, income_group sang dạng factor
+Thường bao gồm
 
-```{r, eval=F}
-df %>% mutate_at(c("region", "income_group"), as.factor)
-```
-:::
-
-## Xử lý các dữ liệu lỗi
-
-### Kiểm tra giá trị
-
-Thường bao gồm các bước chính
-
--   Kiểm tra datatype
-
--   Kiểm tra các giá trị NA
-
--   Kiểm tra các khoảng giá trị của từng cột
-
-#### Kiểm tra datatype
-
-Khi đọc dữ liệu, R sẽ tự động đổi datatype của các cột sang dạng phù hợp nhất. Tuy nhiên, đôi lúc R sẽ chuyển thành datatype khác với mong muốn.
-
-Một số trường hợp có thể xảy ra lỗi bao gồm:
-
--   Cột số nhưng có 1 số hàng chứa chữ
-
--   Ngày theo format khác với format tiêu chuẩn của R (VD: `as.Date("01-01-2014")`)
-
-Để kiểm tra datatype, ta có thể print bảng và xem tên datatype bên dưới tên mỗi cột
-
-```{r}
-df
-
-```
-
-#### Kiểm tra NA/ khoảng giá trị của từng cột
-
-Trong R có lệnh `summary` để người dùng có thể nhanh chóng kiểm tra các khoảng giá trị và số dữ liệu NA trong từng cột.
-
-Ngoài ra, tuỳ vào bộ dữ liệu, có thể cần kiểm tra giá trị giữa các cột (VD: trong dữ liệu tiêm chủng có thể có mũi 2 trùng hoặc trước ngày tiêm mũi 1)
-
-```{r}
-summary(df)
-```
-
-------------------------------------------------------------------------
-
-### Xử lý dữ liệu
-
-Thường bao gồm các bước chính
-
--   Mã hoá lại dữ liệu
+-   Chỉnh sửa giá trị dữ liệu
 
 -   Lọc trùng
 
--   Lọc hàng
+-   Lọc hàng theo điều kiện
 
-#### Mã hoá dữ liệu
+### Chỉnh sửa giá trị dữ liệu {#sec-mutate-data}
 
-Các trường hợp có thể cần mã hoá lại dữ liệu:
+Các trường hợp có thể cần chỉnh sửa lại dữ liệu:
 
 -   Dữ liệu NA (trống)
 
 -   Các dữ liệu dạng TRUE/FALSE được hiển thị bằng cách khác trong dữ liệu gốc (VD: Đánh dấu X hoặc bỏ trống trong file excel)
 
-Các lệnh liên quan đến mã hoá dữ liệu:
+-   Đồng nhất dữ liệu
+
+Một số lệnh liên quan:
 
 -   `replace_na` thay thế giá trị `NA` bằng giá trị được cung cấp
 
@@ -259,10 +651,12 @@ Các lệnh liên quan đến mã hoá dữ liệu:
 
 -   `case_when` mã hóa giá trị cho nhiều trường hợp nhất định
 
+Code mô phỏng sử dụng các lệnh trên
+
 ```{r, eval=F}
 # --- Thay thế các giá trị NA trong cột col1 thành "default"
 df %>% 
-  mutate(col1 = replace_na("default"))
+  mutate(col1 = replace_na(col1, "default"))
 
 # --- Thay thế các giá trị được đánh dấu trong col2 thành TRUE và ngược lại
 df %>% 
@@ -270,24 +664,43 @@ df %>%
 # Cách làm khác bằng ifelse
 df %>% 
   mutate(col2 = ifelse(is.na(col2), FALSE, TRUE))
+
+# --- Mã hoá giá trị cho nhiều trường hợp
+df %>% 
+  mutate(col2 = case_when(
+    condition_1 ~ val_1, # nếu col2 thoả điều kiện condition_1 -> gán giá trị val_1
+    condition_2 ~ val_2, # nếu col2 thoả điều kiện condition_2 -> gán giá trị val_2
+    condition_3 ~ val_3, # nếu col2 thoả điều kiện condition_3 -> gán giá trị val_3
+    .default = default_val # trong các trường hợp khác -> gán giá trị default_val
+  ))
 ```
 
-#### Lọc trùng
+**Thực hiện các bước chỉnh sửa giá trị dữ liệu trên bộ dữ liệu vaccine**
 
-Lệnh `distinct` của gói `dplyr` sẽ dữ lại 1 hàng duy nhất trong các hàng có giá trị bị trùng.
+Đồng nhất tên huyện, xã theo cột `qh_update`, `px_update`
 
-Lệnh `distinct` mặc định sẽ kiểm tra giá trị của tất cả các cột (2 hàng được đánh giá là trùng khi tất cả các trị của chúng giống nhau).
-
-```{r, eval = F}
-df %>% distinct()
-
+```{r}
+joined_df <- joined_df %>% mutate(huyen = qh_update, xa = px_update)
 ```
 
-#### Lọc hàng
+Xem dữ liệu sau khi sửa
+
+```{r, eval=FALSE}
+# n = 100 để hiện 100 hàng đầu thay vì toàn bộ bảng dữ liệu
+head(joined_df, n =100)
+```
+
+```{r, echo=FALSE}
+rmarkdown::paged_table(head(joined_df, n =100), options = list(rows.print = 5))
+```
+
+Đối với trường hợp này, các giá trị `NA` sẽ được loại bỏ ở bước tiếp theo thay vì được thay thế bằng các giá trị khác
+
+### Lọc hàng {#sec-filter-rows}
 
 Bước làm sạch điển hình sau khi đã làm sạch các cột và các giá trị được mã hóa lại đó là *lọc* bộ dữ liệu cho các hàng cụ thể
 
-Để lọc hàng, ta dùng lệnh `filter` kết hợp với điều kiện lọc như đã học ở phần @sec-filter-condition
+Để lọc hàng, ta dùng lệnh `filter` kết hợp với điều kiện lọc như đã học ở phần @sec-filter-conditions
 
 Một số điều kiện lọc:
 
@@ -297,32 +710,18 @@ Một số điều kiện lọc:
 
 -   Lọc theo giá trị
 
-```{r, eval=F }
- # --- Loại các hàng có NA tại cột year hoặc gdp 
-df %>% filter(!is.na(year) | !is.na(gdp))
-
-# --- Lọc hàng 10 đến hàng 20
-df[10:20, ] # Lọc theo cách của base R 
-df %>% filter(row_number() %in% c(10:20)) # lọc theo cách của dplyr
-
-# --- Lọc hàng theo giá trị
-df %>% filter(year > 2016)
-
-```
-
 ::: callout-note
 ### Lệnh `drop_NA` {.callout-note}
 
 `drop_NA` là lệnh để nhanh chóng drop các hàng có chứa giá trị `NA` (ở bất kỳ cột nào)\
 Nếu tên cột được cung cấp, `drop_NA` chỉ drop các hàng có giá trị `NA` ở các cột được quy định
 
-```{r}
+```{r, eval=FALSE}
 # --- drop tất cả các hàng có giá trị NA
 df %>% drop_na()
 
-# --- chỉ drop các hàng có giá trị NA tại cột year
-df %>% drop_na(year)
-
+# --- chỉ drop các hàng có giá trị NA tại cột ngaytiem
+df %>% drop_na(ngaytiem)
 ```
 :::
 
@@ -331,3 +730,221 @@ df %>% drop_na(year)
 
 Việc lọc với điều kiện lớn hơn (\>) hoặc nhỏ hơn (\<) một ngày hoặc số có thể loại bỏ bất kỳ hàng nào có giá trị `NA`. Điều này là do `NA` được coi là giá trị lớn hoặc nhỏ vô hạn.
 :::
+
+**Thực hiện lọc giá trị trên dữ liệu vaccine**
+
+Loại bỏ các dữ liệu có qh px không hợp lý
+
+```{r}
+joined_df <- joined_df %>% filter(!is.na(qh_update)) 
+```
+
+Loại bỏ các dữ liệu có ngày tiêm `NA`
+
+```{r}
+joined_df <- joined_df %>% drop_na(ngaytiem)
+```
+
+Loại bỏ các ngày tiêm trước ngày sinh (trong bộ dữ liệu vaccine này, lệnh filter sau cũng loại bỏ luôn các outlier)
+
+```{r}
+joined_df <- joined_df %>% filter(ngaytiem >= ngaysinh)
+```
+
+### Lọc trùng
+
+Lệnh `distinct` của gói `dplyr` sẽ dữ lại 1 hàng duy nhất trong các hàng có giá trị bị trùng.
+
+Lệnh `distinct` mặc định sẽ kiểm tra giá trị của tất cả các cột (2 hàng được đánh giá là trùng khi tất cả các trị của chúng giống nhau).
+
+**Thực hiện lọc trùng cho bộ dữ liệu vaccine**
+
+```{r, eval = F}
+joined_df <- joined_df %>% distinct()
+```
+
+### Dữ liệu vaccine sau quá trình xử lý
+
+```{r, echo = FALSE}
+rmarkdown::paged_table(joined_df)
+```
+
+## Biến đổi cột
+
+### Chọn cột
+
+Lệnh `select` của dplyr thường được sử dụng để chọn lọc cột một cách nhanh chóng
+
+-   Để chọn cột, chỉ cần gõ tên các cột được chọn, phân cách bởi dấu `,`
+
+-   Để xoá cột, thêm dấu `-` trước tên cột
+
+**Xóa cột không cần thiết trong dữ liệu vaccine**
+
+xoá các cột `qh_update`, `px_update` sau khi đã chỉnh sửa tên quận, xã
+
+```{r}
+# --- Xóa cột 
+joined_df <- joined_df %>% select(-qh_update, -px_update)
+```
+
+### Tạo cột mới
+
+Như đã được nhắc đến trong các phần trước, lệnh `mutate` được sử dụng để tạo cột mới hoặc chỉnh sửa giá trị của cột.
+
+**Ví dụ 1**: tạo cột mới tên qhpx kết hợp cột `huyen`, `xa`
+
+```{r, output = FALSE}
+example_qhpx <- joined_df %>% 
+  mutate(
+    # tạo cột mới kết hợp quận và phường
+    qhpx = str_glue("{huyen}_{xa}"),
+  )
+head(example_qhpx, n=10)
+```
+
+```{r, echo=FALSE}
+rmarkdown::paged_table(head(example_qhpx, n=10))
+```
+
+**Ví dụ 2:** tạo cột nhóm tuổi với `case_when`
+
+```{r, output = FALSE}
+example_age_group <- joined_df %>% 
+  mutate(
+    tuoi = difftime(ngaytiem, ngaysinh, units = "days")/365,
+    nhom_tuoi = case_when(
+      tuoi < 1 ~ "0 - 1",
+      tuoi < 10 ~ "1 - 10",
+      tuoi < 20 ~ "10 - 20",
+      .default = "> 20"
+    )
+  )
+head(example_age_group, n=10)
+```
+
+```{r, echo=FALSE}
+rmarkdown::paged_table(head(example_age_group, n=10))
+```
+
+## Bài tập
+
+Đọc dữ liệu từ sheet 1 của file `gdp-capita.xlsx` và làm sạch tên cột
+
+```{=html}
+<details>
+  <summary>
+    Thông tin về bộ dữ liệu
+  </summary>
+```
+Bảng dữ liệu chứa thông tin về GDP của các quốc gia qua các năm (từ 2015 - 2022)
+
++-------------------------------------------------------------------------+---------------------+
+| Tên cột                                                                 | Ý nghĩa             |
++=========================================================================+=====================+
+| country                                                                 | tên quốc gia        |
++-------------------------------------------------------------------------+---------------------+
+| code                                                                    | mã quốc gia 3 ký tự |
++-------------------------------------------------------------------------+---------------------+
+| \`2015\` \`2016\` \`2017\` \`2018\` \`2019\` \`2020\` \`2021\` \`2022\` | các cột năm         |
++-------------------------------------------------------------------------+---------------------+
+
+</details>
+
+```{=html}
+<details>
+  <summary>
+    Code
+  </summary>
+```
+```{r}
+library(readxl)
+library(janitor)
+library(tidyverse)
+
+gdp <- read_excel(path = "data/gdp-capita.xlsx", sheet = 1) %>% clean_names()
+```
+
+</details>
+
+### Format bảng
+
+Điều chỉnh định dạng dữ liệu đọc dược theo quy tắc dữ liệu gọn gàng
+
+```{=html}
+<details>
+  <summary>
+    Gợi ý
+  </summary>
+```
+Bảng dữ liệu hiện tại chưa tuân theo quy tắc tidy data vì các cột 2015 - 2022 **không phải là biến** và **mỗi hàng đang chứa nhiều quan sát** (quan sát cho các năm từ 2015 - 2022).
+
+Hiện tại bảng dữ liệu đang ở `định dạng ngang (wide)`, khi nhiều quan sát của cùng chủ thể (trong VD này là các quốc gia) được lưu trữ trong một hàng duy nhất.
+
+</details>
+
+```{=html}
+<details>
+  <summary>
+    Code
+  </summary>
+```
+```{r}
+gdp <- gdp %>% 
+  pivot_longer(
+    cols = starts_with("x"),
+    # đặt tên mới cho biến
+    names_to = "year",
+    # đặt tên mới cho cột giá trị tương ứng
+    values_to = "gdp")
+head(gdp)
+```
+
+</details>
+
+### Nối bảng
+
+Đọc sheet thứ 2 của file `gdp-capita.xlsx` chứa thông tin từng quốc gia và nối với bảng dữ liệu đã được chỉnh sửa
+
+2 bảng có cột chung là `country_code`
+
+```{=html}
+<details>
+  <summary>
+    Code
+  </summary>
+```
+```{r}
+mt <- read_excel(path = "data/gdp-capita.xlsx", sheet = 2) %>% 
+  clean_names()
+
+# --- Nối 2 bảng bằng lệnh left_join
+# Trong trường hợp này, tuy lệnh join_by không cần thiết nhưng có thể giúp cho code rõ ràng hơn 
+joined_gdp <- left_join(gdp, mt, by = join_by(country_code == country_code))
+head(joined_gdp)
+mt
+```
+
+</details>
+
+### Tạo cột mới
+
+Tạo cột mới tên `country_details` nối cột country_name và country_code theo format `"Name: [country_name] Code: [country_code]"`
+
+```{=html}
+<details>
+  <summary>
+    Code 
+  </summary>
+```
+```{r}
+joined_gdp %>% 
+  mutate(
+    # tạo cột mới kết hợp 3 cột country_name, country_code, region
+    country_details = str_glue("Name: {country_name} Code:{country_code} Region: {region}"),
+    .keep = "used", # giữ các cột được sử dụng
+    .before = country_name # đặt cột country_details trước cột country_name
+  )
+```
+
+</details>
