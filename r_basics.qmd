@@ -15,7 +15,7 @@ install.packages(c("tidyverse", "readxl", "writexl", "stringi", "janitor"))
 
 -   Và load các package:
 
-```{r,  output=FALSE, warning=FALSE}
+```{r, output=FALSE, warning=FALSE}
 library(tidyverse)
 library(writexl)
 library(readxl)

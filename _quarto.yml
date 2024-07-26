@@ -39,8 +39,8 @@ format:
     # include-in-header:
     #   text: |
     #     <script src="./slider.js"></script>
-  pdf:
-    documentclass: scrreprt
+  # pdf:
+  #   documentclass: scrreprt
 
 comments:
   giscus:

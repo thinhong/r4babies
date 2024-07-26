@@ -118,6 +118,57 @@ Truy cập <https://posit.co/download/rstudio-desktop/> và tải RStudio cho h�
 
 ![](img/intro/rstudio-download.png)
 
+## Snippet manager
+
+Snippet là đoạn code ngắn để thực hiện một việc nhất định. Ví dụ, chúng ta có 1 file excel chứa kết quả xét nghiệm, mỗi batch là 1 sheet có định dạng giống nhau. Chúng ta muốn R đọc tất cả các sheet trong file này vào và ghép lại thành chung 1 bảng. Code có thể giải quyết việc này là:
+
+```{r, eval=FALSE}
+# https://rpubs.com/tf_peterson/readxl_import
+library(readxl)
+library(plyr)
+library(janitor)
+
+inp <- "path/to/file"
+sheets <- excel_sheets(inp)
+l <- lapply(sheets, function(x) read_excel(inp, sheet = x))
+df <- rbind.fill(l)
+df <- clean_names(df)
+```
+
+Chỉ cần thay đường dẫn file vào biến `inp` là có thể tái sử dụng code cho những files khác nhau. Để thuận tiện trong công việc, chúng ta nên lưu snippet này vào một chỗ nào đó để sau này mỗi khi cần đọc file excel như vậy thì chỉ cần vào copy ra dùng.
+
+### Lepton
+
+Lepton là phần mềm quản lý snippet sử dụng tài khoản GitHub. Vào [**link này**](https://github.com/hackjutsu/Lepton) và kéo xuống phần Installation để cài đặt Lepton theo hướng dẫn.
+
+![](img/intro/lepton-install.png)
+
+### Github gist
+
+Để sử dụng Lepton cần tạo tài khoản Github. Vào [**link này**](https://github.com/) nhấn **Sign up** ở góc trên cùng bên phải màn hình và tạo tài khoản Github.
+
+![](img/intro/github-signup.png)
+
+### Sử dụng Lepton
+
+Đăng nhập Lepton bằng tài khoản Github.
+
+![](img/intro/lepton-login.png)
+
+Giao diện Lepton.
+
+![](img/intro/lepton-interface.png)
+
+Bấm `New` ở góc trái để tạo snippet mới.
+
+![](img/intro/lepton-new.png)
+
+Khi cần tìm snippet, nhấn `Shift` + `Space`.
+
+![](img/intro/lepton-search.png)
+
+![](img/intro/lepton-search-results.png)
+
 ## R packages {#sec-r-pkgs}
 
 R packages là các gói phần mềm được viết bằng ngôn ngữ lập trình R để thực hiện một số tác vụ cụ thể.
