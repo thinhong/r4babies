@@ -552,7 +552,7 @@ df %>%
 
 Trong 2 ví dụ trên, cách 1 sẽ chính xác hơn vì ta tính cả ngày khi sử dụng difftime còn cách 2 chỉ lấy 2 tháng trừ nhau
 
-## Lưu bảng dữ liệu sau khi chỉnh sửa
+## Lưu bảng dữ liệu sau khi chỉnh sửa {#sec-save-data}
 
 R cho phép lưu lại dữ liệu với nhiều format khác nhau, bao gồm:
 
