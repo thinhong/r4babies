@@ -13,9 +13,7 @@
 
 -   Tải data cho buổi học
 
-{{< downloadthis data/linelisting.rds dname="linelisting" label="linelisting.rds" type=light >}}
-
-{{< downloadthis data/cleaned_vacdata.rds dname="cleaned_vacdata" label="cleaned_vacdata.rds" type=light >}}
+{{< downloadthis data/simulated_covid.rds dname="simulated_covid" label="simulated_covid.rds" type=light >}} {{< downloadthis data/cleaned_vacdata.rds dname="cleaned_vacdata" label="cleaned_vacdata.rds" type=light >}}
 
 -   Tải các package sau: `tidyverse`, `gtsummary`
 
@@ -37,11 +35,11 @@ Quá trình tạo R project như sau
 
 -   Vào menu **`File` \> `New Project…`**
 
--   Bấm **`New Directory` \>** `New Project`
+-   Bấm **`New Directory` \>** **`New Project`**
 
--   Điền tên folder cho R Project tại mục `Directory name`
+-   Điền tên folder cho R Project tại mục **`Directory name`**
 
--   Bấm `Browse` và chọn Desktop để lưu R project tại Desktop
+-   Bấm **`Browse`** và chọn Desktop để lưu R project tại Desktop
 
 -   Bấm **`Create Project`**
 
@@ -119,7 +117,7 @@ readRDS(file = file.path(data_path, "rds_data.Rds"))
 read_excel(df, path = file.path(data_path, "excel_data.xlsx"))
 ```
 
-### Sử dụng .Rmd 
+### Sử dụng .Rmd
 
 File `.Rmd` thường được dùng cho báo cáo vì có thể kết hợp các lệnh R, văn bản thường, đồ thị trong 1 file 
 
@@ -190,57 +188,56 @@ ggplotly(
     Từ điển biến số
   </summary>
 ```
-+----------------------------+-------------------------------------------------+
-| Tên biến                   | Ý nghĩa                                         |
-+============================+=================================================+
-| `id`                       | id bệnh nhân                                    |
-+----------------------------+-------------------------------------------------+
-| `case_name`                | id ca bệnh                                      |
-+----------------------------+-------------------------------------------------+
-| `case_type`                | phân loại ca bệnh                               |
-|                            |                                                 |
-|                            | -   confirmed: xác nhận nhiễm bệnh              |
-|                            |                                                 |
-|                            | -   probable: có khả năng cao nhiễm bệnh        |
-|                            |                                                 |
-|                            | -   suspected: khi nhiễm bệnh                   |
-+----------------------------+-------------------------------------------------+
-| `sex`                      | giới tính                                       |
-|                            |                                                 |
-|                            | -   m: nam                                      |
-|                            |                                                 |
-|                            | -   f: nữ                                       |
-+----------------------------+-------------------------------------------------+
-| `age`                      | tuổi bệnh nhân                                  |
-+----------------------------+-------------------------------------------------+
-| `date_onset`               | ngày phát bệnh                                  |
-+----------------------------+-------------------------------------------------+
-| `date_admission`           | ngày nhập viện                                  |
-+----------------------------+-------------------------------------------------+
-| `outcome`                  | kết quả ca bệnh:                                |
-|                            |                                                 |
-|                            | -   recovered: khỏi bệnh                        |
-|                            |                                                 |
-|                            | -   died: chết                                  |
-+----------------------------+-------------------------------------------------+
-| `date_outcome`             | ngày thông báo kết quả cao bệnh                 |
-+----------------------------+-------------------------------------------------+
-| `date_first_contact`       | ngày tiếp xúc đầu tiên                          |
-+----------------------------+-------------------------------------------------+
-| `date_last_contact`        | ngày tiếp xúc cuối cùng                         |
-+----------------------------+-------------------------------------------------+
-| `district`                 | địa chỉ của bệnh nhân (quận của TP Hồ Chí Minh) |
-+----------------------------+-------------------------------------------------+
-| `outbreak`                 | đợt dịch:                                       |
-|                            |                                                 |
-|                            | -   1st outbreak: đợt dịch đầu tiên             |
-|                            |                                                 |
-|                            | -   2nd outbreak: đợt dịch thứ hai              |
-+----------------------------+-------------------------------------------------+
++-------------------------+-------------------------------------------------+
+| Tên biến                | Ý nghĩa                                         |
++=========================+=================================================+
+| `id`                    | id bệnh nhân                                    |
++-------------------------+-------------------------------------------------+
+| `case_name`             | id ca bệnh                                      |
++-------------------------+-------------------------------------------------+
+| `case_type`             | phân loại ca bệnh                               |
+|                         |                                                 |
+|                         | -   confirmed: xác nhận nhiễm bệnh              |
+|                         |                                                 |
+|                         | -   probable: có khả năng cao nhiễm bệnh        |
+|                         |                                                 |
+|                         | -   suspected: khi nhiễm bệnh                   |
++-------------------------+-------------------------------------------------+
+| `sex`                   | giới tính                                       |
+|                         |                                                 |
+|                         | -   m: nam                                      |
+|                         |                                                 |
+|                         | -   f: nữ                                       |
++-------------------------+-------------------------------------------------+
+| `age`                   | tuổi bệnh nhân                                  |
++-------------------------+-------------------------------------------------+
+| `date_onset`            | ngày phát bệnh                                  |
++-------------------------+-------------------------------------------------+
+| `date_admission`        | ngày nhập viện                                  |
++-------------------------+-------------------------------------------------+
+| `outcome`               | kết quả ca bệnh:                                |
+|                         |                                                 |
+|                         | -   recovered: khỏi bệnh                        |
+|                         |                                                 |
+|                         | -   died: tử vong                               |
++-------------------------+-------------------------------------------------+
+| `date_outcome`          | ngày thông báo kết quả cao bệnh                 |
++-------------------------+-------------------------------------------------+
+| `date_first_contact`    | ngày tiếp xúc đầu tiên                          |
++-------------------------+-------------------------------------------------+
+| `date_last_contact`     | ngày tiếp xúc cuối cùng                         |
++-------------------------+-------------------------------------------------+
+| `district`              | địa chỉ của bệnh nhân (quận của TP Hồ Chí Minh) |
++-------------------------+-------------------------------------------------+
+| `outbreak`              | đợt dịch:                                       |
+|                         |                                                 |
+|                         | -   1st outbreak: đợt dịch đầu tiên             |
+|                         |                                                 |
+|                         | -   2nd outbreak: đợt dịch thứ hai              |
++-------------------------+-------------------------------------------------+
 
-```{=html}
 </details>
-```
+
 ### gtsummary
 
 Package `gtsummary` được dùng vẽ bảng thống kê một cách nhanh chóng bằng lệnh `tbl_summary()`
@@ -263,24 +260,23 @@ linelist %>% tbl_summary()
 linelist %>% tbl_summary()
 ```
 
-```{=html}
 </details>
-```
+
 ### Điều chỉnh bảng thống kê
 
 Một số tham số của `tbl_summary` hỗ trợ điều chỉnh bảng thống kê
 
-+-------------------+--------------------------------------------------+
-| Tên tham số       | Công dụng                                        |
-+===================+==================================================+
-| `include`         | Chọn các biến được hiển thị trên bảng thống kê   |
-+-------------------+--------------------------------------------------+
-| `label`           | Đổi cách hiển thị tên biến                       |
-+-------------------+--------------------------------------------------+
-| `by`              | Hiển thị thống kê nhóm theo giá trị của 1 biến   |
-+-------------------+--------------------------------------------------+
-| `statistic`       | Điều chỉnh thống kê được hiển thị                |
-+-------------------+--------------------------------------------------+
++------------------+-------------------------------------------------+
+| Tên tham số      | Công dụng                                       |
++==================+=================================================+
+| `include`        | Chọn các biến được hiển thị trên bảng thống kê  |
++------------------+-------------------------------------------------+
+| `label`          | Đổi cách hiển thị tên biến                      |
++------------------+-------------------------------------------------+
+| `by`             | Hiển thị thống kê nhóm theo giá trị của 1 biến  |
++------------------+-------------------------------------------------+
+| `statistic`      | Điều chỉnh thống kê được hiển thị               |
++------------------+-------------------------------------------------+
 
 **Chọn các biến được thống kê qua tham số `include`**
 
@@ -291,7 +287,7 @@ linelist %>%
   )
 ```
 
-**Thay đổi cách hiển thị biến qua tham số `label`**
+**Thay đổi tên biến qua tham số `label`**
 
 **VD**: đổi tên được hiển thị cho các biến
 
@@ -424,6 +420,113 @@ linelist %>% tbl_summary(
   digits = age ~ 2)
 ```
 
+**Điều chỉnh giá trị được hiển thị**
+
+Để thay đổi tên các nhóm của biến phân loại, ta có thể sử dụng lệnh `factor` trước khi tạo bảng
+
+Để thay đổi cách hiển thị giá trị bị thiếu, ta có thể sử dụng tham số `missing_text` của `tbl_summary`
+
+**VD:**
+
+```{r}
+linelist %>% 
+  mutate(
+    # ------ đổi tên các nhóm trong biến phân loại ----
+    sex = factor(sex, levels = c("f", "m"), labels = c("nữ", "nam")),
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh")),
+    outbreak = factor(outbreak, 
+                      levels = c("1st outbreak", "2nd outbreak"), 
+                      labels = c("Đợt dịch 1", "Đợt dịch 2"))
+  ) %>% 
+  tbl_summary(
+    # ----- Đổi label cho các giá trị bị thiếu từ "Unknown" sang "NA" -----
+    missing_text = "NA",    
+    include = c(age, sex, outcome, date_onset, date_admission,
+                  date_first_contact, date_last_contact, outbreak),
+    label = list(
+        age ~ "Tuổi",
+        sex ~ "Giới tính",
+        outcome ~ "Kết quả",
+        date_onset ~ "Ngày phát bệnh",
+        date_admission ~ "Ngày nhập viện",
+        date_first_contact ~ "Ngày tiếp xúc đầu tiên",
+        date_last_contact ~ "Ngày tiếp xúc cuối cùng",
+        outbreak ~ "Đợt dịch"
+      ),
+    by = outbreak,
+    statistic = list(
+      sex ~ "{n} / {N} ({p}%)",
+      outcome ~ "{n} / {N} ({p}%)",
+      all_continuous() ~ "{mean} [{min}, {max}]"),
+    digits = age ~ 2
+  )
+```
+
+::: {.callout-tip collapse="true"}
+### Một số hàm format bảng thống kê khác {.callout-tip collapse="true"}
+
++----------------------------+-------------------------------------------+
+| Function                   | Công dụng                                 |
++:===========================+:==========================================+
+| `modify_header()`          | Điều chỉnh header                         |
++----------------------------+-------------------------------------------+
+| `modify_footnote()`        | Điều chỉnh chú thích cuối bảng            |
++----------------------------+-------------------------------------------+
+| `modify_spanning_header()` | Điều chỉnh spanning header                |
++----------------------------+-------------------------------------------+
+| `modify_caption()`         | Điều chỉnh tên bảng                       |
++----------------------------+-------------------------------------------+
+| `bold_labels()`            | In đậm tên biến                           |
++----------------------------+-------------------------------------------+
+| `bold_levels()`            | In đậm các giá trị của biến phân loại     |
++----------------------------+-------------------------------------------+
+| `italicize_labels()`       | In nghiêng tên biến                       |
++----------------------------+-------------------------------------------+
+| `italicize_levels()`       | In nghiêng các giá trị của biến phân loại |
++----------------------------+-------------------------------------------+
+| `bold_p()`                 | In đậm p-value                            |
++----------------------------+-------------------------------------------+
+
+```{r}
+linelist %>% 
+  mutate(
+    sex = factor(sex, levels = c("f", "m"), labels = c("nữ", "nam")),
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh")),
+    outbreak = factor(outbreak, 
+                      levels = c("1st outbreak", "2nd outbreak"), 
+                      labels = c("Đợt dịch 1", "Đợt dịch 2"))
+  ) %>% 
+  tbl_summary(
+    include = c(age, sex, outcome, date_onset, date_admission,
+                  date_first_contact, date_last_contact, outbreak),
+    label = list(
+        age ~ "Tuổi",
+        sex ~ "Giới tính",
+        outcome ~ "Kết quả",
+        date_onset ~ "Ngày phát bệnh",
+        date_admission ~ "Ngày nhập viện",
+        date_first_contact ~ "Ngày tiếp xúc đầu tiên",
+        date_last_contact ~ "Ngày tiếp xúc cuối cùng",
+        outbreak ~ "Đợt dịch"
+      ),
+    by = outbreak,
+    statistic = list(
+      sex ~ "{n} / {N} ({p}%)",
+      outcome ~ "{n} / {N} ({p}%)",
+      all_continuous() ~ "{mean} [{min}, {max}]"
+  ), 
+  digits = age ~ 2) %>% 
+  # ---- Thay đổi header -----
+  modify_header(label = "Đặc điểm") %>% 
+  # ---- In đậm tên biến -----
+  bold_labels()
+```
+:::
+
 ### Kết hợp nhiều bảng thống kê
 
 Lệnh `tbl_stack` được sử dụng để kết hợp nhiều bảng thống kê có header giống nhau
@@ -433,34 +536,52 @@ Lệnh `tbl_stack` được sử dụng để kết hợp nhiều bảng thống
 ```{r}
 # ----- Bảng tỷ lệ tử vong trong cả 2 đợt dịch -----
 both_outbreak <- linelist %>% 
+  mutate(
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
   tbl_summary(
     include = c(outcome, district),
+    label = outcome ~ "Kết quả",
     by = district,
     statistic = outcome ~ "{n} / {N} ({p}%)"
   ) %>% 
-  modify_header(all_stat_cols() ~ "**{level}**", label = "**District**") 
+  modify_header(all_stat_cols() ~ "**{level}**", label = "**Quận**") 
 
 # ----- Bảng tỷ lệ tử vong trong đợt 1 -----
 tbl_first_outbreak <- linelist %>%
+  mutate(
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
   filter(outbreak == "1st outbreak") %>%
   tbl_summary(
     include = c(outcome, district),
+    label = outcome ~ "Kết quả",
     by = district,
     statistic = outcome ~ "{n} / {N} ({p}%)"
   ) %>% 
-  modify_header(all_stat_cols() ~ "**{level}**", label = "**District**") 
+  modify_header(all_stat_cols() ~ "**{level}**", label = "**Quận**") 
 
 # ----- Bảng tỷ lệ tử vong trong đợt 2 -----
 tbl_second_outbreak <- linelist %>%
+  mutate(
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
   filter(outbreak == "2nd outbreak") %>%
   tbl_summary(
     include = c(outcome, district),
+    label = outcome ~ "Kết quả",
     by = district,
     statistic = outcome ~ "{n} / {N} ({p}%)"
   ) %>% 
-  modify_header(all_stat_cols() ~ "**{level}**", label = "**District**") 
+  modify_header(all_stat_cols() ~ "**{level}**", label = "**Quận**") 
 
-tbl_stack(list(tbl_first_outbreak, tbl_second_outbreak, both_outbreak), group_header = c("1st outbreak", "2nd outbreak", "Both outbreak")) %>% 
+tbl_stack(list(tbl_first_outbreak, tbl_second_outbreak, both_outbreak), group_header = c("Đợt 1", "Đợt 2", "Cả 2 đợt")) %>% 
   # --- optional: code điều chỉnh header cho từng bảng để dễ nhìn hơn ---- 
   as_gt() %>% 
   gt::tab_style(
@@ -483,23 +604,23 @@ Một số phép kiểm định thông dụng
 
 Tổng hợp các phép kiểm định thống kê
 
-+------------------------------+-----------------------------------------------------------------------------------------------+--------------------------------------------------------+
-| Phép kiểm                    | **Mô tả**                                                                                     | Kết quả                                                |
-+==============================+===============================================================================================+========================================================+
-| **Kiểm định T**              | So sánh giá trị trung bình của biến liên tục giữa hai nhóm.                                   | $H_0$ không có sự khác biệt giữa trung bình của 2 nhóm |
-|                              |                                                                                               |                                                        |
-|                              |                                                                                               | p-value \< 0.05: có sự khác biệt giữa 2 nhóm           |
-|                              |                                                                                               |                                                        |
-|                              |                                                                                               | p-value \> 0.05: không có sự khác biệt giữa 2 nhóm     |
-+------------------------------+-----------------------------------------------------------------------------------------------+--------------------------------------------------------+
-| **Kiểm định Chi-Square**     | Kiểm tra biến phân loại giữa 2 nhóm có liên quan hay không                                    | $H_0$ không có sự liên quan giữa 2 biến                |
-|                              |                                                                                               |                                                        |
-|                              |                                                                                               | p-value \< 0.05: có sự liên quan giữa 2 nhóm           |
-|                              |                                                                                               |                                                        |
-|                              |                                                                                               | p-value \> 0.05: không có sự liên quan giữa 2 nhóm     |
-+------------------------------+-----------------------------------------------------------------------------------------------+--------------------------------------------------------+
-| **Kiểm định Fisher's Exact** | Tương tự như Chi-squared, kiểm tra mối liên hệ giữa hai biến phân loại nhưng cho cỡ mẫu nhỏ   |                                                        |
-+------------------------------+-----------------------------------------------------------------------------------------------+--------------------------------------------------------+
++------------------------------+---------------------------------------------------------------------------------------------+--------------------------------------------------------+
+| Phép kiểm                    | **Mô tả**                                                                                   | Kết quả                                                |
++==============================+=============================================================================================+========================================================+
+| **Kiểm định T**              | So sánh giá trị trung bình của biến liên tục giữa hai nhóm.                                 | $H_0$ không có sự khác biệt giữa trung bình của 2 nhóm |
+|                              |                                                                                             |                                                        |
+|                              |                                                                                             | p-value \< 0.05: có sự khác biệt giữa 2 nhóm           |
+|                              |                                                                                             |                                                        |
+|                              |                                                                                             | p-value \> 0.05: không có sự khác biệt giữa 2 nhóm     |
++------------------------------+---------------------------------------------------------------------------------------------+--------------------------------------------------------+
+| **Kiểm định Chi-Square**     | Kiểm tra biến phân loại giữa 2 nhóm có liên quan hay không                                  | $H_0$ không có sự liên quan giữa 2 biến                |
+|                              |                                                                                             |                                                        |
+|                              |                                                                                             | p-value \< 0.05: có sự liên quan giữa 2 nhóm           |
+|                              |                                                                                             |                                                        |
+|                              |                                                                                             | p-value \> 0.05: không có sự liên quan giữa 2 nhóm     |
++------------------------------+---------------------------------------------------------------------------------------------+--------------------------------------------------------+
+| **Kiểm định Fisher's Exact** | Tương tự như Chi-squared, kiểm tra mối liên hệ giữa hai biến phân loại nhưng cho cỡ mẫu nhỏ |                                                        |
++------------------------------+---------------------------------------------------------------------------------------------+--------------------------------------------------------+
 
 ### Kiểm định T
 
@@ -507,10 +628,17 @@ Tổng hợp các phép kiểm định thống kê
 
 ```{r}
 linelist %>% 
+  mutate(
+    outbreak = factor(outbreak, 
+                      levels = c("1st outbreak", "2nd outbreak"), 
+                      labels = c("Đợt 1", "Đợt 2"))
+  ) %>% 
   tbl_summary(
     include = c(age, outbreak),
+    label = age ~ "Tuổi",
     by = outbreak
   ) %>% 
+  modify_header(label = "**Đặc điểm**")  %>% 
   add_p(test = age ~ "t.test")
 ```
 
@@ -519,9 +647,15 @@ linelist %>%
 ```{r}
 # ----- Bảng kết quả cho đợt dịch đầu ---- 
 first_outbreak <- linelist %>% 
+  mutate(
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
   filter(outbreak == "1st outbreak") %>% 
   tbl_summary(
     include = c(age, outcome),
+    label = list( age ~ "Tuổi", outcome ~ "Kết quả"),
     by = outcome
   ) %>% 
   # điều chỉnh header để các bảng có chung header
@@ -531,8 +665,14 @@ first_outbreak <- linelist %>%
 # ----- Bảng kết quả cho đợt dịch thứ hai ---- 
 second_outbreak <- linelist %>% 
   filter(outbreak == "2nd outbreak") %>% 
+  mutate(
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
   tbl_summary(
     include = c(age, outcome),
+    label = list( age ~ "Tuổi", outcome ~ "Kết quả"),
     by = outcome
   ) %>% 
   modify_header(all_stat_cols() ~ "**{level}**") %>% 
@@ -540,8 +680,14 @@ second_outbreak <- linelist %>%
 
 # ----- Bảng kết quả cho cả hai đợt dịch ---- 
 both_outbreak <- linelist %>% 
+  mutate(
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
   tbl_summary(
     include = c(age, outcome),
+    label = list( age ~ "Tuổi", outcome ~ "Kết quả"),
     by = outcome
   ) %>% 
   # điều chỉnh header để các bảng có chung header
@@ -549,8 +695,9 @@ both_outbreak <- linelist %>%
   add_p(test = age ~ "t.test")
 
 tbl_stack(list(first_outbreak, second_outbreak, both_outbreak), 
-          group_header = c("1st outbreak", "2nd outbreak", "both outbreak")) %>% 
+          group_header = c("Đợt 1", "Đợt 2", "Cả 2 đợt")) %>% 
   # --- optional: code điều chỉnh style header ---- 
+  modify_header(label = "**Đặc điểm**")  %>% 
   as_gt() %>% 
   gt::tab_style(
     style = gt::cell_text(weight = "bold"),
@@ -563,35 +710,60 @@ tbl_stack(list(first_outbreak, second_outbreak, both_outbreak),
 **VD:** Kiểm tra giới tính có ảnh hưởng đến khả năng tử vong hay không
 
 ```{r}
-# ----- Bảng kết quả cho cả 2 đợt dịch ---- 
-both_outbreak <- linelist %>% 
-  tbl_summary(
-    include = c(sex, outcome),
-    by = c(sex)
-  ) %>% 
-  # điều chỉnh header để các bảng có chung header
-  modify_header(all_stat_cols() ~ "**{level}**") %>% 
-  add_p(test = outcome ~ "chisq.test")
-
 # ----- Bảng kết quả cho đợt dịch đầu ---- 
 tbl_first_outbreak <- linelist %>%
+  mutate(
+    sex = factor(sex, levels = c("f", "m"), labels = c("nữ", "nam")),
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
   filter(outbreak == "1st outbreak") %>%
-  tbl_summary(include = c(sex, outcome), by = sex) %>%
+  tbl_summary(
+    include = c(sex, outcome), 
+    label = outcome ~ "Kết quả",
+    by = sex) %>%
   # điều chỉnh header để các bảng có chung header
   modify_header(all_stat_cols() ~ "**{level}**") %>% 
   add_p(test = outcome ~ "chisq.test")
 
 # ----- Bảng kết quả cho đợt dịch thứ 2 ---- 
 tbl_second_outbreak <- linelist %>%
+  mutate(
+    sex = factor(sex, levels = c("f", "m"), labels = c("nữ", "nam")),
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
   filter(outbreak == "2nd outbreak") %>%
-  tbl_summary(include= c(sex, outcome), by = sex) %>%
+  tbl_summary(
+    include= c(sex, outcome), label = outcome ~ "Kết quả",
+    by = sex) %>%
+  # điều chỉnh header để các bảng có chung header
+  modify_header(all_stat_cols() ~ "**{level}**") %>% 
+  add_p(test = outcome ~ "chisq.test")
+
+# ----- Bảng kết quả cho cả 2 đợt dịch ---- 
+both_outbreak <- linelist %>% 
+  mutate(
+    sex = factor(sex, levels = c("f", "m"), labels = c("nữ", "nam")),
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
+  tbl_summary(
+    include = c(sex, outcome),
+    label = outcome ~ "Kết quả",
+    by = c(sex)
+  ) %>% 
   # điều chỉnh header để các bảng có chung header
   modify_header(all_stat_cols() ~ "**{level}**") %>% 
   add_p(test = outcome ~ "chisq.test")
 
 tbl_stack(list(tbl_first_outbreak, tbl_second_outbreak, both_outbreak), 
-          group_header = c("1st outbreak", "2nd outbreak", "both outbreak")) %>%
+          group_header = c(c("Đợt 1", "Đợt 2", "Cả 2 đợt"))) %>%
   # --- optional: code điều chỉnh style header ---- 
+  modify_header(label = "**Đặc điểm**")  %>% 
   as_gt() %>% 
   gt::tab_style(
     style = gt::cell_text(weight = "bold"),
@@ -599,109 +771,187 @@ tbl_stack(list(tbl_first_outbreak, tbl_second_outbreak, both_outbreak),
   )
 ```
 
-### Kiểm định Fisher exact 
+### Kiểm định Fisher exact
 
 Thử thực hiện kiểm định Fisher trên bộ dữ liệu và so sánh với kiểm định Chi bình phương
 
 ```{r}
-# ----- Bảng kết quả cho cả hai đợt dịch ---- 
-both_outbreak <- linelist %>% 
+# ----- Bảng kết quả cho đợt dịch đầu ---- 
+tbl_first_outbreak <- linelist %>%
+  mutate(
+    sex = factor(sex, levels = c("f", "m"), labels = c("nữ", "nam")),
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
+  filter(outbreak == "1st outbreak") %>%
   tbl_summary(
-    include = c(sex, outbreak, outcome),
+    include = c(sex, outcome), 
+    label = outcome ~ "Kết quả",
+    by = sex) %>%
+  # điều chỉnh header để các bảng có chung header
+  modify_header(all_stat_cols() ~ "**{level}**") %>% 
+  add_p(test = outcome ~ "fisher.test")
+
+# ----- Bảng kết quả cho đợt dịch thứ 2 ---- 
+tbl_second_outbreak <- linelist %>%
+  mutate(
+    sex = factor(sex, levels = c("f", "m"), labels = c("nữ", "nam")),
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
+  filter(outbreak == "2nd outbreak") %>%
+  tbl_summary(
+    include= c(sex, outcome), label = outcome ~ "Kết quả",
+    by = sex) %>%
+  # điều chỉnh header để các bảng có chung header
+  modify_header(all_stat_cols() ~ "**{level}**") %>% 
+  add_p(test = outcome ~ "fisher.test")
+
+# ----- Bảng kết quả cho cả 2 đợt dịch ---- 
+both_outbreak <- linelist %>% 
+  mutate(
+    sex = factor(sex, levels = c("f", "m"), labels = c("nữ", "nam")),
+    outcome = factor(outcome, 
+                     levels = c("died", "recovered"), 
+                     labels = c("tử vong", "khỏi bệnh"))
+  ) %>% 
+  tbl_summary(
+    include = c(sex, outcome),
+    label = outcome ~ "Kết quả",
     by = c(sex)
   ) %>% 
   # điều chỉnh header để các bảng có chung header
   modify_header(all_stat_cols() ~ "**{level}**") %>% 
   add_p(test = outcome ~ "fisher.test")
 
-# ----- Bảng kết quả cho đợt dịch đầu tiên ---- 
-tbl_first_outbreak <- linelist %>%
-  filter(outbreak == "1st outbreak") %>%
-  tbl_summary(include = c(sex, outcome), by = sex) %>%
-  modify_header(all_stat_cols() ~ "**{level}**") %>% 
-  add_p(test = outcome ~ "fisher.test")
-
-# ----- Bảng kết quả cho đợt dịch thứ 2 ---- 
-tbl_second_outbreak <- linelist %>%
-  filter(outbreak == "2nd outbreak") %>%
-  tbl_summary(include= c(sex, outcome), by = sex) %>%
-  modify_header(all_stat_cols() ~ "**{level}**") %>% 
-  add_p(test = outcome ~ "fisher.test")
 
 tbl_stack(list(tbl_first_outbreak, tbl_second_outbreak, both_outbreak), 
-          group_header = c("1st outbreak", "2nd outbreak", "both_outbreak"))
+          group_header = c(c("Đợt 1", "Đợt 2", "Cả 2 đợt"))) %>%
+  # --- optional: code điều chỉnh style header ---- 
+  modify_header(label = "**Đặc điểm**")  %>% 
+  as_gt() %>% 
+  gt::tab_style(
+    style = gt::cell_text(weight = "bold"),
+    locations = gt::cells_row_groups(groups = everything())
+  )
 ```
 
 ## Bài tập
 
 ### Đọc dữ liệu
 
-Đọc dữ liệu tiêm chủng đã được làm sạch
+Đọc dữ liệu tiêm chủng sau phần làm sạch
 
+```{=html}
+<details>
+  <summary>Code</summary>
+```
 ```{r}
 vaccdata <- readRDS("data/cleaned_vacdata.rds")
 ```
 
-Và tạo cột tuổi tiêm
-
-```{r}
-vaccdata <- vaccdata %>% mutate(
-  tuoi = difftime(ngaytiem, ngaysinh, units = "days")
-)
+```{=html}
+</details>
 ```
-
 ### Tạo và điều chỉnh bảng thống kê
 
 Tạo bảng thống kê cho dữ liệu vaccine theo các yêu cầu sau
 
--   Hiển thị thống kê cho các biến `tuoi`, `ngaysinh`, `ngaytiem`, `khangnguyen` cho từng nhóm giới tính (`gioitinh`)
+-   Hiển thị thống kê cho các biến `ngaysinh`, `ngaytiem`, `khangnguyen`, cho từng nhóm giới tính (`gioitinh`)
 
 -   Thay đổi tên các biến được hiển thị như sau: `ngaysinh` -\> `Ngày sinh,` `ngaytiem` -\> `Ngày tiêm`, `khangnguyen` -\> `Kháng nguyên`
 
+```{=html}
+<details>
+  <summary>Code</summary>
+```
 ```{r}
 vaccdata %>% tbl_summary(
-  # chọn biến được hiển thị trên bảng thống kê
-  include = c(gioitinh, ngaysinh, ngaytiem, tuoi, khangnguyen),
-  # thay đổi tên được hiển thị
-  label = list(
-      gioitinh ~ "Giới tính",
-      ngaysinh ~ "Ngày sinh",
-      ngaytiem ~ "Ngày tiêm",
-      tuoi ~ "Tuổi",
-      khangnguyen ~ "Kháng nguyên"
-    ),
-  by = gioitinh,
-  statistic = list(
-    khangnguyen ~ "{n} / {N} ({p}%)",
-    all_continuous() ~ "{mean} ({min}, {max})"
-  ), 
-  digits = tuoi ~ 2
+    # chọn biến được hiển thị trên bảng thống kê
+    include = c(gioitinh, ngaysinh, ngaytiem, khangnguyen),
+    # thay đổi tên được hiển thị
+    label = list(
+        khangnguyen ~ "Kháng nguyên",
+        ngaysinh ~ "Ngày sinh",
+        ngaytiem ~ "Ngày tiêm"
+      ),
+    by = gioitinh,
+    statistic = list(
+      all_continuous() ~ "{median} ({min}, {max})"
+    )
   ) 
 ```
 
-### Phân tích 
+```{=html}
+</details>
+```
+### Phân tích
 
-Tạo bảng thống kê độ tuổi tiêm mũi ho gà đầu tiên theo quận huyện
+Tạo bảng thống kê số mũi viêm gan b sơ sinh (`khangnguyen` mang giá trị vgb_truoc_24, vgb_sau_24) theo quận huyện
 
+```{=html}
+<details>
+  <summary>Code</summary>
+```
 ```{r}
 vaccdata %>% 
-  filter(khangnguyen == "hg_1") %>% tbl_summary(
+  filter(khangnguyen == "vgb_truoc_24" | khangnguyen == "vgb_sau_24") %>% 
+  tbl_summary(
     # chọn biến được hiển thị trên bảng thống kê
-    include = c(tuoi, huyen),
+    include = c(khangnguyen, huyen),
     # thay đổi tên được hiển thị
     label = list(
-        tuoi ~ "Ngày tuổi",
+        khangnguyen ~ "Viêm gan B sơ sinh",
         huyen ~ "Quận/Huyện"
       ),
-    by = huyen,
-    statistic = list(
-      all_continuous() ~ "{mean} ({min}, {max})"
-    )
+    by = huyen
   )
 ```
 
-Phân tích tỷ lệ tiêm chủng
+```{=html}
+</details>
+```
+Tạo bảng tỷ lệ tiêm chủng bằng `tbl_summary` theo quận/huyện
 
--   Tính tỷ lệ tiêm chủng bằng `summary()`
+```{=html}
+<details>
+  <summary>Gợi ý</summary>
+```
+-   Chuyển từ bảng dạng ngang sang dọc bằng `pivot_wider`
 
--   Hiển thị kết quả bẳng `gt()`
+-   Format các biến ngày tiêm thành tình trạng tiêm (được tiêm nếu có giá trị tại cột mũi tiêm)
+
+-   Dùng `tbl_summary` để hiển thị số trẻ được tiêm cho từng mũi
+
+```{=html}
+</details>
+```
+
+```{=html}
+<details>
+  <summary>Code</summary>
+```
+```{r}
+# các mũi tiêm trong bộ dữ liệu
+khangnguyen_cols <- unique(vaccdata$khangnguyen)
+
+vaccdata %>% 
+  # --- chuyển sang định dạng ngang
+  pivot_wider(
+    id_cols = c(id, huyen), names_from = khangnguyen, values_from = ngaytiem
+    ) %>% 
+  # --- format các biến ngày tiêm thành tình trạng tiêm
+  mutate_at(khangnguyen_cols, ~!is.na(.)) %>% 
+  # --- tạo bảng thống kê
+  tbl_summary(
+    by = huyen, # nhóm theo quận/huyện 
+    include = any_of(khangnguyen_cols), # chọn các cột ngày tiêm để thống kê
+    statistic = everything() ~ "{n} / {N} ({p}%)" # format cách hiển thị thống kê
+  )
+```
+
+```{=html}
+</details>
+```
