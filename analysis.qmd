@@ -188,53 +188,53 @@ ggplotly(
     Từ điển biến số
   </summary>
 ```
-+-------------------------+-------------------------------------------------+
-| Tên biến                | Ý nghĩa                                         |
-+=========================+=================================================+
-| `id`                    | id bệnh nhân                                    |
-+-------------------------+-------------------------------------------------+
-| `case_name`             | id ca bệnh                                      |
-+-------------------------+-------------------------------------------------+
-| `case_type`             | phân loại ca bệnh                               |
-|                         |                                                 |
-|                         | -   confirmed: xác nhận nhiễm bệnh              |
-|                         |                                                 |
-|                         | -   probable: có khả năng cao nhiễm bệnh        |
-|                         |                                                 |
-|                         | -   suspected: khi nhiễm bệnh                   |
-+-------------------------+-------------------------------------------------+
-| `sex`                   | giới tính                                       |
-|                         |                                                 |
-|                         | -   m: nam                                      |
-|                         |                                                 |
-|                         | -   f: nữ                                       |
-+-------------------------+-------------------------------------------------+
-| `age`                   | tuổi bệnh nhân                                  |
-+-------------------------+-------------------------------------------------+
-| `date_onset`            | ngày phát bệnh                                  |
-+-------------------------+-------------------------------------------------+
-| `date_admission`        | ngày nhập viện                                  |
-+-------------------------+-------------------------------------------------+
-| `outcome`               | kết quả ca bệnh:                                |
-|                         |                                                 |
-|                         | -   recovered: khỏi bệnh                        |
-|                         |                                                 |
-|                         | -   died: tử vong                               |
-+-------------------------+-------------------------------------------------+
-| `date_outcome`          | ngày thông báo kết quả cao bệnh                 |
-+-------------------------+-------------------------------------------------+
-| `date_first_contact`    | ngày tiếp xúc đầu tiên                          |
-+-------------------------+-------------------------------------------------+
-| `date_last_contact`     | ngày tiếp xúc cuối cùng                         |
-+-------------------------+-------------------------------------------------+
-| `district`              | địa chỉ của bệnh nhân (quận của TP Hồ Chí Minh) |
-+-------------------------+-------------------------------------------------+
-| `outbreak`              | đợt dịch:                                       |
-|                         |                                                 |
-|                         | -   1st outbreak: đợt dịch đầu tiên             |
-|                         |                                                 |
-|                         | -   2nd outbreak: đợt dịch thứ hai              |
-+-------------------------+-------------------------------------------------+
++----------------------+-------------------------------------------------+
+| Tên biến             | Ý nghĩa                                         |
++======================+=================================================+
+| `id`                 | id bệnh nhân                                    |
++----------------------+-------------------------------------------------+
+| `case_name`          | id ca bệnh                                      |
++----------------------+-------------------------------------------------+
+| `case_type`          | phân loại ca bệnh                               |
+|                      |                                                 |
+|                      | -   confirmed: xác nhận nhiễm bệnh              |
+|                      |                                                 |
+|                      | -   probable: có khả năng cao nhiễm bệnh        |
+|                      |                                                 |
+|                      | -   suspected: khi nhiễm bệnh                   |
++----------------------+-------------------------------------------------+
+| `sex`                | giới tính                                       |
+|                      |                                                 |
+|                      | -   m: nam                                      |
+|                      |                                                 |
+|                      | -   f: nữ                                       |
++----------------------+-------------------------------------------------+
+| `age`                | tuổi bệnh nhân                                  |
++----------------------+-------------------------------------------------+
+| `date_onset`         | ngày phát bệnh                                  |
++----------------------+-------------------------------------------------+
+| `date_admission`     | ngày nhập viện                                  |
++----------------------+-------------------------------------------------+
+| `outcome`            | kết quả ca bệnh:                                |
+|                      |                                                 |
+|                      | -   recovered: khỏi bệnh                        |
+|                      |                                                 |
+|                      | -   died: tử vong                               |
++----------------------+-------------------------------------------------+
+| `date_outcome`       | ngày thông báo kết quả cao bệnh                 |
++----------------------+-------------------------------------------------+
+| `date_first_contact` | ngày tiếp xúc đầu tiên                          |
++----------------------+-------------------------------------------------+
+| `date_last_contact`  | ngày tiếp xúc cuối cùng                         |
++----------------------+-------------------------------------------------+
+| `district`           | địa chỉ của bệnh nhân (quận của TP Hồ Chí Minh) |
++----------------------+-------------------------------------------------+
+| `outbreak`           | đợt dịch:                                       |
+|                      |                                                 |
+|                      | -   1st outbreak: đợt dịch đầu tiên             |
+|                      |                                                 |
+|                      | -   2nd outbreak: đợt dịch thứ hai              |
++----------------------+-------------------------------------------------+
 
 </details>
 
@@ -266,17 +266,12 @@ linelist %>% tbl_summary()
 
 Một số tham số của `tbl_summary` hỗ trợ điều chỉnh bảng thống kê
 
-+------------------+-------------------------------------------------+
-| Tên tham số      | Công dụng                                       |
-+==================+=================================================+
-| `include`        | Chọn các biến được hiển thị trên bảng thống kê  |
-+------------------+-------------------------------------------------+
-| `label`          | Đổi cách hiển thị tên biến                      |
-+------------------+-------------------------------------------------+
-| `by`             | Hiển thị thống kê nhóm theo giá trị của 1 biến  |
-+------------------+-------------------------------------------------+
-| `statistic`      | Điều chỉnh thống kê được hiển thị               |
-+------------------+-------------------------------------------------+
+| Tên tham số | Công dụng                                      |
+|-------------|------------------------------------------------|
+| `include`   | Chọn các biến được hiển thị trên bảng thống kê |
+| `label`     | Đổi cách hiển thị tên biến                     |
+| `by`        | Hiển thị thống kê nhóm theo giá trị của 1 biến |
+| `statistic` | Điều chỉnh thống kê được hiển thị              |
 
 **Chọn các biến được thống kê qua tham số `include`**
 
@@ -324,8 +319,7 @@ linelist %>% tbl_summary(
       date_onset ~ "Ngày phát bệnh",
       date_admission ~ "Ngày nhập viện",
       date_first_contact ~ "Ngày tiếp xúc đầu tiên",
-      date_last_contact ~ "Ngày tiếp xúc cuối cùng",
-      outbreak ~ "Đợt dịch"
+      date_last_contact ~ "Ngày tiếp xúc cuối cùng"
     ),
   # ----- Hiển thị thống kê cho từng đợt dịch ------
   by = outbreak)
@@ -348,8 +342,7 @@ linelist %>% tbl_summary(
       date_onset ~ "Ngày phát bệnh",
       date_admission ~ "Ngày nhập viện",
       date_first_contact ~ "Ngày tiếp xúc đầu tiên",
-      date_last_contact ~ "Ngày tiếp xúc cuối cùng",
-      outbreak ~ "Đợt dịch"
+      date_last_contact ~ "Ngày tiếp xúc cuối cùng"
     ),
   by = outbreak,
   # ----- điều chỉnh thống kê ------
@@ -380,8 +373,7 @@ linelist %>% tbl_summary(
       date_onset ~ "Ngày phát bệnh",
       date_admission ~ "Ngày nhập viện",
       date_first_contact ~ "Ngày tiếp xúc đầu tiên",
-      date_last_contact ~ "Ngày tiếp xúc cuối cùng",
-      outbreak ~ "Đợt dịch"
+      date_last_contact ~ "Ngày tiếp xúc cuối cùng"
     ),
   by = outbreak,
   statistic = list(
@@ -407,8 +399,7 @@ linelist %>% tbl_summary(
       date_onset ~ "Ngày phát bệnh",
       date_admission ~ "Ngày nhập viện",
       date_first_contact ~ "Ngày tiếp xúc đầu tiên",
-      date_last_contact ~ "Ngày tiếp xúc cuối cùng",
-      outbreak ~ "Đợt dịch"
+      date_last_contact ~ "Ngày tiếp xúc cuối cùng"
     ),
   by = outbreak,
   statistic = list(
@@ -452,8 +443,7 @@ linelist %>%
         date_onset ~ "Ngày phát bệnh",
         date_admission ~ "Ngày nhập viện",
         date_first_contact ~ "Ngày tiếp xúc đầu tiên",
-        date_last_contact ~ "Ngày tiếp xúc cuối cùng",
-        outbreak ~ "Đợt dịch"
+        date_last_contact ~ "Ngày tiếp xúc cuối cùng"
       ),
     by = outbreak,
     statistic = list(
@@ -510,8 +500,7 @@ linelist %>%
         date_onset ~ "Ngày phát bệnh",
         date_admission ~ "Ngày nhập viện",
         date_first_contact ~ "Ngày tiếp xúc đầu tiên",
-        date_last_contact ~ "Ngày tiếp xúc cuối cùng",
-        outbreak ~ "Đợt dịch"
+        date_last_contact ~ "Ngày tiếp xúc cuối cùng"
       ),
     by = outbreak,
     statistic = list(
@@ -655,7 +644,7 @@ first_outbreak <- linelist %>%
   filter(outbreak == "1st outbreak") %>% 
   tbl_summary(
     include = c(age, outcome),
-    label = list( age ~ "Tuổi", outcome ~ "Kết quả"),
+    label = age ~ "Tuổi",
     by = outcome
   ) %>% 
   # điều chỉnh header để các bảng có chung header
@@ -672,7 +661,7 @@ second_outbreak <- linelist %>%
   ) %>% 
   tbl_summary(
     include = c(age, outcome),
-    label = list( age ~ "Tuổi", outcome ~ "Kết quả"),
+    label = age ~ "Tuổi",
     by = outcome
   ) %>% 
   modify_header(all_stat_cols() ~ "**{level}**") %>% 
@@ -687,7 +676,7 @@ both_outbreak <- linelist %>%
   ) %>% 
   tbl_summary(
     include = c(age, outcome),
-    label = list( age ~ "Tuổi", outcome ~ "Kết quả"),
+    label = age ~ "Tuổi",
     by = outcome
   ) %>% 
   # điều chỉnh header để các bảng có chung header
@@ -852,9 +841,8 @@ tbl_stack(list(tbl_first_outbreak, tbl_second_outbreak, both_outbreak),
 vaccdata <- readRDS("data/cleaned_vacdata.rds")
 ```
 
-```{=html}
 </details>
-```
+
 ### Tạo và điều chỉnh bảng thống kê
 
 Tạo bảng thống kê cho dữ liệu vaccine theo các yêu cầu sau
@@ -884,9 +872,8 @@ vaccdata %>% tbl_summary(
   ) 
 ```
 
-```{=html}
 </details>
-```
+
 ### Phân tích
 
 Tạo bảng thống kê số mũi viêm gan b sơ sinh (`khangnguyen` mang giá trị vgb_truoc_24, vgb_sau_24) theo quận huyện
@@ -903,16 +890,14 @@ vaccdata %>%
     include = c(khangnguyen, huyen),
     # thay đổi tên được hiển thị
     label = list(
-        khangnguyen ~ "Viêm gan B sơ sinh",
-        huyen ~ "Quận/Huyện"
+        khangnguyen ~ "Viêm gan B sơ sinh"
       ),
     by = huyen
   )
 ```
 
-```{=html}
 </details>
-```
+
 Tạo bảng tỷ lệ tiêm chủng bằng `tbl_summary` theo quận/huyện
 
 ```{=html}
@@ -925,9 +910,7 @@ Tạo bảng tỷ lệ tiêm chủng bằng `tbl_summary` theo quận/huyện
 
 -   Dùng `tbl_summary` để hiển thị số trẻ được tiêm cho từng mũi
 
-```{=html}
 </details>
-```
 
 ```{=html}
 <details>
@@ -952,6 +935,4 @@ vaccdata %>%
   )
 ```
 
-```{=html}
 </details>
-```
