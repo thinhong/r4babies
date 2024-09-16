@@ -38,10 +38,14 @@ for (i in 1:length(cols)){
     if (cols[i] %in% c("VGB <24", "HG_1", "UV_1")){
       data[[ cols[i] ]] <- data[[ "ngaysinh" ]] + sample(c(0, 1), size = nrows, replace=TRUE)
     }else if (cols[i] == "VGB >24"){
-      data[[ cols[i] ]] <- data[[ "VGB <24" ]] + sample(c(-1, 0, 1), prob = c(0.01, 0.09, 0.9), size = nrows, replace = TRUE)
+      data[[ cols[i] ]] <- data[[ "VGB <24" ]] + sample(c(-1, 0, 2), prob = c(0.01, 0.09, 0.9), size = nrows, replace = TRUE)
+    } else if (cols[i] == "VGB_4+" | cols[i] == "UV_4+" | cols[i] == "HG_4+"){
+      # adjust sampling pool for the 4th shots for analysis part 
+      data[[ cols[i] ]] <- data[[ cols[i-1] ]] + sample(c(45, 117, 180, 250, 360, 480, 620, 1070), 
+                                                        prob=c(0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125), size = nrows, replace = TRUE)
     }else{
       # if not the 1st shot, sample by add a few days fr the prev shot
-      data[[ cols[i] ]] <- data[[ cols[i-1] ]] + sample(c(-2, -1, 0, 1, 3, 4, 10, 15), prob=c(0.005, 0.005, 0.045, 0.045, 0.05, 0.05, 0.4, 0.4), size = nrows, replace = TRUE)
+      data[[ cols[i] ]] <- data[[ cols[i-1] ]] + sample(c(-2, -1, 0, 10, 25, 45, 60, 180), prob=c(0.005, 0.005, 0.045, 0.045, 0.05, 0.05, 0.4, 0.4), size = nrows, replace = TRUE)
     }
     
     next

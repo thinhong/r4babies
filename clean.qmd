@@ -455,12 +455,17 @@ Bảng dữ liệu hiện tại chưa tuân theo quy tắc tidy data vì các l�
 
 ```{r}
 cols <- which(str_ends(colnames(df), "[:digit:]"))
+colnames(df)
+str_ends(colnames(df), "[:digit:]")
+colnames(df)[cols]
 df <- pivot_longer(df,
       cols = any_of(cols),
       # đặt tên mới cho biến
       names_to = "khangnguyen",
       # đặt tên mới cho cột giá trị tương ứng
       values_to = "ngaytiem") 
+
+
 ```
 
 **Dữ liệu sau khi format**
@@ -696,6 +701,41 @@ rmarkdown::paged_table(head(joined_df, n =100), options = list(rows.print = 5))
 
 Đối với trường hợp này, các giá trị `NA` sẽ được loại bỏ ở bước tiếp theo thay vì được thay thế bằng các giá trị khác
 
+```{=html}
+<details>
+  <summary> Optional: Code sửa thứ tự mũi tiêm </summary>
+```
+```{r}
+df %>% 
+  mutate(
+    khangnguyen = str_remove_all(khangnguyen, "_.*")
+  ) %>% 
+  unique() %>% # lọc trùng cùng kháng nguyên trong 1 ngày
+  mutate(
+    # tính các mũi vgb sơ sinh trước và sau 24h
+    khangnguyen = case_when(
+      khangnguyen == "vgb" & difftime(ngaytiem, ngaysinh, units = "days") < 1 ~ "vgb_truoc_24",
+      khangnguyen == "vgb" & difftime(ngaytiem, ngaysinh, units = "days") == 1 ~ "vgb_sau_24",
+      .default = khangnguyen
+    )
+  ) %>% 
+  group_by(
+    id, khangnguyen
+  ) %>% 
+  arrange(ngaytiem) %>% 
+  mutate(
+    shot_count = 1:n(), # tính lại thứ tự mũi tiêm
+    exclude_count = sum( str_detect(khangnguyen, "24") ), # loại các mũi sơ sinh khỏi số tt
+    shot_count = shot_count - exclude_count, # loại các mũi sơ sinh khỏi số tt
+    khangnguyen = if_else(str_detect(khangnguyen, "24"), khangnguyen, paste(khangnguyen, shot_count, sep = "_")) # update tên mũi
+  ) %>% 
+  ungroup() %>% 
+  select(-shot_count, -exclude_count) 
+```
+
+```{=html}
+</details>
+```
 ### Lọc hàng {#sec-filter-rows}
 
 Bước làm sạch điển hình sau khi đã làm sạch các cột và các giá trị được mã hóa lại đó là *lọc* bộ dữ liệu cho các hàng cụ thể
@@ -825,6 +865,14 @@ head(example_age_group, n=10)
 
 ```{r, echo=FALSE}
 rmarkdown::paged_table(head(example_age_group, n=10))
+```
+
+## Lưu dữ liệu sau khi xử lý
+
+Sử dụng lệnh `saveRDS()` từ phần @sec-save-data để lưu dữ liệu đã qua xử lý
+
+```{r}
+saveRDS(joined_df, "cleaned_vacdata.rds")
 ```
 
 ## Bài tập
