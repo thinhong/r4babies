@@ -24,7 +24,7 @@ format:
 
 # Data thực hành
 
-{{< downloadthis data/simulated_covid.rds dname="simulated_covid" label="simulated_covid.rds" type=light >}}
+{{< downloadthis data/simulated_covid.rds dname="simulated_covid" label="simulated_covid.rds" type=light >}} {{< downloadthis data/ex-nature.xlsx dname="ex-nature" label="ex-nature.xlsx" type=light >}}
 
 :::
 
@@ -484,6 +484,8 @@ So sánh với biểu đồ gốc ở đây @fig-viz-lancet.
 
 ## Bài tập
 
+### Bài 1
+
 Dùng data thực hành `simulated_covid.rds` để vẽ biểu đồ cột thể hiện số ca nhiễm ở từng quận.
 
 ```{r}
@@ -497,4 +499,115 @@ df_plot <- df |>
   count(district)
 ```
 
+### Bài 2
 
+Vẽ biểu đồ sau bằng data thực hành `ex-nature.xlsx`.
+
+![Virological surveillance, participatory syndromic surveillance and behavioural data for model parameterization](img/viz/ex-nature.svg){#fig-ex-nature}
+
+Đọc và xử lý data.
+
+```{r}
+#| warning: false
+#| message: false
+library(readxl)
+library(stringr)
+
+df <- read_excel("data/ex-nature.xlsx")
+
+# Bars
+df_bar <- data.frame(df[-1, 1:6])
+colnames(df_bar) <- as.character(df[1, 1:6])
+
+df_bar <- df_bar |> 
+  mutate_at(vars(1:6), as.numeric) |> 
+  pivot_longer(cols = starts_with("on"), values_to = "value") |>
+  mutate(name = str_to_sentence(name)) |> 
+  as.data.frame()
+
+# Lines
+df_line <- data.frame(df[-1, c(1, 7:9)])
+colnames(df_line) <- as.character(df[1, c(1, 7:9)])
+
+df_line <- df_line |> 
+  mutate_at(vars(1:4), as.numeric)
+```
+
+```{r}
+#| code-fold: true
+#| fig-width: 4
+#| fig-height: 4.7
+#| out-width: "100%"
+ggplot() +
+  geom_bar(
+    data = df_bar,
+    mapping = aes(
+      x = week,
+      y = value,
+      fill = factor(
+        name,
+        levels = c(
+          'Onset >15 days before testing',
+          'Onset 8-15 days before testing',
+          'Onset 5-7 days before testing',
+          'Onset 2-4 days before testing',
+          'Onset 0-1 days before testing'
+        )
+      )
+    ),
+    stat = "identity"
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Onset 0-1 days before testing" =  "#fcd0a1",
+      "Onset 2-4 days before testing" =  "#fead6c",
+      "Onset 5-7 days before testing" =  "#fd8d3a",
+      "Onset 8-15 days before testing" =  "#f36912",
+      "Onset >15 days before testing" =  "#da4800"
+    )
+  ) +
+  geom_hline(yintercept = 100.3, linewidth = 1) +
+  scale_x_continuous(breaks = seq(20, 26, by = 1)) +
+  geom_line(
+    data = df_line,
+    mapping = aes(x = week, y = median * 100 / 14),
+    linetype = "dashed",
+    color = "#810004"
+  ) +
+  geom_point(data = df_line,
+             aes(x = week, y = median * 100 / 14),
+             color = "#810004") +
+  geom_errorbar(
+    data = df_line,
+    aes(
+      x = week,
+      ymin = `95% CI lower` * 100 / 14,
+      ymax = `95% CI upper` * 100 / 14
+    ),
+    width = 0,
+    color = "#810004"
+  ) +
+  scale_y_continuous(
+    name = "Laboratory-confirmed \n cases showing symptoms (%)",
+    breaks = seq(0, 100, by = 20),
+    expand = c(0, 0),
+    sec.axis = sec_axis(
+      transform =  ~ . / (100 / 14),
+      name = "Delay from onset to testing",
+      breaks = seq(0, 14, by = 2)
+    )
+  ) +
+  labs(x = "Week of testing", fill = NULL) +
+  theme_classic() +
+  theme(
+    axis.title.y.right = element_text(angle = 90, color = "#78070b"),
+    legend.position = "bottom",
+    legend.direction = "vertical",
+    legend.key.height = unit(0.1, "cm"),
+    legend.key.width = unit(0.6, "cm"),
+    legend.key.spacing.y = unit(0.1, "cm"),
+    legend.text = element_text(size = 11)
+  )
+```
+
+So sánh với biểu đồ gốc ở đây @fig-ex-nature.
