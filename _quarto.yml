@@ -19,8 +19,8 @@ book:
     - r_basics.qmd
     - clean.qmd
     - analysis.qmd
+    - viz-prac.qmd
     - viz.qmd
-    - viz-practice.qmd
     - report.qmd
     - references.qmd
 

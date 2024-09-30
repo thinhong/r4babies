@@ -1,4 +1,4 @@
-# Trực quan hóa
+# Trực quan hóa 2
 
 ::: callout-note
 # Các package được sử dụng trong bài học
