@@ -35,7 +35,8 @@ format:
     theme: [cosmo, theme.scss]
     code-overflow: wrap
     code-copy: true
-    fig-format: svg
+    # use fig format as png for cross-platform compatibility
+    fig-format: png
 
 comments:
   giscus:

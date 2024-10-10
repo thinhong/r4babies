@@ -6,7 +6,7 @@ knitr:
     fig.height: 6     # Height of the figure
 ---
 
-# Trực quan hóa
+# Trực quan hóa 2
 
 ::: callout-note
 ### Trước bài học
@@ -16,7 +16,6 @@ knitr:
 {{< downloadthis data/simulated_covid.rds dname="simulated_covid" label="simulated_covid.rds" type=light >}}
 
 -   Tải các package sau: `tidyverse`, `sf`, `plotly`, `leaflet`
-
 
 -   Và load packages
 
@@ -296,21 +295,21 @@ ggplot(
 
 Một số đặc điểm quan trọng cho các lớp `geom_`
 
-+-------------------+-------------------------------------------------------------------------+
-| Tên đặc điểm      | Công dụng                                                               |
-+===================+=========================================================================+
-| `fill`            | quy định fill color cho đồ thị                                          |
-+-------------------+-------------------------------------------------------------------------+
-| `color`           | quy định border color cho đồ thị                                        |
-+-------------------+-------------------------------------------------------------------------+
-| `size`            | quy định kích cỡ của đường/điểm cho đồ thị                              |
-+-------------------+-------------------------------------------------------------------------+
-| `alpha`           | quy định độ trong suốt của màu (từ 0-1, càng gần 0 màu càng trong suốt) |
-+-------------------+-------------------------------------------------------------------------+
-| `linetype`        | quy định loại đường (thẳng, đứt, ...) cho các đồ thị đường              |
-+-------------------+-------------------------------------------------------------------------+
-| `shape`           | quy định loại điểm cho các đồ thị có điểm                               |
-+-------------------+-------------------------------------------------------------------------+
++---------------+-------------------------------------------------------------------------+
+| Tên đặc điểm  | Công dụng                                                               |
++===============+=========================================================================+
+| `fill`        | quy định fill color cho đồ thị                                          |
++---------------+-------------------------------------------------------------------------+
+| `color`       | quy định border color cho đồ thị                                        |
++---------------+-------------------------------------------------------------------------+
+| `size`        | quy định kích cỡ của đường/điểm cho đồ thị                              |
++---------------+-------------------------------------------------------------------------+
+| `alpha`       | quy định độ trong suốt của màu (từ 0-1, càng gần 0 màu càng trong suốt) |
++---------------+-------------------------------------------------------------------------+
+| `linetype`    | quy định loại đường (thẳng, đứt, ...) cho các đồ thị đường              |
++---------------+-------------------------------------------------------------------------+
+| `shape`       | quy định loại điểm cho các đồ thị có điểm                               |
++---------------+-------------------------------------------------------------------------+
 
 Ta có thể quy định giá trị cho các đặc điểm của biểu đồ như một tham số của lệnh `geom_` (**VD:** `geom_bar(color = "cornflowerblue")` trong các ví dụ trên)
 
@@ -438,9 +437,8 @@ linelist %>%
 
 -   `path` đường dẫn đến nơi lưu bản đồ
 
-```{=html}
 <!-- -->
-```
+
 -   `filename` tên file được lưu
 
 -   `plot` biểu đồ được lưu (tự động lưu biểu đồ được vẽ gần nhất)
@@ -494,7 +492,7 @@ Khi knit file `.Rmd` sang các định dạng file khác, tính tương tác c�
 :::
 
 ::: {.callout-note collapse="true"}
-### Thay đổi giá trị hiển thị cho tooltip  {.callout-note}
+### Thay đổi giá trị hiển thị cho tooltip {.callout-note}
 
 Để thay đổi giá trị hiển trị trên tooltip, ta có thể tạo một đặc điểm qua lệnh aes() và quy định giá trị cho tham số tooltip khi sử dụng plotly
 
@@ -669,11 +667,11 @@ hcm_map <- hcm_map %>%
   )
 
 # --------- Vẽ biểu đồ cùng dữ liệu số ca bằng ggplot ------
-hcm_map %>% 
-  ggplot() + 
+hcm_map %>%
+  ggplot() +
     geom_sf(
       # quy định màu theo số ca
-      aes(fill = no_cases) 
+      aes(fill = no_cases)
     ) +
   labs(fill = "Số ca")
 ```
@@ -741,13 +739,112 @@ leaflet(hcm_map) %>%
 ::: {.callout-note collapse="true"}
 ### Các lệnh tạo bảng màu trong leaflet
 
-+---------------------------+---------------------------------------------+
-| Function                  | Công dụng                                   |
-+===========================+=============================================+
-| `colorNumeric()`          | tạo pallete màu liên tục từ biến liên tục   |
-+---------------------------+---------------------------------------------+
-| `colorBin()`              | tạo pallete màu phân loại từ biến liên tục  |
-+---------------------------+---------------------------------------------+
-| `colorFactor()`           | tạo pallete màu phân loại từ biến phân loại |
-+---------------------------+---------------------------------------------+
++--------------------------+---------------------------------------------+
+| Function                 | Công dụng                                   |
++==========================+=============================================+
+| `colorNumeric()`         | tạo palette màu liên tục từ biến liên tục   |
++--------------------------+---------------------------------------------+
+| `colorBin()`             | tạo palette màu phân loại từ biến liên tục  |
++--------------------------+---------------------------------------------+
+| `colorFactor()`          | tạo palette màu phân loại từ biến phân loại |
++--------------------------+---------------------------------------------+
 :::
+
+## Bài tập
+
+Đọc dữ liệu `cleaned_vacdata.rds` và vẽ bản đồ thể hiện tỷ lệ tiêm chủng đầy đủ theo từng quận huyện
+
+Tính tỷ lệ trẻ được tiêm ít nhất 3 mũi VGB
+
+```{r}
+#| code-fold: true
+#| code-summary: "Đọc và xử lý dữ liệu" 
+
+vaccdata <- readRDS("data/cleaned_vacdata.rds")
+
+prop_vaccinated <- vaccdata %>% 
+  group_by(huyen) %>% 
+  summarize(
+    # Tính số trẻ được tiêm vgb_3 tại mỗi quận
+    no_vaccinated = sum(khangnguyen == "vgb_3"),
+    # đếm số trẻ tại mỗi quận
+    total = n_distinct(id)
+  ) %>% 
+  mutate(
+    prop_vaccinated = no_vaccinated/total
+  )
+```
+
+Chuẩn bị dữ liệu để vẽ
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code" 
+
+
+# ----- đọc bản đồ vn cấp quận huyện ------ 
+vn_qh <- st_read(dsn = "data/gadm41_VNM.gpkg", layer = "ADM_ADM_2")
+
+# ----- lọc bản đồ cho hcm ------ 
+hcm_map <- vn_qh %>% filter( NAME_1 == "Hồ Chí Minh" ) 
+
+# ----- tạo bản đồ thành phố Thủ Đức ------ 
+thuduc_subset <- (hcm_map$VARNAME_2 == "District 2" | hcm_map$VARNAME_2 == "District 9" | 
+             hcm_map$VARNAME_2 == "Thu Duc" )
+hcm_map[hcm_map$VARNAME_2 == "Thu Duc", "geom"] <- st_union( subset(hcm_map, thuduc_subset)$geom )
+hcm_map <- hcm_map %>% filter(!VARNAME_2 == "District 2" & !VARNAME_2 == "District 9")
+
+# ----- thêm tỷ lệ tiêm chủng ------
+hcm_map <- hcm_map %>% 
+  mutate(join_key = tolower(NAME_2)) %>% 
+  left_join(
+    prop_vaccinated %>% mutate(join_key = tolower(huyen)), 
+    by = join_by(join_key == join_key)
+  )
+```
+
+**Cách 1**: vẽ bằng ggplot
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code bằng ggplot" 
+
+hcm_map %>% 
+  ggplot() + 
+    geom_sf(
+      aes(fill = prop_vaccinated)
+    ) +
+    scale_fill_binned(
+      low = "#e5f5e0", high =  "#31a354", n.breaks = 8
+    ) + 
+    labs(
+      title = "Tỷ lệ tiêm VGB mũi 3 theo quận",
+      fill = "Tỷ lệ tiêm"
+    )
+```
+
+**Cách 2**: vẽ bằng leaflet
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code bằng leaflet" 
+
+# ----- quy định bảng màu ----
+pal <- colorBin(
+  palette = c("#e5f5e0", "#31a354"), 
+  domain = hcm_map$prop_vaccinated,
+  na.color = "grey" 
+  )
+
+# ----- vẽ biểu đồ ------
+leaflet(hcm_map) %>% 
+  # vẽ biểu đồ
+  addPolygons(
+    color="black", fillColor = ~pal(prop_vaccinated),  
+    weight = 1, label = ~paste0(NAME_2, ". \nTỷ lệ tiêm: ", 
+                                format(prop_vaccinated, digits = 4)), 
+    fillOpacity=1
+  ) %>% 
+  # thêm ô chú thích
+  addLegend(pal = pal, values = ~prop_vaccinated, title = "Tỷ lệ tiêm", position = "bottomright", opacity=1)
+```
