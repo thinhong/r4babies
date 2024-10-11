@@ -8,11 +8,15 @@ knitr:
 
 # Trực quan hóa 2
 
+::: {.callout-note collapse="true"}
+## Slide
 ```{=html}
 <div>
 <iframe class="slide-deck" style="height: 50vh; width: 100%;" src="slides/viz.html"></iframe>
 </div>
 ```
+[{{< fa expand size=fw >}} Full screen](slides/viz.html){.btn .btn-outline-secondary role="button"}
+:::
 
 ::: callout-note
 ### Trước bài học

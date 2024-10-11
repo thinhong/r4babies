@@ -110,7 +110,7 @@ ggplot(
 
 Ngoài các màu cơ bản, ta có thể quy định màu trong R dưới dạng hex color
 
-VD
+**VD**
 
 ```{r, eval=FALSE}
 ggplot(data = my_data)+                   
@@ -121,7 +121,7 @@ ggplot(data = my_data)+
 
 Để có được hex color, ta có thể google "hex color", chọn màu phù hợp và copy HEX
 
-![](../img/viz/hex_color.png){width="367"}
+![](../img/viz/hex_color.png){height="300px"}
 
 ## Một số `geom_` thông dụng {.scrollable}
 
