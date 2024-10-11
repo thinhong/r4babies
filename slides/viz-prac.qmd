@@ -3,7 +3,7 @@ title: "Trực quan hóa"
 format: 
   revealjs:
     df-print: paged
-    fig-format: svg
+    fig-format: png
     footer: |
       [View book](../viz-prac.html)
 ---

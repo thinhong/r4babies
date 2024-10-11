@@ -1,0 +1,219 @@
+[
+  {
+    "objectID": "viz.html#mục-tiêu",
+    "href": "viz.html#mục-tiêu",
+    "title": "Trực quan hóa (p2)",
+    "section": "Mục tiêu",
+    "text": "Mục tiêu\n\nHiểu cách sử dụng các lệnh geom_*() của ggplot\nSử dụng plotly để tạo biểu đồ tương tác\nHọc cách vẽ bản đồ bằng leaflet"
+  },
+  {
+    "objectID": "viz.html#ggplot",
+    "href": "viz.html#ggplot",
+    "title": "Trực quan hóa (p2)",
+    "section": "ggplot",
+    "text": "ggplot\nNhư đã học ở phần trước, quá trình vẽ ggplot được thực hiện tương tự như quá trình vẽ đồ thị thủ công, bao gồm việc vẽ từng lớp đồ thị và các lớp sẽ được nối bằng dấu +.\nQuá trình vẽ như sau\n\nBắt đầu với lớp nền bằng lệnh ggplot() - nơi người dùng thường quy định dữ liệu được vẽ và các biến nằm trên trục x và y\nThêm các lớp geom - mỗi lớp geom sẽ thêm 1 loại biểu đồ (VD: biểu đồ cột, biểu đồ đường, biểu đồ phân tán, histogram). Các hàm này đều bắt đầu bằng geom_*\nThêm các yếu tố thiết kế vào đồ thị, chẳng hạn như nhãn trục, tiêu đề, phông chữ, kích thước, phối màu, chú giải hoặc xoay trục"
+  },
+  {
+    "objectID": "viz.html#ggplot-1",
+    "href": "viz.html#ggplot-1",
+    "title": "Trực quan hóa (p2)",
+    "section": "ggplot",
+    "text": "ggplot\nVD: Vẽ số ca theo thời gian từ dữ liệu covid"
+  },
+  {
+    "objectID": "viz.html#ggplot-2",
+    "href": "viz.html#ggplot-2",
+    "title": "Trực quan hóa (p2)",
+    "section": "ggplot",
+    "text": "ggplot\n\n\n\n\n\n\nChọn màu cho ggplot\n\n\nNgoài các màu cơ bản, ta có thể quy định màu trong R dưới dạng hex color\nVD\n\n\n\nĐể có được hex color, ta có thể google “hex color”, chọn màu phù hợp và copy HEX"
+  },
+  {
+    "objectID": "viz.html#một-số-geom_-thông-dụng",
+    "href": "viz.html#một-số-geom_-thông-dụng",
+    "title": "Trực quan hóa (p2)",
+    "section": "Một số geom_ thông dụng",
+    "text": "Một số geom_ thông dụng\n\n\n\n\n\n\n\n\nLệnh geom_\nCông dụng\nCác tuỳ chỉnh\n\n\n\n\ngeom_histogram()\nTạo biểu đồ cột với x là biến liên tục động được chia thành các khoảng (bin) còn y là số quan sát trong mỗi khoảng\nDữ liệu cần cung cấp: Giá trị cho cột x (y là số quan sát, sẽ tự động được tính)\nCác tham số khác:\n\nbin (số nhóm để chia trục x) hoặc binwidth (độ rộng cho mỗi nhóm của trục x)\n\n\n\ngeom_col()\nTạo biểu đồ cột từ x và y\nDữ liệu cần cung cấp: Giá trị cho cột x và y\n\n\ngeom_bar()\nTương tự như geom_col() nhưng y sẽ tự động được tính theo tham số stat\nDữ liệu cần cung cấp: Giá trị cho cột x (y sẽ tự động được tính theo tham số stat)\nCác tham số khác:\n\nstat cách tính y (mặc định stat = \"count\" nghĩa là lấy số quan sát làm giá trị y)\n\n\n\ngeom_boxplot()\nTạo boxplot từ x và y (nếu 1 trục là biến liên trục, trục còn lại phải thuộc biến phân loại)\nDữ liệu cần cung cấp: Giá trị cho cột x và y\n\n\ngeom_point()\nTạo biểu đồ phân tán từ x và y\nDữ liệu cần cung cấp: Giá trị cho cột x và y\n\n\ngeom_line()\nTạo biểu đồ đường từ x và y\nDữ liệu cần cung cấp: Giá trị cho cột x và y\n\n\ngeom_smooth()\nTạo biểu đồ đường hồi quy cùng khoảng tin cậy (confidence interval) từ x và y\nDữ liệu cần cung cấp: Giá trị cho cột x và yCác tham số khác:\n\nmethod quy định mô hình hồi quy (\"auto\", \"lm\", \"glm\", \"gam\", \"loess\")"
+  },
+  {
+    "objectID": "viz.html#plotly",
+    "href": "viz.html#plotly",
+    "title": "Trực quan hóa (p2)",
+    "section": "Plotly",
+    "text": "Plotly\nPackage plotly cung cấp lệnh ggplotly giúp người dùng nhanh chóng biến biểu đồ của ggplot thành biểu đồ tương tác (interactive plot).\nVD: dùng ggplotly để biến biểu đồ số ca thành dạng tương tác\n\n\n\n\n\n\n\n\n\n\n\n\nLưu ý\n\n\nKhi knit file .Rmd sang các định dạng file khác, tính tương tác của đồ thị chỉ còn khi người dùng knit thành file .html\n\n\n\n\n\n\n\n\n\nThay đổi giá trị hiển thị cho tooltip\n\n\nĐể thay đổi giá trị hiển trị trên tooltip, ta có thể tạo một đặc điểm qua lệnh aes() và quy định giá trị cho tham số tooltip khi sử dụng plotly"
+  },
+  {
+    "objectID": "viz.html#vẽ-bản-đồ",
+    "href": "viz.html#vẽ-bản-đồ",
+    "title": "Trực quan hóa (p2)",
+    "section": "Vẽ bản đồ",
+    "text": "Vẽ bản đồ\nDữ liệu bản đồ\nTrước tiên, ta cần dữ liệu để vẽ biểu đồ trong R. Trong khoá học này ta sẽ sử dụng dữ liệu được cấp bởi GADM.\n\nĐể download dữ liệu biểu đồ Việt Nam, thực hiện các bước sau:\n\nVào trang https://gadm.org/download_country.html\nChọn Vietnam trong danh sách Country\nBấm Geopackage\nFile được tải về có tên là gadm41_VNM.gpkg\n\n\n\n\n\n\n\nLưu ý\n\n\n\nCác nguồn bản đồ mở thường sẽ không có các phần lãnh thổ tranh chấp (VD: Hoàng Sa, Trường Sa)\nCác thay đổi về bản đồ hành chính có thể không được cập nhật kịp thời (VD: các quận được sáp nhập thành TP. Thủ Đức)\n\n\n\n\nDữ liệu bản đồ tải về sẽ có 3 cấp bậc\n\nCấp tỉnh/ thành phố\nCấp quận/ huyện\nCấp phường/ xã\n\nĐể đọc dữ liệu bản đồ, dùng lệnh st_read của package sf\nĐể vẽ dữ liệu đọc được, dùng lệnh geom_sf của ggplot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nĐiều chỉnh dữ liệu bản đồ\nKhi thử nhìn dữ liệu cho bản đồ, ta có thể thấy dữ liệu đọc được cũng là một bảng dữ liệu và nhiều lệnh điều chỉnh bảng dữ liệu cũng có thể áp dụng với bảng này\nMột số cột đáng lưu ý bao gồm\n\nCác cột có format NAME_`cấp bậc hành chính` chứa tên tiếng Việt\nCác cột có format VARNAME_`cấp bậc hành chính` chứa tên tiếng Anh\nCột geom sẽ chứa dữ liệu để vẽ nên bản đồ\n\n\n\n\n\n  \n\n\n\nĐiều chỉnh dữ liệu bản đồ\nĐể lựa chọn các khu vực được vẽ trên bản đồ, ta có thể sử dụng lệnh filter() tương tự như các bảng dữ liệu khác\nVD: chỉ vẽ bản đồ các quận của phố Hồ Chí Minh\n\n\n\n\n\nĐiều chỉnh dữ liệu bản đồ\nĐể nối một số khu vực được vẽ trên bản đồ, ta có thể sử dụng lệnh st_join() của gói sf\nVD: gộp quận 2, quận 9 và quận Thủ Đức thành Thành phố Thủ Đức\n\n\n\n\n\nĐiều chỉnh dữ liệu bản đồ\nĐể thêm giá trị từ một bảng khác vào bảng dữ liệu biểu đồ, ta có thể sử dụng left_join() tương tự các bài học trước\nVD: vẽ bản đồ cùng số ca\n\n\n\n\n\nLeaflet\nGói leaflet được dùng để vẽ bản đồ tương tác.\nChúng ta sử dụng leaflet thay vì ggplot + plotly vì bản đồ vẽ bởi leaflet thường đẹp hơn\n\nQuá trình vẽ biểu đồ bằng leaflet cũng tương tự như ggplot, bao gồm các bước sau:\n\nGọi leaflet() và cung cấp dữ liệu cần vẽ\nThêm lớp biểu đồ qua lệnh addPolygon()\nThêm ô chú thích bằng lệnh addLegend() nếu cần thiết\n\nLeaflet\n\n\n\n\n\n\n\nTên lệnh\nCác tham số thông dụng\n\n\n\n\naddPolygon()\ncolor - màu cho đường viền\nfillColor - màu cho các khu vực\nfillOpacity - độ trong suốt của màu (từ 0-1, càng gần 0 màu càng trong suốt)\nlabel - giá trị được hiển thị (tương tự tooltip của plotly)\n\n\naddLegend()\npal - palette màu\nvalues - cung cấp giá trị cần chú thích\ntitle - tiêu đề cho ô chú thích\nopacity - độ trong suốt của màu (cần giống fillOpacity trong addPolygon() để hiển thị màu chính xác)\nposition - vị trí của ô chú thích\n\n\n\nLeaflet\n\n\n\n\n\n\n\n\n\n\n\n\nCác lệnh tạo bảng màu trong leaflet\n\n\n\n\n\n\n\n\n\nFunction\nCông dụng\n\n\n\n\ncolorNumeric()\ntạo palette màu liên tục từ biến liên tục\n\n\ncolorBin()\ntạo palette màu phân loại từ biến liên tục\n\n\ncolorFactor()\ntạo palette màu phân loại từ biến phân loại\n\n\n\n\n\n\n\n\nView book"
+  },
+  {
+    "objectID": "viz.html#histograms---geom_histogram",
+    "href": "viz.html#histograms---geom_histogram",
+    "title": "Trực quan hóa (p2)",
+    "section": "Histograms - geom_histogram()",
+    "text": "Histograms - geom_histogram()"
+  },
+  {
+    "objectID": "viz.html#biểu-đồ-cột---geom_bar-hoặc-geom_col",
+    "href": "viz.html#biểu-đồ-cột---geom_bar-hoặc-geom_col",
+    "title": "Trực quan hóa (p2)",
+    "section": "Biểu đồ cột - geom_bar() hoặc geom_col()",
+    "text": "Biểu đồ cột - geom_bar() hoặc geom_col()"
+  },
+  {
+    "objectID": "viz.html#box-plots---geom_boxplot",
+    "href": "viz.html#box-plots---geom_boxplot",
+    "title": "Trực quan hóa (p2)",
+    "section": "Box plots - geom_boxplot()",
+    "text": "Box plots - geom_boxplot()"
+  },
+  {
+    "objectID": "viz.html#điểm-vd-biểu-đồ-phân-tán---geom_point",
+    "href": "viz.html#điểm-vd-biểu-đồ-phân-tán---geom_point",
+    "title": "Trực quan hóa (p2)",
+    "section": "Điểm (vd: biểu đồ phân tán) - geom_point()",
+    "text": "Điểm (vd: biểu đồ phân tán) - geom_point()"
+  },
+  {
+    "objectID": "viz.html#biểu-đồ-đường---geom_line",
+    "href": "viz.html#biểu-đồ-đường---geom_line",
+    "title": "Trực quan hóa (p2)",
+    "section": "Biểu đồ đường - geom_line()",
+    "text": "Biểu đồ đường - geom_line()"
+  },
+  {
+    "objectID": "viz.html#đường-xu-hướng---geom_smooth",
+    "href": "viz.html#đường-xu-hướng---geom_smooth",
+    "title": "Trực quan hóa (p2)",
+    "section": "Đường xu hướng - geom_smooth()",
+    "text": "Đường xu hướng - geom_smooth()"
+  },
+  {
+    "objectID": "viz.html#geom_area",
+    "href": "viz.html#geom_area",
+    "title": "Trực quan hóa (p2)",
+    "section": "geom_area()",
+    "text": "geom_area()"
+  },
+  {
+    "objectID": "viz.html#tham-số-stat",
+    "href": "viz.html#tham-số-stat",
+    "title": "Trực quan hóa (p2)",
+    "section": "Tham số stat",
+    "text": "Tham số stat\n\n\n\n\n\n\nNote\n\n\n\nTham số stat của hàm geom\n\n\"identity\" lấy dữ liệu thô\n\"count\" đếm số quan sát (số hàng) trong từng phân nhóm\n\"sum\" tính tổng của các hàng trong từng phân nhóm\n\nVD: vẽ biểu đồ số ca trực tiếp từ data linelist thay vì case_data bằng các quy định stat = count"
+  },
+  {
+    "objectID": "viz.html#điều-chỉnh-các-đặc-điểm-của-biểu-đồ",
+    "href": "viz.html#điều-chỉnh-các-đặc-điểm-của-biểu-đồ",
+    "title": "Trực quan hóa (p2)",
+    "section": "Điều chỉnh các đặc điểm của biểu đồ",
+    "text": "Điều chỉnh các đặc điểm của biểu đồ\n\nMột số đặc điểm quan trọng cho các lớp geom_\n\n\n\n\n\n\n\nTên đặc điểm\nCông dụng\n\n\n\n\nfill\nquy định fill color cho đồ thị\n\n\ncolor\nquy định border color cho đồ thị\n\n\nsize\nquy định kích cỡ của đường/điểm cho đồ thị\n\n\nalpha\nquy định độ trong suốt của màu (từ 0-1, càng gần 0 màu càng trong suốt)\n\n\nlinetype\nquy định loại đường (thẳng, đứt, …) cho các đồ thị đường\n\n\nshape\nquy định loại điểm cho các đồ thị có điểm\n\n\n\nTa có thể quy định giá trị cho các đặc điểm của biểu đồ như một tham số của lệnh geom_ (VD: geom_bar(color = \"cornflowerblue\") trong các ví dụ trên)\nTuy nhiên, nếu muốn thay đổi các đặc điểm dựa theo biến từ dữ liệu, ta cần quy định mối liên hệ giữa biến và đặc điểm trong lệnh aes()\n\n\n\n\n\n\n\nLệnh aes()\n\n\nLệnh aes được sử dụng để quy định mối quan hệ giữa các biến và các đặc điểm của biểu đồ\nVD: quy định màu của cột theo đợt dịch\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuy định màu\n\n\nĐể tự quy định màu cho biểu đồ, ta có thể sử dụng các lệnh scale_color_*() khi muốn quy định màu viền, hoặc scale_fill_*() quy định màu fill\n\n\n\n\n\n\n\n\nFunction\nCông dụng\nTham số\n\n\n\n\nscale_color_manual()/\nscale_fill_manual()\nQuy định màu cho từng giá trị biến phân loại\nbreaks các giá trị trong biến phân loại\nvalues màu tương ứng\nlabels chú thích cho màu\n\n\nscale_color_continuous()/\nscale_fill_continuous()\nQuy định màu cho biến liên tục\nlow màu cho giá trị thấp nhất\nhigh màu cho giá trị cao nhất\n\n\nscale_color_binned()/\nscale_fill_binned()\nTạo thang màu bằng cách chia giá trị biến liên tục thành các nhóm (bins).\nlow màu cho giá trị thấp nhất\nhigh màu cho giá trị cao nhất\nn.breaks số bin để chia\n\n\n\nVD: quy định màu và label cho từng đợt dịch bằng lệnh scale_fill_manual()"
+  },
+  {
+    "objectID": "viz.html#facet",
+    "href": "viz.html#facet",
+    "title": "Trực quan hóa (p2)",
+    "section": "Facet",
+    "text": "Facet\n\nFacets, hay “chia nhỏ biểu đồ”, được sử dụng để chia một biểu đồ thành nhiều phần nhỏ, với mỗi phần (“facet”) đại diện cho một nhóm của dữ liệu.\nTrong ggplot, có 2 loại facet chính\n\nfacet_wrap() hiện thị các biểu đồ khác nhau cho từng nhóm của một biến số. (VD: thể hiện các đường cong dịch bệnh khác nhau cho từng khu vực).\nfacet_grid() áp dụng khi muốn đưa một biến thứ hai vào sắp xếp các biểu đồ con. Ở đây mỗi ô thể hiện sự giao nhau của các giá trị giữa hai cột.\n\n\nFacet\n\n\n\n\n\n\n\n\n\nfacet_wrap\nbiểu đồ số ca bệnh sốt rét chia theo tỉnh (tên tỉnh ở phía trên mỗi biểu đồ)\nfacet_grid\nbiểu đồ số ca bệnh sốt rét chia theo tỉnh và nhóm tuổi\n\n\n\n\n\n\n |"
+  },
+  {
+    "objectID": "viz.html#facet-2",
+    "href": "viz.html#facet-2",
+    "title": "Trực quan hóa (p2)",
+    "section": "Facet",
+    "text": "Facet\nVD: dùng facet_grid để vẽ biểu đồ theo giới tính và đợt dịch"
+  },
+  {
+    "objectID": "viz.html#lưu-biểu-đồ",
+    "href": "viz.html#lưu-biểu-đồ",
+    "title": "Trực quan hóa (p2)",
+    "section": "Lưu biểu đồ",
+    "text": "Lưu biểu đồ\n\nĐể lưu biểu đồ, ta sử dụng lệnh ggsave() với các tham số sau\n\npath đường dẫn đến nơi lưu bản đồ\nfilename tên file được lưu\nplot biểu đồ được lưu (tự động lưu biểu đồ được vẽ gần nhất)\nwidth, height kích cỡ của ảnh được lưu\ndpi độ phân giải của ảnh được lưu\n\n\nVD: lưu biểu đồ"
+  },
+  {
+    "objectID": "viz.html#plotly-1",
+    "href": "viz.html#plotly-1",
+    "title": "Trực quan hóa (p2)",
+    "section": "Plotly",
+    "text": "Plotly\nPackage plotly cung cấp lệnh ggplotly giúp người dùng nhanh chóng biến biểu đồ của ggplot thành biểu đồ tương tác (interactive plot).\nVD: dùng ggplotly để biến biểu đồ số ca thành dạng tương tác\n\n\n\n\n\n\n\n\n\n\n\n\nLưu ý\n\n\nKhi knit file .Rmd sang các định dạng file khác, tính tương tác của đồ thị chỉ còn khi người dùng knit thành file .html"
+  },
+  {
+    "objectID": "viz.html#plotly-2",
+    "href": "viz.html#plotly-2",
+    "title": "Trực quan hóa (p2)",
+    "section": "Plotly",
+    "text": "Plotly\n\n\n\n\n\n\nThay đổi giá trị hiển thị cho tooltip\n\n\nĐể thay đổi giá trị hiển trị trên tooltip, ta có thể tạo một đặc điểm qua lệnh aes() và quy định giá trị cho tham số tooltip khi sử dụng plotly"
+  },
+  {
+    "objectID": "viz.html#dữ-liệu-bản-đồ",
+    "href": "viz.html#dữ-liệu-bản-đồ",
+    "title": "Trực quan hóa (p2)",
+    "section": "Dữ liệu bản đồ",
+    "text": "Dữ liệu bản đồ\nTrước tiên, ta cần dữ liệu để vẽ biểu đồ trong R. Trong khoá học này ta sẽ sử dụng dữ liệu được cấp bởi GADM.\n\nĐể download dữ liệu biểu đồ Việt Nam, thực hiện các bước sau:\n\nVào trang https://gadm.org/download_country.html\nChọn Vietnam trong danh sách Country\nBấm Geopackage\nFile được tải về có tên là gadm41_VNM.gpkg\n\n\n\n\n\n\n\nLưu ý\n\n\n\nCác nguồn bản đồ mở thường sẽ không có các phần lãnh thổ tranh chấp (VD: Hoàng Sa, Trường Sa)\nCác thay đổi về bản đồ hành chính có thể không được cập nhật kịp thời (VD: các quận được sáp nhập thành TP. Thủ Đức)"
+  },
+  {
+    "objectID": "viz.html#dữ-liệu-bản-đồ-1",
+    "href": "viz.html#dữ-liệu-bản-đồ-1",
+    "title": "Trực quan hóa (p2)",
+    "section": "Dữ liệu bản đồ",
+    "text": "Dữ liệu bản đồ\nDữ liệu bản đồ tải về sẽ có 3 cấp bậc\n\nCấp tỉnh/ thành phố\nCấp quận/ huyện\nCấp phường/ xã\n\nĐể đọc dữ liệu bản đồ, dùng lệnh st_read của package sf\nĐể vẽ dữ liệu đọc được, dùng lệnh geom_sf của ggplot"
+  },
+  {
+    "objectID": "viz.html#dữ-liệu-bản-đồ-2",
+    "href": "viz.html#dữ-liệu-bản-đồ-2",
+    "title": "Trực quan hóa (p2)",
+    "section": "Dữ liệu bản đồ",
+    "text": "Dữ liệu bản đồ"
+  },
+  {
+    "objectID": "viz.html#điều-chỉnh-dữ-liệu-bản-đồ",
+    "href": "viz.html#điều-chỉnh-dữ-liệu-bản-đồ",
+    "title": "Trực quan hóa (p2)",
+    "section": "Điều chỉnh dữ liệu bản đồ",
+    "text": "Điều chỉnh dữ liệu bản đồ\nKhi thử nhìn dữ liệu cho bản đồ, ta có thể thấy dữ liệu đọc được cũng là một bảng dữ liệu và nhiều lệnh điều chỉnh bảng dữ liệu cũng có thể áp dụng với bảng này\nMột số cột đáng lưu ý bao gồm\n\nCác cột có format NAME_`cấp bậc hành chính` chứa tên tiếng Việt\nCác cột có format VARNAME_`cấp bậc hành chính` chứa tên tiếng Anh\nCột geom sẽ chứa dữ liệu để vẽ nên bản đồ"
+  },
+  {
+    "objectID": "viz.html#điều-chỉnh-dữ-liệu-bản-đồ-1",
+    "href": "viz.html#điều-chỉnh-dữ-liệu-bản-đồ-1",
+    "title": "Trực quan hóa (p2)",
+    "section": "Điều chỉnh dữ liệu bản đồ",
+    "text": "Điều chỉnh dữ liệu bản đồ\nĐể lựa chọn các khu vực được vẽ trên bản đồ, ta có thể sử dụng lệnh filter() tương tự như các bảng dữ liệu khác\nVD: chỉ vẽ bản đồ các quận của phố Hồ Chí Minh"
+  },
+  {
+    "objectID": "viz.html#điều-chỉnh-dữ-liệu-bản-đồ-2",
+    "href": "viz.html#điều-chỉnh-dữ-liệu-bản-đồ-2",
+    "title": "Trực quan hóa (p2)",
+    "section": "Điều chỉnh dữ liệu bản đồ",
+    "text": "Điều chỉnh dữ liệu bản đồ\nĐể nối một số khu vực được vẽ trên bản đồ, ta có thể sử dụng lệnh st_join() của gói sf\nVD: gộp quận 2, quận 9 và quận Thủ Đức thành Thành phố Thủ Đức"
+  },
+  {
+    "objectID": "viz.html#điều-chỉnh-dữ-liệu-bản-đồ-3",
+    "href": "viz.html#điều-chỉnh-dữ-liệu-bản-đồ-3",
+    "title": "Trực quan hóa (p2)",
+    "section": "Điều chỉnh dữ liệu bản đồ",
+    "text": "Điều chỉnh dữ liệu bản đồ\nĐể thêm giá trị từ một bảng khác vào bảng dữ liệu biểu đồ, ta có thể sử dụng left_join() tương tự các bài học trước\nVD: vẽ bản đồ cùng số ca"
+  },
+  {
+    "objectID": "viz.html#leaflet",
+    "href": "viz.html#leaflet",
+    "title": "Trực quan hóa (p2)",
+    "section": "Leaflet",
+    "text": "Leaflet\nGói leaflet được dùng để vẽ bản đồ tương tác.\nChúng ta sử dụng leaflet thay vì ggplot + plotly vì bản đồ vẽ bởi leaflet thường đẹp hơn\n\nQuá trình vẽ biểu đồ bằng leaflet cũng tương tự như ggplot, bao gồm các bước sau:\n\nGọi leaflet() và cung cấp dữ liệu cần vẽ\nThêm lớp biểu đồ qua lệnh addPolygon()\nThêm ô chú thích bằng lệnh addLegend() nếu cần thiết"
+  },
+  {
+    "objectID": "viz.html#leaflet-1",
+    "href": "viz.html#leaflet-1",
+    "title": "Trực quan hóa (p2)",
+    "section": "Leaflet",
+    "text": "Leaflet\n\n\n\n\n\n\n\nTên lệnh\nCác tham số thông dụng\n\n\n\n\naddPolygon()\ncolor - màu cho đường viền\nfillColor - màu cho các khu vực\nfillOpacity - độ trong suốt của màu (từ 0-1, càng gần 0 màu càng trong suốt)\nlabel - giá trị được hiển thị (tương tự tooltip của plotly)\n\n\naddLegend()\npal - palette màu\nvalues - cung cấp giá trị cần chú thích\ntitle - tiêu đề cho ô chú thích\nopacity - độ trong suốt của màu (cần giống fillOpacity trong addPolygon() để hiển thị màu chính xác)\nposition - vị trí của ô chú thích"
+  },
+  {
+    "objectID": "viz.html#leaflet-2",
+    "href": "viz.html#leaflet-2",
+    "title": "Trực quan hóa (p2)",
+    "section": "Leaflet",
+    "text": "Leaflet\n\n\n\n\n\n\n\n\n\n\n\n\nCác lệnh tạo bảng màu trong leaflet\n\n\n\n\n\n\n\n\n\nFunction\nCông dụng\n\n\n\n\ncolorNumeric()\ntạo palette màu liên tục từ biến liên tục\n\n\ncolorBin()\ntạo palette màu phân loại từ biến liên tục\n\n\ncolorFactor()\ntạo palette màu phân loại từ biến phân loại\n\n\n\n\n\n\n\n\nView book"
+  }
+]

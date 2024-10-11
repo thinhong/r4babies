@@ -1,9 +1,14 @@
 project:
   output-dir: ../docs/slides
+  
+freeze: auto
 
+execute: 
+  echo: TRUE
+  
 author: "Thinh Ong"
 bibliography: ../references.bib
 
-format: 
+format:
   revealjs:
     logo: ../../logo.svg
