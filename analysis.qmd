@@ -167,8 +167,8 @@ library(plotly)
 ```
 
 ```{r, echo = FALSE}
-ggplotly(
-  linelist %>% 
+
+plot <- linelist %>% 
   count(date_onset) %>% 
   ggplot(
     aes(
@@ -176,8 +176,11 @@ ggplotly(
       text = paste0("Ngày: ", date_onset, "\n", "Số ca: ", n)
       )
     ) + 
-  geom_bar(stat = "identity", color = "cornflowerblue") + 
-  labs(x = "Ngày phát triệu chứng", y = "Số ca"),
+  geom_col( color = "cornflowerblue") + 
+  labs(x = "Ngày phát triệu chứng", y = "Số ca")
+  
+ggplotly(
+  plot,
   tooltip = "text"
 )
 ```

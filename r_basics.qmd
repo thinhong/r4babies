@@ -285,7 +285,7 @@ Lệnh `colnames` được sử dụng để xem danh sách tên các cột tron
 # lấy dữ liệu tại hàng thứ 5, cột thứ 2
 df[5 ,2]
 
-# lấy dữ liệu tại hàng thứ 5, cột thứ 2
+# lấy dữ liệu tại hàng thứ 5, cột "vgb_truoc_24"
 df[5 , "vgb_truoc_24"]
 
 # lấy hàng thứ 5 trong bảng df
@@ -360,8 +360,8 @@ Một số ký tự thường được sử dụng để quy định điều ki�
 |------------|-----------------------|
 | `x == y`   | x bằng y              |
 | `x != y`   | x không bằng y        |
-| `y < x`    | x nhỏ hơn y           |
-| `y <= x`   | x nhỏ hơn hoặc bằng y |
+| `x < y`    | x nhỏ hơn y           |
+| `x <= y`   | x nhỏ hơn hoặc bằng y |
 | `is.na(x)` | x trống               |
 | `A & B`    | A và B                |
 | `A | B`    | A hoặc B              |
